@@ -15,6 +15,16 @@
 * *Переменная* (*variable*) - это именованная *ячейка памяти*, содержимое которой может изменяться.
 * При объявлении переменной сначала указывается *data type* (*тип данных*) переменной, а затем *identifier* (*идентификатор*) задаваемой переменной, например: `int age`.
 
+=== Variables
+
+[.fragment]
+image::/assets/img/java/basics/data-types/variables-in-java.png[Variables in Java]
+
+=== Variables
+
+[.fragment]
+image::/assets/img/java/basics/data-types/variable-in-memory.jpeg[Variable in Memory.jpeg]
+
 === Типы данных
 
 [.fragment]
