@@ -46,11 +46,9 @@ getDefaultColor();
 === Profit
 
 [.step]
-- Human-readable
-- Hide difficult code
-- Don't repeat yourself (*DRY*)
-- Single responsibility (*SOLID*)
-- Encapsulation (*OOP*)
+* Human-readable
+* Hide difficult code
+* Don't repeat yourself (*DRY*)
 
 == Methods
 
@@ -59,7 +57,7 @@ getDefaultColor();
 [.fragment]
 [source,java]
 ----
-[модификаторы] тип_возвращаемого_значения название_метода([параметры]) {
+тип_возвращаемого_значения название_метода([параметры]) {
     // тело метода
 }
 ----
@@ -69,9 +67,9 @@ getDefaultColor();
 [.fragment]
 [source,java]
 ----
-    public static void main(String[] args) {
-        System.out.println("привет мир!");
-    }
+public static void main(String[] args) {
+    System.out.println("Hell to World!");
+}
 ----
 
 === Methods: example
@@ -99,7 +97,7 @@ public class Program {
 [.fragment]
 [source,java]
 ----
-имя_метода(аргументы);	
+имя_метода(аргументы);
 ----
 
 === Methods
@@ -119,7 +117,7 @@ public class Program {
     }
 
     static void welcome() {
-        System.out.println("Welcome to Java 10");
+        System.out.println("Welcome to Java 11");
     }
 }
 ----
@@ -130,8 +128,8 @@ public class Program {
 [source,out]
 ----
 Hello
-Welcom to Java 10
-Welcom to Java 10
+Welcom to Java 11
+Welcom to Java 11
 ----
 
 == Passing parameters to methods
@@ -187,52 +185,6 @@ public class Program {
 }
 ----
 
-== Variable Length Parameters
-
-=== Passing parameters to methods
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String args[]) {
-        sum(1, 2, 3); // 6
-        sum(1, 2, 3, 4, 5); // 15
-        sum(); // 0
-    }
-
-    static void sum(int ...nums) {
-        int result = 0;
-        for (int n : nums) {
-            result += n;
-        }
-        System.out.println(result);
-    }
-}
-----
-
-=== Passing parameters to methods
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String[] args) {
-        sum("Welcome!", 20, 10);
-        sum("Hello World!");
-    }
-
-    static void sum(String message, int ...nums) {
-        System.out.println(message);
-        int result = 0;
-        for (int x : nums) {
-            result += x;
-        }
-        System.out.println(result);
-    }
-}
-----
-
 == Operator `return`
 
 === Operator `return`
@@ -254,31 +206,7 @@ public class Program {
 }
 ----
 
-=== Operator `return`
+== JMM (Java Memory Model)
 
 [.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String args[]) {
-        System.out.println(daytime(7)); // Good morning
-        System.out.println(daytime(13)); // Good after noon
-        System.out.println(daytime(18)); // Good evening
-        System.out.println(daytime(2)); // Good night
-    }
-
-    static String daytime(int hour) {
-        if (hour > 24 || hour < 0) {
-            return "Invalid data";
-        } else if (hour > 21 || hour < 6) {
-            return "Good night";
-        } else if (hour >= 15) {
-            return "Good evening";
-        } else if (hour >= 11) {
-            return "Good after noon";
-        } else {
-            return "Good morning";
-        }
-    }
-}
-----
+image::/assets/img/java/basics/stack-memory-space.png[Stack Memory Space]
