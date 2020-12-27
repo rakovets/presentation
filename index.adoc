@@ -57,6 +57,7 @@
 
 * link:./java/basics/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224)]
 * link:./java/basics/networking.html[Networking]
+* link:./java/basics/i18n.html[i18n]
 
 == Course: Java Tools [[course-java-tools]]
 
@@ -116,7 +117,11 @@
 * link:./common/xml.html[XML]
 * link:./common/json.html[JSON]
 * link:./common/scrum.html[Scrum]
+
+=== Course: Common
+
 * link:./common/regex.html[Regular Expression]
+* link:./common/i18n.html[i18n]
 
 == Course: SQL [[course-sql]]
 

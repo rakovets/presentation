@@ -48,6 +48,7 @@ asciidoctor.convertFile('./java/basics/reflection.adoc', options)
 asciidoctor.convertFile('./java/basics/annotations.adoc', options)
 asciidoctor.convertFile('./java/basics/xml.adoc', options)
 asciidoctor.convertFile('./java/basics/networking.adoc', options)
+asciidoctor.convertFile('./java/basics/i18n.adoc', options)
 
 // Course: "Java Tools"
 asciidoctor.convertFile('./java/tools/logging.adoc', options)
@@ -86,6 +87,7 @@ asciidoctor.convertFile('./common/xml.adoc', options)
 asciidoctor.convertFile('./common/json.adoc', options)
 asciidoctor.convertFile('./common/scrum.adoc', options)
 asciidoctor.convertFile('./common/regex.adoc', options)
+asciidoctor.convertFile('./common/i18n.adoc', options)
 
 // Course: "SQL"
 asciidoctor.convertFile('./sql/database-normalization.adoc', options)
