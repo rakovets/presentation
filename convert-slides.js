@@ -49,6 +49,11 @@ asciidoctor.convertFile('./java/basics/annotations.adoc', options)
 asciidoctor.convertFile('./java/basics/xml.adoc', options)
 asciidoctor.convertFile('./java/basics/networking.adoc', options)
 
+// Course: "Java Tools"
+asciidoctor.convertFile('./java/tools/logging.adoc', options)
+asciidoctor.convertFile('./java/tools/apache-maven.adoc', options)
+asciidoctor.convertFile('./java/tools/apache-tomcat.adoc', options)
+
 // Course: "Data persistence in Java"
 asciidoctor.convertFile('./java/data-persistence/database-connection-pool.adoc', options)
 asciidoctor.convertFile('./java/data-persistence/intro-jpa.adoc', options)
@@ -58,15 +63,12 @@ asciidoctor.convertFile('./java/data-persistence/query-language.adoc', options)
 
 // Course: "Java with Jakarta EE"
 asciidoctor.convertFile('./java/jakarta-ee/java-enterprise.adoc', options)
-asciidoctor.convertFile('./java/jakarta-ee/apache-tomcat.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/servlet.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/jsp.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/jstl.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/el.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/filter.adoc', options)
 asciidoctor.convertFile('./java/jakarta-ee/i18n.adoc', options)
-asciidoctor.convertFile('./java/jakarta-ee/logging.adoc', options)
-asciidoctor.convertFile('./java/jakarta-ee/apache-maven.adoc', options)
 
 // Course: "Java with Spring"
 asciidoctor.convertFile('./java/spring/intro-spring.adoc', options)

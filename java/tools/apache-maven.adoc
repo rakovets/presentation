@@ -135,7 +135,7 @@ apache-maven/
 
 === Project Object Model (POM)
 
-image::/assets/img/java/jakarta-ee/apache-maven/pom.png[POM]
+image::/assets/img/java/tools/apache-maven/pom.png[POM]
 
 === Project Object Model (POM)
 
@@ -157,7 +157,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
     <dependencyManagement>...</dependencyManagement>
     <modules>...</modules>
     <properties>...</properties>
-    
+
     <!-- Setting for build/reporting -->
     <build>...</build>
     <reporting>...</reporting>
@@ -198,7 +198,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 
 === Maven Flow
 
-image::/assets/img/java/jakarta-ee/apache-maven/flow.jpg[Apache Maven Flow]
+image::/assets/img/java/tools/apache-maven/flow.jpg[Apache Maven Flow]
 
 === Build Life Cycles
 
@@ -224,12 +224,12 @@ The default-lifecycle executes the following build phases:
 
 === Lifecycle
 
-image::/assets/img/java/jakarta-ee/apache-maven/lifecycle.jpg[Apache Maven Lifecycle]
+image::/assets/img/java/tools/apache-maven/lifecycle.jpg[Apache Maven Lifecycle]
 
 === Full lifecycle
 
-image::/assets/img/java/jakarta-ee/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
-http://localhost:3000/assets/img/java/jakarta-ee/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
+image::/assets/img/java/tools/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
+http://localhost:3000/assets/img/java/tools/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
 
 == Plugins
 
@@ -258,7 +258,7 @@ http://localhost:3000/assets/img/java/jakarta-ee/apache-maven/lifecycle-full.png
 
 === Artifacts
 
-image::/assets/img/java/jakarta-ee/apache-maven/artifacts.png[Artifacts]
+image::/assets/img/java/tools/apache-maven/artifacts.png[Artifacts]
 
 === Artifacts
 
@@ -282,7 +282,7 @@ image::/assets/img/java/jakarta-ee/apache-maven/artifacts.png[Artifacts]
 
 === Repository
 
-image::/assets/img/java/jakarta-ee/apache-maven/repositories.jpg[Repositories]
+image::/assets/img/java/tools/apache-maven/repositories.jpg[Repositories]
 
 == POM Relationships
 
@@ -628,7 +628,7 @@ mvn install:install-file \
 
 [source,xml]
 ----
-<plugin> 
+<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-dependency-plugin</artifactId>
     <version>2.5.1</version>
@@ -641,7 +641,7 @@ mvn install:install-file \
         <overWriteIfNewer>true</overWriteIfNewer>
     </configuration>
     <executions>
-        <execution> 
+        <execution>
             <id>copy-dependencies</id>
             <phase>package</phase>
             <goals>

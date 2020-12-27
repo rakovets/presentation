@@ -2,8 +2,8 @@
 
 == Apache Tomcat
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/apache-software-foundation.png[Apache Software Foundation, 300]
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat.png[Apache Tomcat]
+image::/assets/img/java/tools/apache-tomcat/apache-software-foundation.png[Apache Software Foundation, 300]
+image::/assets/img/java/tools/apache-tomcat/tomcat.png[Apache Tomcat]
 
 === Versions
 
@@ -31,7 +31,7 @@ image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat.png[Apache Tomcat]
 
 === Architecture
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
 
 === Architecture
 
@@ -41,7 +41,7 @@ image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache 
 * only one instance per *JVM*
 ** multiple instances can run on separate *JVM* and network ports
 * `server.xml` provides an XML representation of
-relationships between the different containers 
+relationships between the different containers
 
 === `server.xml`
 
@@ -61,7 +61,7 @@ relationships between the different containers
 
 === Architecture
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
 
 === Architecture
 
@@ -73,7 +73,7 @@ engine
 
 === Architecture
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
 
 === Architecture
 
@@ -85,7 +85,7 @@ and response
 
 === Architecture
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
 
 === Architecture
 
@@ -100,7 +100,7 @@ component
 
 === Architecture
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
 
 === Apache Tomcat overview
 
@@ -147,7 +147,7 @@ image::/assets/img/java/jakarta-ee/apache-tomcat/tomcat-architecture.png[Apache 
 
 === How works it?
 
-image::/assets/img/java/jakarta-ee/apache-tomcat/web-static-app.png[Web static app]
+image::/assets/img/java/tools/apache-tomcat/web-static-app.png[Web static app]
 
 === Practice
 
