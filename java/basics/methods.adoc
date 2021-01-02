@@ -78,7 +78,7 @@ public static void main(String[] args) {
 [source,java]
 ----
 public class Program {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         //TODO
     }
 
@@ -106,7 +106,7 @@ public class Program {
 [source,java]
 ----
 public class Program {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         hello();
         welcome();
         welcome();
@@ -151,7 +151,7 @@ static void sum(int x, int y) {
 [source,java]
 ----
 public class Program {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int a = 6;
         int b = 8;
         sum(a, b); // 14
@@ -172,7 +172,7 @@ public class Program {
 [source,java]
 ----
 public class Program {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         display("Tom", 34);
         display("Bob", 28);
         display("Sam", 23);
@@ -193,9 +193,9 @@ public class Program {
 [source,java]
 ----
 public class Program {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int x = sum(1, 2, 3);
-        int y = sum(1, 4, 9);
+        int y = sum(2, 4, 9);
         System.out.println(x); // 6
         System.out.println(y); // 14
     }

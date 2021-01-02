@@ -76,7 +76,7 @@ class Multi extends Thread {
         System.out.println("thread is running...");
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Multi t1 = new Multi();
         t1.start();
     }
@@ -93,7 +93,7 @@ class Multi3 implements Runnable {
         System.out.println("thread is running...");
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Multi3 m1 = new Multi3();
         Thread t1 = new Thread(m1);
         t1.start();

@@ -217,7 +217,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
 public class DataStreamExample {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         FileOutputStream fout1 = new FileOutputStream("D:\\f1.txt");
         FileOutputStream fout2 = new FileOutputStream("D:\\f2.txt");
 
@@ -243,7 +243,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class DataStreamExample {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         String text = "Hello Wolrd!";
         byte[] buffer = text.getBytes();
@@ -323,7 +323,7 @@ public class FileDemo {
             e.printStackTrace();
         }
     }
-}  
+}
 ----
 
 === Example
@@ -413,7 +413,7 @@ public class FileExample {
 import java.io.FileOutputStream;
 
 public class FileOutputStreamExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             FileOutputStream fout = new FileOutputStream("D:\\testout.txt");
             String s = "Welcome to party!";
@@ -445,7 +445,7 @@ public class FileOutputStreamExample {
 import java.io.FileInputStream;
 
 public class DataStreamExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             FileInputStream fis = new FileInputStream("D:\\testout.txt");
             int i = fis.read();
@@ -475,7 +475,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
 public class BufferedInputStreamExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             FileInputStream fin = new FileInputStream("D:\\testout.txt");
             BufferedInputStream bin = new BufferedInputStream(fin);
@@ -509,7 +509,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
 public class BufferedOutputStreamExample {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         FileOutputStream fout = new FileOutputStream("D:\\testout.txt");
         BufferedOutputStream bout = new BufferedOutputStream(fout);
         String s = "Welcome to javaTpoint.";
@@ -746,7 +746,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 public class PrintStreamTest {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         FileOutputStream fout = new FileOutputStream("D:\\testout.txt ");
         PrintStream pout = new PrintStream(fout);
         pout.println(2016);
@@ -840,7 +840,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class BufferedReaderExample {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         FileReader fr = new FileReader("D:\\testout.txt");
         BufferedReader br = new BufferedReader(fr);
 
@@ -873,7 +873,7 @@ public class BufferedReaderExample {
 import java.io.FileWriter;
 
 public class FileWriterExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             FileWriter fw = new FileWriter("D:\\testout.txt");
             fw.write("Welcome to the party!");
@@ -903,7 +903,7 @@ public class FileWriterExample {
 import java.io.FileReader;
 
 public class FileReaderExample {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         FileReader fr = new FileReader("D:\\testout.txt");
         int i;
         while ((i = fr.read()) != -1)
@@ -962,7 +962,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 class Persist {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         Student s1 = new Student(211, "ravi");
 
         FileOutputStream fout = new FileOutputStream("f.txt");
@@ -1008,7 +1008,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 class Depersist {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         ObjectInputStream in =
             new ObjectInputStream(new FileInputStream("f.txt"));
         Student s = (Student) in.readObject();
@@ -1064,7 +1064,7 @@ class Person implements Serializable {
 import java.io.Console;
 
 class ReadStringTest {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Console c = System.console();
         System.out.println("Enter your name: ");
         String n = c.readLine();

@@ -9,7 +9,7 @@
 @FunctionalInterface
 public interface Comparator<T> {
     int compare(T o1, T o2);
-    
+
     // default behavior
 }
 ----
@@ -76,7 +76,7 @@ public class AgeComparator implements Comparator {
             return -1;
         }
     }
-}  
+}
 ----
 
 === Example
@@ -106,7 +106,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class ComparatorExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         ArrayList students = new ArrayList();
         students.add(new Student(101, "Vijay", 23));
         students.add(new Student(106, "Ajay", 27));
@@ -130,7 +130,7 @@ public class ComparatorExample {
             System.out.println(student.getId() + " " + student.getName() + " " + student.getAge());
         }
     }
-}  
+}
 ----
 
 === NOT functional interface `Comparable<T>`
@@ -182,7 +182,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CompareExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         ArrayList<Student> students = new ArrayList<Student>();
         students.add(new Student(101, "Vijay", 23));
         students.add(new Student(106, "Ajay", 27));
@@ -213,11 +213,11 @@ public interface Predicate<T> {
 [source,java]
 ----
 import java.util.function.Predicate;
- 
+
 public class Program {
     public static void main(String[] args) {
         Predicate<Integer> isPositive = x -> x > 0;
-         
+
         System.out.println(isPositive.test(5));
         System.out.println(isPositive.test(-7));
     }
@@ -241,11 +241,11 @@ public interface BinaryOperator<T> {
 [source,java]
 ----
 import java.util.function.BinaryOperator;
- 
+
 public class Program {
     public static void main(String[] args) {
         BinaryOperator<Integer> multiply = (x, y) -> x * y;
-         
+
         System.out.println(multiply.apply(3, 5));
         System.out.println(multiply.apply(10, -2));
     }
@@ -269,7 +269,7 @@ public interface UnaryOperator<T> {
 [source,java]
 ----
 import java.util.function.UnaryOperator;
- 
+
 public class Program {
     public static void main(String[] args) {
         UnaryOperator<Integer> square = x -> x * x;

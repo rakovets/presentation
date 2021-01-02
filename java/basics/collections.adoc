@@ -166,7 +166,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class ArrayListExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Ravi");
         list.add("Vijay");
@@ -350,7 +350,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 
 [.step]
 * *Set<E>* (*Множество*) - коллекция без повторяющихся элементов.
-* Интерфейс `Set<E>` содержит методы, унаследованные `Collection<E>` и добавляет запрет на дублирующийся элементы. 
+* Интерфейс `Set<E>` содержит методы, унаследованные `Collection<E>` и добавляет запрет на дублирующийся элементы.
 
 == Class `HashSet<E>`
 
@@ -381,7 +381,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 class HashSetExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         HashSet<String> set = new HashSet<String>();
         set.add("Ravi");
         set.add("Vijay");
@@ -392,7 +392,7 @@ class HashSetExample {
             System.out.println(itr.next());
         }
     }
-}  
+}
 ----
 
 == Interface `SortedSet<E>`
@@ -468,7 +468,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 class TreeSetExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         TreeSet<String> al = new TreeSet<String>();
         al.add("Ravi");
         al.add("Vijay");
@@ -479,7 +479,7 @@ class TreeSetExample {
             System.out.println(itr.next());
         }
     }
-}  
+}
 ----
 
 == Interface `Map<K, V>`
@@ -550,7 +550,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HashMapExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         HashMap<Integer, String> humans = new HashMap<Integer, String>();
         humans.put(100, "Amit");
         humans.put(101, "Vijay");
@@ -663,7 +663,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class TreeMapExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         TreeMap<Integer, String> humans = new TreeMap<Integer, String>();
         humans.put(100, "Amit");
         humans.put(102, "Ravi");
@@ -673,7 +673,7 @@ public class TreeMapExample {
             System.out.println(m.getKey() + " " + m.getValue());
         }
     }
-} 
+}
 ----
 
 == Interface `Iterator<E>`
