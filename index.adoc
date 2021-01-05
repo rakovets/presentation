@@ -110,6 +110,7 @@
 === Course: Common
 
 * link:./common/programming-languages.html[Programming languages]
+* link:./common/git.html[Git]
 * link:./common/uml.html[UML]
 * link:./common/design-principles.html[Design Principles]
 * link:./common/design-patterns.html[Design Patterns]

@@ -79,6 +79,7 @@ asciidoctor.convertFile('./java/spring/spring-webmvc.adoc', options)
 
 // Common themes
 asciidoctor.convertFile('./common/programming-languages.adoc', options)
+asciidoctor.convertFile('./common/git.adoc', options)
 asciidoctor.convertFile('./common/uml.adoc', options)
 asciidoctor.convertFile('./common/design-principles.adoc', options)
 asciidoctor.convertFile('./common/design-patterns.adoc', options)
