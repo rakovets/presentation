@@ -1,6 +1,6 @@
 = presentation
 
-Presenations for different courses. Use *AsciiDoc* and *Asciidoctor Reveal.js* for convertation to *HTML*
+Presentations for different courses. Use *AsciiDoc* and *Asciidoctor Reveal.js* for converting to *HTML*.
 
 == Getting Started
 

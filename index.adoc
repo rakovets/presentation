@@ -4,19 +4,19 @@
 
 === Courses
 
-* <<course-java-core, Core Java>>
-* <<course-java-tools, Java Tools>>
-* <<course-java-data-persistence, Data Persistence in Java>>
-* <<course-java-jakarta-ee, Java with Jakarta EE>>
-* <<course-java-spring-framework, Java with Spring Framework>>
-* <<course-java-desktop, Java for Desktop>>
+* <<course-java-core, Core Java.>>
+* <<course-java-tools, Java Tools.>>
+* <<course-java-data-persistence, Data Persistence in Java.>>
+* <<course-java-jakarta-ee, Java with Jakarta EE.>>
+* <<course-java-spring-framework, Java with Spring Framework.>>
+* <<course-java-desktop, Java for Desktop.>>
 
 === Courses
 
-* <<course-common, Common>>
-* <<course-sql, SQL>>
-* <<course-html-and-css, HTML and CSS>>
-* <<course-javascript-basic, JavaScript Basic>>
+* <<course-common, Common.>>
+* <<course-sql, SQL.>>
+* <<course-html-and-css, HTML and CSS.>>
+* <<course-javascript-basic, JavaScript Basic.>>
 
 == Course: Core Java [[course-java-core]]
 
