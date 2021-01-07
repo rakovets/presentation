@@ -5,41 +5,39 @@
 === Problem
 
 [.step]
-* PC understand: 0110010101001010
-* Human understand: Languages (English, Belarusian, German)
+* PC understand: `0110010101001010`.
+* Human understand: Languages (English, Belarusian, German).
 
 === Solution
 
 [.step]
-* Use Programing Languages
-* For example: Java
+* Use Programing Languages.
+* For example: Java.
 
 == Why Java?
 
 === Profit
 
 [.step]
-* Объектно-ориентированное программирование
-* Java — язык высокого уровня с простым синтаксисом и плавной кривой обучения
-* Стандарт для корпоративных вычислительных систем
-* Безопасность
-* Независимость от платформы («Написать один раз и использовать везде»)
+* Объектно-ориентированное программирование.
+* Автоматическое управление памятью.
+* Многопоточность.
+* Стабильность и огромное сообщество.
 
 === Profit
 
 [.step]
-* Язык для распределенного программирования и комфортной удаленной совместной работы
-* Автоматическое управление памятью
-* Многопоточность
-* Стабильность и сообщество
+* Независимость от платформы («Написать один раз и использовать везде»).
+* Стандарт для корпоративных вычислительных систем.
+* Java — язык высокого уровня с простым синтаксисом и плавной кривой обучения.
+* Безопасность.
 
 === Loss
 
 [.step]
-* Платная коммерческая поддержка
-* Низкая производительность по сравнению с С/С++
-* Отсутствие нативного дизайна (работа с GUI)
-* Многословный и сложный код
+* Низкая производительность по сравнению с C/C++.
+* Отсутствие нативного дизайна (работа с GUI).
+* Платная коммерческая поддержка.
 
 === Where use?
 
@@ -104,9 +102,12 @@ image::/assets/img/java/core/intro/jvm.png[JVM]
 
 === JRE
 
-[.fragment]
-*Java Runtime Environment*
-(*JRE*) - минимальная реализация виртуальной машины и билиотеки Java. *JRE* необходима для исполнения Java-приложений.
+[.step]
+* *Java Runtime Environment* (*JRE*) - это исполнительная система Java, необходимая для исполнения Java-программ.
+* *JRE* содержит:
+[.step]
+** минимальную реализацию *JVM*
+** Java *libraries*.
 
 === JDK
 
@@ -114,7 +115,14 @@ image::/assets/img/java/core/intro/jvm.png[JVM]
 *Java Development Kit* (*JDK*) - бесплатно распространяемый комплект разработчика приложений на языке Java.
 
 [.fragment]
-*JDK* включает в себя компилятор Java (`javac`), стандартные библиотеки классов Java, примеры, документацию, различные утилиты и исполнительную систему Java (*JRE*).
+*JDK* включает в себя:
+[.step]
+* исполнительную систему Java (*JRE*).
+* компилятор Java (`javac`)
+* стандартные библиотеки классов Java
+* примеры
+* документацию
+* различные утилиты
 
 === Recap
 
@@ -126,43 +134,52 @@ image::/assets/img/java/core/intro/jvm-jre-jdk.png[JVM, JRE, JDK]
 === Проверка наличия JRE и JDK
 
 [.step]
-* Открыть командную строку.
+* Открыть _PowerShell_.
 [.step]
-** _Пуск_ -> _PowerShell_
-* Для проверки наличия *JDK*, необходимо выполнить powershell команду: `javaс --version`
-* Проанализировать результат работы команды
-* Для проверки наличия *JRE*, необходимо выполнить powershell команду: `java --version`
-* Проанализировать результат работы команды
+** _Пуск_ -> _PowerShell_.
+** `Shift` + `Mouse Right Click` in currency directory.
+* Для проверки наличия *JDK*, необходимо выполнить команду:
+
+[source,shell script]
+javaс --version
+
+* Проанализировать результат работы команды.
+* Для проверки наличия *JRE*, необходимо выполнить команду:
+
+[source,shell script]
+java --version
+
+* Проанализировать результат работы команды.
 
 === Установка OpenJDK
 
 [.step]
-* Скачиваем *OpenJDK 11.0.2* (_build 11.0.2_) с сайта https://jdk.java.net/archive/ для _OS Windows_
+* Скачиваем *OpenJDK 11.0.2* (_build 11.0.2_) с сайта link:https://jdk.java.net/archive/[jdk.java.net] для _OS Windows_
 * Распаковываем в `d:\opt\java\openjdk-11.0.2`
 
 === Установка системных переменных среды (с помощью UI)
 
 [.step]
-* Зайти в _Этот компьютер_ -> _Свойства_ -> _Дополнительные параметры системы_ -> _Дополнительно_ -> _Переменные среды_
-* Добавить системную переменную `JAVA_HOME` с значением `d:\opt\java\openjdk-11.0.2`
-* Отредактировать системную переменную `PATH`, создав `%JAVA_HOME%\bin`
-* Проверить установку JDK
+* Зайти в _Этот компьютер_ -> _Свойства_ -> _Дополнительные параметры системы_ -> _Дополнительно_ -> _Переменные среды_.
+* Добавить системную переменную `JAVA_HOME` с значением `d:\opt\java\openjdk-11.0.2`.
+* Отредактировать системную переменную `PATH`, создав `%JAVA_HOME%\bin`.
+* Проверить установку JDK.
 
 === Установка системных переменных среды (с помощью CLI)
 
 [.step]
-* Выполнить powershell команды:
+* Выполнить команды:
 
 [.fragment]
-[source,cmd]
+[source,shell script]
 ----
 setx JAVA_HOME d:\opt\java\openjdk-11.0.2
 setx PATH "%PATH%;%JAVA_HOME%\bin"
 ----
 
 [.step]
-* Перезапустить OS
-* Проверить установку JDK
+* Перезапустить OS.
+* Проверить установку JDK.
 
 == Compile and Run time
 
@@ -191,7 +208,7 @@ public class Hello {
 === Compile with `javac` to `byte code`
 
 [.fragment]
-[source,shell]
+[source,shell script]
 ----
 javac Hello.java
 ----
@@ -199,7 +216,6 @@ javac Hello.java
 === Have `byte code`
 
 [.fragment]
-[source,out]
 ----
 // class version 55.0 (55)
 // access flags 0x21
@@ -239,13 +255,13 @@ public class Hello {
 === Run with interpreter `java` on JVM
 
 [.fragment]
-[source,shell]
+[source,shell script]
 ----
 java Hello
 ----
 
 [.fragment]
-[source,shell]
+[source,shell script]
 ----
 java -cp . Hello
 ----
@@ -253,7 +269,6 @@ java -cp . Hello
 === See in output
 
 [.fragment]
-[source,out]
 ----
 Hello World!
 ----
