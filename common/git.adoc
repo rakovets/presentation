@@ -21,29 +21,29 @@
 *Version Control Systems*
 
 [.fragment]
-*Git*
+image:/assets/img/common/git/logo.png[Git Logo]
 
 == History
 
 === The Problem of File-Sharing
 
 [.fragment]
-image:../assets/img/common/git/file-sharing-problem.png[The Problem of File-Sharing]
+image:/assets/img/common/git/file-sharing-problem.png[The Problem of File-Sharing]
 
 === The Lock-Modify-Unlock Solution
 
 [.fragment]
-image:../assets/img/common/git/lock-modify-unlock-solution.png[The Lock-Modify-Unlock Solution]
+image:/assets/img/common/git/lock-modify-unlock-solution.png[The Lock-Modify-Unlock Solution]
 
 === The Copy-Modify-Merge Solution
 
 [.fragment]
-image:../assets/img/common/git/copy-modify-merge-solution-1.png[The Copy-Modify-Merge Solution]
+image:/assets/img/common/git/copy-modify-merge-solution-1.png[The Copy-Modify-Merge Solution]
 
 === The Copy-Modify-Merge Solution
 
 [.fragment]
-image:../assets/img/common/git/copy-modify-merge-solution-2.png[The Copy-Modify-Merge Solution]
+image:/assets/img/common/git/copy-modify-merge-solution-2.png[The Copy-Modify-Merge Solution]
 
 == Git
 
@@ -57,7 +57,7 @@ image:../assets/img/common/git/copy-modify-merge-solution-2.png[The Copy-Modify-
 === Decentralized but centralized
 
 [.fragment]
-image:../assets/img/common/git/centr-decentr.png[Repository]
+image:/assets/img/common/git/centr-decentr.png[Repository]
 
 === Install
 
@@ -83,50 +83,51 @@ Repositories:
 === Main possibilities
 
 [.fragment]
-image:../assets/img/common/git/repositories.png[Main commands]
+image:/assets/img/common/git/repositories.png[Main commands]
 
 === Main commands
 
 [.fragment]
-image:../assets/img/common/git/stages.png[Main commands]
+image:/assets/img/common/git/stages.png[Main commands]
 
 == Branches
 
 === Main branches
 
 [.fragment]
-image:../assets/img/common/git/main-branches.png[Main branches]
+image:/assets/img/common/git/main-branches.png[Main branches]
 
 === Feature branches
 
 [.fragment]
-image:../assets/img/common/git/feature-branches.png[Feature branches]
+image:/assets/img/common/git/feature-branches.png[Feature branches]
 
 === Example
 
 [.fragment]
-image:../assets/img/common/git/branch.png[Branches]
+image:/assets/img/common/git/branch.png[Branches]
 
 === Flow
 
 [.fragment]
-image:../assets/img/common/git/git-flow.png[Git flow]
+image:/assets/img/common/git/git-flow.png[Git flow]
 
 == Setting in IntelliJ IDEA
 
 === VC Setting
 
 [.fragment]
-image:../assets/img/common/git/ij-setting-vc.png[VC Setting]
+image:/assets/img/common/git/ij-setting-vc.png[VC Setting]
 
 === GitHub Setting
 
 [.fragment]
-image:../assets/img/common/git/ij-setting-vc.png[GitHub Setting]
+image:/assets/img/common/git/ij-setting-vc.png[GitHub Setting]
 
 == Links
 
 === Links
 
-* link:https://git-scm.com/book/ru/v1[Справочник]
-* link:https://habrahabr.ru/blogs/Git/106912/[Удачная модель ветвления для Git]
+* link:https://git-scm.com/book/ru/v2[Справочник.]
+* link:https://githowto.com/ru[Git How To.]
+* link:https://habrahabr.ru/blogs/Git/106912/[Удачная модель ветвления для Git.]
