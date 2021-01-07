@@ -1,6 +1,6 @@
-= Conditional statements
+= Decision-making statements
 
-== Conditional statements
+== Intro
 
 === Problem
 
@@ -11,131 +11,219 @@
 [.step]
 * Использование конструкций позволяющих изменять последовательность выполнение в зависимости от условия (*condition*)
 
+== Decision-making statements
+
+=== Decision-making statements
+
+[.step]
+* `if...else`
+[.step]
+** `if`
+** `if...else`
+** `if...else if...else`
+** Nested `if...else`
+* `switch`
+
 == `if` statement
 
 === Syntax
 
+[.fragment]
 [source,java]
 ----
 if (condition) {
-    // execute this code if the condition is true
+    // statements
 }
+----
+
+=== How `if` statement works?
+
+[.fragment]
+image:/assets/img/java/core/decision-making-statements/if-working.png[if working]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 10;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+}
+System.out.println("Statement outside if block");
+----
+
+[.fragment]
+[source,output]
+----
+The number is positive.
+Statement outside if block;
 ----
 
 === Example
 
+[.fragment]
 [source,java]
 ----
-if (20 > 18) {
-    System.out.println("20 is greater than 18");
+// create a string variable
+String language = "Java";
+// if statement
+if (language == "Java") {
+    System.out.println("Best Programming Language");
 }
 ----
 
-=== Example
-
-[source,java]
+[.fragment]
+[source,output]
 ----
-int x = 20;
-int y = 18;
-if (x > y) {
-    System.out.println("x is greater than y");
-}
+Best Programming Language
 ----
 
-== The `if ... else` statement
+== `if...else` (`if-then-else`) statement
 
 === Syntax
 
+[.fragment]
 [source,java]
 ----
 if (condition) {
-    // execute this code if the condition is true
+    // codes in if block
 } else {
-    // execute this code if the condition is false
+    // codes in else block
 }
 ----
+
+=== How `if` statement works?
+
+[.fragment]
+image:/assets/img/java/core/decision-making-statements/if-else-working.png[if-then-else working]
 
 === Example
 
+[.fragment]
 [source,java]
 ----
-int time = 20;
-if (time < 18) {
-    System.out.println("Good day.");
-} else {
-    System.out.println("Good evening.");
+int number = 10;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+} else { // execute this block if number is not greater than 0
+    System.out.println("The number is not positive.");
 }
-// Outputs "Good evening."
+System.out.println("Statement outside if...else block");
 ----
 
-== Inner `if` statement
+[.fragment]
+[source,output]
+----
+The number is positive.
+Statement outside if...else block
+----
+
+== `if...else...if` statement
 
 === Syntax
 
+[.fragment]
+[source,java]
+----
+if (condition1) {
+    // codes
+} else if(condition2) {
+    // codes
+} else if (condition3) {
+    // codes
+} else {
+    // codes
+}
+----
+
+=== How `if...else...if` statement works?
+
+[.fragment]
+image:/assets/img/java/core/decision-making-statements/if-else-if-working.png[if-else-if working]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 0;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+} else if (number < 0) { // checks if number is less than 0
+    System.out.println("The number is negative.");
+} else { // if both condition is false
+    System.out.println("The number is 0.");
+}
+----
+
+[.fragment]
+[source,output]
+----
+The number is 0.
+----
+
+== Nested `if..else` Statement
+
+=== Syntax
+
+[.fragment]
 [source,java]
 ----
 if (condition1) {
     if (condition2) {
-        // execute this code if the condition1 AND condition2 is true
+        // codes
     } else {
-        // execute this code if the condition1 AND condition2 is false
+        // codes
     }
 } else {
-    // execute this code if the condition1 is false
+    // codes
 }
 ----
 
 === Example
 
+[.fragment]
 [source,java]
 ----
-if (a > b) {
-    if (a > c) {
-        System.out.println("max number:" + a);
+// declaring double type variables
+double n1 = -1.0;
+double n2 = 4.5;
+double n3 = -5.3;
+double largest;
+
+if (n1 >= n2) { // checks if n1 is greater than or equal to n2
+    // checks if n1 is greater than or equal to n3
+    if (n1 >= n3) { // if...else statement inside the if block
+        largest = n1;
     } else {
-        System.out.println("max number:" + c);
+        largest = n3;
     }
-} else {
-    if (b > c) {
-        System.out.println("max number:" + b);
+} else { // if..else statement inside else block
+    // checks if n2 is greater than or equal to n3
+    if (n2 >= n3) {
+        largest = n2;
     } else {
-        System.out.println("max number:" + c);
+        largest = n3;
     }
 }
+System.out.println("Largest Number: " + largest);
 ----
 
-== The `if ... else if` statement
-
-=== Syntax
-[source,java]
+[.fragment]
+[source,output]
 ----
-if (condition1) {
-    // execute this code if condition1 is true
-} else if (condition2) {
-    // execute this code if the condition1 is false and condition2 is true
-} else {
-    // execute this code if the condition1 is false and condition2 is false
-}
-----
-
-=== Example
-
-[source,java]
-----
-int time = 22;
-if (time < 10) {
-    System.out.println("Good morning.");
-} else if (time < 20) {
-    System.out.println("Good day.");
-} else {
-    System.out.println("Good evening.");
-}
-// Outputs "Good evening."
+Largest Number: 4.5
 ----
 
 == `switch` statement
 
 === Syntax
+
+[.fragment]
 [source,java]
 ----
 switch(expression) {
@@ -150,64 +238,86 @@ default:
 }
 ----
 
-=== Example
+=== How does the `switch` statement work?
 
-[source,java]
-----
-int day = 4;
-switch (day) {
-    case 1:
-        System.out.println("Monday");
-        break;
-    case 2:
-        System.out.println("Tuesday");
-        break;
-    case 3:
-        System.out.println("Wednesday");
-        break;
-    case 4:
-        System.out.println("Thursday");
-        break;
-    case 5:
-        System.out.println("Friday");
-        break;
-    case 6:
-        System.out.println("Saturday");
-        break;
-    case 7:
-        System.out.println("Sunday");
-        break;
-}
-// Outputs "Thursday" (day 4)
-----
-
-
-== The `break` keyword
+[.fragment]
+image:/assets/img/java/core/decision-making-statements/switch-case-implementation.png[switch-case implementation]
 
 === Example
+
+[.fragment]
 [source,java]
 ----
-int day = 4;
-switch (day) {
-    case 6:
-        System.out.println("Today is Saturday");
+int number = 44;
+String size;
+// switch statement to check size
+switch (number) {
+    case 29:
+        size = "Small";
         break;
-    case 7:
-        System.out.println("Today is Sunday");
+    case 42:
+        size = "Medium";
+        break;
+    // match the value of week
+    case 44:
+        size = "Large";
+        break;
+    case 48:
+        size = "Extra Large";
         break;
     default:
-        System.out.println("Looking forward to the Weekend");
+        size = "Unknown";
+        break;
 }
-// Outputs "Looking forward to the Weekend"
+System.out.println("Size: " + size);
 ----
 
-== Short hand `if ... else` (*Ternary Operator*)
+[.fragment]
+[source,output]
+----
+Size: Large
+----
+
+
+== `break` statement in `switch...case`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int expression = 2;
+// switch statement to check size
+switch (expression) {
+    case 1:
+        System.out.println("Case 1");
+    // matching case
+    case 2:
+        System.out.println("Case 2");
+    case 3:
+        System.out.println("Case 3");
+    default:
+        System.out.println("Default case");
+}
+----
+
+[.fragment]
+[source,output]
+----
+Case 2
+Case 3
+Default case
+----
+
+== *Ternary Operator* (Short hand `if ... else`)
 
 === Ternary Operator
 
 image:/assets/img/java/core/decision-making-statements/ternary-operator.svg[Ternary Operator,200%]
 
 === Syntax
+
+[.fragment]
 [source,java]
 ----
 variable = (condition) ? expressionTrue : expressionFalse;
@@ -219,6 +329,7 @@ variable = (condition)
 
 === Example
 
+[.fragment]
 [source,java]
 ----
 int time = 20;
@@ -231,6 +342,7 @@ if (time < 18) {
 
 === Example
 
+[.fragment]
 [source,java]
 ----
 int time = 20;
