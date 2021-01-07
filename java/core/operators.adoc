@@ -57,6 +57,11 @@
 |`+`|`+a`|*Одинарный плюс*|Ничего не меняет.
 |===
 
+=== Type casting
+
+[.fragment]
+image::/assets/img/java/core/type-casting-math-operations.png[Type casting]
+
 === Examples
 
 [.fragment]
