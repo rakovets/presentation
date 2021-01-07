@@ -18,7 +18,7 @@
     },
     "homepage": "https://github.com/rakovets/presentation#readme",
     "dependencies": {
-        "@asciidoctor/reveal.js": "^4.0.1",
-        "asciidoctor": "^2.2.0"
+        "@asciidoctor/reveal.js": "^4.1.0",
+        "asciidoctor": "^2.2.1"
     }
 }
