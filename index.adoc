@@ -26,8 +26,8 @@
 * link:./java/core/data-types.html[Data Types]
 * link:./java/core/operators.html[Operators]
 * link:./java/core/methods.html[Methods]
-* link:./java/core/conditional-statements.html[Conditional statements]
-* link:./java/core/loops.html[Loops]
+* link:./java/core/decision-making-statements.html[Decision-making statements]
+* link:./java/core/looping-statements.html[Looping statements]
 * link:./java/core/arrays.html[Arrays]
 * link:./java/core/oop-classes-and-objects.html[OOP: Classes and Objects]
 

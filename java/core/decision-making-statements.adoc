@@ -205,7 +205,7 @@ switch (day) {
 
 === Ternary Operator
 
-image:/assets/img/java/core/conditional-statements/ternary-operator.svg[Ternary Operator,200%]
+image:/assets/img/java/core/decision-making-statements/ternary-operator.svg[Ternary Operator,200%]
 
 === Syntax
 [source,java]
