@@ -2,6 +2,7 @@
 
 == Problem
 
+[.fragment]
 [source,java]
 ----
 // (1) make sure the code only runs on mac os x
