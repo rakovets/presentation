@@ -49,6 +49,7 @@ asciidoctor.convertFile('./java/core/annotations.adoc', options)
 asciidoctor.convertFile('./java/core/xml.adoc', options)
 asciidoctor.convertFile('./java/core/networking.adoc', options)
 asciidoctor.convertFile('./java/core/i18n.adoc', options)
+asciidoctor.convertFile('./java/core/javadoc.adoc', options)
 
 // Course: "Java Tools"
 asciidoctor.convertFile('./java/tools/logging.adoc', options)

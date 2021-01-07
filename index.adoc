@@ -58,6 +58,7 @@
 * link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224)]
 * link:./java/core/networking.html[Networking]
 * link:./java/core/i18n.html[i18n]
+* link:./java/core/javadoc.html[Javadoc]
 
 == Course: Java Tools [[course-java-tools]]
 
