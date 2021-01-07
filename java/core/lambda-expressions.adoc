@@ -347,7 +347,7 @@ public class LambdaApp {
 === Stream
 
 [.fragment]
-image::/assets/img/java/basics/stream.jpg[Stream]
+image::/assets/img/java/core/stream.jpg[Stream]
 
 == `BaseStream`
 

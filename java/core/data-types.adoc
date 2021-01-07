@@ -28,12 +28,12 @@
 === Variables
 
 [.fragment]
-image::/assets/img/java/basics/data-types/variables-in-java.png[Variables in Java]
+image::/assets/img/java/core/data-types/variables-in-java.png[Variables in Java]
 
 === Variables
 
 [.fragment]
-image::/assets/img/java/basics/data-types/variable-in-memory.jpeg[Variable in Memory.jpeg]
+image::/assets/img/java/core/data-types/variable-in-memory.jpeg[Variable in Memory.jpeg]
 
 == Data Types
 
@@ -64,7 +64,7 @@ image::/assets/img/java/basics/data-types/variable-in-memory.jpeg[Variable in Me
 === Типы данных
 
 [.fragment]
-image::/assets/img/java/basics/data-types/data-types.png[Data Types]
+image::/assets/img/java/core/data-types/data-types.png[Data Types]
 
 === Типы данных в языке Java
 
@@ -334,7 +334,7 @@ final String NUMBER_SYSTEM = "BINARY";
 === Преобразование типов
 
 [.fragment]
-image::/assets/img/java/basics/data-types/type-casting.png[Type casting]
+image::/assets/img/java/core/data-types/type-casting.png[Type casting]
 
 === Examples: Widening Casting
 

@@ -29,7 +29,7 @@ System.out.println(numbers[4]);
 
 === Hierarchy
 
-image::/assets/img/java/basics/hierarchy-exceptions.png[Hierarchy for Exceptions]
+image::/assets/img/java/core/hierarchy-exceptions.png[Hierarchy for Exceptions]
 
 === `Throwable`
 
@@ -229,7 +229,7 @@ public class FirstApp {
             System.out.println(e.getMessage());
         }
         System.out.println("Программа завершена");
-    } 
+    }
 }
 ----
 
@@ -268,7 +268,7 @@ public static void main(String[] args) {
 ----
 public static void main(String[] args) {
     try {
-        int result = getFactorial(-6); 
+        int result = getFactorial(-6);
         System.out.println(result);
     } catch (Exception e) {
         System.out.println(e.getMessage());

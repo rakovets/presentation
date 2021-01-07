@@ -12,7 +12,7 @@
 === Differentiation
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/multithreading.png[Multithreading]
+image::/assets/img/java/core/concurrency/multithreading.png[Multithreading]
 
 == Class `Thread`
 
@@ -48,7 +48,7 @@ public static void main(String[] args) {
 === Thread Lifecycle
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
+image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
 
 == Creating Thread
 

@@ -51,7 +51,7 @@
 === Basics
 
 [.fragment]
-image:/assets/img/java/basics/date-time.png[Java Date and Time API]
+image:/assets/img/java/core/date-time.png[Java Date and Time API]
 
 == `Temporal`
 

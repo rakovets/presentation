@@ -13,14 +13,14 @@ How research class?
 Reflection
 
 [.fragment]
-image:/assets/img/java/basics/reflection/reflection-juggling.webp[Reflection juggling]
+image:/assets/img/java/core/reflection/reflection-juggling.webp[Reflection juggling]
 
 == Structure
 
 === Structure
 
 [.fragment]
-image:/assets/img/java/basics/reflection/reflection-structure.gif[Reflection Structure]
+image:/assets/img/java/core/reflection/reflection-structure.gif[Reflection Structure]
 
 == Класс `Class`
 

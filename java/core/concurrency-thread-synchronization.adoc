@@ -152,7 +152,7 @@ class CountThread implements Runnable {
 === Thread Lifecycle
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
+image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
 
 === Example
 
@@ -260,9 +260,9 @@ public class Program {
 === Deadlock
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/deadlock.jpg[Deadlock]
+image::/assets/img/java/core/concurrency/deadlock.jpg[Deadlock]
 
 === Starvation
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/starvation.png[Starvation]
+image::/assets/img/java/core/concurrency/starvation.png[Starvation]

@@ -181,8 +181,8 @@ System.out.println(str1.equalsIgnoreCase(str2)); // true
 [.fragment]
 [source,java]
 ----
-regionMatches(int toffset, String other, int oofset, int len): boolean 
-regionMatches(boolean ignoreCase, int toffset, String other, int oofset, int): boolean 
+regionMatches(int toffset, String other, int oofset, int len): boolean
+regionMatches(boolean ignoreCase, int toffset, String other, int oofset, int): boolean
 ----
 
 === `regionMatches(int, String, int, int): boolean`
@@ -302,7 +302,7 @@ it
 *String Poll* (*Пул строк*) - это набор строк, который хранится в *Heap*.
 
 [.fragment]
-image:/assets/img/java/basics/string-pool.png[String Pool]
+image:/assets/img/java/core/string-pool.png[String Pool]
 
 === String Pool
 
@@ -419,7 +419,7 @@ StringBuffer strBuffer = new StringBuffer("word");
 
 strBuffer.insert(3, 'l');
 System.out.println(strBuffer.toString()); // world
-    
+
 strBuffer.insert(0, "s");
 System.out.println(strBuffer.toString()); // sworld
 ----
@@ -446,7 +446,7 @@ StringBuffer strBuffer = new StringBuffer("hello java!");
 String str1 = strBuffer.substring(6); // обрезка строки с 6 символа до конца
 System.out.println(str1); //java!
 
-String str2 = strBuffer.substring(3, 9); // обрезка строки с 3 по 9 символ 
+String str2 = strBuffer.substring(3, 9); // обрезка строки с 3 по 9 символ
 System.out.println(str2); //lo jav
 ----
 

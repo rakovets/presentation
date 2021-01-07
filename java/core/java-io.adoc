@@ -20,12 +20,12 @@
 === Concept IO
 
 [.fragment]
-image::/assets/img/java/basics/java-io/concept-io.png[Concept IO]
+image::/assets/img/java/core/java-io/concept-io.png[Concept IO]
 
 === Concept Java IO
 
 [.fragment]
-image::/assets/img/java/basics/java-io/concept-java-io.png[Concept Java IO]
+image::/assets/img/java/core/java-io/concept-java-io.png[Concept Java IO]
 
 == Streams
 
@@ -60,7 +60,7 @@ image::/assets/img/java/basics/java-io/concept-java-io.png[Concept Java IO]
 === Byte-based streams
 
 [.fragment]
-image::/assets/img/java/basics/java-io/byte-based-stream.png[Byte-based stream]
+image::/assets/img/java/core/java-io/byte-based-stream.png[Byte-based stream]
 
 === Byte-based streams
 
@@ -918,7 +918,7 @@ public class FileReaderExample {
 === Serialization and Deserialization
 
 [.fragment]
-image::/assets/img/java/basics/java-io/serialization.png[Serialization and Deserialization]
+image::/assets/img/java/core/java-io/serialization.png[Serialization and Deserialization]
 
 === Interface `Serializable`
 

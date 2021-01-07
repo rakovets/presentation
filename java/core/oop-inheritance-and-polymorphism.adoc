@@ -12,11 +12,11 @@
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-without.svg[Without Inheritance]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-without.svg[Without Inheritance]
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance.svg[Inheritance]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance.svg[Inheritance]
 
 === Super class: example
 
@@ -51,11 +51,11 @@ class Employee extends Person {
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-profit.svg[Inheritance profit]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-profit.svg[Inheritance profit]
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-with-extends.svg[Inheritance with extends]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-with-extends.svg[Inheritance with extends]
 
 === Extends sub class: example
 
@@ -114,7 +114,7 @@ public class Program {
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-override.svg[Inheritance: override]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-override.svg[Inheritance: override]
 
 === `@Override`: example
 
@@ -175,7 +175,7 @@ public class Program {
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-example-iphone.svg[Inheritance example: iPhone]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-example-iphone.svg[Inheritance example: iPhone]
 
 === Inheritance
 
@@ -186,7 +186,7 @@ image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-exam
 
 === Inheritance
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/inheritance-example-auto.svg[Inheritance example: auto]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-example-auto.svg[Inheritance example: auto]
 
 === Subclass
 
@@ -488,13 +488,13 @@ if (kate instanceof Employee) {
 
 === Polymorphism
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/polymorphism-overloading.svg[Polymorphism: overloading]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/polymorphism-overloading.svg[Polymorphism: overloading]
 
 == Abstracttion
 
 === Abstracttion
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/abstraction.svg[Abstraction]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/abstraction.svg[Abstraction]
 
 == Abstract classes
 
@@ -888,7 +888,7 @@ public class Program {
 
 === Nested Classes
 
-image::/assets/img/java/basics/oop/inheritance-and-polymorphism/nested-classes.png[Nested Classes]
+image::/assets/img/java/core/oop/inheritance-and-polymorphism/nested-classes.png[Nested Classes]
 
 === Nested Classes
 

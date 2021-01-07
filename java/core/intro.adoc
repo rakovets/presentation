@@ -55,7 +55,7 @@
 === Java
 
 [.fragment]
-image::/assets/img/java/basics/intro/java-logo.png[Java logo, 400]
+image::/assets/img/java/core/intro/java-logo.png[Java logo, 400]
 
 [.step]
 * *Java* - объектно-ориентированный язык программирования
@@ -65,7 +65,7 @@ image::/assets/img/java/basics/intro/java-logo.png[Java logo, 400]
 === Author
 
 [.fragment]
-image::/assets/img/java/basics/intro/james-gosling.jpg[James Gosling]
+image::/assets/img/java/core/intro/james-gosling.jpg[James Gosling]
 
 [.fragment]
 *James Gosling*
@@ -82,12 +82,12 @@ image::/assets/img/java/basics/intro/james-gosling.jpg[James Gosling]
 === Java versions
 
 [.fragment]
-image::/assets/img/java/basics/intro/java-versions.png[Java versions]
+image::/assets/img/java/core/intro/java-versions.png[Java versions]
 
 === Java versions releases
 
 [.fragment]
-image::/assets/img/java/basics/intro/java-se-lifecycle.jpg[Java SE Lifecycle]
+image::/assets/img/java/core/intro/java-se-lifecycle.jpg[Java SE Lifecycle]
 
 === JVM
 
@@ -95,12 +95,12 @@ image::/assets/img/java/basics/intro/java-se-lifecycle.jpg[Java SE Lifecycle]
 *Java Virtual Machine* (*JVM*) - ключевой компонент платформы Java
 
 [.fragment]
-image::/assets/img/java/basics/intro/boxer-engine.jpg[Boxer Engine]
+image::/assets/img/java/core/intro/boxer-engine.jpg[Boxer Engine]
 
 === JVM
 
 [.fragment]
-image::/assets/img/java/basics/intro/jvm.png[JVM]
+image::/assets/img/java/core/intro/jvm.png[JVM]
 
 === JRE
 
@@ -119,7 +119,7 @@ image::/assets/img/java/basics/intro/jvm.png[JVM]
 === Recap
 
 [.fragment]
-image::/assets/img/java/basics/intro/jvm-jre-jdk.png[JVM, JRE, JDK]
+image::/assets/img/java/core/intro/jvm-jre-jdk.png[JVM, JRE, JDK]
 
 == Install JDK (OS Windows)
 
@@ -169,12 +169,12 @@ setx PATH "%PATH%;%JAVA_HOME%\bin"
 === How computer understands Java?
 
 [.fragment]
-image::/assets/img/java/basics/intro/compiler-interpreter.jpg[Compiler and Interpreter]
+image::/assets/img/java/core/intro/compiler-interpreter.jpg[Compiler and Interpreter]
 
 === Compile and Run time
 
 [.fragment]
-image::/assets/img/java/basics/intro/compile-and-run-time.gif[Compile and Run time]
+image::/assets/img/java/core/intro/compile-and-run-time.gif[Compile and Run time]
 
 === Write `source code`
 
@@ -266,7 +266,7 @@ Hello World!
 [.fragment]
 [.column.is-one-third]
 --
-image::/assets/img/java/basics/intro/ide-intellij-idea.png[IntelliJ IDEA]
+image::/assets/img/java/core/intro/ide-intellij-idea.png[IntelliJ IDEA]
 
 IntelliJ IDEA
 --
@@ -274,7 +274,7 @@ IntelliJ IDEA
 [.fragment]
 [.column.is-one-third]
 --
-image::/assets/img/java/basics/intro/ide-eclipse.svg[Eclipse]
+image::/assets/img/java/core/intro/ide-eclipse.svg[Eclipse]
 
 Eclipse
 --
@@ -282,7 +282,7 @@ Eclipse
 [.fragment]
 [.column.is-one-third]
 --
-image::/assets/img/java/basics/intro/ide-netbeans.png[NetBeans]
+image::/assets/img/java/core/intro/ide-netbeans.png[NetBeans]
 
 NetBeans
 --

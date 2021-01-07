@@ -4,7 +4,7 @@
 
 === Arrays
 
-image:/assets/img/java/basics/arrays/arrays.png[Arrays]
+image:/assets/img/java/core/arrays/arrays.png[Arrays]
 
 === Syntax
 
@@ -80,7 +80,7 @@ int[] nums2 = {1, 2, 3, 5};
 
 === Multidimensional Arrays
 
-image:/assets/img/java/basics/arrays/arrays-2d.jpg[Multidimensional Arrays]
+image:/assets/img/java/core/arrays/arrays-2d.jpg[Multidimensional Arrays]
 
 === Syntax
 
@@ -115,7 +115,7 @@ System.out.println(nums2[1][0]);
 
 === Multidimensional Arrays
 
-image:/assets/img/java/basics/arrays/arrays-2d-variable-length.jpg[Multidimensional Arrays]
+image:/assets/img/java/core/arrays/arrays-2d-variable-length.jpg[Multidimensional Arrays]
 
 === Example
 

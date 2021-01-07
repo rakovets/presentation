@@ -8,7 +8,7 @@
 Принцип: код воздействует на данные
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/structured-programming.svg[Structured Programming]
+image::/assets/img/java/core/oop/classes-and-objects/structured-programming.svg[Structured Programming]
 
 === Solution
 
@@ -18,14 +18,14 @@ image::/assets/img/java/basics/oop/classes-and-objects/structured-programming.sv
 Принцип: данные управляют доступом к коду
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/object-orinted-programming.png[Object-Orinted Programming]
+image::/assets/img/java/core/oop/classes-and-objects/object-orinted-programming.png[Object-Orinted Programming]
 
 == OOP
 
 === OOP principles
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/oop-principles-mem.png[OOP principles]
+image::/assets/img/java/core/oop/classes-and-objects/oop-principles-mem.png[OOP principles]
 
 === OOP principles
 
@@ -126,7 +126,7 @@ public class Program {
 class Person {
     String name;
     int age;
-    
+
     Person() {
         name = "Undefined";
         age = 18;
@@ -416,7 +416,7 @@ package com.rakovets;
 
 import java.util.Scanner;
 import java.util.*;
-    
+
 public class Program {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -442,12 +442,12 @@ java.sql.Date sqlDate = new java.sql.Date();
 * *Encapsulation* - это ограничение доступа одних компонентов программы к другим
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/encapsulation.png[Encapsulation]
+image::/assets/img/java/core/oop/classes-and-objects/encapsulation.png[Encapsulation]
 
 === Encapsulation
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/encapsulation-example.png[Encapsulation example]
+image::/assets/img/java/core/oop/classes-and-objects/encapsulation-example.png[Encapsulation example]
 
 == Access modifiers
 
@@ -563,12 +563,12 @@ public class Program {
 === non `static`
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/non-static-members.png[Non static members]
+image::/assets/img/java/core/oop/classes-and-objects/non-static-members.png[Non static members]
 
 === `static`
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/static-members.png[Static members]
+image::/assets/img/java/core/oop/classes-and-objects/static-members.png[Static members]
 
 === Keyword `static`: example
 
@@ -746,24 +746,24 @@ public class Program {
 Открытая часть класса, с помощью которой другие классы могут с ним взаимодействовать
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/interface.png[Interface]
+image::/assets/img/java/core/oop/classes-and-objects/interface.png[Interface]
 
 === Interface
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/interface-with-encapsulation.png[Interface with Encapsulation]
+image::/assets/img/java/core/oop/classes-and-objects/interface-with-encapsulation.png[Interface with Encapsulation]
 
 == Composition
 
 === Composition (Композиция)
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/non-composition.png[Non Composition]
+image::/assets/img/java/core/oop/classes-and-objects/non-composition.png[Non Composition]
 
 === Composition
 
 [.fragment]
-image::/assets/img/java/basics/oop/classes-and-objects/composition.png[Composition]
+image::/assets/img/java/core/oop/classes-and-objects/composition.png[Composition]
 
 == Total
 

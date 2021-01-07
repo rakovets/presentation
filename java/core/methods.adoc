@@ -209,4 +209,4 @@ public class Program {
 == JMM (Java Memory Model)
 
 [.fragment]
-image::/assets/img/java/basics/stack-memory-space.png[Stack Memory Space]
+image::/assets/img/java/core/stack-memory-space.png[Stack Memory Space]

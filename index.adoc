@@ -4,7 +4,7 @@
 
 === Courses
 
-* <<course-java-basics, Basics Java>>
+* <<course-java-core, Core Java>>
 * <<course-java-tools, Java Tools>>
 * <<course-java-data-persistence, Data Persistence in Java>>
 * <<course-java-jakarta-ee, Java with Jakarta EE>>
@@ -18,46 +18,46 @@
 * <<course-html-and-css, HTML and CSS>>
 * <<course-javascript-basic, JavaScript Basic>>
 
-== Course: Basics Java [[course-java-basics]]
+== Course: Core Java [[course-java-core]]
 
-=== Course: Basics Java
+=== Course: Core Java
 
-* link:./java/basics/intro.html[Intro]
-* link:./java/basics/data-types.html[Data Types]
-* link:./java/basics/operators.html[Operators]
-* link:./java/basics/methods.html[Methods]
-* link:./java/basics/conditional-statements.html[Conditional statements]
-* link:./java/basics/loops.html[Loops]
-* link:./java/basics/arrays.html[Arrays]
-* link:./java/basics/oop-classes-and-objects.html[OOP: Classes and Objects]
+* link:./java/core/intro.html[Intro]
+* link:./java/core/data-types.html[Data Types]
+* link:./java/core/operators.html[Operators]
+* link:./java/core/methods.html[Methods]
+* link:./java/core/conditional-statements.html[Conditional statements]
+* link:./java/core/loops.html[Loops]
+* link:./java/core/arrays.html[Arrays]
+* link:./java/core/oop-classes-and-objects.html[OOP: Classes and Objects]
 
-=== Course: Basics Java
+=== Course: Core Java
 
-* link:./java/basics/strings.html[Strings]
-* link:./java/basics/oop-inheritance-and-polymorphism.html[OOP: Inheritance and Polymorphism]
-* link:./java/basics/class-object.html[Class `Objects`]
-* link:./java/basics/generics.html[Generics]
-* link:./java/basics/enum.html[Enum]
-* link:./java/basics/collections.html[Java Collection Framework]
-* link:./java/basics/exception-handling.html[Exception Handling]
-* link:./java/basics/java-io.html[Java IO]
+* link:./java/core/strings.html[Strings]
+* link:./java/core/oop-inheritance-and-polymorphism.html[OOP: Inheritance and Polymorphism]
+* link:./java/core/class-object.html[Class `Objects`]
+* link:./java/core/generics.html[Generics]
+* link:./java/core/enum.html[Enum]
+* link:./java/core/collections.html[Java Collection Framework]
+* link:./java/core/exception-handling.html[Exception Handling]
+* link:./java/core/java-io.html[Java IO]
 
-=== Course: Basics Java
+=== Course: Core Java
 
-* link:./java/basics/concurrency-common.html[Concurrency: common]
-* link:./java/basics/concurrency-thread-synchronization.html[Concurrency: thread synchronization]
-* link:./java/basics/concurrency-utilities.html[Concurrency: utilities (JSR 166)]
-* link:./java/basics/functional-interfaces.html[Functional interfaces]
-* link:./java/basics/lambda-expressions.html[Lambda Expressions (JSR 335)]
-* link:./java/basics/date-and-time.html[Date and Time API (JSR 335)]
-* link:./java/basics/reflection.html[Reflection]
-* link:./java/basics/annotations.html[Annotations (JSR 250, 269, 308)]
+* link:./java/core/concurrency-common.html[Concurrency: common]
+* link:./java/core/concurrency-thread-synchronization.html[Concurrency: thread synchronization]
+* link:./java/core/concurrency-utilities.html[Concurrency: utilities (JSR 166)]
+* link:./java/core/functional-interfaces.html[Functional interfaces]
+* link:./java/core/lambda-expressions.html[Lambda Expressions (JSR 335)]
+* link:./java/core/date-and-time.html[Date and Time API (JSR 335)]
+* link:./java/core/reflection.html[Reflection]
+* link:./java/core/annotations.html[Annotations (JSR 250, 269, 308)]
 
-=== Course: Basics Java
+=== Course: Core Java
 
-* link:./java/basics/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224)]
-* link:./java/basics/networking.html[Networking]
-* link:./java/basics/i18n.html[i18n]
+* link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224)]
+* link:./java/core/networking.html[Networking]
+* link:./java/core/i18n.html[i18n]
 
 == Course: Java Tools [[course-java-tools]]
 

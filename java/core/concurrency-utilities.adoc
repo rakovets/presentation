@@ -5,7 +5,7 @@
 === Problem
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/concurrency-theory-practice.jpg[Concurrency: Theory and Practice]
+image::/assets/img/java/core/concurrency/concurrency-theory-practice.jpg[Concurrency: Theory and Practice]
 
 === Solution
 
@@ -17,7 +17,7 @@ image::/assets/img/java/basics/concurrency/concurrency-theory-practice.jpg[Concu
 === Whom to thank?
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/doug-lea.jpeg[Doug Lea]
+image::/assets/img/java/core/concurrency/doug-lea.jpeg[Doug Lea]
 [.fragment]
 Doug Lea
 
@@ -100,12 +100,12 @@ Doug Lea
 === `Semaphore`
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/semaphore.png[Semaphore]
+image::/assets/img/java/core/concurrency/semaphore.png[Semaphore]
 
 === `Semaphore`
 
 [.fragment]
-image::/assets/img/java/basics/concurrency/java-monitor.gif[Java monitor]
+image::/assets/img/java/core/concurrency/java-monitor.gif[Java monitor]
 
 == `java.concurrent.locks`
 

@@ -55,19 +55,19 @@
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 == Interface `Collection<E>`
 
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `Collection<E>`
 
@@ -105,7 +105,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `List<E>`
 
@@ -138,7 +138,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `ArrayList<E>`
 
@@ -197,7 +197,7 @@ class ArrayListExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `Queue<E>`
 
@@ -244,7 +244,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Methods
 
@@ -275,7 +275,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Constructors
 
@@ -310,7 +310,7 @@ public class ArrayDequeExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `LinkedList<E>`
 
@@ -344,7 +344,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 ===  Interface `Set<E>`
 
@@ -357,7 +357,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `HashSet<E>`
 
@@ -400,7 +400,7 @@ class HashSetExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Methods
 
@@ -416,7 +416,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 [.fragment]
 `NavigadleSet<E> extends SortedSet<E>`
@@ -444,7 +444,7 @@ image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Co
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `TreeSet<E>`
 
@@ -487,7 +487,7 @@ class TreeSetExample {
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 === Interface `Map<K, V>`
 
@@ -533,7 +533,7 @@ image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hiera
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `HashMap<K, V>`
 
@@ -567,7 +567,7 @@ public class HashMapExample {
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `LinkedHashMap<K, V>`
 
@@ -581,7 +581,7 @@ image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hiera
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 === Methods
 
@@ -597,7 +597,7 @@ image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hiera
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 [.fragment]
 `NavigableMap<K, V> extends SortedMap<K, V>`
@@ -637,7 +637,7 @@ image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hiera
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `TreeMap<K, V>`
 
@@ -681,7 +681,7 @@ public class TreeMapExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/basics/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `Iterator<E>`
 
@@ -796,4 +796,4 @@ public class Program {
 Collection выбирается под задачу.
 
 [.fragment]
-image::/assets/img/java/basics/collections/jcf-big-o.png[BigO for JCF]
+image::/assets/img/java/core/collections/jcf-big-o.png[BigO for JCF]
