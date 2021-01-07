@@ -4,6 +4,7 @@
 
 === Problem
 
+[.fragment]
 Как с помощью языка программирования хранить информацию в оперативной памяти?
 
 === Solution
@@ -18,7 +19,7 @@
 
 [.step]
 * *Переменная* (*variable*) - это именованная *ячейка памяти*
-* Содержимое *переменной* может изменяться в процессе выполениея программы.
+* Содержимое *переменной* может изменяться в процессе выполнения программы.
 * При объявлении переменной:
 [.step]
 ** сначала указывается *data type* (*тип данных*) переменной
@@ -69,7 +70,7 @@ image::/assets/img/java/core/data-types/data-types.png[Data Types]
 === Типы данных в языке Java
 
 [.fragment]
-Все остальные типы - *ссылочные*. Если быть точным, то любой `Object`
+Все остальные типы — *ссылочные*. Если быть точным, то любой `Object`
 
 === Примитивные типы данных
 
@@ -173,12 +174,44 @@ System.out.println(j); // 11
 [.fragment]
 Well
 
+== Identifier
+
+=== Identifier
+
+[.step]
+* *Идентификаторы* – это имена, которые даются различным элементам языка для упрощения доступа к ним.
+* В именах переменных используются символы:
+[.step]
+** `A`-`Z`
+** `a`-`z`
+** `0`-`9`
+** `$`, `_`
+
+=== Identifier
+
+[.fragment]
+Запрещено применение:
+[.step]
+* `\_` - error: as of release 9, '_' is a keyword, and may not be used as an identifier
+* арифметических и логических операторов
+* и других символов
+
+=== Identifier
+
+[options="header"]
+|===
+|Possible|Impossible
+|`my$money`|`field#`
+|`_flag`|`open^flag`
+|`new_string`|`1searchIndex`
+|===
+
 == Literals
 
 === Literals
 
 [.step]
-* *Литералы* - это явно заданные значения в коде программы.
+* *Литералы* — это явно заданные значения в коде программы.
 * Фактически, _константы определенного типа_, которые _находятся в коде в момент запуска_.
 
 === Literals
@@ -198,10 +231,10 @@ class Test {
 [.step]
 * Числовые:
 [.step]
-** Целочисленные;
-** С плавающей точкой;
-* Строковые;
-* Символьные;
+** Целочисленные.
+** С плавающей точкой.
+* Строковые.
+* Символьные.
 * Логические.
 
 === Literal type `long`
@@ -219,9 +252,12 @@ long c = 1_234_567_890_1l; // Not recommend. Use `L`
 [.fragment]
 [source,java]
 ----
-float d = 2.718; // error: incompatible types: possible lossy conversion from double to float
-float e = 2.718F; // Все в порядке
-float f = 2.718f; // Все в порядке
+// float d = 2.718; // error: incompatible types: possible lossy conversion from double to float
+float f1 = 2.718F; // Все в порядке
+float f2 = 2.718f; // Все в порядке
+float f3 = 0.0f / 0.0f; // NaN - Not-a-Number
+float f4 = 1.0f / 0.0f; // Infinity - бесконечность
+float f5 = -1.0f / 0.0f; // -Infinity - отрицательная бесконечность
 ----
 
 === Literal type `double`
@@ -229,8 +265,13 @@ float f = 2.718f; // Все в порядке
 [.fragment]
 [source,java]
 ----
-double a = 2.718281828459045; // Тип double в классическом виде
-double d = 4.05E-13; // Тип double в научном виде
+double d1 = 2.123_456_789; // Тип double в классическом виде
+double d2 = 4.05E-13; // Тип double в научном виде
+double d3 = .5; // Тип double эквивалентный 0.5
+double d4 = 3.; // Тип double эквивалентный 3.0
+double d5 = 0.0 / 0.0; // NaN - Not-a-Number
+double d6 = 1.0 / 0.0; // Infinity - бесконечность
+double d7 = -1.0 / 0.0; // -Infinity - отрицательная бесконечность
 ----
 
 === Literal type `char`
@@ -238,10 +279,42 @@ double d = 4.05E-13; // Тип double в научном виде
 [.fragment]
 [source,java]
 ----
-char i = 'A'; // A (latin)
-char j = '\u0041'; // A (latin)
-char k = 65; // A (latin)
+char c1 = 'A'; // A (latin) Glyph
+char c2 = '\u0041'; // A (latin) Unicode Code
+char c3 = '\101'; // A (latin) Octal
+char c4 = 65; // A (latin) Decimal
 ----
+
+[.fragment]
+*Unicode*: `\uUNICODE_HEX` от `\u0000` до `\u00ff` символа в шестнадцатеричном формате.
+
+=== Literal type `char`
+
+[.fragment]
+[options="header",cols="1,1,4"]
+|===
+|Symbol|Unicode|Description
+|`\b`|`\u0008`|*backspace* - *BS* – забой
+|`\t`|`\u0009`|*horizontal tab* - *HT* – табуляция
+|`\n`|`\u000a`|*linefeed* - *LF* – конец строки
+|`\f`|`\u000c`|*form feed* - *FF* – конец страницы
+|`\r`|`\u000d`|*carriage return* - *CR* – возврат каретки
+|`\"`|`\u0022`|*double quote* - `"` – двойная кавычка
+|`\'`|`\u0027`|*single quote* - `'` – одинарная кавычка
+|`\\`|`\u005c`|*backslash* - `\` – обратная косая черта
+|===
+
+=== Text Literal
+
+[.fragment]
+[source,java]
+String text = "text literal";
+
+=== Literal `null`
+
+[.fragment]
+[source,java]
+String text = null;
 
 === Другие системы счисления
 
@@ -312,7 +385,7 @@ y = 10;
 * Константы позволяют задать такие переменные, которые не должны больше изменяться.
 * В отличие от переменных константам можно присвоить значение ТОЛЬКО один раз.
 * Как правило, константы имеют имена в **ВЕРХНЕМ_РЕГИСТРЕ**.
-* Объявляется как и переменные, но только с служебным словом `final`
+* Объявляется, как и переменные, но только со служебным словом `final`.
 
 === Example
 
@@ -381,5 +454,5 @@ System.out.println(i2); // -127
 
 [.step]
 * *Java* - *строго типизированный* язык программирования.
-* т.е. типы переменных должны быть известны до *compile time*
+* Типы переменных должны быть известны до *compile time*
 * (@since 10) или могут *ОДНОЗНАЧНО* установлены во время *compile time*
