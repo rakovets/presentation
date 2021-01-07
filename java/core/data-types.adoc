@@ -13,6 +13,85 @@
 * Data types
 * Variables
 
+== Структура кода
+
+=== Структура кода
+
+[.step]
+* *Пробелы*
+* *Комментарии*
+* *Лексемы*
+
+=== Пробелы
+
+[.step]
+* Whitespace (Пробел) - *ASCII 32*
+* `CR` - *ASCII 10*
+* `LF` (`NL`) - *ASCII 13*
+* `TAB` - *ASCII 9*
+
+=== Комментарии
+
+[.step]
+* Однострочный
+
+[.fragment]
+----
+// java 4 U
+----
+
+[.step]
+* Многострочный
+
+[.fragment]
+----
+i++/* increment comment*/;
+----
+
+[.step]
+* Документирования
+
+[.fragment]
+----
+/**
+* @author Dmitry Rakovets
+*/
+----
+
+=== Лексемы
+
+[.step]
+* *ключевые слова* (*key words*)
+* *идентификаторы* (*identifiers*)
+* *литералы* (*literals*)
+* *разделители* (*separators*)
+* *операторы* (*operators*)
+
+=== Ключевые слова
+
+[.fragment]
+[source,java]
+----
+abstract   continue   for          new         switch
+assert     default    if           package     synchronized
+boolean    do         goto         private     this
+break      double     implements   protected   throw
+byte       else       import       public      throws
+case       enum       instanceof   return      transient
+catch      extends    int          short       try
+char       final      interface    static      void
+class      finally    long         strictfp    volatile
+const      float      native       super       while
+_ (underscore)
+----
+
+=== Разделители
+
+[.fragment]
+----
+( ) [ ] { } ; . ,
+----
+
 == Variables
 
 === Variables
