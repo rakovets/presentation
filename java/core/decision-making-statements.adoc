@@ -227,16 +227,23 @@ Largest Number: 4.5
 [source,java]
 ----
 switch(expression) {
-case x:
+case exp1:
     // code block
     break;
-case y:
+// ...
+case expN:
     // code block
     break;
 default:
     // code block
 }
 ----
+
+=== Syntax
+
+[.step]
+* Значения `exp1`, ..., `expN` должны быть константами и могут быть значения типа `byte`, `short`, `char`, `int` или `enum`.
+* C *Java 7* тип `String`, `Character`, `Byte`, `Short` и `Integer`
 
 === How does the `switch` statement work?
 
@@ -278,7 +285,6 @@ System.out.println("Size: " + size);
 Size: Large
 ----
 
-
 == `break` statement in `switch...case`
 
 === Example
@@ -309,7 +315,7 @@ Case 3
 Default case
 ----
 
-== *Ternary Operator* (Short hand `if ... else`)
+== Ternary Operator (Short hand `if ... else`)
 
 === Ternary Operator
 
