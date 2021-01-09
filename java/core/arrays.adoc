@@ -1,10 +1,31 @@
 = Arrays
 
+== Intro
+
+=== Problem
+
+[.step]
+* Что если необходимо хранить в памяти множество однотипных данных, например: фамилии студентов в группе.
+* Создадим такое же количество переменных как и студентов!
+* А что если появится новый студент? Переписывать программу?!
+
+=== Solution
+
+[.fragment]
+*Arrays*
+
 == Arrays
 
 === Arrays
 
+[.fragment]
 image:/assets/img/java/core/arrays/arrays.png[Arrays]
+
+=== Arrays
+
+[.step]
+* *Массив* — это конечная последовательность упорядоченных по индексу элементов одного типа, доступ к каждому элементу в которой осуществляется по этому индексу.
+* Размер или длина массива — это общее количество элементов в массиве. Размер массива задаётся при создании массива и не может быть изменён в дальнейшем.
 
 === Syntax
 
@@ -48,7 +69,7 @@ int nums[] = new int[4];
 int[] nums2 = new int[15];
 ----
 
-=== ArrExampleays
+=== Example
 
 [.fragment]
 [source,java]
@@ -74,12 +95,50 @@ System.out.println(nums[2]); // 4
 // эти два способа равноценны
 int[] nums = new int[] {1, 2, 3, 5};
 int[] nums2 = {1, 2, 3, 5};
+System.out.println(nums.length); // длина массива 4
 ----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int[] array = new int[10];
+Random rand = new Random();
+for (int i = 0; i < array.length; i++) {
+		array[i] = rand.nextInt(10);
+}
+
+System.out.println("initial array:");
+for (int i = 0; i < array.length; i++) {
+    System.out.print(array[i] + "   ");
+}
+
+for (int i = 0; i < array.length; i++) {
+    array[i] += 10;
+}
+
+System.out.println("new array:");
+for (int i = 0; i < array.length; i++) {
+    System.out.print(array[i] + "   ");
+}
+----
+
 
 == Multidimensional Arrays
 
 === Multidimensional Arrays
 
+[.fragment]
+Массивы бывают:
+[.step]
+* одномерные
+* двумерные
+* n-мерные
+
+=== Multidimensional Arrays
+
+[.fragment]
 image:/assets/img/java/core/arrays/arrays-2d.jpg[Multidimensional Arrays]
 
 === Syntax
@@ -115,6 +174,7 @@ System.out.println(nums2[1][0]);
 
 === Multidimensional Arrays
 
+[.fragment]
 image:/assets/img/java/core/arrays/arrays-2d-variable-length.jpg[Multidimensional Arrays]
 
 === Example
@@ -129,44 +189,120 @@ nums[2] = new int[5];
 ...
 ----
 
+=== Example
+
+[.fragment]
+[source,java]
+----
+int[][] array = {
+    {1, 1, 1, 1},
+    {1, 1, 1, 1},
+    {1, 1, 1, 1}
+};
+int sum = 0;
+for (int i = 0; i < array.length; i++) {
+    for (int j = 0; j < array[0].length; j++) {
+         sum += array[i][j];
+    }
+}
+System.out.println(sum);
+----
+
 == Default initialization for Array
 
 === Default initialization for Array
 
+[.fragment]
+[options="header"]
 |===
-|initialization|content
-|new boolean[3]|{false, false, false}
-|new int[3]|{0, 0, 0}
-|new double[3]|{0.0, 0.0, 0.0}
-|new String[3]|{null, null, null}
-|new int[3][]|{null, null, null}
+|Initialization|Content
+|`new boolean[3]`|`{false, false, false}`
+|`new int[3]`|`{0, 0, 0}`
+|`new double[3]`|`{0.0, 0.0, 0.0}`
+|`new String[3]`|`{null, null, null}`
+|`new int[3][]`|`{null, null, null}`
 |===
 
 == Class `Arrays`
 
 === Methods for class `Arrays`
 
-Methods:
-
-- `String toString(T[])`
-- `String toString(T[])`
-- `T[] copyOf(T[], int)`
-- `T[] copyOfRange(T[], int, int)`
-- `void sort(T[])`
-- `void sort(T[], int, int)`
-- `int binarySearch(T[], T)`
-- `int binarySearch(T[], int, int, T)`
-
+[.step]
+* `String toString(T[])`
+* `String toString(T[])`
+* `T[] copyOf(T[], int)`
+* `T[] copyOfRange(T[], int, int)`
+* `void sort(T[])`
+* `void sort(T[], int, int)`
+* `int binarySearch(T[], T)`
+* `int binarySearch(T[], int, int, T)`
 
 === Methods for class `Arrays`
 
-Methods:
+[.step]
+* `void fill(T[], T)`
+* `void fill(T[], int, int, T)`
+* `boolean equals(T[], T[])`
+* `boolean equals(T[], int, int, T[], int, int)`
+* `int compare(T[], T[])`
+* `int compare(T[], int, int, T[], int, int)`
+* `boolean deepEquals(Object[], Object[])`
+* `List<T> asList(T ...)`
 
-- `void fill(T[], T)`
-- `void fill(T[], int, int, T)`
-- `boolean equals(T[], T[])`
-- `boolean equals(T[], int, int, T[], int, int)`
-- `int compare(T[], T[])`
-- `int compare(T[], int, int, T[], int, int)`
-- `boolean deepEquals(Object[], Object[])`
-- `List<T> asList(T ...)`
+== Сортировка массивов
+
+=== Сортировка массивов
+
+[.step]
+* Сортировка выбором
+* Сортировки с помощью обменов
+[.step]
+** Пузырьковая сортировка
+** Шейкерная сортировка
+* Сортировка с помощью включения
+* Сортировка слиянием
+* Сортировка с помощью разделения
+
+=== Сортировка выбором
+
+[.fragment]
+[source,java]
+----
+int[] array = {8, 5, 2, 6, 9, 3, 1, 4, 0, 7};
+
+for (int i = 0; i < array.length; i++) {
+    int minIndex = i;
+    for (int j = i + 1; j < array.length; j++) {
+        if (array[j] < array[minIndex]) {
+            minIndex = j;
+        }
+    }
+    int temp = array[i];
+    array[i] = array[minIndex];
+    array[minIndex] = temp;
+}
+
+for (int i = 0; i < array.length; i++) {
+    System.out.print(array[i] + “	”);
+}
+----
+
+=== Пузырьковая сортировка
+
+[.fragment]
+[source,java]
+----
+int[] array = {5, 4, 3, 1, 2};
+for (int i = array.length - 1; i > 0; i--) {
+    for (int j = 0; j < i; j++) {
+        if (array[j] > array[j + 1]) {
+            int temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
+        }
+    }
+}
+for (int i = 0; i < array.length; i++) {
+    System.out.print(array[i] + "   ");
+}
+----
