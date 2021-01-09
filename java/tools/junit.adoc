@@ -1,0 +1,76 @@
+= JUnit
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как после модификации кода быть уверенным, что он все ещё работает правильно?
+
+=== Solution
+
+[.fragment]
+*JUnit*
+
+== JUnit 5
+
+=== JUnit 5
+
+[.step]
+* Применение новых аннотаций
+* Использование пользовательского имени для класса и метода теста
+* Возможность объединения нескольких *assert* в группу *assert*
+* Возможность запуска в группе *assert* независимых *assert*
+* Использование части кода теста для проверки на генерацию объекта класса исключения
+* Использование тайм-аута при выполнении теста
+* Использование предположений в методе
+
+== Add to project
+
+=== Add dependency
+
+[.fragment]
+[source,xml]
+----
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.7.0</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== Add class
+
+[.fragment]
+[source,java]
+----
+public class JUnitTest {
+    public static String[] splitText(String text) {
+        return text.split("\\|");
+    }
+}
+----
+
+=== Add test
+
+[.fragment]
+[source,java]
+----
+import static JUnit5Demo;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+public class AppTest {
+    @Test
+    public void splitTextTest() {
+        String[] splitText = splitText("a|b");
+        assertAll("splitGroupTest",
+                () -> assertEquals(new String[]{"a", "b"}.length, splitText.length),
+                () -> assertEquals("a", splitText[0]),
+                () -> assertEquals("b", splitText[1]));
+    }
+}
+----

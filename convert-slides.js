@@ -53,6 +53,7 @@ asciidoctor.convertFile('./java/core/javadoc.adoc', options)
 
 // Course: "Java Tools"
 asciidoctor.convertFile('./java/tools/logging.adoc', options)
+asciidoctor.convertFile('./java/tools/junit.adoc', options)
 asciidoctor.convertFile('./java/tools/apache-maven.adoc', options)
 asciidoctor.convertFile('./java/tools/apache-tomcat.adoc', options)
 

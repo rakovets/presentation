@@ -65,6 +65,7 @@
 === Course: Java Tools
 
 * link:./java/tools/logging.html[Logging]
+* link:./java/tools/junit.html[JUnit]
 * link:./java/tools/apache-maven.html[Apache Maven]
 * link:./java/tools/apache-tomcat.html[Apache Tomcat]
 
