@@ -113,11 +113,15 @@
 
 * link:./common/programming-languages.html[Programming languages]
 * link:./common/git.html[Git]
+* link:./common/testing.html[Testing]
 * link:./common/uml.html[UML]
 * link:./common/design-principles.html[Design Principles]
 * link:./common/design-patterns.html[Design Patterns]
 * link:./common/architectural-patterns.html[Architectural Patterns]
 * link:./common/xml.html[XML]
+
+=== Course: Common
+
 * link:./common/json.html[JSON]
 * link:./common/scrum.html[Scrum]
 

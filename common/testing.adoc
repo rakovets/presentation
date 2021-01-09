@@ -1,0 +1,24 @@
+= Testing
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как после модификации кода быть уверенным, что он все ещё работает правильно?
+
+=== Solution
+
+[.fragment]
+*Testing*
+
+== Testing
+
+=== The Cost of Defects
+
+image::/assets/img/common/cost-of-defects.jpg[The Cost of Defects]
+
+=== Цель Unit-тестирования
+
+Цель Unit-тестирования в изолировании каждого программного модуля и проведение тестирования корректности их работы независимо друг от друга.
+
