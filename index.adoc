@@ -33,8 +33,8 @@
 
 === Course: Core Java
 
-* link:./java/core/strings.html[Strings.]
-* link:./java/core/oop-inheritance-and-polymorphism.html[OOP. Inheritance and Polymorphism.]
+* link:./java/core/string.html[String.]
+* link:./java/core/oop-principles.html[OOP. Principles.]
 * link:./java/core/class-object.html[Class `Objects`.]
 * link:./java/core/generics.html[Generics.]
 * link:./java/core/enum.html[Enum.]

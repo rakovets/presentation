@@ -8,15 +8,46 @@
 
 == Solution
 
+== OOP
+
+=== OOP principles
+
+[.fragment]
+image::/assets/img/java/core/oop/classes-and-objects/oop-principles-mem.png[OOP principles]
+
+=== OOP principles
+
+[.step]
+* *Encapsulation* (*Инкапсуляция*)
+* *Inheritance* (*Наследование*)
+* *Polymorphism* (*Полиморфизм*)
+* *Abstraction* (*Абстракция*)
+
+== Encapsulation
+
+=== Encapsulation
+
+[.step]
+* *Encapsulation* (*Инкапсуляция*) — это процесс объединения кода и данных в единый блок.
+* *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
+
+[.fragment]
+image::/assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
+
+=== Encapsulation
+
+[.fragment]
+image::/assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
+
 == Inheritance
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-without.svg[Without Inheritance]
+image::/assets/img/java/core/oop/principles/inheritance-without.svg[Without Inheritance]
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance.svg[Inheritance]
+image::/assets/img/java/core/oop/principles/inheritance.svg[Inheritance]
 
 === Super class: example
 
