@@ -22,86 +22,86 @@
 
 === Course: Core Java
 
-* link:./java/core/intro.html[Intro]
-* link:./java/core/data-types.html[Data Types]
-* link:./java/core/operators.html[Operators]
-* link:./java/core/methods.html[Methods]
-* link:./java/core/decision-making-statements.html[Decision-making statements]
-* link:./java/core/looping-statements.html[Looping statements]
-* link:./java/core/arrays.html[Arrays]
-* link:./java/core/oop-classes-and-objects.html[OOP: Classes and Objects]
+* link:./java/core/intro.html[Intro.]
+* link:./java/core/data-types.html[Data Types.]
+* link:./java/core/operators.html[Operators.]
+* link:./java/core/methods.html[Methods.]
+* link:./java/core/decision-making-statements.html[Decision-making statements.]
+* link:./java/core/looping-statements.html[Looping statements.]
+* link:./java/core/arrays.html[Arrays.]
+* link:./java/core/oop-classes-and-objects.html[OOP. Classes and Objects.]
 
 === Course: Core Java
 
-* link:./java/core/strings.html[Strings]
-* link:./java/core/oop-inheritance-and-polymorphism.html[OOP: Inheritance and Polymorphism]
-* link:./java/core/class-object.html[Class `Objects`]
-* link:./java/core/generics.html[Generics]
-* link:./java/core/enum.html[Enum]
-* link:./java/core/collections.html[Java Collection Framework]
-* link:./java/core/exception-handling.html[Exception Handling]
-* link:./java/core/java-io.html[Java IO]
+* link:./java/core/strings.html[Strings.]
+* link:./java/core/oop-inheritance-and-polymorphism.html[OOP. Inheritance and Polymorphism.]
+* link:./java/core/class-object.html[Class `Objects`.]
+* link:./java/core/generics.html[Generics.]
+* link:./java/core/enum.html[Enum.]
+* link:./java/core/collections.html[Java Collection Framework.]
+* link:./java/core/exception-handling.html[Exception Handling.]
+* link:./java/core/java-io.html[Java IO.]
 
 === Course: Core Java
 
-* link:./java/core/concurrency-common.html[Concurrency: common]
-* link:./java/core/concurrency-thread-synchronization.html[Concurrency: thread synchronization]
-* link:./java/core/concurrency-utilities.html[Concurrency: utilities (JSR 166)]
-* link:./java/core/functional-interfaces.html[Functional interfaces]
-* link:./java/core/lambda-expressions.html[Lambda Expressions (JSR 335)]
-* link:./java/core/date-and-time.html[Date and Time API (JSR 335)]
-* link:./java/core/reflection.html[Reflection]
-* link:./java/core/annotations.html[Annotations (JSR 250, 269, 308)]
+* link:./java/core/concurrency-common.html[Concurrency: common.]
+* link:./java/core/concurrency-thread-synchronization.html[Concurrency: thread synchronization.]
+* link:./java/core/concurrent-utilities.html[Concurrent utilities (JSR 166).]
+* link:./java/core/functional-interfaces.html[Functional interfaces.]
+* link:./java/core/lambda-expressions.html[Lambda Expressions (JSR 335).]
+* link:./java/core/date-and-time.html[Date and Time API (JSR 335).]
+* link:./java/core/reflection.html[Reflection.]
+* link:./java/core/annotations.html[Annotations (JSR 250, 269, 308).]
 
 === Course: Core Java
 
-* link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224)]
-* link:./java/core/networking.html[Networking]
-* link:./java/core/i18n.html[i18n]
-* link:./java/core/javadoc.html[Javadoc]
+* link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224).]
+* link:./java/core/networking.html[Networking.]
+* link:./java/core/i18n.html[i18n.]
+* link:./java/core/javadoc.html[Javadoc.]
 
 == Course: Java Tools [[course-java-tools]]
 
 === Course: Java Tools
 
-* link:./java/tools/logging.html[Logging]
-* link:./java/tools/junit.html[JUnit]
-* link:./java/tools/apache-maven.html[Apache Maven]
-* link:./java/tools/apache-tomcat.html[Apache Tomcat]
+* link:./java/tools/logging.html[Logging.]
+* link:./java/tools/junit.html[JUnit.]
+* link:./java/tools/apache-maven.html[Apache Maven.]
+* link:./java/tools/apache-tomcat.html[Apache Tomcat.]
 
 == Course: Data Persistence in Java [[course-java-data-persistence]]
 
 === Course: Data Persistence in Java
 
-* link:./java/data-persistence/jdbc.html[(in develop)Java DataBase Connectivity (JDBC)]
-* link:./java/data-persistence/dto.html[(in develop) Data Access Object (DAO)]
-* link:./java/data-persistence/database-connection-pool.html[Database Connection Pool]
-* link:./java/data-persistence/intro-jpa.html[Intro to Java Persistence API (JPA)]
-* link:./java/data-persistence/intro-hibernate.html[Intro to Hibernate]
-* link:./java/data-persistence/mapping.html[Mapping]
-* link:./java/data-persistence/query-language.html[Query Language]
-* link:./java/data-persistence/transaction.html[(in develop) Transaction]
+* link:./java/data-persistence/jdbc.html[(in develop)Java DataBase Connectivity (JDBC).]
+* link:./java/data-persistence/dto.html[(in develop) Data Access Object (DAO).]
+* link:./java/data-persistence/database-connection-pool.html[Database Connection Pool.]
+* link:./java/data-persistence/intro-jpa.html[Intro to Java Persistence API (JPA).]
+* link:./java/data-persistence/intro-hibernate.html[Intro to Hibernate.]
+* link:./java/data-persistence/mapping.html[Mapping.]
+* link:./java/data-persistence/query-language.html[Query Language.]
+* link:./java/data-persistence/transaction.html[(in develop) Transaction.]
 
 == Course: Java with Jakarta EE [[course-java-jakarta-ee]]
 
 === Course: Java with Jakarta EE
 
-* link:./java/jakarta-ee/java-enterprise.html[Java Enterprise]
-* link:./java/jakarta-ee/servlet.html[Servlet]
-* link:./java/jakarta-ee/jsp.html[JSP]
-* link:./java/jakarta-ee/jstl.html[JSTL]
-* link:./java/jakarta-ee/el.html[EL]
-* link:./java/jakarta-ee/filter.html[Filter]
-* link:./java/jakarta-ee/i18n.html[i18n]
+* link:./java/jakarta-ee/java-enterprise.html[Java Enterprise.]
+* link:./java/jakarta-ee/servlet.html[Servlet.]
+* link:./java/jakarta-ee/jsp.html[JSP.]
+* link:./java/jakarta-ee/jstl.html[JSTL.]
+* link:./java/jakarta-ee/el.html[EL.]
+* link:./java/jakarta-ee/filter.html[Filter.]
+* link:./java/jakarta-ee/i18n.html[i18n.]
 
 == Course: Java with Spring Framework [[course-java-spring-framework]]
 
 === Course: Java with Spring Framework
 
-* link:./java/spring/intro-spring.html[Intro to Spring]
-* link:./java/spring/beans.html[Beans]
-* link:./java/spring/spring-orm.html[Spring ORM]
-* link:./java/spring/spring-webmvc.html[Spring Web MVC]
+* link:./java/spring/intro-spring.html[Intro to Spring.]
+* link:./java/spring/beans.html[Beans.]
+* link:./java/spring/spring-orm.html[Spring ORM.]
+* link:./java/spring/spring-webmvc.html[Spring Web MVC.]
 
 == Course: Java for Desktop [[course-java-desktop]]
 
@@ -111,41 +111,41 @@
 
 === Course: Common
 
-* link:./common/programming-languages.html[Programming languages]
-* link:./common/git.html[Git]
-* link:./common/testing.html[Testing]
-* link:./common/uml.html[UML]
-* link:./common/design-principles.html[Design Principles]
-* link:./common/design-patterns.html[Design Patterns]
-* link:./common/architectural-patterns.html[Architectural Patterns]
-* link:./common/xml.html[XML]
+* link:./common/programming-languages.html[Programming languages.]
+* link:./common/git.html[Git.]
+* link:./common/testing.html[Testing.]
+* link:./common/uml.html[UML.]
+* link:./common/design-principles.html[Design Principles.]
+* link:./common/design-patterns.html[Design Patterns.]
+* link:./common/architectural-patterns.html[Architectural Patterns.]
+* link:./common/xml.html[XML.]
 
 === Course: Common
 
-* link:./common/json.html[JSON]
-* link:./common/scrum.html[Scrum]
+* link:./common/json.html[JSON.]
+* link:./common/scrum.html[Scrum.]
 
 === Course: Common
 
-* link:./common/regex.html[Regular Expression]
-* link:./common/i18n.html[i18n]
+* link:./common/regex.html[Regular Expression.]
+* link:./common/i18n.html[i18n.]
 
 == Course: SQL [[course-sql]]
 
 === Course: SQL
 
-* link:./sql/database-normalization.html[Database Normalization]
+* link:./sql/database-normalization.html[Database Normalization.]
 
 == Course: HTML and CSS [[course-html-and-css]]
 
 === Course: HTML and CSS
 
-* link:./html-and-css/text-markup.html[Text Markup]
-* link:./html-and-css/link.html[Link]
-* link:./html-and-css/form.html[Form]
-* link:./html-and-css/html-tables.html[Tables]
-* link:./html-and-css/css-intro.html[CSS: Intro]
-* link:./html-and-css/css-float.html[CSS: Float]
+* link:./html-and-css/text-markup.html[Text Markup.]
+* link:./html-and-css/link.html[Link.]
+* link:./html-and-css/form.html[Form.]
+* link:./html-and-css/html-tables.html[Tables.]
+* link:./html-and-css/css-intro.html[CSS. Intro.]
+* link:./html-and-css/css-float.html[CSS. Float.]
 
 == Course: JavaScript Basic [[course-javascript-basic]]
 
