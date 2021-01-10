@@ -1,4 +1,4 @@
-= JSR 310: Date and Time API
+= Date and Time API (JSR 310)
 
 == Intro
 
@@ -36,6 +36,13 @@
 
 === Basics
 
+* `java.time` — содержит, часто используемые классы.
+* `java.time.format` — класс для преобразования даты и форматирования.
+* `java.time.temporal` — класс для конвертирования даты и время, и для внесения в них корректировок (например добавить 30 дней к текущей дате).
+
+
+=== Basics
+
 [.step]
 * `java.time.temporal.Temporal`
 [.step]
@@ -51,7 +58,7 @@
 === Basics
 
 [.fragment]
-image:/assets/img/java/core/date-time.png[Java Date and Time API]
+image::/assets/img/java/core/date-time.png[Java Date and Time API]
 
 == `Temporal`
 
@@ -212,6 +219,7 @@ DateTimeFormatter formatter =
 === Pattern
 
 [.fragment]
+[options="header"]
 |===
 |Символ|Что означает|Пример
 |`y`|год в эре|`2014`, `14`
