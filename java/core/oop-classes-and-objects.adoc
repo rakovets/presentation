@@ -1,6 +1,8 @@
 = OOP. Classes and Objects
 
-== Problem
+== Intro
+
+=== Problem
 
 === Структурное программирование
 
@@ -8,7 +10,7 @@
 Принцип: код воздействует на данные
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/structured-programming.svg[Structured Programming]
+image::../../assets/img/java/core/oop/classes-and-objects/structured-programming.svg[Structured Programming]
 
 === Solution
 
@@ -18,34 +20,28 @@ image::/assets/img/java/core/oop/classes-and-objects/structured-programming.svg[
 Принцип: данные управляют доступом к коду
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/object-orinted-programming.png[Object-Orinted Programming]
-
-== OOP
-
-=== OOP principles
-
-[.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/oop-principles-mem.png[OOP principles]
-
-=== OOP principles
-
-[.step]
-* *Encapsulation* (*Инкапсуляция*)
-* *Inheritance* (*Наследование*)
-* *Polymorphism* (*Полиморфизм*)
-* *Abstraction* (*Абстракция*)
+image::../../assets/img/java/core/oop/classes-and-objects/object-orinted-programming.png[Object-Orinted Programming]
 
 == Classes and objects
+
+=== OOP concepts
+
+[.step]
+* *ООП* — это парадигма программирования, в которой главные понятия *объекты* и *классы*.
+* *ООП* возникло в результате развития идей процедурного программирования, где *данные* и *функции* (*методы*) их обработки формально не связаны.
 
 === Classes and objects
 
 [.step]
-* *Класс* (*Class*)- это _шаблон_ для создания объектов
-* *Объект* (*Object*) - это _экземпляр_ класса
+* *Класс* (*Class*)- это _шаблон_ для создания *объектов*
+* *Объект* (*Object*) - это _экземпляр_ *класса*
 * _Функция_, созданная внутри класса, называется *метод* (*method*)
 * _Переменная_, созданная внутри класса, называется *поле* (*field*)
 
 === Class definition: syntax
+
+[.fragment]
+*Класс* определяет _структуру_ и _поведение_ *объектов*
 
 [.fragment]
 [source,java]
@@ -54,6 +50,94 @@ class Person {
     // class content
 }
 ----
+
+=== Objects
+
+[.step]
+* *Объект* – любой предмет, четко структурированный и имеющий смысл в контексте решаемой предметной области.
+* Все *объекты* имеют одинаковые *наборы полей* данных (*атрибуты объекта*), но с независимыми значениями этих данных для каждого объекта.
+* Значения *полей* данных объекта задают его *состояние*.
+* *Методы*  объекта задают его *поведение*.
+
+=== Objects
+
+[.step]
+* Объекты безымянны, и доступ к ним осуществляется только через *ссылочные переменные*.
+
+[.fragment]
+[source,java]
+User tom = new User();
+
+=== Понятие данных
+
+[.fragment]
+Данные – члены класса, которые называются *полями* или *переменными класса*, объявляются в классе следующим образом:
+
+[.fragment]
+[source,java]
+модификатор тип имя;
+
+[.fragment]
+[source,java]
+public int age;
+
+=== Модификаторы
+
+[.step]
+* Модификаторы доступа:
+[.step]
+** `public`
+** `private`
+** `protected`
+* Специализированные модификаторы:
+[.step]
+** `final`
+** `static`
+** `synchronized`
+** `native`
+
+=== Метод
+
+[.step]
+* *Метод* – это обособленный блок кода.
+
+[.fragment]
+[source,java]
+----
+cпецификатор возвращаемый-тип идентификатор-метода(параметры) {
+    тело-метода
+}
+----
+
+[.fragment]
+[source,java]
+----
+public class Human {
+    private double temperature; // поле класса
+
+    public boolean isIll() { // метод
+        return temperature > 37.0 || temperature < 36.2;
+    }
+}
+----
+
+=== Области видимости переменных
+
+[.step]
+* *Область видимости* — часть текста программы, на протяжении которого к объекту можно обращаться по его имени.
+* В языках программирования выделяют:
+[.step]
+** *глобальную* области видимости, если объявление происходит вне любой функции или блока кода и доступно в любой точке программы.
+** *локальную* области видимости, если оно объявлено в теле функции или в пространстве имен. *Область видимости*: от объявления и до окончания блока кода.
+
+=== Области видимости переменных
+
+[.step]
+* Основные *области видимости* в Java:
+[.step]
+** класс (глобальная)
+** метод (локальная)
+** блоки кода (локальная)
 
 === Class definition: example
 
@@ -68,7 +152,11 @@ class Person {
         System.out.printf("Name: %s \tAge: %d\n", name, age);
     }
 }
+----
 
+[.fragment]
+[source,java]
+----
 class Program {
     public static void main(String[] args) {
         Person tom;
@@ -81,11 +169,12 @@ class Program {
 === Constructor (Конструктор)
 
 [.step]
-* Конструктор и метод внешне похожи
-* Конструктор имеет имя как у класса
-* В конструкторе не должно быть лишней логики
-* Если конструктор не указан – компилятор создаст конструктор по умолчанию
-* Если создали свой конструктор – конструктор по умолчанию не создаётся
+* *Конструктор* и *метод* внешне похожи.
+* *Конструктор* имеет имя как у *класса*.
+* В *конструкторе* не должно быть лишней логики.
+* У конструкторов нет типа возвращаемого результата.
+* Если *конструктор* не указан – компилятор создаст *конструктор по умолчанию*.
+* Если создали свой *конструктор* – *конструктор по умолчанию* не создаётся.
 
 === Default Constructor: example
 
@@ -212,9 +301,31 @@ public class Program {
 }
 ----
 
-== Initializers
+==  Initialization Block (блок инициализации)
 
-=== Initializers (блок инициализации): example
+===  Initialization Block
+
+[.step]
+* При описании класса могут быть использованы *блоки инициализации*.
+* *Блоком инициализации* называется код, заключенный в фигурные скобки и не принадлежащий ни одному методу текущего класса.
+
+[.fragment]
+[source,java]
+{ /* код */ }
+
+===  Initialization Block
+
+[.step]
+* *Блоки инициализации* чаще всего используются в качестве инициализаторов полей, но могут содержать вызовы методов как текущего класса, так и не принадлежащих ему.
+* При создании объекта класса *блоки инициализации* вызываются последовательно, в порядке размещения, вместе с инициализацией полей как простая последовательность операторов, и только после выполнения последнего *блока инициализации* будет вызван *конструктор* класса.
+
+===  Initialization Block
+
+[.step]
+* Операции с полями класса внутри *блока инициализации* до явного объявления этого поля возможны только при использовании ссылки `this`, представляющую собой ссылку на текущий объект.
+* *Блок инициализации* может быть объявлен со спецификатором `static`. В этом случае он вызывается только один раз в жизненном цикле приложения при создании объекта или при обращении к статическому методу (полю) данного класса.
+
+=== Example
 
 [.fragment]
 [source,java]
@@ -246,7 +357,7 @@ class Person {
 }
 ----
 
-=== Initializers: example
+=== Example
 
 [.fragment]
 [source,java]
@@ -259,6 +370,65 @@ public class Program {
         tom.displayInfo();
     }
 }
+----
+
+=== How does it work?
+
+[.fragment]
+[source,java]
+----
+public class Init {
+    {
+        System.out.println("initializer (1), id=" + this.id);
+    }
+
+    private int id = 42;
+
+    public Init(int d) {
+        id = d;
+        System.out.println("constructor, id=" + id);
+    }
+
+    {
+        System.out.println("initializer (2), id=" + this.id);
+    }
+
+    static {
+        System.out.println("static initializer");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    {
+        id = 10;
+        System.out.println("initializer (3), id=" + id);
+    }
+}
+----
+
+=== How does it work?
+
+[.fragment]
+[source,java]
+----
+public class Example1 {
+    public static void main(String[] args) {
+        Init obj = new Init(7);
+        System.out.println("value for id=" + obj.getId());
+    }
+}
+----
+
+[.fragment]
+----
+static initializer
+initializer (1), id=0
+initializer (2), id=42
+initializer (3), id=10
+constructor, id=7
+value for id=7
 ----
 
 == Objects as parameters of methods
@@ -352,6 +522,18 @@ public class Program {
 
 == Packages
 
+=== Packages
+
+[.step]
+* Для логического группирования множеств классов в связанные группы в Java применяется понятие *пакета* (*package*).
+* *Пакеты* обеспечивают:
+[.step]
+** независимые пространства имён (*namespaces*)
+** ограничение доступа к классам
+
+[.step]
+* *Пакеты* — это фактически обычная директория.
+
 === Package definition: syntax
 
 [.fragment]
@@ -400,7 +582,7 @@ public class Program {
 === Packages and Terminal: example
 
 [.fragment]
-[source,java]
+[source,shell script]
 ----
 cd D:\home\rakovets\dev
 javac com\rakovets\Program.java
@@ -433,48 +615,30 @@ java.util.Date utilDate = new java.util.Date();
 java.sql.Date sqlDate = new java.sql.Date();
 ----
 
-== Encapsulation
-
-=== Encapsulation
-
-[.step]
-* *Encapsulation* (*Инкапсуляция*) - это процесс объединения кода и данных в единый блок.
-* *Encapsulation* - это ограничение доступа одних компонентов программы к другим
-
-[.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/encapsulation.png[Encapsulation]
-
-=== Encapsulation
-
-[.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/encapsulation-example.png[Encapsulation example]
-
-== Access modifiers
-
-=== Access modifiers (Модификаторы доступа)
+== Access modifiers (Модификаторы доступа)
 
 === Access modifiers
 
 [.step]
-* `public`- доступно из любого места. Чаще всего для внешнего интерфейса.
-* `protected`- внутри пакета и в дочерних классах
-* _default_ - доступно внутри пакета – использовать нежелательно
-* `private` - доступно только внутри класса – для скрытия реализации (инкапсуляции)
+* `public` - доступно из любого места, но чаще всего для внешнего интерфейса.
+* `protected` - внутри пакета и в дочерних классах.
+* _friendly_/_default_/_package_ - доступно внутри пакета.
+* `private` - доступно только внутри класса – для скрытия реализации (инкапсуляции).
 
 === Access modifiers
 
+[.fragment]
+[options="header",cols="3,1,1,1,1"]
 |===
-||private|default|ptotected|public
+||`private`|_friendly_|`protected`|`public`
 |same class|+|+|+|+
 |same package subclass|-|+|+|+
 |same package non-subclass|-|+|+|+
 |different package subclass|-|-|+|+
-|different  package non-subclass|-|-|-|+
+|different package non-subclass|-|-|-|+
 |===
 
 === Access modifiers
-
-Bad practice:
 
 [.fragment]
 [source,java]
@@ -490,9 +654,10 @@ class Person {
 }
 ----
 
-=== Access modifiers
+[.fragment]
+Bad practice.
 
-Bad practice:
+=== Access modifiers
 
 [.fragment]
 [source,java]
@@ -507,9 +672,13 @@ public class Program {
 }
 ----
 
+[.fragment]
+Bad practice.
+
 === Access modifiers
 
-Good practice:
+[.fragment]
+Good practice.
 
 [.fragment]
 [source,java]
@@ -543,7 +712,8 @@ public class Person {
 
 === Access modifiers
 
-Good practice:
+[.fragment]
+Good practice.
 
 [.fragment]
 [source,java]
@@ -558,19 +728,72 @@ public class Program {
 }
 ----
 
-== Keyword `static`
+== Modifiers (Модификаторы)
+
+=== Modifiers `final`
+
+[.fragment]
+Модификатор `final` (_неизменяемый_) может применяться к классам, методам и переменным.
+
+[.fragment]
+[source,java]
+final double PI = 3.14; // константы
+
+[.fragment]
+[source,java]
+final void run() {} // запрещено переопределение метода
+
+[.fragment]
+[source,java]
+final class Example {} // запрещено наследование
+
+=== Modifiers `native`
+
+[.step]
+* Приложение на языке Java может вызывать методы, написанные на языке С++. Такие методы объявляются с ключевым словом `native`, которое сообщает компилятору, что метод реализован в другом месте.
+
+[.fragment]
+[source,java]
+public native int loadCripto(int num);
+
+[.step]
+* Методы, помеченные `native`, можно переопределять обычными методами в подклассах.
+
+=== Modifiers `synchronized`
+
+[.step]
+* При использовании нескольких потоков управления в одном приложении необходимо синхронизировать методы, обращающиеся к общим данным.
+* Когда интерпретатор обнаруживает `synchronized`, он включает код, блокирующий доступ к данным при запуске потока и снимающий блок при его завершении.
+
+=== Modifiers `static`
+
+=== Ключевое слово `static`
+
+[.step]
+* Модификатор `static` (единственный) применяется к методам, переменным и логическим блокам.
+* Поля данных, объявленные в классе как `static`, являются общими для всех объектов класса и называются *переменными класса*.
+* Для работы со статическими атрибутами используются статические методы, объявленные со спецификатором `static` являются *методами класса*.
+* Не привязаны ни к какому объекту.
+
+=== Ключевое слово `static`
+
+[.step]
+* Не содержат указателя `this` на конкретный объект, вызвавший метод.
+* Реализует парадигму «раннего связывания», жестко определяющую версию метода на этапе компиляции.
+* Статические поля и методы не могут обращаться к нестатическим полям и методам напрямую по причине недоступности указателя this.
+* Для обращения к статическим полям и методам достаточно имени класса, в котором они определены.
 
 === non `static`
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/non-static-members.png[Non static members]
+image::../../assets/img/java/core/oop/classes-and-objects/non-static-members.png[Non static members]
 
 === `static`
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/static-members.png[Static members]
+image::../../assets/img/java/core/oop/classes-and-objects/static-members.png[Static members]
 
-=== Keyword `static`: example
+=== Example
 
 [.fragment]
 [source,java]
@@ -728,42 +951,32 @@ public class Program {
 }
 ----
 
-=== Ключевое слово `static`
-
-[.step]
-* Статичному элементу запрещено использовать нестатичные переменные и методы класса.
-* Статичные элементы не манипулируют свойствами объекта и не привязаны к конкретному объекту.
-* Статичные методы и свойства можно вызывать:
-	1. Через имя класса
-	2. Через ссылку на экземпляр класса
-* Чаще используется первый вариант
-* Статичный элемент связан не с объектом, а с классом, следовательно его нельзя переопределить
-
 == Interface
 
 === Interface (Интерфейс)
 
+[.fragment]
 Открытая часть класса, с помощью которой другие классы могут с ним взаимодействовать
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/interface.png[Interface]
+image::../../assets/img/java/core/oop/classes-and-objects/interface.png[Interface]
 
 === Interface
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/interface-with-encapsulation.png[Interface with Encapsulation]
+image::../../assets/img/java/core/oop/classes-and-objects/interface-with-encapsulation.png[Interface with Encapsulation]
 
 == Composition
 
 === Composition (Композиция)
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/non-composition.png[Non Composition]
+image::../../assets/img/java/core/oop/classes-and-objects/non-composition.png[Non Composition]
 
 === Composition
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/composition.png[Composition]
+image::../../assets/img/java/core/oop/classes-and-objects/composition.png[Composition]
 
 == Total
 
