@@ -28,7 +28,7 @@
 * link:./java/core/methods.html[Methods.]
 * link:./java/core/decision-making-statements.html[Decision-making statements.]
 * link:./java/core/looping-statements.html[Looping statements.]
-* link:./java/core/arrays.html[Arrays.]
+* link:./java/core/array.html[Array.]
 * link:./java/core/oop-classes-and-objects.html[OOP. Classes and Objects.]
 
 === Course: Core Java
