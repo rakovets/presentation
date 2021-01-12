@@ -33,17 +33,18 @@
 
 === Course: Core Java
 
-* link:./java/core/string.html[String.]
 * link:./java/core/oop-principles.html[OOP. Principles.]
 * link:./java/core/nested-classes.html[Nested Classes.]
 * link:./java/core/enum.html[Enum.]
 * link:./java/core/class-object.html[Class `Object`.]
+* link:./java/core/string.html[String.]
+* link:./java/core/regex.html[String.]
 * link:./java/core/generics.html[Generics.]
 * link:./java/core/collections.html[Java Collection Framework.]
-* link:./java/core/exception-handling.html[Exception Handling.]
 
 === Course: Core Java
 
+* link:./java/core/exception-handling.html[Exception Handling.]
 * link:./java/core/java-io.html[Java IO.]
 * link:./java/core/properties.html[Properties.]
 * link:./java/core/functional-interfaces.html[Functional interfaces.]
@@ -51,10 +52,10 @@
 * link:./java/core/date-and-time.html[Date and Time API (JSR 335).]
 * link:./java/core/reflection.html[Reflection.]
 * link:./java/core/annotations.html[Annotations (JSR 250, 269, 308).]
-* link:./java/core/concurrency.html[Concurrency.]
 
 === Course: Core Java
 
+* link:./java/core/concurrency.html[Concurrency.]
 * link:./java/core/concurrency-thread-synchronization.html[Concurrency. Thread synchronization.]
 * link:./java/core/concurrent-utilities.html[Concurrent utilities (JSR 166).]
 * link:./java/core/i18n.html[i18n.]
