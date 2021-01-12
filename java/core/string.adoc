@@ -1,9 +1,17 @@
 = String
 
-== Problem
+== Intro
 
-[.fragment]
-Большая часть информации, которая используется в ПО является текстовой. Как работать с текстом в Java?
+=== Problem
+
+[.step]
+* Большая часть информации, которая используется в программном обеспечении является текстовой.
+* Как работать с текстом в Java?
+
+=== Solution
+
+[.step]
+* *String*
 
 == Class `String`
 
@@ -299,10 +307,10 @@ it
 === String Pool
 
 [.fragment]
-*String Poll* (*Пул строк*) - это набор строк, который хранится в *Heap*.
+*String Poll* (*Пул строк*) — это набор строк, который хранится в *Heap*.
 
 [.fragment]
-image:/assets/img/java/core/string-pool.png[String Pool]
+image:../../assets/img/java/core/string-pool.png[String Pool]
 
 === String Pool
 
@@ -315,7 +323,7 @@ image:/assets/img/java/core/string-pool.png[String Pool]
 === Immutable `String`
 
 [.fragment]
-Класс `String` *immutable* (неизменяемый).
+Класс `String` *immutable* (не изменяемый).
 
 [.fragment]
 [source,java]
@@ -329,8 +337,9 @@ str += " Java";
 
 === `StringBuffer` и `StringBuilder`
 
-[.fragment]
-Эту проблему решают объекты типа `StringBuilder` или `StringBuffer`. Оба эти класса позволяют менять содержимое находящихся в них строк.
+[.step]
+* Эту проблему решают объекты типа `StringBuilder` или `StringBuffer`.
+* Оба класса позволяют менять содержимое находящихся в них строк.
 
 [.fragment]
 [source,java]
@@ -343,8 +352,8 @@ strBuilder.append(" Java");
 === `StringBuffer` и `StringBuilder`
 
 [.step]
-* Класс `StringBuilder` - _NOT thread safe_ (потокоНЕбезопасный), но быстрый
-* Класс `StringBuffer` - _thread safe_ (потокобезопасный), но медленный
+* Класс `StringBuilder` - _NOT thread safe_ (потоко-НЕбезопасный), но быстрый
+* Класс `StringBuffer` - _thread safe_ (потоко-безопасный), но медленный
 
 === `StringBuffer` constructors
 
@@ -481,170 +490,4 @@ System.out.println(strBuffer.toString()); // hello java!
 StringBuffer strBuffer = new StringBuffer("assembler");
 strBuffer.reverse();
 System.out.println(strBuffer.toString()); // relbmessa
-----
-
-== Regular Expression in `String`
-
-=== `split(String): String[]`
-
-[.fragment]
-[source,java]
-----
-String text = "FIFA will never regret it";
-String[] words = text.split("\\s*(\\s|,|!|\\.)\\s*");
-for (String word : words) {
-    System.out.println(word);
-}
-----
-
-=== matches(String): boolean`
-
-[.fragment]
-[source,java]
-----
-String input = "+12343454556";
-boolean result = input.matches("(\\+*)\\d{11}");
-if (result == true) {
-    System.out.println("It is a phone number");
-} else {
-    System.out.println("It is not a phone number!");
-}
-----
-
-=== `replaceAll(String, String): String`
-
-[.fragment]
-[source,java]
-----
-String input = "Hello Java! Hello JavaScript! JavaSE 8.";
-String myStr =input.replaceAll("Java(\\w*)", "HTML");
-System.out.println(myStr); // Hello HTML! Hello HTML! HTML 8.
-----
-
-== Regular Expression with `Pattern` and `Matcher`
-
-=== Regular Expression with `Pattern` and `Matcher`
-
-[.step]
-* Более мощные средства, для работы с регулярными выражениями предлагают классы `Pattern` и `Matcher` из пакета `java.util.regex`.
-* Класс `Pattern` служит для хранения регулярного выражения
-* Класс `Matcher` служит для выполнения операций поиска и сравнения.
-
-=== `Pattern`: `matches(String, CharSequence): boolean`
-
-[.fragment]
-[source,java]
-----
-import java.util.regex.Pattern;
-
-public class StringsApp {
-    public static void main(String[] args) {
-        String input = "Hello";
-        boolean found = Pattern.matches("Hello", input);
-        if (found) {
-            System.out.println("Найдено");
-        } else {
-            System.out.println("Не найдено");
-        }
-    }
-}
-----
-
-=== `Pattern`: `split(CharSequence): String[]`
-
-[.fragment]
-[source,java]
-----
-import java.util.regex.Pattern;
-
-public class StringsApp {
-    public static void main(String[] args) {
-        String input = "Hello Java! Hello JavaScript! JavaSE 8.";
-        Pattern pattern = Pattern.compile("[ ,.!?]");
-        String[] words = pattern.split(input);
-        for (String word : words) {
-            System.out.println(word);
-        }
-    }
-}
-----
-
-=== `Pattern`: `split(CharSequence): String[]`
-
-[.fragment]
-[source,out]
-----
-Hello
-Java
-
-Hello
-JavaScript
-
-JavaSE
-8
-----
-
-=== `Matcher`: `matches(): boolean`
-
-[.fragment]
-[source,java]
-----
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class StringsApp {
-    public static void main(String[] args) {
-        String input = "Hello";
-        Pattern pattern = Pattern.compile("Hello");
-        Matcher matcher = pattern.matcher(input);
-        boolean found = matcher.matches();
-        if (found) {
-            System.out.println("Найдено");
-        } else {
-            System.out.println("Не найдено");
-        }
-    }
-}
-----
-
-=== `Matcher`: `find(): boolean` и `group(): String`
-
-[.fragment]
-[source,java]
-----
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class StringsApp {
-    public static void main(String[] args) {
-        String input = "Hello Java! Hello JavaScript! JavaSE 8.";
-        Pattern pattern = Pattern.compile("Java(\\w*)");
-        Matcher matcher = pattern.matcher(input);
-        while (matcher.find()) {
-            System.out.println(matcher.group());
-        }
-    }
-}
-----
-
-=== `Matcher`: `find(): boolean` и `group(): String`
-
-[.fragment]
-[source,out]
-----
-Java
-JavaScript
-JavaSE
-----
-
-=== `Matcher`: `replaceAll(String): String`
-
-[.fragment]
-[source,java]
-----
-String input = "Hello Java! Hello JavaScript! JavaSE 8.";
-Pattern pattern = Pattern.compile("Java(\\w*)");
-Matcher matcher = pattern.matcher(input);
-String newStr = matcher.replaceAll("HTML");
-System.out.println(newStr); // Hello HTML! Hello HTML! HTML 8.
 ----
