@@ -1,19 +1,24 @@
-= OOP. Inheritance and Polymorphism
+= OOP. Principles.
 
-== Problem
+== Intro
 
 === Problem
 
-Возникает необходимость создания классов, которые отличаются несколькими полями/методами.
+[.step]
+* Возникает необходимость создания классов, которые отличаются несколькими полями/методами.
+* Как писать меньше кода?
 
-== Solution
+=== Solution
+
+[.step]
+* OOP
 
 == OOP
 
 === OOP principles
 
 [.fragment]
-image::/assets/img/java/core/oop/classes-and-objects/oop-principles-mem.png[OOP principles]
+image::../../assets/img/java/core/oop/principles/oop-principles-mem.png[OOP principles]
 
 === OOP principles
 
@@ -32,22 +37,24 @@ image::/assets/img/java/core/oop/classes-and-objects/oop-principles-mem.png[OOP 
 * *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
 
 [.fragment]
-image::/assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
+image::../../assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
 
 === Encapsulation
 
 [.fragment]
-image::/assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
+image::../../assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
 
 == Inheritance
 
 === Inheritance
 
-image::/assets/img/java/core/oop/principles/inheritance-without.svg[Without Inheritance]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-without.svg[Without Inheritance]
 
 === Inheritance
 
-image::/assets/img/java/core/oop/principles/inheritance.svg[Inheritance]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance.svg[Inheritance]
 
 === Super class: example
 
@@ -82,11 +89,13 @@ class Employee extends Person {
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-profit.svg[Inheritance profit]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-profit.svg[Inheritance profit]
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-with-extends.svg[Inheritance with extends]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-with-extends.svg[Inheritance with extends]
 
 === Extends sub class: example
 
@@ -145,7 +154,8 @@ public class Program {
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-override.svg[Inheritance: override]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-override.svg[Inheritance: override]
 
 === `@Override`: example
 
@@ -206,7 +216,8 @@ public class Program {
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-example-iphone.svg[Inheritance example: iPhone]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-example-iphone.svg[Inheritance example: iPhone]
 
 === Inheritance
 
@@ -217,24 +228,26 @@ image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-exampl
 
 === Inheritance
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/inheritance-example-auto.svg[Inheritance example: auto]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/inheritance-example-auto.svg[Inheritance example: auto]
 
 === Subclass
 
+[.fragment]
 Дочерний класс видит:
 
 [.step]
-* Открытые методы и переменные с модификатором `public`
-* Защищённые (`protected`) методы и переменные
-* Методы и переменные на уровне пакета (без модификатора доступа), если суперкласс в том же пакете, что и дочерний – так делать нежелательно
+* Открытые методы и переменные с модификатором `public`.
+* Защищённые (`protected`) методы и переменные.
+* Методы и переменные на уровне пакета (без модификатора доступа), если суперкласс в том же пакете, что и дочерний – так делать нежелательно.
 
 === Inheritance
 
 [.step]
-* Все объекты наследуются от `Object`, даже если не указан `extends Object`
+* Все объекты наследуются от `Object`, даже если не указан `extends` `Object`.
 * Родительские классы не наследуют элементы дочернего класса!
-* В дочерних классах при наследовании можно расширять модификатор доступа, но нельзя сужать
-* В Java нет множественного наследования, как в C++
+* В дочерних классах при наследовании можно расширять модификатор доступа, но нельзя сужать.
+* В Java нет множественного наследования, как в C++.
 
 === Inheritance
 
@@ -514,18 +527,20 @@ if (kate instanceof Employee) {
 === Polymorphism
 
 [.step]
-* Один интерфейс – множество реализаций
-* Одно имя – множество вариантов выполнения
+* Один интерфейс – множество реализаций.
+* Одно имя – множество вариантов выполнения.
 
 === Polymorphism
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/polymorphism-overloading.svg[Polymorphism: overloading]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/polymorphism-overloading.svg[Polymorphism: overloading]
 
-== Abstracttion
+== Abstraction
 
-=== Abstracttion
+=== Abstraction
 
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/abstraction.svg[Abstraction]
+[.fragment]
+image::../../assets/img/java/core/oop/principles/abstraction.svg[Abstraction]
 
 == Abstract classes
 
@@ -538,11 +553,11 @@ image::/assets/img/java/core/oop/inheritance-and-polymorphism/abstraction.svg[Ab
 === Abstract classes
 
 [.step]
-* Если класс имеет хотя бы один абстрактный метод, то он будет абстрактным
-* Любой дочерний класс должен реализовать все абстрактные методы родительского, либо он сам должен быть абстрактным
-* Абстрактный класс может быть абстрактным и при этом не иметь ни одного абстрактного метода
+* Если класс имеет хотя бы один абстрактный метод, то он будет абстрактным.
+* Любой дочерний класс должен реализовать все абстрактные методы родительского, либо он сам должен быть абстрактным.
+* Абстрактный класс может быть абстрактным и при этом не иметь ни одного абстрактного метода.
 
-=== Keyword `abstract`
+=== `abstract`
 
 [.fragment]
 [source,java]
@@ -609,7 +624,8 @@ class Client extends Person {
     }
 
     public void display() {
-        System.out.printf("Client Name: %s \t Bank: %s \n", super.getName(), bank);
+        System.out.printf("Client Name: %s \t
+                Bank: %s \n", super.getName(), bank);
     }
 }
 ----
@@ -827,10 +843,18 @@ public class Program {
 ----
 interface Printable {
 }
+----
 
+[.fragment]
+[source,java]
+----
 interface Searchable {
 }
+----
 
+[.fragment]
+[source,java]
+----
 class Book implements Printable, Searchable {
 }
 ----
@@ -915,189 +939,10 @@ public class Program {
 }
 ----
 
-== Nested Classes
-
-=== Nested Classes
-
-image::/assets/img/java/core/oop/inheritance-and-polymorphism/nested-classes.png[Nested Classes]
-
-=== Nested Classes
-
-Внутренним классом называют класс, который является членом другого класса. Существует четыре базовых типа внутренних классов в Java:
-
-[.step]
-* *Static Nested classes* or *Member of outer class* (*статические вложенные классы*)
-* *Nested Inner classes* (*вложенные внутренние классы*)
-* *Method Local Inner classes* (*внутренние классы в локальном методе*)
-* *Anonymous Inner classes* (*анонимные классы*)
-
-=== Static Nested classes
-
-[.fragment]
-[source,java]
-----
-class Math {
-    public static class Factorial {
-        private int result;
-        private int key;
-
-        public Factorial(int number, int x) {
-            this.result = number;
-            this.key = x;
-        }
-
-        public int getResult() {
-            return result;
-        }
-
-        public int getKey() {
-            return key;
-        }
-    }
-
-    public static Factorial getFactorial(int x) {
-        int result = 1;
-        for (int i = 1; i <= x; i++) {
-            result *= i;
-        }
-        return new Factorial(result, x);
-    }
-}
-----
-
-=== Static Nested classes
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String[] args) {
-        Math.Factorial fact = Math.getFactorial(6);
-        System.out.printf("Факториал числа %d равен %d \n", fact.getKey(), fact.getResult());
-    }
-}
-----
-
-=== Nested Inner classes
-
-[.fragment]
-[source,java]
-----
-class Person {
-    private String name;
-    Account account;
-
-    Person(String name, String password) {
-        this.name = name;
-        account = new Account(password);
-    }
-
-    public void displayPerson() {
-        System.out.printf("Person \t Name: %s \t Password: %s \n", name, account.password);
-    }
-
-    public class Account {
-        private String password;
-
-        Account(String password) {
-            this.password = password;
-        }
-
-        void displayAccount() {
-            System.out.printf("Account Login: %s \t Password: %s \n", Person.this.name, password);
-        }
-    }
-}
-----
-
-=== Nested Inner classes
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String[] args) {
-        Person tom = new Person("Tom", "qwerty");
-        tom.displayPerson();
-        tom.account.displayAccount();
-    }
-}
-----
-
-=== Method Local Inner Classes
-
-[.fragment]
-[source,java]
-----
-class Person {
-    private String name;
-
-    Person(String name) {
-        this.name = name;
-    }
-
-    public void setAccount(String password) {
-        class Account {
-            void display() {
-                System.out.printf("Account Login: %s \t Password: %s \n", name, password);
-            }
-        }
-        Account account = new Account();
-        account.display();
-    }
-}
-----
-
-=== Method Local Inner Classes
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String[] args) {
-        Person tom = new Person("Tom");
-        tom.setAccount("qwerty");
-    }
-}
-----
-
-=== Anonymous Inner classes
-
-[.fragment]
-Extend a Class:
-
-[.fragment]
-[source,java]
-----
-new Book("Design Patterns") {
-    @Override
-    public String description() {
-        return "Famous GoF book.";
-    }
-}
-----
-
-
-=== Anonymous Inner classes
-
-[.fragment]
-Implement an Interface:
-
-[.fragment]
-[source,java]
-----
-new Runnable() {
-    @Override
-    public void run() {
-        // code
-    }
-}
-----
-
 == Abstract classes vs Interfaces
 
 === Abstract classes vs Interfaces
 
 [.step]
-* Интерфейс может наследоваться от множества интерфейсов, абстрактный класс - только от одного класса.
-* Совет: если есть возможность - используйте интерфейсы.
+* Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
+* Совет: если есть возможность — используйте интерфейсы.
