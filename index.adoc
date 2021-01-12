@@ -116,22 +116,19 @@
 
 * link:./common/programming-languages.html[Programming languages.]
 * link:./common/git.html[Git.]
+* link:./common/regex.html[Regular Expression.]
 * link:./common/testing.html[Testing.]
 * link:./common/uml.html[UML.]
 * link:./common/design-principles.html[Design Principles.]
 * link:./common/design-patterns.html[Design Patterns.]
+* link:./common/i18n.html[i18n.]
 * link:./common/architectural-patterns.html[Architectural Patterns.]
-* link:./common/xml.html[XML.]
 
 === Course: Common
 
+* link:./common/xml.html[XML.]
 * link:./common/json.html[JSON.]
 * link:./common/scrum.html[Scrum.]
-
-=== Course: Common
-
-* link:./common/regex.html[Regular Expression.]
-* link:./common/i18n.html[i18n.]
 
 == Course: SQL [[course-sql]]
 
