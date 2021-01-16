@@ -304,29 +304,3 @@ for (int i = 0; i < array.length; i++) {
     System.out.print(array[i] + "   ");
 }
 ----
-
-== Class `Arrays`
-
-=== Methods for class `Arrays`
-
-[.step]
-* `String toString(T[])`
-* `String toString(T[])`
-* `T[] copyOf(T[], int)`
-* `T[] copyOfRange(T[], int, int)`
-* `void sort(T[])`
-* `void sort(T[], int, int)`
-* `int binarySearch(T[], T)`
-* `int binarySearch(T[], int, int, T)`
-
-=== Methods for class `Arrays`
-
-[.step]
-* `void fill(T[], T)`
-* `void fill(T[], int, int, T)`
-* `boolean equals(T[], T[])`
-* `boolean equals(T[], int, int, T[], int, int)`
-* `int compare(T[], T[])`
-* `int compare(T[], int, int, T[], int, int)`
-* `boolean deepEquals(Object[], Object[])`
-* `List<T> asList(T ...)`
