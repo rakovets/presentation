@@ -11,9 +11,9 @@
 === Solution
 
 [.step]
-* OOP
+* OOP Principles.
 
-== OOP
+== OOP principles
 
 === OOP principles
 
@@ -23,26 +23,10 @@ image::../../assets/img/java/core/oop/principles/oop-principles-mem.png[OOP prin
 === OOP principles
 
 [.step]
-* *Encapsulation* (*Инкапсуляция*)
 * *Inheritance* (*Наследование*)
+* *Encapsulation* (*Инкапсуляция*)
 * *Polymorphism* (*Полиморфизм*)
 * *Abstraction* (*Абстракция*)
-
-== Encapsulation
-
-=== Encapsulation
-
-[.step]
-* *Encapsulation* (*Инкапсуляция*) — это процесс объединения кода и данных в единый блок.
-* *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
-
-[.fragment]
-image::../../assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
-
-=== Encapsulation
-
-[.fragment]
-image::../../assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
 
 == Inheritance
 
@@ -56,12 +40,12 @@ image::../../assets/img/java/core/oop/principles/inheritance-without.svg[Without
 [.fragment]
 image::../../assets/img/java/core/oop/principles/inheritance.svg[Inheritance]
 
-=== Super class: example
+=== Superclass: example
 
 [.fragment]
 [source,java]
 ----
-class Person {
+publicclass Person {
     private String name;
 
     public String getName() {
@@ -78,7 +62,7 @@ class Person {
 }
 ----
 
-=== Sub class: example
+=== Subclass: example
 
 [.fragment]
 [source,java]
@@ -97,7 +81,7 @@ image::../../assets/img/java/core/oop/principles/inheritance-profit.svg[Inherita
 [.fragment]
 image::../../assets/img/java/core/oop/principles/inheritance-with-extends.svg[Inheritance with extends]
 
-=== Extends sub class: example
+=== Extends subclass: example
 
 [.fragment]
 [source,java]
@@ -119,7 +103,7 @@ class Person {
 }
 ----
 
-=== Extends sub class: example
+=== Extends subclass: example
 
 [.fragment]
 [source,java]
@@ -138,7 +122,7 @@ class Employee extends Person {
 }
 ----
 
-=== Extends sub class: example
+=== Extends subclass: example
 
 [.fragment]
 [source,java]
@@ -223,8 +207,8 @@ image::../../assets/img/java/core/oop/principles/inheritance-example-iphone.svg[
 
 [.step]
 * Повторное использование кода
-* Расширение родительского класса
-* Дочерний класс будет уметь всё, что умел родительский плюс добавляет что-то своё
+* Расширение *superclass*
+* *Subclass* будет уметь всё, что умел *superclass* плюс добавляет что-то своё
 
 === Inheritance
 
@@ -234,41 +218,41 @@ image::../../assets/img/java/core/oop/principles/inheritance-example-auto.svg[In
 === Subclass
 
 [.fragment]
-Дочерний класс видит:
+*Subclass* видит:
 
 [.step]
-* Открытые методы и переменные с модификатором `public`.
-* Защищённые (`protected`) методы и переменные.
-* Методы и переменные на уровне пакета (без модификатора доступа), если суперкласс в том же пакете, что и дочерний – так делать нежелательно.
+* *fields* и *methods* с модификатором `public`.
+* *fields* и *methods* с модификатором `protected`.
+* *fields* и *methods* без модификатора доступа, если *superclass* в том же *package*, что и *subclass* – так делать нежелательно.
 
 === Inheritance
 
 [.step]
-* Все объекты наследуются от `Object`, даже если не указан `extends` `Object`.
-* Родительские классы не наследуют элементы дочернего класса!
-* В дочерних классах при наследовании можно расширять модификатор доступа, но нельзя сужать.
-* В Java нет множественного наследования, как в C++.
+* Все *objects* наследуются от `Object`, даже если не указан `*** extends Object`.
+* *superclasses* не наследуют *members* *subclasses*!
+* В *subclasses* при наследовании можно расширять *accesses modifier*, но нельзя сужать.
+* В Java *НЕТ* множественного наследования, как в C++.
 
 === Inheritance
 
 [.step]
-* Когда есть общее поведение для каких-либо объектов – нужно выносить его в родительский класс.
-* Нужно уметь правильно наследоваться, т.е. выделять общие классы.
+* Когда есть общее поведение для каких-либо *objects* – нужно выносить его в *superclass*.
+* Нужно уметь правильно наследоваться, т.е. выделять общие *classes*.
 * Наследование избавляет вашу программу от избыточности.
 
 === Inheritance
 
 [.step]
-* Если нужно изменить общее поведение, то наследование автоматически передаст это изменение для всех дочерних классов.
-* Дочерний класс наследует доступные методы и переменные от родительского класса и может прибавлять свои собственные методы и переменные.
+* Если нужно изменить общее поведение, то наследование автоматически передаст это изменение для всех *subclasses*.
+* *subclass* наследует доступные *methods* и *fields* от *superclass* и может прибавлять свои собственные *methods* и *fields*.
 
 == Inheritance vs Composition
 
 === Inheritance vs Composition
 
 [.step]
-* *Наследование* – не всегда лучший инструмент для повторного использования кода из-за привязки к архитектуре наследования.
-* Старайтесь использовать *композицию* вместо *наследования*.
+* *Inheritance* – не всегда лучший инструмент для повторного использования кода из-за привязки к архитектуре наследования.
+* Старайтесь использовать *composition* вместо *inheritance*.
 * По времени жизни внутренние объекты зависят от объекта, в котором они созданы.
 
 === Inheritance vs Composition
@@ -276,52 +260,6 @@ image::../../assets/img/java/core/oop/principles/inheritance-example-auto.svg[In
 [.step]
 * Если объекты связаны по типу *has a* («содержит»), то нужно применять композицию
 * Если объекты связаны по типу *is a* («является»), то нужно применять наследование
-
-== Inheritance and `final`
-
-=== Inheritance and `final`
-
-[.step]
-* Переменная, объявленная `final` не может изменить своё значение.
-* Метод, объявленный `final` не может быть переопределён в подклассе.
-* Класс, объявленный `final` не может иметь подклассы.
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-public final class Person {
-}
-
-class Employee extends Person {
-} // Compile error
-----
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-public class Person {
-    public final void display() {
-        System.out.println("Имя: " + name);
-    }
-}
-
-class Employee extends Person {
-    @Override
-    public void display() {
-        System.out.println("Имя: " + name);
-    } // Compile error
-}
-----
-
-=== `final`
-
-[.step]
-* Однако, у объектной переменной можно изменить внутреннее состояние (свойства) с помощью вызова методов, даже если она объявлена `final`.
-* Объявление `private`-методов `final` не имеет смысла, так как `private`-методы не наследуются
 
 == Dynamic binding
 
@@ -522,18 +460,134 @@ if (kate instanceof Employee) {
 }
 ----
 
-== Polymorphism
+== Encapsulation
 
-=== Polymorphism
+=== Encapsulation
 
 [.step]
-* Один интерфейс – множество реализаций.
-* Одно имя – множество вариантов выполнения.
-
-=== Polymorphism
+* *Encapsulation* (*Инкапсуляция*) — это процесс объединения кода и данных в единый блок.
+* *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/polymorphism-overloading.svg[Polymorphism: overloading]
+image::../../assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
+
+=== Encapsulation
+
+[.fragment]
+image::../../assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
+
+== Access modifiers
+
+=== Access modifiers (Модификаторы доступа)
+
+[.step]
+* `public` - доступно из любого места, но чаще всего для внешнего интерфейса.
+* `protected` - внутри пакета и в дочерних классах.
+* _friendly_/_default_/_package_ - доступно внутри пакета.
+* `private` - доступно только внутри класса – для скрытия реализации (инкапсуляции).
+
+=== Access modifiers
+
+[.fragment]
+[options="header",cols="3,1,1,1,1"]
+|===
+||`private`|_friendly_|`protected`|`public`
+|same class|+|+|+|+
+|same package subclass|-|+|+|+
+|same package non-subclass|-|+|+|+
+|different package subclass|-|-|+|+
+|different package non-subclass|-|-|-|+
+|===
+
+=== Access modifiers
+
+[.fragment]
+[source,java]
+----
+class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+----
+
+[.fragment]
+Bad practice.
+
+=== Access modifiers
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person kate = new Person("Kate", 30);
+        System.out.println(kate.age);
+        kate.age = 33;
+        System.out.println(kate.age);
+    }
+}
+----
+
+[.fragment]
+Bad practice.
+
+=== Access modifiers
+
+[.fragment]
+Good practice.
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+----
+
+=== Access modifiers
+
+[.fragment]
+Good practice.
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person kate = new Person("Kate", 30);
+        System.out.println(kate.getAge());
+        kate.setAge(33);
+        System.out.println(kate.getAge());
+    }
+}
+----
 
 == Abstraction
 
@@ -946,3 +1000,25 @@ public class Program {
 [.step]
 * Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
 * Совет: если есть возможность — используйте интерфейсы.
+
+== Polymorphism
+
+=== Polymorphism
+
+[.step]
+* Один интерфейс – множество реализаций.
+* Одно имя – множество вариантов выполнения.
+
+=== Polymorphism
+
+[.step]
+* *overloading methods*
+* *overriding methods*
+* *abstract classes* and *interfaces*
+
+=== Polymorphism: overloading methods
+
+[.fragment]
+image::../../assets/img/java/core/oop/principles/polymorphism-overloading.svg[Polymorphism: overloading]
+
+
