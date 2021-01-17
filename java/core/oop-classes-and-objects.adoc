@@ -955,17 +955,17 @@ java.util.Date utilDate = new java.util.Date();
 java.sql.Date sqlDate = new java.sql.Date();
 ----
 
-== Aggregation
+== Composition
 
-=== Aggregation (Агрегация)
-
-[.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/without-relations.png[Without relations]
-
-=== Aggregation
+=== Composition (Композиция)
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/aggregation.png[Aggregation]
+image::../../assets/img/java/core/oop/classes-and-objects/without-relations.png[Without relationship]
+
+=== Composition
+
+[.fragment]
+image::../../assets/img/java/core/oop/classes-and-objects/composition.png[Composition]
 
 === Example
 
@@ -1042,9 +1042,9 @@ public class PC {
 ----
 public class Example6Composition {
     public static void main(String[] args) {
-        CPU intel = new CPU("Intel", "i5 6400", "LGA 1151");
-        MotherBoard asus = new MotherBoard("ASUS", "Z-170P", "LGA 1151");
-        PC dev = new PC("Dev", intel, asus);
+        PC dev = new PC("Dev",
+                new CPU("Intel", "i5 6400", "LGA 1151"),
+                new MotherBoard("ASUS", "Z-170P", "LGA 1151"));
         dev.print();
     }
 }
