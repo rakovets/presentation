@@ -1,4 +1,5 @@
 = Testing
+:imagesdir: ../assets/img/common
 
 == Intro
 
@@ -16,9 +17,14 @@
 
 === The Cost of Defects
 
-image::/assets/img/common/cost-of-defects.jpg[The Cost of Defects]
+[.fragment]
+image::cost-of-defects.jpg[The Cost of Defects]
 
 === Цель Unit-тестирования
+[.fragment]
+Цель Unit-тестирования:
 
-Цель Unit-тестирования в изолировании каждого программного модуля и проведение тестирования корректности их работы независимо друг от друга.
+[.step]
+* изолирование каждого программного модуля
+* проведение тестирования корректности работы модуля независимо друг от друга
 
