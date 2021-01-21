@@ -20,6 +20,8 @@
 
 == Course: Core Java [[course-java-core]]
 
+* link:./java/core/code-convention.html[Code Convention.]
+
 === Course: Core Java
 
 * link:./java/core/intro.html[Intro.]

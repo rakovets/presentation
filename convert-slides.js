@@ -22,6 +22,7 @@ var options = {
 asciidoctor.convertFile('./index.adoc', options)
 
 // Course: "Core Java"
+asciidoctor.convertFile('./java/core/code-convention.adoc', options)
 asciidoctor.convertFile('./java/core/intro.adoc', options)
 asciidoctor.convertFile('./java/core/data-types.adoc', options)
 asciidoctor.convertFile('./java/core/operators.adoc', options)
