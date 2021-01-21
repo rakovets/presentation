@@ -1,4 +1,5 @@
 = OOP. Principles.
+:imagesdir: ../../assets/img/java/core/oop/principles
 
 == Intro
 
@@ -18,7 +19,7 @@
 === OOP principles
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/oop-principles-mem.png[OOP principles]
+image::oop-principles-mem.png[OOP principles]
 
 === OOP principles
 
@@ -33,12 +34,12 @@ image::../../assets/img/java/core/oop/principles/oop-principles-mem.png[OOP prin
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-without.svg[Without Inheritance]
+image::inheritance-without.svg[Without Inheritance]
 
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance.svg[Inheritance]
+image::inheritance.svg[Inheritance]
 
 === Superclass: example
 
@@ -74,12 +75,12 @@ class Employee extends Person {
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-profit.svg[Inheritance profit]
+image::inheritance-profit.svg[Inheritance profit]
 
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-with-extends.svg[Inheritance with extends]
+image::inheritance-with-extends.svg[Inheritance with extends]
 
 === Extends subclass: example
 
@@ -139,7 +140,7 @@ public class Program {
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-override.svg[Inheritance: override]
+image::inheritance-override.svg[Inheritance: override]
 
 === `@Override`: example
 
@@ -162,6 +163,12 @@ class Person {
     }
 }
 ----
+
+=== `super` keyword
+
+* Для вызова *methods* *superclass*, *override* в *subclass*.
+* Для доступа к *fields* *superclass*, если и *superclass*, и *subclass* имеют *fields* с одинаковыми именами.
+* Чтобы явно вызвать *superclass* no-args (по умолчанию) или параметризованный *constructor* из *constructor* *subclass*.
 
 === `@Override`: example
 
@@ -201,7 +208,7 @@ public class Program {
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-example-iphone.svg[Inheritance example: iPhone]
+image::inheritance-example-iphone.svg[Inheritance example: iPhone]
 
 === Inheritance
 
@@ -213,7 +220,7 @@ image::../../assets/img/java/core/oop/principles/inheritance-example-iphone.svg[
 === Inheritance
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/inheritance-example-auto.svg[Inheritance example: auto]
+image::inheritance-example-auto.svg[Inheritance example: auto]
 
 === Subclass
 
@@ -447,7 +454,7 @@ emp.display();
 ((Employee) kate).display();
 ----
 
-=== Good Practice
+=== `instanceof` keyword
 
 [.fragment]
 [source,java]
@@ -469,12 +476,112 @@ if (kate instanceof Employee) {
 * *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/encapsulation.png[Encapsulation]
+image::encapsulation.png[Encapsulation]
 
 === Encapsulation
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/encapsulation-example.png[Encapsulation example]
+image::encapsulation-example.png[Encapsulation example]
+
+== Packages
+
+=== Packages
+
+[.step]
+* Для логического группирования множеств классов в связанные группы в Java применяется понятие *package* (*пакета*).
+* *Packages* обеспечивают:
+[.step]
+** независимые пространства имён (*namespaces*)
+** ограничение доступа к классам
+
+[.step]
+* *Packages* — это фактически обычная директория.
+
+=== Packages
+
+[.step]
+* *Packages* — это фактически обычная директория.
+
+[.fragment]
+[source,java]
+----
+package your.package.which.can.has.any.name;
+----
+
+=== Package definition: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+public class User {
+    public String name;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    void tellAboutYourself() {
+        System.out.printf("Name: %s\n", name);
+    }
+}
+----
+
+=== Package definition: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+public class Program {
+    public static void main(String[] args) {
+        User dmitry = new User("Dmitry");
+        dmitry.tellAboutYourself();
+    }
+}
+----
+
+=== Packages and Terminal: example
+
+[.fragment]
+[source,shell script]
+----
+cd D:\home\rakovets\dev
+javac com\rakovets\Program.java
+java com.rakovets.Program
+----
+
+[.fragment]
+----
+Name: Dmitry
+----
+
+=== `import` Packages and Classes: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+import java.util.Scanner;
+
+public class Program {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+    }
+}
+----
+
+=== `import` Packages and Classes: example
+
+[.fragment]
+[source,java]
+----
+java.util.Date utilDate = new java.util.Date();
+java.sql.Date sqlDate = new java.sql.Date();
+----
 
 == Access modifiers
 
@@ -589,12 +696,31 @@ public class Program {
 }
 ----
 
-== Abstraction
+== Abstraction and Polymorphism
 
 === Abstraction
 
 [.fragment]
-image::../../assets/img/java/core/oop/principles/abstraction.svg[Abstraction]
+image::abstraction.svg[Abstraction]
+
+=== Polymorphism
+
+[.step]
+* Один *interface* – множество *implementations* (*реализаций*).
+* Одно имя – множество вариантов выполнения.
+
+=== Polymorphism
+
+[.step]
+* *overloading methods*
+* *overriding methods*
+* *abstract classes*
+* *interfaces*
+
+=== Polymorphism: overloading methods
+
+[.fragment]
+image::polymorphism-overloading.svg[Polymorphism: overloading]
 
 == Abstract classes
 
@@ -704,9 +830,9 @@ public class Program {
 === Interfaces
 
 [.step]
-* Интерфейс – более «строгий» вариант абстрактного класса. Методы могут быть только абстрактными.
-* Интерфейс задаёт только поведение, без реализации.
-* Интерфейс может наследоваться от одного или нескольких интерфейсов.
+* *Interface* (*интерфейс*) – более «строгий» вариант *abstract class*. *Methods* могут быть только *abstract*.
+* *Interface* задаёт только поведение, без реализации.
+* *Interface* может наследоваться от одного или нескольких *interfaces*.
 
 === `Interfaces` definition
 
@@ -1000,25 +1126,3 @@ public class Program {
 [.step]
 * Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
 * Совет: если есть возможность — используйте интерфейсы.
-
-== Polymorphism
-
-=== Polymorphism
-
-[.step]
-* Один интерфейс – множество реализаций.
-* Одно имя – множество вариантов выполнения.
-
-=== Polymorphism
-
-[.step]
-* *overloading methods*
-* *overriding methods*
-* *abstract classes* and *interfaces*
-
-=== Polymorphism: overloading methods
-
-[.fragment]
-image::../../assets/img/java/core/oop/principles/polymorphism-overloading.svg[Polymorphism: overloading]
-
-

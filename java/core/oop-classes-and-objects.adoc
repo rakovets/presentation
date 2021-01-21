@@ -1,4 +1,5 @@
 = OOP. Classes and Objects
+:imagesdir: ../../assets/img/java/core/oop/classes-and-objects
 
 == Intro
 
@@ -10,7 +11,7 @@
 Принцип: код воздействует на данные.
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/structured-programming.svg[Structured Programming]
+image::structured-programming.svg[Structured Programming]
 
 === Solution
 
@@ -20,7 +21,7 @@ image::../../assets/img/java/core/oop/classes-and-objects/structured-programming
 Принцип: данные управляют доступом к коду.
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/object-orinted-programming.png[Object-Orinted Programming]
+image::object-orinted-programming.png[Object-Orinted Programming]
 
 == Classes and objects
 
@@ -847,125 +848,24 @@ public class Program {
 Открытая часть класса, с помощью которой другие классы могут с ним взаимодействовать
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/interface.png[Interface]
+image::interface.png[Interface]
 
 === Interface
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/interface-with-encapsulation.png[Interface with Encapsulation]
-
-
-== Packages
-
-=== Packages
-
-[.step]
-* Для логического группирования множеств классов в связанные группы в Java применяется понятие *package* (*пакета*).
-* *Packages* обеспечивают:
-[.step]
-** независимые пространства имён (*namespaces*)
-** ограничение доступа к классам
-
-[.step]
-* *Packages* — это фактически обычная директория.
-
-=== Packages
-
-[.step]
-* *Packages* — это фактически обычная директория.
-
-[.fragment]
-[source,java]
-----
-package your.package.which.can.has.any.name;
-----
-
-=== Package definition: example
-
-[.fragment]
-[source,java]
-----
-package com.rakovets;
-
-public class User {
-    public String name;
-
-    public User(String name) {
-        this.name = name;
-    }
-
-    void tellAboutYourself() {
-        System.out.printf("Name: %s\n", name);
-    }
-}
-----
-
-=== Package definition: example
-
-[.fragment]
-[source,java]
-----
-package com.rakovets;
-
-public class Program {
-    public static void main(String[] args) {
-        User dmitry = new User("Dmitry");
-        dmitry.tellAboutYourself();
-    }
-}
-----
-
-=== Packages and Terminal: example
-
-[.fragment]
-[source,shell script]
-----
-cd D:\home\rakovets\dev
-javac com\rakovets\Program.java
-java com.rakovets.Program
-----
-
-[.fragment]
-----
-Name: Dmitry
-----
-
-=== `import` Packages and Classes: example
-
-[.fragment]
-[source,java]
-----
-package com.rakovets;
-
-import java.util.Scanner;
-
-public class Program {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-    }
-}
-----
-
-=== `import` Packages and Classes: example
-
-[.fragment]
-[source,java]
-----
-java.util.Date utilDate = new java.util.Date();
-java.sql.Date sqlDate = new java.sql.Date();
-----
+image::interface-with-encapsulation.png[Interface with Encapsulation]
 
 == Composition
 
 === Composition (Композиция)
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/without-relations.png[Without relationship]
+image::without-relations.png[Without relationship]
 
 === Composition
 
 [.fragment]
-image::../../assets/img/java/core/oop/classes-and-objects/composition.png[Composition]
+image::composition.png[Composition]
 
 === Example
 
