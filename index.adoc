@@ -1,8 +1,6 @@
 = Presentations
 
-== Courses
-
-=== Courses
+== Java Courses
 
 * <<course-java-core, Core Java.>>
 * <<course-java-tools, Java Tools.>>
@@ -11,7 +9,7 @@
 * <<course-java-spring-framework, Java with Spring Framework.>>
 * <<course-java-desktop, Java for Desktop.>>
 
-=== Courses
+== Other Courses
 
 * <<course-common, Common.>>
 * <<course-sql, SQL.>>
@@ -42,7 +40,7 @@
 * link:./java/core/class-object.html[Class `Object`.]
 * link:./java/core/class-arrays.html[Class `Arrays`.]
 * link:./java/core/string.html[String.]
-* link:./java/core/regex.html[String.]
+* link:./java/core/regex.html[Regex.]
 
 === Course: Core Java
 
