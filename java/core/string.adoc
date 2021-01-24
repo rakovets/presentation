@@ -11,7 +11,7 @@
 === Solution
 
 [.step]
-* *String*
+* Use class `String`
 
 == Class `String`
 
@@ -19,7 +19,8 @@
 
 [.step]
 * `String` из пакета `java.lang`
-* `String` *неизменяемый* (*immutable*), т.е. после создания, его содержимое не может изменяться.
+* `String` *immutable* (*неизменяемый*)
+* *immutable* значит, что после его создания он (и его содержимое) не может изменяться.
 
 [.fragment]
 [source,java]
@@ -36,10 +37,11 @@ String str1 = "Java";
 String str2 = new String();
 String str3 = new String("JVM");
 String str4 = new String(new char[] {'h', 'e', 'l', 'l', 'o'});
-String str5 = new String(new char[] {'w', 'e', 'l', 'c', 'o', 'm', 'e'}, 3, 4);
+String str5 = new String(
+        new char[] {'w', 'e', 'l', 'c', 'o', 'm', 'e'}, 3, 4);
 
 System.out.println(str1); // 'Java'
-System.out.println(str2); //
+System.out.println(str2); // ''
 System.out.println(str3); // 'JVM'
 System.out.println(str4); // 'hello'
 System.out.println(str5); // 'come'
@@ -58,7 +60,12 @@ String str1 = "Java";
 String str2 = "Hello";
 String str3 = str1 + " " + str2;
 
-System.out.println(str3); // Hello Java
+System.out.println(str3);
+----
+
+[.fragment]
+----
+Hello Java
 ----
 
 == `String`: main methods
@@ -69,7 +76,12 @@ System.out.println(str3); // Hello Java
 [source,java]
 ----
 String str1 = "Java";
-System.out.println(str1.length()); // 4
+System.out.println(str1.length());
+----
+
+[.fragment]
+----
+4
 ----
 
 === `toCharArray(): char[]`
@@ -79,9 +91,24 @@ System.out.println(str1.length()); // 4
 ----
 String str1 = new String(new char[] {'h', 'e', 'l', 'l', 'o'});
 char[] helloArray = str1.toCharArray();
+----
 
-String s = ""; // строка не указывает на объект
+=== Как проверить что строка пуста?
+
+[.fragment]
+[source,java]
+----
+String s = null; // строка не указывает на объект
 if (s.length() == 0) {
+    System.out.println("String is empty");
+}
+----
+
+[.fragment]
+[source,java]
+----
+String s = null; // строка не указывает на объект
+if (s.length() == 0) { // null.length() - `NullPointerException`
     System.out.println("String is empty");
 }
 ----
@@ -96,24 +123,29 @@ public boolean isEmpty() {
 }
 ----
 
-=== `isEmpty(): boolean`
-
 [.fragment]
 [source,java]
 ----
 String s = null; // строка не указывает на объект
-if (s.isEmpty()) { // NullPointerException
+if (s.isEmpty()) { // null.length() - `NullPointerException`
     System.out.println("String is empty");
 }
 ----
+
+=== Как же этого избежать?
 
 [.fragment]
 [source,java]
 ----
 String s = null; // строка не указывает на объект
 if (s != null && s.isEmpty()) {
-    System.out.println("String is empty");
+    System.out.println("String is empty or null");
 }
+----
+
+[.fragment]
+----
+String is empty or null
 ----
 
 === `concat(String): String`
@@ -123,7 +155,12 @@ if (s != null && s.isEmpty()) {
 ----
 String str1 = "Java";
 String str2 = "Hello";
-str2 = str2.concat(str1); // HelloJava
+str2 = str2.concat(str1);
+----
+
+[.fragment]
+----
+HelloJava
 ----
 
 === `join(CharSequence, CharSequence...): String`
@@ -133,7 +170,12 @@ str2 = str2.concat(str1); // HelloJava
 ----
 String str1 = "Java";
 String str2 = "Hello";
-String str3 = String.join(" ", str2, str1); // Hello Java
+String str3 = String.join(" ", str2, str1);
+----
+
+[.fragment]
+----
+Hello Java
 ----
 
 === `charAt(int): char`
@@ -144,7 +186,12 @@ String str3 = String.join(" ", str2, str1); // Hello Java
 String str = "Java";
 char c = str.charAt(2);
 
-System.out.println(c); // v
+System.out.println(c);
+----
+
+[.fragment]
+----
+v
 ----
 
 === `getChars(int, int, char[], int): void`
@@ -159,7 +206,12 @@ char[] dst = new char[end - start];
 int dstBegin = 0;
 str.getChars(srcBegin, srcEnd, dst, dstBegin);
 
-System.out.println(dst); // world
+System.out.println(dst);
+----
+
+[.fragment]
+----
+world
 ----
 
 === `equals(Object): boolean`
@@ -170,7 +222,12 @@ System.out.println(dst); // world
 String str1 = "Hello";
 String str2 = "hello";
 
-System.out.println(str1.equals(str2)); // false
+System.out.println(str1.equals(str2));
+----
+
+[.fragment]
+----
+false
 ----
 
 === `equalsIgnoreCase(Object): boolean`
@@ -181,7 +238,12 @@ System.out.println(str1.equals(str2)); // false
 String str1 = "Hello";
 String str2 = "hello";
 
-System.out.println(str1.equalsIgnoreCase(str2)); // true
+System.out.println(str1.equalsIgnoreCase(str2));
+----
+
+[.fragment]
+----
+true
 ----
 
 === `regionMatches(int, String, int, int): boolean`
@@ -202,7 +264,12 @@ String str1 = "Hello world";
 String str2 = "I work";
 boolean result = str1.regionMatches(6, str2, 2, 3);
 
-System.out.println(result); // true
+System.out.println(result);
+----
+
+[.fragment]
+----
+true
 ----
 
 === `compareTo(String): int` и `compareToIgnoreCase(String): int`
@@ -214,8 +281,14 @@ String str1 = "hello";
 String str2 = "world";
 String str3 = "hell";
 
-System.out.println(str1.compareTo(str2)); // -15 -> str1 меньше чем strt2
-System.out.println(str1.compareTo(str3)); // 1 -> str1 больше чем str3
+System.out.println(str1.compareTo(str2));
+System.out.println(str1.compareTo(str3));
+----
+
+[.fragment]
+----
+1 // str1 больше чем str3 по количеству символов
+-15 // str1 меньше чем strt2 так находится на 15 символов ближе к началу отсчета
 ----
 
 === `indexOf(String): int` и `lastIndexOf(String): int`
@@ -224,9 +297,16 @@ System.out.println(str1.compareTo(str3)); // 1 -> str1 больше чем str3
 [source,java]
 ----
 String str = "Hello world";
-int index1 = str.indexOf('l'); // 2
-int index2 = str.indexOf("wo"); // 6
-int index3 = str.lastIndexOf('l'); // 9
+int index1 = str.indexOf('l');
+int index2 = str.indexOf("wo");
+int index3 = str.lastIndexOf('l');
+----
+
+[.fragment]
+----
+2
+6
+9
 ----
 
 === `startsWith(String): boolean` и `endsWith(String): boolean`
@@ -235,8 +315,14 @@ int index3 = str.lastIndexOf('l'); // 9
 [source,java]
 ----
 String str = "myfile.exe";
-boolean start = str.startsWith("my"); // true
-boolean end = str.endsWith("exe"); // true
+boolean start = str.startsWith("my");
+boolean end = str.endsWith("exe");
+----
+
+[.fragment]
+----
+true
+true
 ----
 
 === `replace(CharSequence, CharSequence)`
@@ -245,8 +331,14 @@ boolean end = str.endsWith("exe"); // true
 [source,java]
 ----
 String str = "Hello world";
-String replStr1 = str.replace('l', 'd'); // Heddo wordd
-String replStr2 = str.replace("Hello", "Bye"); // Bye world
+String replStr1 = str.replace('l', 'd');
+String replStr2 = str.replace("Hello", "Bye");
+----
+
+[.fragment]
+----
+Heddo wordd
+Bye world
 ----
 
 === `trim(): String`
@@ -255,7 +347,12 @@ String replStr2 = str.replace("Hello", "Bye"); // Bye world
 [source,java]
 ----
 String str = "  hello world  ";
-str = str.trim(); // "hello world"
+str = str.trim();
+----
+
+[.fragment]
+----
+hello world
 ----
 
 === `substring(int): String` and `substring(int, int): String`
@@ -264,8 +361,14 @@ str = str.trim(); // "hello world"
 [source,java]
 ----
 String str = "Hello world";
-String substr1 = str.substring(6); // "world"
-String substr2 = str.substring(3,5); // "lo"
+String substr1 = str.substring(6);
+String substr2 = str.substring(3,5);
+----
+
+[.fragment]
+----
+world
+lo
 ----
 
 === `toLowerCase(): String` и `toUpperCase(): String`
@@ -274,8 +377,14 @@ String substr2 = str.substring(3,5); // "lo"
 [source,java]
 ----
 String str = "Hello World";
-System.out.println(str.toLowerCase()); // hello world
-System.out.println(str.toUpperCase()); // HELLO WORLD
+System.out.println(str.toLowerCase());
+System.out.println(str.toUpperCase());
+----
+
+[.fragment]
+----
+hello world
+HELLO WORLD
 ----
 
 === `split(String): String[]` and `split(String, int): String[]`
@@ -290,10 +399,7 @@ for (String word : words) {
 }
 ----
 
-=== `split(String): String[]`
-
 [.fragment]
-[source,java]
 ----
 FIFA
 will
@@ -307,7 +413,7 @@ it
 === String Pool
 
 [.fragment]
-*String Poll* (*Пул строк*) — это набор строк, который хранится в *Heap*.
+*String Pool* (*Пул строк*) — это набор строк, который хранится в *Heap*.
 
 [.fragment]
 image:../../assets/img/java/core/string-pool.png[String Pool]
@@ -315,15 +421,34 @@ image:../../assets/img/java/core/string-pool.png[String Pool]
 === String Pool
 
 [.step]
-* При создании объекта через оператор `new` строка не помещается в *String Pool*.
-* Для того чтобы поместить строку в *String Pool* используется метод `intern()`.
+* *ЕСЛИ* `String` создается через оператор `new`, *ТО* она не помещается в *String Pool*.
+* *ЕСЛИ* ее необходимо поместить в *String Pool*, *ТО* используется метод `intern()`.
+
+=== String Poll
+
+[.fragment]
+[source,java]
+----
+String s1 = "Rick";
+// s1 in String Pool
+String s2 = "Rick";
+// s2 in String Pool: s2 equals s1
+String s3 = new String("Rick");
+// s3 in Heap: s3 NOT equals s1, s2
+String s4 = new String("Rick");
+// s4 in Heap: s4 NOT equals s1, s2, s3
+String s5 = s4.intern();
+// ss5move to Strint Poll: s5 equals s1, s2
+----
 
 == `StringBuffer` и `StringBuilder`
 
 === Immutable `String`
 
-[.fragment]
-Класс `String` *immutable* (не изменяемый).
+[.step]
+* Класс `String` *immutable* (не изменяемый).
+* Еще раз: он *immutable*
+* Он реально *immutable*!
 
 [.fragment]
 [source,java]
@@ -338,8 +463,11 @@ str += " Java";
 === `StringBuffer` и `StringBuilder`
 
 [.step]
-* Эту проблему решают объекты типа `StringBuilder` или `StringBuffer`.
+* Если класс `String` *immutable*, то что делать когда нужно часто изменять строку?
+* Каждый раз при изменении строки, создается новая и под нее выделяется память.
+* Эту проблему решают объекты типа: `StringBuilder` и `StringBuffer`
 * Оба класса позволяют менять содержимое находящихся в них строк.
+* При этом они не потребляют лишнюю память.
 
 [.fragment]
 [source,java]
@@ -390,10 +518,25 @@ System.out.println("Длина: " + strBuffer.length()); // 4
 [source,java]
 ----
 StringBuffer strBuffer = new StringBuffer("Java");
-char c = strBuffer.charAt(0); // J
+char c = strBuffer.charAt(0);
 System.out.println(c);
+----
+
+[.fragment]
+----
+J
+----
+
+[.fragment]
+[source,java]
+----
 strBuffer.setCharAt(0, 'c');
-System.out.println(strBuffer.toString()); // cava
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+cava
 ----
 
 === `getChars(int, int, char[], int): void`
@@ -406,7 +549,12 @@ int startIndex = 1;
 int endIndex = 4;
 char[] buffer = new char[endIndex - startIndex];
 strBuffer.getChars(startIndex, endIndex, buffer, 0);
-System.out.println(buffer); // orl
+System.out.println(buffer);
+----
+
+[.fragment]
+----
+orl
 ----
 
 === `append(*): StringBuffer`
@@ -416,7 +564,12 @@ System.out.println(buffer); // orl
 ----
 StringBuffer strBuffer = new StringBuffer("hello");
 strBuffer.append(" world");
-System.out.println(strBuffer.toString()); // hello world
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+hello world
 ----
 
 === `insert(int, *): StringBuffer`
@@ -427,10 +580,16 @@ System.out.println(strBuffer.toString()); // hello world
 StringBuffer strBuffer = new StringBuffer("word");
 
 strBuffer.insert(3, 'l');
-System.out.println(strBuffer.toString()); // world
+System.out.println(strBuffer.toString());
 
 strBuffer.insert(0, "s");
-System.out.println(strBuffer.toString()); // sworld
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+world
+sworld
 ----
 
 === `delete(int, int): StringBuffer` и `deleteCharAt(int): StringBuffer`
@@ -439,11 +598,17 @@ System.out.println(strBuffer.toString()); // sworld
 [source,java]
 ----
 StringBuffer strBuffer = new StringBuffer("assembler");
-strBuffer.delete(0,2);
-System.out.println(strBuffer.toString()); // sembler
+strBuffer.delete(0, 2);
+System.out.println(strBuffer.toString());
 
 strBuffer.deleteCharAt(6);
-System.out.println(strBuffer.toString()); // semble
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+sembler
+semble
 ----
 
 === `substring(int): String` и `substring(int, int): String`
@@ -453,10 +618,16 @@ System.out.println(strBuffer.toString()); // semble
 ----
 StringBuffer strBuffer = new StringBuffer("hello java!");
 String str1 = strBuffer.substring(6); // обрезка строки с 6 символа до конца
-System.out.println(str1); //java!
+System.out.println(str1);
 
 String str2 = strBuffer.substring(3, 9); // обрезка строки с 3 по 9 символ
-System.out.println(str2); //lo jav
+System.out.println(str2);
+----
+
+[.fragment]
+----
+java!
+lo jav
 ----
 
 === `setLength(int): void`
@@ -466,12 +637,17 @@ System.out.println(str2); //lo jav
 ----
 StringBuffer strBuffer = new StringBuffer("hello");
 strBuffer.setLength(10);
-System.out.println(strBuffer.toString()); // "hello     "
+System.out.println(strBuffer.toString() + "'");
 
 strBuffer.setLength(4);
-System.out.println(strBuffer.toString()); // "hell"
+System.out.println(strBuffer.toString());
 ----
 
+[.fragment]
+----
+hello     '
+hell
+----
 === `replace(int, int, String): StringBuffer`
 
 [.fragment]
@@ -479,7 +655,12 @@ System.out.println(strBuffer.toString()); // "hell"
 ----
 StringBuffer strBuffer = new StringBuffer("hello world!");
 strBuffer.replace(6, 11, "java");
-System.out.println(strBuffer.toString()); // hello java!
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+hello java!
 ----
 
 === `reverse(): StringBuffer`
@@ -489,5 +670,10 @@ System.out.println(strBuffer.toString()); // hello java!
 ----
 StringBuffer strBuffer = new StringBuffer("assembler");
 strBuffer.reverse();
-System.out.println(strBuffer.toString()); // relbmessa
+System.out.println(strBuffer.toString());
+----
+
+[.fragment]
+----
+relbmessa
 ----
