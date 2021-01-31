@@ -1,4 +1,5 @@
 = Exception handling
+:imagesdir: ../../assets/img/java/core/
 
 == Problem
 
@@ -20,16 +21,16 @@ System.out.println(numbers[4]);
 [.fragment]
 Например:
 [.step]
-* Пользователь ввел некоректные данные
-* Не смогли подключиться к стороннему сервису
-* Не найден файл с которым выполняются какие-то действия
-* Не выполняются  какие-то бизнес требования
+* Пользователь ввел некорректные данные.
+* Не смогли подключиться к стороннему сервису.
+* Не найден файл с которым выполняются какие-то действия.
+* Не выполняются бизнес требования.
 
 == Throwable
 
 === Hierarchy
 
-image::/assets/img/java/core/hierarchy-exceptions.png[Hierarchy for Exceptions]
+image:exception-hierarchy.png[Hierarchy for Exceptions]
 
 === `Throwable`
 
@@ -142,9 +143,9 @@ try {
 System.out.println("Программа завершена");
 ----
 
-== Multiexceptions `catch`
+== Multiple `catch`
 
-=== Multiexceptions `catch`
+=== Multiple `catch`
 
 [.fragment]
 [source,java]
@@ -160,7 +161,7 @@ try {
 }
 ----
 
-=== Multiexceptions `catch`
+=== Multiple `catch`
 
 [.fragment]
 [source,java]
@@ -178,7 +179,7 @@ try {
 }
 ----
 
-=== Multiexceptions `catch`
+=== Multiple `catch`
 
 [.fragment]
 [source,java]
@@ -194,7 +195,7 @@ try {
 }
 ----
 
-=== Multiexceptions `catch`
+=== Multiple `catch`
 
 [.fragment]
 [source,java]
