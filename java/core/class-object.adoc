@@ -1,8 +1,13 @@
 = Class `Object`
+:imagesdir: ../../assets/img/java/core/class-object
 
-== Сlass `Object`
+== Intro
 
-== Constructor
+[.step]
+* Class `Object` is the *root* of the *class hierarchy*.
+* Every class has `Object` as a *superclass*.
+
+== Class `Object`
 
 === Constructor
 
@@ -18,17 +23,222 @@ public Object() {}
 
 == Methods
 
-=== `getClass(): Class<?>`
+=== Methods
+
+[.step]
+* `toString(): String`
+* `equals(Object): boolean`
+* `hashCode(): int`
+* `getClass(): Class<?>`
+* `finalize(): void`
+* `clone(): Object`
+
+=== Methods for multithreading
+
+[.step]
+* `notify(): void`
+* `notifyAll(): void`
+* `wait(): void`
+* `wait(long): void`
+* `wait(long, int): void`
+
+=== Model `Person`
 
 [.fragment]
 [source,java]
 ----
-public class Test {
+public class Person {
+    private final String firstname;
+    private final String lastname;
+
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+}
+----
+
+== `toString(): String`
+
+=== `toString(): String`
+
+[.fragment]
+[source,java]
+----
+public String toString() {
+    return getClass().getName()
+            + "@"
+            + Integer.toHexString(hashCode());
+}
+----
+
+=== `toString(): String`
+
+[.fragment]
+[source,java]
+----
+public class Example1ToString {
     public static void main(String[] args) {
-        Object obj = new String("Hell to world!");
-        Class c = obj.getClass();
-        System.out.println("Class of Object obj is: " + c.getName());
-        // Class of Object obj is: java.lang.String
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+    }
+}
+----
+
+[.fragment]
+----
+Person@db6cce66
+----
+
+=== `toString(): String`
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    // ...
+
+    @Override
+    public String toString() {
+        return firstname + ' ' + lastname;
+    }
+}
+----
+
+=== `toString(): String`
+
+[.fragment]
+[source,java]
+----
+public class Example1ToString {
+    public static void main(String[] args) {
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+    }
+}
+----
+
+[.fragment]
+----
+Dmitry Rakovets
+----
+
+== `equals(Object): boolean`
+
+=== `equals(Object): boolean`
+
+[.fragment]
+[source,java]
+----
+public class Example2Equals {
+    public static void main(String[] args) {
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        Person anonymous = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+        System.out.println(anonymous.toString());
+        System.out.println(anonymous.equals(rakovets));
+    }
+}
+----
+
+=== `equals(Object): boolean`
+
+[.fragment]
+----
+Dmitry Rakovets
+Dmitry Rakovets
+false
+----
+
+=== `equals(Object): boolean`
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    // ...
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (firstname != null ? !firstname.equals(person.firstname) : person.firstname != null) return false;
+        return lastname != null ? lastname.equals(person.lastname) : person.lastname == null;
+    }
+}
+----
+
+=== `equals(Object): boolean`
+
+[.fragment]
+[source,java]
+----
+public class Example2Equals {
+    public static void main(String[] args) {
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        Person anonymous = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+        System.out.println(anonymous.toString());
+        boolean isRakovets = anonymous.equals(rakovets);
+        System.out.println(isRakovets);
+    }
+}
+----
+
+=== `equals(Object): boolean`
+
+[.fragment]
+----
+Dmitry Rakovets
+Dmitry Rakovets
+false
+----
+
+== `hashCode(): int`
+
+=== `hashCode(): int`
+
+[.fragment]
+[source,java]
+----
+public class Example3HashCode {
+    public static void main(String[] args) {
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        Person anonymous = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+        System.out.println(anonymous.toString());
+        System.out.println(rakovets.hashCode());
+        System.out.println(anonymous.hashCode());
+    }
+}
+----
+
+=== `hashCode(): int`
+
+[.fragment]
+----
+Dmitry Rakovets
+Dmitry Rakovets
+1523554304
+1175962212
+----
+
+=== `hashCode(): int`
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    // ...
+
+    @Override
+    public int hashCode() {
+        int result = firstname != null ? firstname.hashCode() : 0;
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        return result;
     }
 }
 ----
@@ -38,113 +248,123 @@ public class Test {
 [.fragment]
 [source,java]
 ----
-public class Program {
+public class Example3HashCode {
     public static void main(String[] args) {
-        Person tom = new Person("Tom");
-        System.out.println(tom.hashCode());
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        Person anonymous = new Person("Dmitry", "Rakovets");
+        System.out.println(rakovets.toString());
+        System.out.println(anonymous.toString());
+        System.out.println(rakovets.hashCode());
+        System.out.println(anonymous.hashCode());
     }
 }
+----
 
-class Person {
-    private String name;
+=== `hashCode(): int`
 
-    public Person(String name) {
-        this.name = name;
+[.fragment]
+----
+Dmitry Rakovets
+Dmitry Rakovets
+-613626266
+-613626266
+----
+
+== Objects Equality
+
+=== Objects Equality
+
+[.step]
+* *Одинаковые объекты* — это объекты одного класса с одинаковым содержимым полей.
+* Для одного и того-же объекта, хеш-код всегда будет одинаковым
+
+[.fragment]
+image::hash-code-1.png[Hash Code]
+
+=== Objects Equality
+
+[.step]
+* Если объекты одинаковые, то и хеш-коды будут одинаковые, но не наоборот.
+
+[.fragment]
+image::hash-code-2.png[Hash Code]
+
+=== Objects Equality
+
+[.step]
+* Если хеш-коды равны, то входные объекты не всегда равны (коллизия).
+
+[.fragment]
+image::hash-code-3.png[Hash Code]
+
+=== Objects Equality
+
+[.step]
+* Если хеш-коды разные, то и объекты гарантированно будут разные.
+
+[.fragment]
+image::hash-code-4.png[Hash Code]
+
+== `getClass(): Class<?>`
+
+=== `getClass(): Class<?>`
+
+[.fragment]
+[source,java]
+----
+@HotSpotIntrinsicCandidate
+public final native Class<?> getClass();
+----
+
+=== `getClass(): Class<?>`
+
+[.fragment]
+[source,java]
+----
+public class Example2GetClass {
+    public static void main(String[] args) {
+        String string = "This is String";
+        Class stringClass = string.getClass();
+        System.out.println(stringClass.getName());
+        // java.lang.String
+        Person person = new Person("Dmitry", "Rakovets");
+        Class personClass = person.getClass();
+        System.out.println(personClass.getName());
+        // Person
     }
+}
+----
+
+=== `getClass(): Class<?>`
+
+[.fragment]
+----
+java.lang.String
+Person
+----
+
+== `finalize(): void`
+
+=== `finalize(): void`
+
+[.fragment]
+[source,java]
+----
+protected void finalize() throws Throwable {
+----
+
+=== `finalize(): void`
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    // ...
 
     @Override
-    public int hashCode() {
-        return 19 * name.hashCode() + 7;
-    }
-}
-----
-
-=== `toString(): String`
-
-[.fragment]
-[source,java]
-----
-public String toString() {
-    return getClass().getName() + "@" + Integer.toHexString(hashCode());
-}
-----
-
-=== `toString(): String`
-
-[.fragment]
-[source,java]
-----
-class Complex {
-    private double re;
-    private double im;
-
-    public Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(re + " + i" + im);
-    }
-}
-----
-
-=== `toString(): String`
-
-[.fragment]
-[source,java]
-----
-public class DEmo {
-    public static void main(String[] args) {
-        Complex c1 = new Complex(10, 15);
-        System.out.println(c1);
-    }
-}
-----
-
-=== `equals(Object): boolean`
-
-[.fragment]
-[source,java]
-----
-class Complex {
-    private double re;
-    private double im;
-
-    public Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        } else if (!(o instanceof Complex)) {
-            return false;
-        } else {
-            Complex c = (Complex) o;
-            return (Double.compare(re, c.re) == 0) && (Double.compare(im, c.im) == 0);
-        }
-    }
-}
-----
-
-=== `equals(Object): boolean`
-
-[.fragment]
-[source,java]
-----
-public class Demo {
-    public static void main(String[] args) {
-        Complex c1 = new Complex(10, 15);
-        Complex c2 = new Complex(10, 15);
-        if (c1.equals(c2)) {
-            System.out.println("Equal ");
-        } else {
-            System.out.println("Not Equal ");
-        }
+    protected void finalize() { // @Deprecated(since="9")
+        System.out.println(this.toString());
+        System.out.println("Call method: finalize()");
     }
 }
 ----
@@ -154,38 +374,58 @@ public class Demo {
 [.fragment]
 [source,java]
 ----
-public class Test {
-    public static void main(String[] args) {
-        Test t = new Test();
-        System.out.println(t.hashCode());
-        t = null;
-        System.gc();
-        System.out.println("end");
-    }
+public class Example5Finalize {
+    public static void main(String[] args) throws InterruptedException {
+        Person person1 = new Person("Dmitry", "Rakovets");
+        Person person2 = new Person("James", "Gosling");
 
-    @Override //@Deprecated(since="9")
-    protected void finalize() {
-        System.out.println("finalize method called");
+        // After
+        person1 = null;
+        person2 = null;
+
+        // Call GC: way 1
+        System.gc();
+        // Call GC: way 2
+        Runtime.getRuntime().gc();
+        // Increases the chance of garbage collection
+        Thread.sleep(5_000);
+
+        System.out.println("End program");
     }
 }
 ----
 
-=== Multithreading methods
+=== `finalize(): void`
+
+[.fragment]
+----
+Dmitry Rakovets
+Call method: finalize()
+James Gosling
+Call method: finalize()
+End program
+----
+
+=== `finalize(): void`
 
 [.step]
-* `notify(): void`
-* `notifyAll(): void`
-* `wait(): void`
-* `wait(long): void`
-* `wait(long, int): void`
+* `finalize()` запускается *Garbage Collector*.
+* *Garbage Collector* начинает работы при *GC*.
+* *GC* запускается *JVM*.
+* *JVM* сама решит когда нужно запускать *GC*.
 
-== How clone objects?
+[.fragment]
+----
+End program
+----
+
+== `clone(): Object`
 
 === How clone objects?
 
 [.step]
-* `clone(): Object`
-* Interface `Cloneable` (*интерфейс-маркер*/*Marker Interface*)
+* Переопределить `protected` метода класса `Object`: `clone(): Object`.
+* Реализовать *Marker Interface* (*интерфейс-маркер*): `Cloneable`.
 
 [.fragment]
 [source,java]
@@ -200,26 +440,12 @@ public interface Cloneable {
 [source,java]
 ----
 public class Person implements Cloneable {
-    private String name;
-    private int age;
-
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
+    // ...
 
     @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
-    @Override
-    protected Person clone() throws CloneNotSupportedException {
+    public Person clone() throws CloneNotSupportedException {
         super.clone();
-        return new Person(this.name, this.age);
+        return new Person(this.firstname, this.lastname);
     }
 }
 ----
@@ -229,14 +455,20 @@ public class Person implements Cloneable {
 [.fragment]
 [source,java]
 ----
-public class Demo {
+public class Example6Clone {
     public static void main(String[] args) throws CloneNotSupportedException {
-        Person lucas = new Person("Lucas", 23);
-        System.out.println(lucas);
-        Person leo = lucas.clone();
-        System.out.println(leo);
-        System.out.println(lucas.equals(leo));
+        Person rakovets = new Person("Dmitry", "Rakovets");
+        Object clone = rakovets.clone();
+        System.out.println(clone.toString()); // 'Dmitry Rakovets'
+        System.out.println(clone.equals(rakovets)); // true
     }
 }
 ----
 
+=== `clone(): Object`
+
+[.fragment]
+----
+Dmitry Rakovets
+true
+----
