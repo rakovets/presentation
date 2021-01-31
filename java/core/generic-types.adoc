@@ -1,4 +1,4 @@
-= Generics
+= Generic Types
 
 == Problem
 
@@ -9,7 +9,11 @@
 ----
 public class Box {
     private Object item;
-    
+
+    public Box(Object item) {
+        this.item = item;
+    }
+
     public Object getItem() {
         return item;
     }
@@ -25,23 +29,34 @@ public class Box {
 [.fragment]
 [source,java]
 ----
-Box box = new Box();
-box.setItem("Test");
-// code
-Object item = box.getItem();
-Integer itemInt = (Integer) item;
+public class Example1 {
+    public static void main(String[] args) {
+        Box box1 = new Box("Item");
+        Box box2 = new Box(Double.valueOf("12.12"));
+
+        Object item1 = box1.getItem();
+        Object item2 = box2.getItem();
+
+        String originalItem1 = (String) item1;
+        String originalItem2 = (String) item2;
+    }
+}
 ----
 
 [.fragment]
-[source,out]
 ----
 Exception in thread "main" java.lang.ClassCastException:
-java.lang.String cannot be cast to java.lang.Integer
+java.lang.Double cannot be cast to java.lang.String
 ----
 
-== Generics
+=== Solution
 
-=== Identificator: `Number` vs. `String`
+[.step]
+* Generic Types
+
+== Generic Types
+
+=== Identifier: `Number` vs. `String`
 
 [.fragment]
 [source,java]
@@ -69,7 +84,7 @@ public class Account {
 }
 ----
 
-=== Identificator: `Number` vs. `String`
+=== Identifier: `Number` vs. `String`
 
 [.fragment]
 [source,java]
@@ -86,7 +101,7 @@ public class Program {
 }
 ----
 
-=== Generics (Обобщения)
+=== Generic classes
 
 [.fragment]
 [source,java]
@@ -114,7 +129,7 @@ public class Account<T> {
 }
 ----
 
-=== Generics (Обобщения)
+=== Generic classes
 
 [.fragment]
 [source,java]
@@ -132,7 +147,7 @@ public class Program {
 }
 ----
 
-=== Generics and Interfaces
+=== Generic interfaces
 
 [.fragment]
 [source,java]
@@ -146,7 +161,7 @@ public interface Accountable<T> {
 }
 ----
 
-=== Generics and Interfaces
+=== Generic interfaces
 
 [.fragment]
 [source,java]
@@ -174,7 +189,7 @@ public class Account implements Accountable<String> {
 }
 ----
 
-=== Generics and Interfaces
+=== Generic interfaces
 
 [.fragment]
 [source,java]
@@ -189,7 +204,7 @@ public class Program {
 }
 ----
 
-=== Generics and methods
+=== Generic methods
 
 [.fragment]
 [source,java]
@@ -203,7 +218,7 @@ public class Printer {
 }
 ----
 
-=== Generics and methods
+=== Generic methods
 
 [.fragment]
 [source,java]
@@ -219,7 +234,7 @@ public class Program {
 }
 ----
 
-=== Generics and constructors
+=== Generic constructors
 
 [.fragment]
 [source,java]
@@ -247,7 +262,7 @@ public class Account {
 }
 ----
 
-=== Generics and constructors
+=== Generic constructors
 
 [.fragment]
 [source,java]
@@ -262,9 +277,9 @@ public class Program {
 }
 ----
 
-== Multiple Generics
+== Multiple Generic Types
 
-=== Multiple Generics
+=== Multiple Generic Types
 
 [.fragment]
 [source,java]
@@ -292,7 +307,7 @@ public class Account<T, S> {
 }
 ----
 
-=== Multiple Generics
+=== Multiple Generic Types
 
 [.fragment]
 [source,java]
@@ -307,7 +322,7 @@ public class Program {
 }
 ----
 
-== Limitations of Generics
+== Limitations of Generic Types
 
 === Limitation with superclass
 
@@ -380,82 +395,6 @@ public class Program {
                 new Transaction<Account>(acc1, acc2, 4000);
         tran1.execute();
         tran1 = new Transaction<Account>(acc1, acc2, 4000);
-        tran1.execute();
-    }
-}
-----
-
-=== Limitation with Generic Types
-
-[.fragment]
-[source,java]
-----
-public class Account<T> {
-    private T id;
-    private int sum;
-
-    public Account(T id, int sum) {
-        this.id = id;
-        this.sum = sum;
-    }
-
-    public T getId() {
-        return id;
-    }
-
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
-    }
-}
-----
-
-=== Limitation with Generic Types
-
-[.fragment]
-[source,java]
-----
-public class Transaction<T extends Account<String>> {
-    private T from;
-    private T to;
-    private int sum;
-
-    public Transaction(T from, T to, int sum) {
-        this.from = from;
-        this.to = to;
-        this.sum = sum;
-    }
-
-    public void execute() {
-        if (from.getSum() > sum) {
-            from.setSum(from.getSum() - sum);
-            to.setSum(to.getSum() + sum);
-            System.out.printf("Account %s: %d \nAccount %s: %d \n",
-                from.getId(), from.getSum(), to.getId(), to.getSum());
-        } else {
-            System.out.printf("Operation is invalid");
-        }
-    }
-}
-----
-
-=== Limitation with Generic Types
-
-[.fragment]
-[source,java]
-----
-public class Program {
-    public static void main(String[] args) {
-        Account<String> acc1 = new Account<String>("1876", 4500);
-        Account<String> acc2 = new Account<String>("3476", 1500);
-
-        Transaction<Account<String>> tran1 = 
-                new Transaction<Account<String>>(acc1, acc2, 4000);
-        tran1.execute();
-        tran1 = new Transaction<Account<String>>(acc1, acc2, 4000);
         tran1.execute();
     }
 }
@@ -541,8 +480,84 @@ public class Program {
     public static void main(String[] args) {
         Account acc1 = new Account("1235rwr", 5000);
         Account acc2 = new Account("2373", 4300);
-        Transaction<Account> tran1 = 
+        Transaction<Account> tran1 =
                 new Transaction<Account>(acc1, acc2, 1560);
+        tran1.execute();
+    }
+}
+----
+
+=== Limitation with Generic Types
+
+[.fragment]
+[source,java]
+----
+public class Account<T> {
+    private T id;
+    private int sum;
+
+    public Account(T id, int sum) {
+        this.id = id;
+        this.sum = sum;
+    }
+
+    public T getId() {
+        return id;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+}
+----
+
+=== Limitation with Generic Types
+
+[.fragment]
+[source,java]
+----
+public class Transaction<T extends Account<String>> {
+    private T from;
+    private T to;
+    private int sum;
+
+    public Transaction(T from, T to, int sum) {
+        this.from = from;
+        this.to = to;
+        this.sum = sum;
+    }
+
+    public void execute() {
+        if (from.getSum() > sum) {
+            from.setSum(from.getSum() - sum);
+            to.setSum(to.getSum() + sum);
+            System.out.printf("Account %s: %d \nAccount %s: %d \n",
+                from.getId(), from.getSum(), to.getId(), to.getSum());
+        } else {
+            System.out.printf("Operation is invalid");
+        }
+    }
+}
+----
+
+=== Limitation with Generic Types
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Account<String> acc1 = new Account<String>("1876", 4500);
+        Account<String> acc2 = new Account<String>("3476", 1500);
+
+        Transaction<Account<String>> tran1 =
+                new Transaction<Account<String>>(acc1, acc2, 4000);
+        tran1.execute();
+        tran1 = new Transaction<Account<String>>(acc1, acc2, 4000);
         tran1.execute();
     }
 }
@@ -557,17 +572,25 @@ public class Program {
 ----
 public class Person {
 }
+----
 
+[.fragment]
+[source,java]
+----
 public interface Accountable {
 }
+----
 
+[.fragment]
+[source,java]
+----
 public class Transaction<T extends Person & Accountable> {
 }
 ----
 
-== Inheritance and Generics
+== Inheritance and Generic Types
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -585,7 +608,7 @@ public class Account<T> {
 }
 ----
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -597,7 +620,7 @@ public class DepositAccount<T> extends Account<T> {
 }
 ----
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -613,7 +636,7 @@ public class Program {
 }
 ----
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -631,7 +654,7 @@ public class Account<T> {
 }
 ----
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -650,7 +673,7 @@ public class DepositAccount<T, S> extends Account<T> {
 }
 ----
 
-=== Basic generic class
+=== Generic superclass
 
 [.fragment]
 [source,java]
@@ -660,15 +683,13 @@ public class Program {
         DepositAccount<Integer, String> dAccount1 =
                 new DepositAccount(20, "Tom");
         System.out.println(dAccount1.getId() + " : " + dAccount1.getName());
-                    
+
         DepositAccount<String, Integer> dAccount2 =
                 new DepositAccount("12345", 23456);
         System.out.println(dAccount2.getId() + " : " + dAccount2.getName());
     }
 }
 ----
-
-== Generic subclass
 
 === Generic subclass
 
@@ -707,7 +728,7 @@ public class DepositAccount<T> extends Account {
 }
 ----
 
-=== Generic Type Converion
+=== Generic Types Casting
 
 [.fragment]
 [source,java]
@@ -725,7 +746,7 @@ public class Account<T> {
 }
 ----
 
-=== Generic Type Converion
+=== Generic Types Casting
 
 [.fragment]
 [source,java]
@@ -737,7 +758,7 @@ public class DepositAccount<T> extends Account<T> {
 }
 ----
 
-=== Generic Type Converion
+=== Generic Types Casting
 
 [.fragment]
 [source,java]
@@ -759,8 +780,7 @@ public class Program {
 === Wildcard
 
 [.fragment]
-Возникает необходимость в метод обобщенного класса одного допустимого типа передать объект этого же класса, но параметризованного
-другим типом.
+Возникает необходимость в метод обобщенного класса одного допустимого типа передать объект этого же класса, но параметризованного другим типом.
 
 === Wildcard
 
@@ -772,7 +792,7 @@ public class Program {
 ----
 public class Generic<T> {
     // code
-    
+
     boolean compare(Generic<?> o) {
         return o.getObject() == obj;
     }
@@ -788,6 +808,7 @@ public class Generic<T> {
 
 [.step]
 * Операции, для выполнения которых нужно точно знать типы в _runtime_, работать не будут:
+
 [.step]
 ** *Приведение типов*: `(T) var;`
 ** *instanceof*: `var instaceof T;`
