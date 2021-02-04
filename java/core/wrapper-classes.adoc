@@ -1,0 +1,15 @@
+= Wrapper Classes
+
+== Intro
+
+=== Problem
+
+[.step]
+* Есть представление числа в виде строки. Как его сделать числом?
+
+=== Solution
+
+[.step]
+* *Wrapper Classes*
+
+==

@@ -123,14 +123,15 @@
 * link:./common/git.html[Git.]
 * link:./common/regex.html[Regular Expression.]
 * link:./common/testing.html[Testing.]
+* link:./common/data-structures.html[Data Structure]
 * link:./common/uml.html[UML.]
 * link:./common/design-principles.html[Design Principles.]
 * link:./common/design-patterns.html[Design Patterns.]
 * link:./common/i18n.html[i18n.]
-* link:./common/architectural-patterns.html[Architectural Patterns.]
 
 === Course: Common
 
+* link:./common/architectural-patterns.html[Architectural Patterns.]
 * link:./common/xml.html[XML.]
 * link:./common/json.html[JSON.]
 * link:./common/scrum.html[Scrum.]
