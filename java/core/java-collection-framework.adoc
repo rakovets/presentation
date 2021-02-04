@@ -1,4 +1,5 @@
-= Collections (JCF)
+= Java Collection Framework (JCF)
+:imagesdir: ../../assets/img/java/core/java-collection-framework/
 
 == Problem
 
@@ -27,7 +28,7 @@
 === Collection Framework
 
 [.step]
-* *Collection framework* (*каркас коллекций*) - это унифицированная архитектура для представления и манипулирования коллекциями.
+* *Collection framework* (*каркас коллекций*) — это унифицированная архитектура для представления и манипулирования коллекциями.
 * Collection framework содержит:
 [.step]
 ** *Interfaces* (*Интерфейсы*)
@@ -55,19 +56,19 @@
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 == Interface `Collection<E>`
 
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `Collection<E>`
 
@@ -100,12 +101,56 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 * `size(): int`
 * `toArray(): Object[]`
 
+
+== Interface `Iterator<E>`
+
+=== Collection Hierarchy
+
+[.fragment]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
+
+=== Interface `Iterator<E>`
+
+[.fragment]
+*Iterator* (*Итератор*) — это объект, предназначенный для обхода коллекции.
+
+=== Methods
+
+[.step]
+* `next(): E`
+* `hasNext(): boolean`
+* `remove(): void`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> states = new ArrayList<String>();
+        states.add("Germany");
+        states.add("France");
+        states.add("Italy");
+        states.add("Spain");
+
+        Iterator<String> iter = states.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+    }
+}
+----
+
 == Interface `List<E>`
 
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `List<E>`
 
@@ -133,12 +178,64 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 * `sort(Comparator<? super E> comp): void`
 * `subList(int start, int end): List<E>`
 
+
+== Interface `ListIterator<E>`
+
+=== Collection Hierarchy
+
+[.fragment]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
+
+=== Methods
+
+[.step]
+* `add(E obj): void`
+* `hasNext(): boolean`
+* `hasPrevious(): boolean`
+* `next(): E`
+* `previous(): E`
+* `nextIndex(): int`
+* `previousIndex(): int`
+* `remove(): void`
+* `set(E obj): void`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+public class ListIteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> states = new ArrayList<String>();
+        states.add("Germany");
+        states.add("France");
+        states.add("Italy");
+        states.add("Spain");
+
+        ListIterator<String> listIter = states.listIterator();
+
+        while (listIter.hasNext()) {
+            System.out.println(listIter.next());
+        }
+
+        listIter.set("Португалия");
+
+        while (listIter.hasPrevious()) {
+            System.out.println(listIter.previous());
+        }
+    }
+}
+----
+
 == Class `ArrayList<E>`
 
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `ArrayList<E>`
 
@@ -197,12 +294,12 @@ class ArrayListExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Interface `Queue<E>`
 
 [.step]
-* *Queue<E>* (*Очередь*) - хранилище элементов для обработки.
+* *Queue<E>* (*Очередь*) — хранилище элементов для обработки.
 * Свойства очередей:
 [.step]
 ** Порядок выдачи элементов определяется конкретной реализацией
@@ -244,7 +341,7 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Methods
 
@@ -275,7 +372,7 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Constructors
 
@@ -310,12 +407,12 @@ public class ArrayDequeExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `LinkedList<E>`
 
 [.step]
-* `LinkedList<E>` - двусвязный список
+* `LinkedList<E>` - связный список.
 * Рекомендуется использовать, если необходимо часто добавлять элементы в начало списка или удалять внутренний элемент списка.
 * Можно использовать для:
 [.step]
@@ -344,12 +441,12 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 ===  Interface `Set<E>`
 
 [.step]
-* *Set<E>* (*Множество*) - коллекция без повторяющихся элементов.
+* *Set<E>* (*Множество*) — коллекция без повторяющихся элементов.
 * Интерфейс `Set<E>` содержит методы, унаследованные `Collection<E>` и добавляет запрет на дублирующийся элементы.
 
 == Class `HashSet<E>`
@@ -357,7 +454,7 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `HashSet<E>`
 
@@ -369,8 +466,8 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 [.step]
 * `HashSet()`
 * `HashSet(Collection<? extends E> col)`
-* `HashSet(int capacity)` _default_ `16`
-* `HashSet(int capacity, float koef)` `koef` [`0.0`; `1.0`]
+* `HashSet(int capacity)`, где _default_ `16`
+* `HashSet(int capacity, float koef)`, где `koef` [`0.0`; `1.0`]
 
 === Example
 
@@ -400,7 +497,7 @@ class HashSetExample {
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Methods
 
@@ -411,15 +508,15 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 * `subSet(E start, E end): SortedSet<E>`
 * `tailSet(E start): SortedSet<E>`
 
-== Interface `NavigadleSet<E>`
+== Interface `NavigableSet<E>`
 
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 [.fragment]
-`NavigadleSet<E> extends SortedSet<E>`
+`NavigableSet<E> extends SortedSet<E>`
 
 === Methods
 
@@ -444,7 +541,7 @@ image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Coll
 === Collection Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 === Class `TreeSet<E>`
 
@@ -487,7 +584,7 @@ class TreeSetExample {
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 === Interface `Map<K, V>`
 
@@ -533,7 +630,7 @@ image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarc
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `HashMap<K, V>`
 
@@ -567,7 +664,7 @@ public class HashMapExample {
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `LinkedHashMap<K, V>`
 
@@ -581,7 +678,7 @@ image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarc
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 === Methods
 
@@ -597,7 +694,7 @@ image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarc
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 [.fragment]
 `NavigableMap<K, V> extends SortedMap<K, V>`
@@ -637,7 +734,7 @@ image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarc
 === Map Hierarchy
 
 [.fragment]
-image::/assets/img/java/core/collections/java-map-hierarchy.png[Java Map Hierarchy]
+image::java-map-hierarchy.png[Java Map Hierarchy]
 
 === Class `TreeMap<K, V>`
 
@@ -676,94 +773,6 @@ public class TreeMapExample {
 }
 ----
 
-== Interface `Iterator<E>`
-
-=== Collection Hierarchy
-
-[.fragment]
-image::/assets/img/java/core/collections/java-collection-hierarchy.png[Java Collection Hierarchy]
-
-=== Interface `Iterator<E>`
-
-*Iterator* (*Итератор*) - это объект, предназначенный для обхода коллекции.
-
-=== Methods
-
-[.step]
-* `next(): E`
-* `hasNext(): boolean`
-* `remove(): void`
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-import java.util.ArrayList;
-import java.util.Iterator;
-
-public class IteratorExample {
-    public static void main(String[] args) {
-        ArrayList<String> states = new ArrayList<String>();
-        states.add("Germany");
-        states.add("France");
-        states.add("Italy");
-        states.add("Spain");
-
-        Iterator<String> iter = states.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-    }
-}
-----
-
-== Interface `ListIterator<E>`
-
-=== Methods
-
-[.step]
-* `add(E obj): void`
-* `hasNext(): boolean`
-* `hasPrevious(): boolean`
-* `next(): E`
-* `previous(): E`
-* `nextIndex(): int`
-* `previousIndex(): int`
-* `remove(): void`
-* `set(E obj): void`
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-import java.util.ArrayList;
-import java.util.ListIterator;
-
-public class ListIteratorExample {
-    public static void main(String[] args) {
-        ArrayList<String> states = new ArrayList<String>();
-        states.add("Germany");
-        states.add("France");
-        states.add("Italy");
-        states.add("Spain");
-
-        ListIterator<String> listIter = states.listIterator();
-
-        while (listIter.hasNext()) {
-            System.out.println(listIter.next());
-        }
-
-        listIter.set("Португалия");
-
-        while (listIter.hasPrevious()) {
-            System.out.println(listIter.previous());
-        }
-    }
-}
-----
-
 == Создание `unmodified` коллекций
 
 === Static method `of(...): E`
@@ -796,4 +805,4 @@ public class Program {
 Collection выбирается под задачу.
 
 [.fragment]
-image::/assets/img/java/core/collections/jcf-big-o.png[BigO for JCF]
+image::jcf-big-o.png[BigO for JCF]

@@ -45,7 +45,7 @@
 === Course: Core Java
 
 * link:./java/core/generics.html[Generics.]
-* link:./java/core/collections.html[Java Collection Framework.]
+* link:./java/core/java-collection-framework.html[Java Collection Framework.]
 * link:./java/core/exception-handling.html[Exception Handling.]
 * link:./java/core/java-io.html[Java IO.]
 * link:./java/core/properties.html[Properties.]
