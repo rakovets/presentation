@@ -68,6 +68,7 @@
 
 * link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224).]
 * link:./java/core/networking.html[Networking.]
+* link:./java/core/system-classes.html[System Classes.]
 
 == Course: Java Tools [[course-java-tools]]
 
