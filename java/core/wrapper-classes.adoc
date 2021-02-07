@@ -1,4 +1,5 @@
 = Wrapper Classes
+:imagesdir: ../../assets/img/java/core/
 
 == Intro
 
@@ -12,4 +13,52 @@
 [.step]
 * *Wrapper Classes*
 
-==
+== Wrapper Classes
+
+=== Wrapper Classes
+
+[.fragment]
+image:wrapper-classes-hierarhy.jpg[Wrapper Classes Hierarhy]
+
+=== Wrapper Classes
+
+[options="header"]
+|===
+|Примитивный тип|Оболочка|Аргументы конструктора
+|`boolean`|`Boolean`|`boolean` or `String`
+|`byte`|`Byte`|`byte` or `String`
+|`char`|`Character`|`char`
+|`double`|`Double`|`double` or `String`
+|`float`|`Float`|`float`, double, or `String`
+|`int`|`Integer`|`int` or `String`
+|`long`|`Long`|`long` or `String`
+|`short`|`Short`|`short` or `String`
+|===
+
+=== Methods
+
+[.step]
+* `parse()`
+* `toString()`
+* `toHexString()`
+* `toOctalString()`
+* `toBinaryString()`
+
+=== Principles
+
+[.step]
+* *Autoboxing* происходит при прямом присвоении примитива классу-обертке (с помощью оператора `=`), либо при передаче примитива в параметры метода.
+* *Unboxing* происходит при прямом присвоении классу-обертке примитива.
+* Компилятор использует метод `valueOf()` для упаковки, а методы `intValue()`, `doubleValue()` и так далее, для распаковки.
+* *Autoboxing* в *классы-обертки* могут быть подвергнуты как переменные примитивных типов, так и литералы:
+
+=== Principles
+
+[.step]
+* Метод `valueOf()` не всегда создает новый объект.
+* Он кэширует следующие значения:
+[.step]
+** `Boolean`,
+** `Byte`,
+** `Character` от `\u0000` до `\u007f` (`7f` это `127`),
+** `Short` и `Integer` от `-128` до `127`.
