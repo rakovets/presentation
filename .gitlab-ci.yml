@@ -1,0 +1,16 @@
+image: node:latest
+
+pages:
+  script:
+    - npm i
+    - node convert-slides.js
+    - echo 'node_modules/' > ./.gitignore
+    - rm -rf ./*.adoc
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
