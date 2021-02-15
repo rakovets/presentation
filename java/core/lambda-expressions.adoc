@@ -1,4 +1,5 @@
 = JSR-335: Lambda expressions
+:imagesdir: ../../assets/img/java/core/
 
 == Intro
 
@@ -19,7 +20,6 @@ button.addActionListener(new ActionListener() {
 
 === Solution
 
-
 [.fragment]
 [source, java]
 ----
@@ -30,6 +30,15 @@ button.addActionListener(event -> System.out.println("Hello World!"));
 link:https://jcp.org/en/jsr/detail?id=335[JSR-335]: Lambda expressions
 
 == Lambda expressions
+
+=== Lambda expressions
+
+[.step]
+* Анонимный блок кода со списком параметров и телом (по сути – анонимная функция)
+[.step]
+** `(parameters) -> expressions`
+** `(parameters) -> { expressions; }`
+
 
 === Functional Interface
 
@@ -82,10 +91,18 @@ public class LambdaApp {
 ----
 // Defining reference to functional interface:
 Operationable operation;
+----
 
+[.fragment]
+[source, java]
+----
 // Creating Lambda Expression
 operation = (x, y) -> x + y;
+----
 
+[.fragment]
+[source, java]
+----
 // Using Lambda Expression
 int result = operation.calculate(10, 20);
 ----
@@ -95,13 +112,21 @@ int result = operation.calculate(10, 20);
 [.fragment]
 [source, java]
 ----
-Operationable operation1 = (int x, int y)-> x + y;
-Operationable operation2 = (int x, int y)-> x - y;
-Operationable operation3 = (int x, int y)-> x * y;
+Operationable operation1 = (int x, int y) -> x + y;
+Operationable operation2 = (int x, int y) -> x - y;
+Operationable operation3 = (int x, int y) -> x * y;
 
 System.out.println(operation1.calculate(20, 10));
 System.out.println(operation2.calculate(20, 10));
 System.out.println(operation3.calculate(20, 10));
+----
+
+[.fragment]
+[source, java]
+----
+30
+10
+200
 ----
 
 === Syntax Lambda Expressions
@@ -109,6 +134,10 @@ System.out.println(operation3.calculate(20, 10));
 [.fragment]
 [source, java]
 ----
+() -> {
+    return 3.1415;
+}
+
 (int a, int b) -> {
     return a + b;
 }
@@ -117,19 +146,15 @@ System.out.println(operation3.calculate(20, 10));
     return a + b;
 }
 
-() -> System.out.println("Hello World");
-
 (String s) -> {
     System.out.println(s);
 }
 
 (s) -> System.out.println(s);
 
-() -> 42;
+() -> System.out.println("Hello World");
 
-() -> {
-    return 3.1415;
-}
+() -> 42;
 ----
 
 === Terminal Lambda Expressions
@@ -140,7 +165,11 @@ System.out.println(operation3.calculate(20, 10));
 interface Printable {
     void print(String s);
 }
+----
 
+[.fragment]
+[source, java]
+----
 public class LambdaApp {
     public static void main(String[] args) {
         Printable printer = s -> System.out.println(s);
@@ -149,7 +178,20 @@ public class LambdaApp {
 }
 ----
 
+[.fragment]
+----
+Hello Java!
+----
+
 === Lambda Expressions and global variables
+
+[.fragment]
+[source, java]
+----
+interface Operation {
+    int calculate();
+}
+----
 
 [.fragment]
 [source, java]
@@ -167,10 +209,11 @@ public class LambdaApp {
         System.out.println(x);
     }
 }
+----
 
-interface Operation {
-    int calculate();
-}
+[.fragment]
+----
+50
 ----
 
 === Lambda Expressions and local variables
@@ -190,7 +233,20 @@ public static void main(String[] args) {
 }
 ----
 
+[.fragment]
+----
+100
+----
+
 === Generic Functional Interface
+
+[.fragment]
+[source, java]
+----
+interface Operationable<T> {
+    T calculate(T x, T y);
+}
+----
 
 [.fragment]
 [source, java]
@@ -204,15 +260,25 @@ public class LambdaApp {
         System.out.println(operation2.calculate("20", "10"));
     }
 }
+----
 
-interface Operationable<T> {
-    T calculate(T x, T y);
-}
+[.fragment]
+----
+30
+2010
 ----
 
 == Lambda as parameters and results of methods
 
 === Lambda as parameters method
+
+[.fragment]
+[source, java]
+----
+interface Expression {
+    boolean isEqual(int n);
+}
+----
 
 [.fragment]
 [source, java]
@@ -233,10 +299,11 @@ public class LambdaApp {
         return result;
     }
 }
+----
 
-interface Expression {
-    boolean isEqual(int n);
-}
+[.fragment]
+----
+45
 ----
 
 === Method links as method parameters
@@ -247,7 +314,11 @@ interface Expression {
 interface Expression {
     boolean isEqual(int n);
 }
+----
 
+[.fragment]
+[source, java]
+----
 class ExpressionHelper {
     static boolean isEven(int n) {
         return n % 2 == 0;
@@ -257,7 +328,11 @@ class ExpressionHelper {
         return n > 0;
     }
 }
+----
 
+[.fragment]
+[source, java]
+----
 public class LambdaApp {
     public static void main(String[] args) {
         int[] nums = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
@@ -278,23 +353,25 @@ public class LambdaApp {
 }
 ----
 
+[.fragment]
+----
+0
+15
+----
+
 === Links to constructors
 
 [.fragment]
 [source, java]
 ----
-public class LambdaApp {
-    public static void main(String[] args) {
-        UserBuilder userBuilder = User::new;
-        User user = userBuilder.create("Tom");
-        System.out.println(user.getName());
-    }
-}
-
 interface UserBuilder {
     User create(String name);
 }
+----
 
+[.fragment]
+[source, java]
+----
 class User {
     private String name;
 
@@ -308,6 +385,25 @@ class User {
 }
 ----
 
+=== Links to constructors
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        UserBuilder userBuilder = User::new;
+        User user = userBuilder.create("Tom");
+        System.out.println(user.getName());
+    }
+}
+----
+
+[.fragment]
+----
+Tom
+----
+
 === Lambda as a result of methods
 
 [.fragment]
@@ -316,7 +412,13 @@ class User {
 interface Operation {
     int execute(int x, int y);
 }
+----
 
+=== Lambda as a result of methods
+
+[.fragment]
+[source, java]
+----
 public class LambdaApp {
     public static void main(String[] args) {
         Operation func = action(1);
@@ -346,8 +448,16 @@ public class LambdaApp {
 
 === Stream
 
+[.step]
+* Предназначен для *обработки* данных
+* Не хранит данные
+* Нельзя переиспользовать
+* Можно преобразовать в другие типы данных
+
+=== Stream
+
 [.fragment]
-image::/assets/img/java/core/stream.jpg[Stream]
+image::stream.jpg[Stream]
 
 == `BaseStream`
 
