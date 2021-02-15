@@ -1,9 +1,16 @@
-= Functional Interfaces
+= Functional Interface
 
 == Functional Interface
 
+=== Functional Interface
+
+[.step]
+* Это интерфейс ровно с одним абстрактным методом.
+* Может быть отмечен аннотаций `@FunctionalInterface`
+
 === Example
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -18,6 +25,7 @@ public interface Comparator<T> {
 
 === `Comparator<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -200,6 +208,7 @@ public class CompareExample {
 
 === `Predicate<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -210,6 +219,7 @@ public interface Predicate<T> {
 
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.function.Predicate;
@@ -228,6 +238,7 @@ public class Program {
 
 === `BinaryOperator<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -238,6 +249,7 @@ public interface BinaryOperator<T> {
 
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.function.BinaryOperator;
@@ -256,6 +268,7 @@ public class Program {
 
 === `UnaryOperator<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -266,6 +279,7 @@ public interface UnaryOperator<T> {
 
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.function.UnaryOperator;
@@ -282,6 +296,7 @@ public class Program {
 
 === `Function<T, R>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -290,8 +305,40 @@ public interface Function<T, R> {
 }
 ----
 
+[.step]
+* Принимает объект одного типа, а  возвращает того же или другого типа.
+
+=== Other methods
+
+[.fragment]
+[source,java]
+----
+default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+    Objects.requireNonNull(before);
+    return (V v) -> apply(before.apply(v));
+}
+----
+
+[.fragment]
+[source,java]
+----
+default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+    Objects.requireNonNull(after);
+    return (T t) -> after.apply(apply(t));
+}
+----
+
+[.fragment]
+[source,java]
+----
+static <T> Function<T, T> identity() {
+    return t -> t;
+}
+----
+
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.function.Function;
@@ -308,6 +355,7 @@ public class Program {
 
 === `Consumer<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -316,8 +364,21 @@ public interface Consumer<T> {
 }
 ----
 
+[.step]
+* Принимает объект одного типа и выполняет с ним бизнес-логику.
+
+[.fragment]
+[source,java]
+----
+default Consumer<T> andThen(Consumer<? super T> after) {
+    Objects.requireNonNull(after);
+    return (T t) -> { accept(t); after.accept(t); };
+}
+----
+
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.function.Consumer;
@@ -334,6 +395,7 @@ public class Program {
 
 === `Supplier<T>`
 
+[.fragment]
 [source,java]
 ----
 @FunctionalInterface
@@ -342,8 +404,12 @@ public interface Supplier<T> {
 }
 ----
 
+[.step]
+* Возвращает объект типа T.
+
 === Example
 
+[.fragment]
 [source,java]
 ----
 import java.util.Scanner;
@@ -374,5 +440,16 @@ public class User {
     public User(String n) {
         this.name = n;
     }
+}
+----
+
+== `Runnable`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface Runnable {
+    public abstract void run();
 }
 ----
