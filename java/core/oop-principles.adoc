@@ -830,9 +830,11 @@ public class Program {
 === Interfaces
 
 [.step]
-* *Interface* (*интерфейс*) – более «строгий» вариант *abstract class*. *Methods* могут быть только *abstract*.
+* *Interface* (*интерфейс*) – более «строгий» вариант *abstract class*.
 * *Interface* задаёт только поведение, без реализации.
 * *Interface* может наследоваться от одного или нескольких *interfaces*.
+* Все объявленные в интерфейсе методы автоматически трактуются как `public` и `abstract`
+* Все объявленные в интерфейсе поля трактуются как `public`, `static` и `final`, даже если они так не объявлены.
 
 === `Interfaces` definition
 
@@ -1119,6 +1121,16 @@ public class Program {
 }
 ----
 
+=== Interface types
+
+[.step]
+* Интерфейсы, определяющие контракт для классов посредством методов
+* Интерфейсы-маркеры, реализация которых автоматически (без реализации методов) придает классу определенные свойства
+[.step]
+** `Cloneable` - клонирование объекта
+** `Serializable` - сериализация объектов
+* Функциональные интерфейсы (с java 1.8) – интерфейс с одним методом.
+
 == Abstract classes vs Interfaces
 
 === Abstract classes vs Interfaces
@@ -1126,3 +1138,7 @@ public class Program {
 [.step]
 * Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
 * Совет: если есть возможность — используйте интерфейсы.
+
+== Interface in a broad sense
+
+image:interface.png[Interface in a broad sense]
