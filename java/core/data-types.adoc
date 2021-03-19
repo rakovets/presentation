@@ -209,7 +209,7 @@ System.out.println(z);
 ----
 
 [.fragment]
-Compile error: `java: variable x might not have been initialized`
+Compile error: `java: variable z might not have been initialized`
 
 === Definition and Initialization
 
@@ -245,8 +245,8 @@ Bad
 [source,java]
 ----
 int i = 1;
-System.out.println(i); // 1
 int j = 11;
+System.out.println(i); // 1
 System.out.println(j); // 11
 ----
 
@@ -272,6 +272,7 @@ Well
 Запрещено применение:
 [.step]
 * `\_` - error: as of release 9, '_' is a keyword, and may not be used as an identifier
+* использовать первым символом цифру
 * арифметических и логических операторов
 * и других символов
 
@@ -284,6 +285,25 @@ Well
 |`_flag`|`open^flag`
 |`new_string`|`1searchIndex`
 |===
+
+=== Code Convention
+
+[.step]
+* Как правило:
+** Переменные именуются с использованием `camelCase`.
+** Название должно объяснять что за значение находится в переменной.
+
+=== Code Convention
+
+[.fragment]
+[source,java]
+----
+int cargo = 11;
+int carryingCapacity = 2;
+int depositAmount = 1500;
+int depositYears = 5;
+int depositAnnualPercentage = 3;
+----
 
 == Literals
 
@@ -463,10 +483,16 @@ y = 10;
 * Кроме переменных, в Java для хранения данных можно использовать *константы*.
 * Константы позволяют задать такие переменные, которые не должны больше изменяться.
 * В отличие от переменных константам можно присвоить значение ТОЛЬКО один раз.
-* Как правило, константы имеют имена в **ВЕРХНЕМ_РЕГИСТРЕ**.
 * Объявляется, как и переменные, но только со служебным словом `final`.
 
-=== Example
+=== Code Convention
+
+[.step]
+* Как правило:
+** Константы именуются с использованием `UPPER_SNAKE_CASE`.
+** Название должно объяснять что за значение находится в константы.
+
+=== Code Convention
 
 [.fragment]
 [source,java]
