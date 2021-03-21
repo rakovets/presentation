@@ -123,6 +123,7 @@
 === Course: Common
 
 * link:./common/programming-languages.html[Programming languages.]
+* link:./common/hardware-resources.html[Hardware Resources.]
 * link:./common/git.html[Git.]
 * link:./common/regex.html[Regular Expression.]
 * link:./common/testing.html[Testing.]

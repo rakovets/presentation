@@ -90,6 +90,7 @@ asciidoctor.convertFile('./java/spring/spring-webmvc.adoc', options)
 
 // Common themes
 asciidoctor.convertFile('./common/programming-languages.adoc', options)
+asciidoctor.convertFile('./common/hardware-resources.adoc', options)
 asciidoctor.convertFile('./common/git.adoc', options)
 asciidoctor.convertFile('./common/testing.adoc', options)
 asciidoctor.convertFile('./common/data-structures.adoc', options)

@@ -1,0 +1,54 @@
+= Hardware Resources
+:imagesdir: ../assets/img/common/hardware-resources
+
+== Hardware Resources
+
+=== Hardware Resources
+
+[.step]
+* hardware resource
+* system resource
+* computer resource
+* resource
+
+=== Hardware Resources
+
+[.step]
+* CPU
+* Primary memory
+* Persistent storage
+* Network
+* GPU
+
+=== CPU
+
+[.step]
+* Получает команды и данные из памяти.
+* Выполняет соответствующие вычисления.
+
+=== Primary memory
+
+[.step]
+** *RAM* - *Random Access Memory*
+** *ROM* - *Read Only Memory*
+
+=== Primary memory
+
+[.step]
+* *RAM* - это место, где инструкции (команды) и данные хранятся во время выполнения.
+* Доступ к *RAM* осуществляется намного быстрее, чем к вторичному хранилищу.
+* Все данные и инструкции теряются при отключении питания (нестабильно).
+* Позволяет хранить и предоставляет произвольный доступ к данным и инструкциям.
+* Каждая инструкция и часть данных в ОЗУ имеют уникальный адрес.
+
+== Архитектура компьютера
+
+=== Архитектура компьютера
+
+[.fragment]
+image:arch-computer.png[]
+
+=== Архитектура компьютера
+
+[.fragment]
+image:motherboard-diagram.png[]
