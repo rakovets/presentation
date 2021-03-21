@@ -13,85 +13,6 @@
 * Data types
 * Variables
 
-== Структура кода
-
-=== Структура кода
-
-[.step]
-* *Пробелы*
-* *Комментарии*
-* *Лексемы*
-
-=== Пробелы
-
-[.step]
-* Whitespace (Пробел) - *ASCII 32*
-* `CR` - *ASCII 10*
-* `LF` (`NL`) - *ASCII 13*
-* `TAB` - *ASCII 9*
-
-=== Комментарии
-
-[.step]
-* Однострочный
-
-[.fragment]
-----
-// java 4 U
-----
-
-[.step]
-* Многострочный
-
-[.fragment]
-----
-i++/* increment comment*/;
-----
-
-[.step]
-* Документирования
-
-[.fragment]
-----
-/**
-* @author Dmitry Rakovets
-*/
-----
-
-=== Лексемы
-
-[.step]
-* *ключевые слова* (*key words*)
-* *идентификаторы* (*identifiers*)
-* *литералы* (*literals*)
-* *разделители* (*separators*)
-* *операторы* (*operators*)
-
-=== Ключевые слова
-
-[.fragment]
-[source,java]
-----
-abstract   continue   for          new         switch
-assert     default    if           package     synchronized
-boolean    do         goto         private     this
-break      double     implements   protected   throw
-byte       else       import       public      throws
-case       enum       instanceof   return      transient
-catch      extends    int          short       try
-char       final      interface    static      void
-class      finally    long         strictfp    volatile
-const      float      native       super       while
-_ (underscore)
-----
-
-=== Разделители
-
-[.fragment]
-----
-( ) [ ] { } ; . ,
-----
-
 == Variables
 
 === Variables
@@ -129,22 +50,26 @@ image::/assets/img/java/core/data-types/variable-in-memory.jpeg[Variable in Memo
 === Типы данных
 
 [.fragment]
-Существует несколько предопределённых примитивных типов:
-
-[.step]
-* `boolean` - логический
-* `byte` - целочисленный
-* `char` - символьный
-* `short` - целочисленный
-* `int` - целочисленный
-* `long` - целочисленный
-* `float` - числовой, с плавающей точкой
-* `double` - числовой, с плавающей точкой
+image::/assets/img/java/core/data-types/data-types.png[Data Types]
 
 === Типы данных
 
 [.fragment]
-image::/assets/img/java/core/data-types/data-types.png[Data Types]
+Существует несколько предопределённых примитивных типов:
+
+[.step]
+* `byte` - целочисленный
+* `short` - целочисленный
+* `int` - целочисленный
+* `long` - целочисленный
+
+=== Типы данных
+
+[.step]
+* `boolean` - логический
+* `char` - символьный
+* `float` - числовой, с плавающей точкой
+* `double` - числовой, с плавающей точкой
 
 === Типы данных в языке Java
 
@@ -162,8 +87,8 @@ image::/assets/img/java/core/data-types/data-types.png[Data Types]
 |`short`|2|`0`|`-32 768`| `32 767`
 |`int`|4|`0`|`-2 147 483 648`|`2 147 483 647`
 |`long`|8|`0`|`-9 223 372 036 854 775 808`|`9 223 372 036 854 775 807`
-|`float`|4|`0.0F`|1.4E-45|1.4E+38
-|`double`|8|`0.0d`|4.9E-324|1.8E+308
+|`float`|4|`0.0`|-3.4E+38|3.4E+38 (стандарт IEEE 754)
+|`double`|8|`0.0`|-1.7E+308|1.7E+308 (стандарт IEEE 754)
 |====
 
 === Default value
@@ -341,9 +266,9 @@ class Test {
 [.fragment]
 [source,java]
 ----
-long a = 1_234_567_890_1; // error: integer number too large
-long b = 1_234_567_890_1L; // Все в порядке
-long c = 1_234_567_890_1l; // Not recommend. Use `L`
+long a = 12_345_678_901; // error: integer number too large
+long b = 12_345_678_901L; // Все в порядке
+long c = 12_345_678_901l; // Not recommend. Use `L`
 ----
 
 === Literal type `float`
@@ -551,6 +476,85 @@ byte i1 = (byte) 128;
 byte i2 = (byte) 129;
 System.out.println(i1); // -128
 System.out.println(i2); // -127
+----
+
+== Структура кода
+
+=== Структура кода
+
+[.step]
+* *Пробелы*
+* *Комментарии*
+* *Лексемы*
+
+=== Пробелы
+
+[.step]
+* Whitespace (Пробел) - *ASCII 32*
+* `CR` - *ASCII 10*
+* `LF` (`NL`) - *ASCII 13*
+* `TAB` - *ASCII 9*
+
+=== Комментарии
+
+[.step]
+* Однострочный
+
+[.fragment]
+----
+// java 4 U
+----
+
+[.step]
+* Многострочный
+
+[.fragment]
+----
+i++/* increment comment*/;
+----
+
+[.step]
+* Документирования
+
+[.fragment]
+----
+/**
+* @author Dmitry Rakovets
+*/
+----
+
+=== Лексемы
+
+[.step]
+* *ключевые слова* (*key words*)
+* *идентификаторы* (*identifiers*)
+* *литералы* (*literals*)
+* *разделители* (*separators*)
+* *операторы* (*operators*)
+
+=== Ключевые слова
+
+[.fragment]
+[source,java]
+----
+abstract   continue   for          new         switch
+assert     default    if           package     synchronized
+boolean    do         goto         private     this
+break      double     implements   protected   throw
+byte       else       import       public      throws
+case       enum       instanceof   return      transient
+catch      extends    int          short       try
+char       final      interface    static      void
+class      finally    long         strictfp    volatile
+const      float      native       super       while
+_ (underscore)
+----
+
+=== Разделители
+
+[.fragment]
+----
+( ) [ ] { } ; . ,
 ----
 
 == Java
