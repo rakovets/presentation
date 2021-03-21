@@ -58,6 +58,7 @@ asciidoctor.convertFile('./java/core/javadoc.adoc', options)
 asciidoctor.convertFile('./java/core/xml.adoc', options)
 asciidoctor.convertFile('./java/core/networking.adoc', options)
 asciidoctor.convertFile('./java/core/system-classes.adoc', options)
+asciidoctor.convertFile('./java/core/jmm.adoc', options)
 
 // Course: "Java Tools"
 asciidoctor.convertFile('./java/tools/logging.adoc', options)
