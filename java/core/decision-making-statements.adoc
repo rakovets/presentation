@@ -1,4 +1,5 @@
 = Decision-making statements
+:imagesdir: ../../assets/img/java/core/decision-making-statements
 
 == Intro
 
@@ -39,7 +40,7 @@ if (condition) {
 === How `if` statement works?
 
 [.fragment]
-image:/assets/img/java/core/decision-making-statements/if-working.png[if working]
+image:if-working.png[if working]
 
 === Example
 
@@ -97,7 +98,7 @@ if (condition) {
 === How `if` statement works?
 
 [.fragment]
-image:/assets/img/java/core/decision-making-statements/if-else-working.png[if-then-else working]
+image:if-else-working.png[if-then-else working]
 
 === Example
 
@@ -142,7 +143,7 @@ if (condition1) {
 === How `if...else...if` statement works?
 
 [.fragment]
-image:/assets/img/java/core/decision-making-statements/if-else-if-working.png[if-else-if working]
+image:if-else-if-working.png[if-else-if working]
 
 === Example
 
@@ -242,13 +243,13 @@ default:
 === Syntax
 
 [.step]
-* Значения `exp1`, ..., `expN` должны быть константами и могут быть значения типа `byte`, `short`, `char`, `int` или `enum`.
-* C *Java 7* тип `String`, `Character`, `Byte`, `Short` и `Integer`
+* До Java 7: в качестве значений `exp1`, ..., `expN` могли быть константы и значения типа `byte`, `short`, `char`, `int` или `enum`.
+* C *Java 7*: в качестве значений стали допустимы типы `String`, `Character`, `Byte`, `Short` и `Integer`
 
-=== How does the `switch` statement work?
+=== How work?
 
 [.fragment]
-image:/assets/img/java/core/decision-making-statements/switch-case-implementation.png[switch-case implementation]
+image:switch-case-implementation.png[switch-case implementation]
 
 === Example
 
@@ -265,7 +266,6 @@ switch (number) {
     case 42:
         size = "Medium";
         break;
-    // match the value of week
     case 44:
         size = "Large";
         break;
@@ -285,9 +285,47 @@ System.out.println("Size: " + size);
 Size: Large
 ----
 
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 30;
+String size;
+switch (number) {
+    case 29:
+    case 30:
+    case 31:
+        size = "Small";
+        break;
+    case 42:
+    case 43:
+        size = "Medium";
+        break;
+    case 44:
+    case 45:
+    case 46:
+        size = "Large";
+        break;
+    case 48:
+        size = "Extra Large";
+        break;
+    default:
+        size = "Unknown";
+        break;
+}
+System.out.println("Size: " + size);
+----
+
+[.fragment]
+[source,output]
+----
+Size: Small
+----
+
 == `break` statement in `switch...case`
 
-=== Example
+=== Example: strange behavior
 
 [.fragment]
 [source,java]
@@ -297,8 +335,7 @@ int expression = 2;
 switch (expression) {
     case 1:
         System.out.println("Case 1");
-    // matching case
-    case 2:
+    case 2: // matching case
         System.out.println("Case 2");
     case 3:
         System.out.println("Case 3");
@@ -319,7 +356,7 @@ Default case
 
 === Ternary Operator
 
-image:/assets/img/java/core/decision-making-statements/ternary-operator.svg[Ternary Operator,200%]
+image:ternary-operator.svg[Ternary Operator,200%]
 
 === Syntax
 
@@ -357,3 +394,16 @@ String result = (time < 18)
     : "Good evening.";
 System.out.println(result);
 ----
+
+== Total
+
+[.step]
+* *if statement*
+** когда необходимо работать с диапазонами или сложными условиями
+[.step]
+* *switch statement*
+[.step]
+** когда известны все возможные варианты и их количество конечно
+* *ternary operator*
+[.step]
+** когда результат необходимо сразу же использовать в выражении
