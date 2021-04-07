@@ -1,4 +1,5 @@
 = String
+:imagesdir: ../../assets/img/java/core/
 
 == Intro
 
@@ -56,8 +57,8 @@ System.out.println(str5); // 'come'
 [.fragment]
 [source,java]
 ----
-String str1 = "Java";
-String str2 = "Hello";
+String str1 = "Hello";
+String str2 = "Java";
 String str3 = str1 + " " + str2;
 
 System.out.println(str3);
@@ -200,13 +201,13 @@ v
 [source,java]
 ----
 String str = "Hello world!";
-int srcBegin = 6;
-int srcEnd = 11;
-char[] dst = new char[end - start];
-int dstBegin = 0;
-str.getChars(srcBegin, srcEnd, dst, dstBegin);
+int sourceBegin = 6;
+int sourceEnd = 11;
+char[] target = new char[sourceEnd - sourceBegin];
+int targetBegin = 0;
+str.getChars(sourceBegin, sourceEnd, target, targetBegin);
 
-System.out.println(dst);
+System.out.println(target);
 ----
 
 [.fragment]
@@ -280,15 +281,18 @@ true
 String str1 = "hello";
 String str2 = "world";
 String str3 = "hell";
+String str4 = "helln";
 
 System.out.println(str1.compareTo(str2));
 System.out.println(str1.compareTo(str3));
+System.out.println(str1.compareTo(str4));
 ----
 
 [.fragment]
 ----
-1 // str1 больше чем str3 по количеству символов
 -15 // str1 меньше чем strt2 так находится на 15 символов ближе к началу отсчета
+1 // str1 больше чем str3 по количеству символов
+1 // str1 больше чем str4 так находится на 1 символов дальше к началу отсчета
 ----
 
 === `indexOf(String): int` и `lastIndexOf(String): int`
@@ -416,7 +420,7 @@ it
 *String Pool* (*Пул строк*) — это набор строк, который хранится в *Heap*.
 
 [.fragment]
-image:../../assets/img/java/core/string-pool.png[String Pool]
+image:string-pool.png[String Pool]
 
 === String Pool
 
@@ -432,13 +436,13 @@ image:../../assets/img/java/core/string-pool.png[String Pool]
 String s1 = "Rick";
 // s1 in String Pool
 String s2 = "Rick";
-// s2 in String Pool: s2 equals s1
+// s2 in String Pool: s1 vs. s2 - the same object
 String s3 = new String("Rick");
-// s3 in Heap: s3 NOT equals s1, s2
+// s3 in Heap: s3 vs. s1, s2 - different objects
 String s4 = new String("Rick");
-// s4 in Heap: s4 NOT equals s1, s2, s3
+// s4 in Heap: s4 vs. s3 vs. s1, s2 - different objects
 String s5 = s4.intern();
-// ss5move to Strint Poll: s5 equals s1, s2
+// s5 is s4 moved to String Poll: s5 vs. s1, s2 - the same object
 ----
 
 == `StringBuffer` и `StringBuilder`
@@ -505,11 +509,21 @@ strBuilder.append(" Java");
 [source,java]
 ----
 String str = "Java";
-StringBuffer strBuffer = new StringBuffer(str);
-System.out.println("Емкость: " + strBuffer.capacity()); // 20
+StringBuffer strBuffer = new StringBuffer(str); // capacity = 16 + str.length()
+System.out.println("Length: " + strBuffer.length());
+System.out.println("Capacity: " + strBuffer.capacity());
 strBuffer.ensureCapacity(32);
-System.out.println("Емкость: " + strBuffer.capacity()); // 42
-System.out.println("Длина: " + strBuffer.length()); // 4
+// If the current capacity is less than the argument ->
+// newCapacity = 2 * oldCapacity + 2
+System.out.println("Capacity: " + strBuffer.capacity());
+----
+
+[.fragment]
+[source,java]
+----
+Length: 4
+Capacity: 20
+Capacity: 42
 ----
 
 === `charAt(int): char` и `setCharAt(int, char): void`
