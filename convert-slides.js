@@ -102,7 +102,7 @@ asciidoctor.convertFile('./common/architectural-patterns.adoc', options)
 asciidoctor.convertFile('./common/xml.adoc', options)
 asciidoctor.convertFile('./common/json.adoc', options)
 asciidoctor.convertFile('./common/scrum.adoc', options)
-asciidoctor.convertFile('./common/regex.adoc', options)
+asciidoctor.convertFile('./common/regular-expressions.adoc', options)
 
 // Course: "SQL"
 asciidoctor.convertFile('./sql/database-normalization.adoc', options)
