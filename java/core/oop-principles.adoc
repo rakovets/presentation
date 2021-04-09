@@ -46,7 +46,7 @@ image::inheritance.svg[Inheritance]
 [.fragment]
 [source,java]
 ----
-publicclass Person {
+public class Person {
     private String name;
 
     public String getName() {
@@ -118,7 +118,7 @@ class Employee extends Person {
     }
 
     public void work() {
-        System.out.printf("%s works in %s \n", getName(), company);
+        System.out.printf("%s works in %s\n", getName(), company);
     }
 }
 ----
@@ -130,11 +130,17 @@ class Employee extends Person {
 ----
 public class Program {
     public static void main(String[] args) {
-        Employee sam = new Employee("Sam", "Red Hat");
-        sam.display(); // Sam
-        sam.work(); // Sam works in Red Hat
+        Employee sam = new Employee("Sam", "Canonical");
+        sam.display();
+        sam.work();
     }
 }
+----
+
+[.fragment]
+----
+Sam
+Sam works in Canonical
 ----
 
 === Inheritance
@@ -166,8 +172,10 @@ class Person {
 
 === `super` keyword
 
-* Для вызова *methods* *superclass*, *override* в *subclass*.
-* Для доступа к *fields* *superclass*, если и *superclass*, и *subclass* имеют *fields* с одинаковыми именами.
+Ключевое слово `super` используется
+[.step]
+* Для вызова *methods* *superclass*, при переопределении в *subclass*.
+* Для доступа к *fields* *superclass*, если *superclass* и *subclass* имеют *fields* с одинаковыми именами.
 * Чтобы явно вызвать *superclass* no-args (по умолчанию) или параметризованный *constructor* из *constructor* *subclass*.
 
 === `@Override`: example
@@ -185,8 +193,8 @@ class Employee extends Person {
 
     @Override
     public void display() {
-        System.out.printf("Name: %s \n", getName());
-        System.out.printf("Works in %s \n", company);
+        System.out.printf("Name: %s\n", getName());
+        System.out.printf("Works in %s\n", company);
     }
 }
 ----
@@ -198,11 +206,16 @@ class Employee extends Person {
 ----
 public class Program {
     public static void main(String[] args) {
-        Employee sam = new Employee("Sam", "Red Hat");
-        sam.display(); // Sam
-        // Works in Red Hat
+        Employee sam = new Employee("Sam", "Canonical");
+        sam.display();
     }
 }
+----
+
+[.fragment]
+----
+Sam
+Works in Canonical
 ----
 
 === Inheritance
@@ -287,7 +300,7 @@ class Person {
     }
 
     public void display() {
-        System.out.printf("Person %s \n", name);
+        System.out.printf("Person %s\n", name);
     }
 }
 ----
@@ -307,7 +320,7 @@ class Employee extends Person {
 
     @Override
     public void display() {
-        System.out.printf("Employee %s works in %s \n", super.getName(), company);
+        System.out.printf("Employee %s works in %s\n", super.getName(), company);
     }
 }
 ----
@@ -321,10 +334,16 @@ public class Program {
     public static void main(String[] args) {
         Person tom = new Person("Tom");
         tom.display();
-        Person sam = new Employee("Sam", "Oracle");
+        Person sam = new Employee("Sam", "Canonical");
         sam.display();
     }
 }
+----
+
+[.fragment]
+----
+Person Tom
+Employee Sam works in Canonical
 ----
 
 == Inheritance Hierarchy and Type Conversion
@@ -346,7 +365,7 @@ class Person {
     }
 
     public void display() {
-        System.out.printf("Person %s \n", name);
+        System.out.printf("Person %s\n", name);
     }
 }
 ----
@@ -369,7 +388,8 @@ class Employee extends Person {
     }
 
     public void display() {
-        System.out.printf("Employee %s works in %s \n", super.getName(), company);
+        System.out.printf("Employee %s works in %s\n",
+                super.getName(), company);
     }
 }
 ----
@@ -390,7 +410,8 @@ class Client extends Person {
     }
 
     public void display() {
-        System.out.printf("Client %s has account in %s \n", super.getName(), bank);
+        System.out.printf("Client %s has account in %s\n",
+                super.getName(), bank);
     }
 
     public String getBank() {
@@ -412,12 +433,19 @@ public class Program {
     public static void main(String[] args) {
         Person tom = new Person("Tom");
         tom.display();
-        Person sam = new Employee("Sam", "Oracle");
+        Person sam = new Employee("Sam", "Canonical");
         sam.display();
-        Person bob = new Client("Bob", "DeutscheBank", 3000);
+        Person bob = new Client("Bob", "Rakovets & Co.", 3000);
         bob.display();
     }
 }
+----
+
+[.fragment]
+----
+Person Tom
+Employee Sam works in Canonical
+Client Bob has account in Rakovets & Co.
 ----
 
 === Upcasting: example
@@ -426,10 +454,10 @@ public class Program {
 [source,java]
 ----
 Object tom = new Person("Tom");
-Object sam = new Employee("Sam", "Oracle");
-Object kate = new Client("Kate", "DeutscheBank", 2000);
-Person bob = new Client("Bob", "DeutscheBank", 3000);
-Person alice = new Employee("Alice", "Google");
+Object sam = new Employee("Sam", "Canonical");
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+Person bob = new Client("Bob", "Rakovets & Co.", 3000);
+Person alice = new Employee("Alice", "Rad Hat");
 ----
 
 === Downcasting: example
@@ -437,10 +465,17 @@ Person alice = new Employee("Alice", "Google");
 [.fragment]
 [source,java]
 ----
-Object sam = new Employee("Sam", "Oracle");
+Object sam = new Employee("Sam", "Canonical");
+// many, many code
 Employee emp = (Employee) sam;
 emp.display();
 System.out.println(emp.getCompany());
+----
+
+[.fragment]
+----
+Employee Sam works in Canonical
+Canonical
 ----
 
 === Bad Practice
@@ -448,23 +483,41 @@ System.out.println(emp.getCompany());
 [.fragment]
 [source,java]
 ----
-Object kate = new Client("Kate", "DeutscheBank", 2000);
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
 Employee emp = (Employee) kate;
 emp.display();
 ((Employee) kate).display();
 ----
+
+[.fragment]
+[source,java]
+----
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
+((Employee) kate).display();
+----
+
+[.fragment]
+JVM throws `ClassCastException`
 
 === `instanceof` keyword
 
 [.fragment]
 [source,java]
 ----
-Object kate = new Client("Kate", "DeutscheBank", 2000);
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
 if (kate instanceof Employee) {
     ((Employee) kate).display();
 } else {
     System.out.println("Conversion is invalid");
 }
+----
+
+[.fragment]
+----
+Conversion is invalid
 ----
 
 == Encapsulation
@@ -482,6 +535,15 @@ image::encapsulation.png[Encapsulation]
 
 [.fragment]
 image::encapsulation-example.png[Encapsulation example]
+
+=== Encapsulation
+
+[.fragment]
+*Encapsulation* в Java достигается с помощью:
+[.step]
+* *packages*
+* *access modifiers*
+* *modules* (`@since 9`)
 
 == Packages
 
@@ -541,6 +603,11 @@ public class Program {
         dmitry.tellAboutYourself();
     }
 }
+----
+
+[.fragment]
+----
+Name: Dmitry
 ----
 
 === Packages and Terminal: example
@@ -641,6 +708,12 @@ public class Program {
 ----
 
 [.fragment]
+----
+30
+33
+----
+
+[.fragment]
 Bad practice.
 
 === Access modifiers
@@ -696,6 +769,12 @@ public class Program {
 }
 ----
 
+[.fragment]
+----
+30
+33
+----
+
 == Abstraction and Polymorphism
 
 === Abstraction
@@ -724,6 +803,22 @@ image::polymorphism-overloading.svg[Polymorphism: overloading]
 
 == Abstract classes
 
+=== Example
+
+[.fragment]
+[source,java]
+----
+public abstract class Human {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public abstract void sleep();
+}
+----
+
 === Abstract classes
 
 [.step]
@@ -736,20 +831,6 @@ image::polymorphism-overloading.svg[Polymorphism: overloading]
 * Если класс имеет хотя бы один абстрактный метод, то он будет абстрактным.
 * Любой дочерний класс должен реализовать все абстрактные методы родительского, либо он сам должен быть абстрактным.
 * Абстрактный класс может быть абстрактным и при этом не иметь ни одного абстрактного метода.
-
-=== `abstract`
-
-[.fragment]
-[source,java]
-----
-public abstract class Human {
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-}
-----
 
 === Example
 
@@ -785,7 +866,8 @@ class Employee extends Person {
     }
 
     public void display() {
-        System.out.printf("Employee Name: %s \t Bank: %s \n", super.getName(), bank);
+        System.out.printf("Employee Name: %s \t Bank: %s\n",
+                super.getName(), bank);
     }
 }
 ----
@@ -804,8 +886,8 @@ class Client extends Person {
     }
 
     public void display() {
-        System.out.printf("Client Name: %s \t
-                Bank: %s \n", super.getName(), bank);
+        System.out.printf("Client Name: %s \tBank: %s\n",
+                super.getName(), bank);
     }
 }
 ----
@@ -817,12 +899,19 @@ class Client extends Person {
 ----
 public class Program {
     public static void main(String[] args) {
-        Employee sam = new Employee("Sam", "Leman Brothers");
+        Person sam = new Employee("Sam", "Leman Brothers");
         sam.display();
-        Client bob = new Client("Bob", "Leman Brothers");
+        Person bob = new Client("Bob", "Leman Brothers");
         bob.display();
     }
 }
+----
+
+[.fragment]
+[source,java]
+----
+Employee Name: Sam    Bank: Leman Brothers
+Client Name: Bob    Bank: Leman Brothers
 ----
 
 == Interfaces
@@ -861,7 +950,7 @@ class Book implements Printable {
     }
 
     public void print() {
-        System.out.printf("%s (%s) \n", name, author);
+        System.out.printf("%s (%s)\n", name, author);
     }
 }
 ----
@@ -877,6 +966,11 @@ public class Program {
         b1.print();
     }
 }
+----
+
+[.fragment]
+----
+Java. Complete Referense. (H. Shildt)
 ----
 
 === `Interfaces` and `default` method: example
@@ -921,10 +1015,21 @@ interface Printable {
         System.out.println("Read printable");
     }
 }
+----
 
+=== `Interfaces` and `static` method: example
+
+[.fragment]
+[source,java]
+----
 public static void main(String[] args) {
     Printable.read();
 }
+----
+
+[.fragment]
+----
+Read printable
 ----
 
 === `Interfaces` and `private` method (`@since 9`)
@@ -974,6 +1079,13 @@ public class Program {
 }
 ----
 
+[.fragment]
+[source,java]
+----
+3
+7
+----
+
 === `Interfaces` and constants: example
 
 [.fragment]
@@ -1016,6 +1128,11 @@ public class Program {
         pipe.printState(1);
     }
 }
+----
+
+[.fragment]
+----
+Water is opened
 ----
 
 === Multiple implements: example
@@ -1066,7 +1183,7 @@ class Book implements Printable {
     }
 
     public void print() {
-        System.out.printf("%s (%s) \n", name, author);
+        System.out.printf("%s (%s)\n", name, author);
     }
 }
 ----
@@ -1121,6 +1238,15 @@ public class Program {
 }
 ----
 
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+----
+Foreign Affairs
+Java for impatients (Cay Horstmann)
+Java Dayly News
+----
+
 === Interface types
 
 [.step]
@@ -1139,6 +1265,17 @@ public class Program {
 * Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
 * Совет: если есть возможность — используйте интерфейсы.
 
-== Interface in a broad sense
+== Interfaces
 
+=== Interfaces
+
+[.fragment]
+Под *Interface* могут понимать одно из понятий
+[.step]
+* *Interface* как один из элементов языка Java (как и *class*)
+* *Interface* как *API* (контракт/договор) для какой-то функциональность доступной для потребителя (клиента или клиентского кода)
+
+=== Interface in a broad sense (as API)
+
+[.fragment]
 image:interface.png[Interface in a broad sense]
