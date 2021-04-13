@@ -81,6 +81,18 @@ if (language == "Java") {
 Best Programming Language
 ----
 
+=== Example
+
+[.fragment]
+[source,java]
+----
+// create a string variable
+String language = "Java";
+// if statement
+if (language == "Java")
+    System.out.println("Best Programming Language");
+----
+
 == `if...else` (`if-then-else`) statement
 
 === Syntax
@@ -165,6 +177,21 @@ if (number > 0) {
 [source,output]
 ----
 The number is 0.
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 0;
+// checks if number is greater than 0
+if (number > 0)
+    System.out.println("The number is positive.");
+else if (number < 0) // checks if number is less than 0
+    System.out.println("The number is negative.");
+else // if both condition is false
+    System.out.println("The number is 0.");
 ----
 
 == Nested `if..else` Statement
