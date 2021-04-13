@@ -141,8 +141,6 @@ public class Example2Equals {
 }
 ----
 
-=== `equals(Object): boolean`
-
 [.fragment]
 ----
 Dmitry Rakovets
@@ -182,19 +180,16 @@ public class Example2Equals {
         Person anonymous = new Person("Dmitry", "Rakovets");
         System.out.println(rakovets.toString());
         System.out.println(anonymous.toString());
-        boolean isRakovets = anonymous.equals(rakovets);
-        System.out.println(isRakovets);
+        System.out.println(anonymous.equals(rakovets));
     }
 }
 ----
-
-=== `equals(Object): boolean`
 
 [.fragment]
 ----
 Dmitry Rakovets
 Dmitry Rakovets
-false
+true
 ----
 
 == `hashCode(): int`
@@ -326,11 +321,10 @@ public class Example2GetClass {
         String string = "This is String";
         Class stringClass = string.getClass();
         System.out.println(stringClass.getName());
-        // java.lang.String
+
         Person person = new Person("Dmitry", "Rakovets");
         Class personClass = person.getClass();
         System.out.println(personClass.getName());
-        // Person
     }
 }
 ----
@@ -459,13 +453,11 @@ public class Example6Clone {
     public static void main(String[] args) throws CloneNotSupportedException {
         Person rakovets = new Person("Dmitry", "Rakovets");
         Object clone = rakovets.clone();
-        System.out.println(clone.toString()); // 'Dmitry Rakovets'
-        System.out.println(clone.equals(rakovets)); // true
+        System.out.println(clone.toString());
+        System.out.println(clone.equals(rakovets));
     }
 }
 ----
-
-=== `clone(): Object`
 
 [.fragment]
 ----
