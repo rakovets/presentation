@@ -1,6 +1,6 @@
-= Enum
+= Enums
 
-== Enum (Перечисления)
+== Enums (Перечисления)
 
 === Enum definition
 
@@ -77,7 +77,7 @@ public class Program {
 }
 ----
 
-=== `values(): T[]`, `ordinal(): int`, 
+=== `values(): T[]`, `ordinal(): int`,
 
 [.fragment]
 [source,java]
@@ -90,7 +90,7 @@ public enum Type {
 }
 ----
 
-=== `values(): T[]`, `ordinal(): int`, 
+=== `values(): T[]`, `ordinal(): int`,
 
 [.fragment]
 [source,java]

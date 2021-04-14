@@ -28,29 +28,29 @@
 * link:./java/core/methods.html[Methods.]
 * link:./java/core/decision-making-statements.html[Decision-making statements.]
 * link:./java/core/looping-statements.html[Looping statements.]
-* link:./java/core/array.html[Array.]
+* link:./java/core/arrays.html[Arrays.]
 * link:./java/core/oop-classes-and-objects.html[OOP. Classes and Objects.]
 
 === Course: Core Java
 
+* link:./java/core/strings[Strings.]
+* link:./java/core/regex.html[Regex.]
 * link:./java/core/oop-principles.html[OOP. Principles.]
 * link:./java/core/modifiers.html[Modifiers.]
-* link:./java/core/nested-classes.html[Nested Classes.]
-* link:./java/core/enum.html[Enum.]
-* link:./java/core/class-object.html[Class `Object`.]
 * link:./java/core/class-arrays.html[Class `Arrays`.]
-* link:./java/core/string.html[String.]
-* link:./java/core/regex.html[Regex.]
+* link:./java/core/class-object.html[Class `Object`.]
+* link:./java/core/enums.html[Enums.]
+* link:./java/core/nested-classes.html[Nested Classes.]
 
 === Course: Core Java
 
 * link:./java/core/wrapper-classes.html[Wrapper Classes.]
+* link:./java/core/exception-handling.html[Exception Handling.]
 * link:./java/core/generic-types.html[Generic Types (JSR 14).]
 * link:./java/core/java-collection-framework.html[Java Collection Framework.]
-* link:./java/core/exception-handling.html[Exception Handling.]
 * link:./java/core/java-io.html[Java IO.]
 * link:./java/core/properties.html[Properties.]
-* link:./java/core/functional-interface.html[Functional interface.]
+* link:./java/core/functional-interfaces.html[Functional interfaces.]
 * link:./java/core/lambda-expressions.html[Lambda Expressions (JSR 335).]
 
 === Course: Core Java
