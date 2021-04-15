@@ -810,7 +810,7 @@ public class Generic<T> {
 * Операции, для выполнения которых нужно точно знать типы в _runtime_, работать не будут:
 
 [.step]
-** *Приведение типов*: `(T) var;`
-** *instanceof*: `var instaceof T;`
-** *new*: `T var = new T(); T[] array = new T[size]`
+** *Приведение типов*: `(T) variable;`
+** *instanceof*: `variable instaceof T;`
+** *new*: `T variable = new T(); T[] array = new T[size]`
 ** *Создание массива конкретного типа*: `Type<Integer> arr = new Type<Integer>[10];`
