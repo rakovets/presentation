@@ -82,6 +82,18 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 [.fragment]
 image::java-map-hierarchy.png[Java Map Hierarchy]
 
+=== Interfaces for Collections
+
+[.step]
+* `Collection<E>` - вершина иерархии остальных коллекций
+* `List<E>` - специализирует коллекции для обработки списков
+* `Set<E>` - специализирует коллекции для обработки множеств, содержащих уникальные элементы
+* `Queue<E>` - коллекция, предназначенная для хранения элементов в порядке, нужном для их обработки
+* `Map<K, V>` - карта отображения вида _ключ-значение_
+
+[.fragment]
+Интерфейсы позволяют манипулировать коллекциями независимо от реализации. Этим реализуется принцип полиморфизма.
+
 === General-purpose Implementations
 
 [.fragment]
@@ -95,17 +107,12 @@ image::java-map-hierarchy.png[Java Map Hierarchy]
 |Map|HashMap||TreeMap||LinkedHashMap
 |===
 
-=== Interfaces for Collections
+=== Алгоритмы (Algorithms)
 
 [.step]
-* `Collection<E>` - вершина иерархии остальных коллекций
-* `List<E>` - специализирует коллекции для обработки списков
-* `Set<E>` - специализирует коллекции для обработки множеств, содержащих уникальные элементы
-* `Queue<E>` - коллекция, предназначенная для хранения элементов в порядке, нужном для их обработки
-* `Map<K, V>` - карта отображения вида _ключ-значение_;
-
-[.fragment]
-Интерфейсы позволяют манипулировать коллекциями независимо от реализации. Этим реализуется принцип полиморфизма.
+* Под алгоритмами понимают методы реализующие интерфейс `Collection` и другие.
+* Они выполняют операции, такие как поиск, сортировка объектов, и т.д.
+* Они реализуют принцип полиморфизма, так как один и тот же метод может быть использован в различных реализациях интерфейса `Collection`.
 
 == Interface `Collection<E>`
 
@@ -391,11 +398,12 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 [source,java]
 ----
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 class ArrayListExample {
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<String>();
+        Collection<String> list = new ArrayList<String>();
         list.add("Ravi");
         list.add("Vijay");
         list.add("Ravi");
@@ -433,18 +441,22 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 * *Queue<E>* (*Очередь*) — хранилище элементов для обработки.
 * Свойства очередей:
 [.step]
-** Порядок выдачи элементов определяется конкретной реализацией
-** Очереди не могут хранить `null`
-** У очереди может быть ограничен размер
+** Порядок выдачи элементов определяется конкретной реализацией.
+** Не может хранить `null`.
+** Может иметь ограниченный размер.
 
-=== Methods
+=== Methods with Exception
 
 [.step]
+* `add(E e): boolean`
 * `element(): E`
-* `offer(E obj): boolean`
+* `remove(): E`
+
+=== Methods without Exception
+
+* `offer(E e): boolean`
 * `peek(): E`
 * `poll(): E`
-* `remove(): E`
 
 == Class `PriorityQueue<E>`
 
@@ -543,26 +555,23 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 === Class `LinkedList<E>`
 
 [.step]
-* `LinkedList<E>` - связный список.
-* Рекомендуется использовать, если необходимо часто добавлять элементы в начало списка или удалять внутренний элемент списка.
-* Можно использовать для:
+* `LinkedList<E>` ─ двусвязный список.
+* Рекомендуется использовать если необходимо часто:
+[.step]
+** добавлять элементы в начало списка
+** удалять внутренний элемент списка
+* Используется как реализация:
 [.step]
 ** Стек
 ** Очередь
-** Двухсторонняя очередь
-
-=== Constructors
-
-[.step]
-* `LinkedList()`
-* `LinkedList(Collection<? extends E> col)`
+** Очередь с двумя концами (*Дек*)
 
 === Profit
 
 [.step]
 * Плюсы:
 [.step]
-** Быстрое добавление и удаление элементов
+** Быстрое добавление и удаление элементов в середину
 * Минусы:
 [.step]
 ** Медленный доступ по индексу
@@ -578,7 +587,10 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 
 [.step]
 * *Set<E>* (*Множество*) — коллекция без повторяющихся элементов.
-* Интерфейс `Set<E>` содержит методы, унаследованные `Collection<E>` и добавляет запрет на дублирующийся элементы.
+* Интерфейс `Set<E>` содержит методы, унаследованные `Collection<E>` и добавляет запрет на дублирующиеся элементы.
+
+[.fragment]
+image::set.png[Set]
 
 == Class `HashSet<E>`
 
@@ -605,22 +617,88 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 [.fragment]
 [source,java]
 ----
-import java.util.HashSet;
-import java.util.Iterator;
+public class Dog {
+    private final String name;
 
-class HashSetExample {
+    public Dog(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class HashSetExample1WithCustomObject {
     public static void main(String[] args) {
-        HashSet<String> set = new HashSet<String>();
-        set.add("Ravi");
-        set.add("Vijay");
-        set.add("Ravi");
-        set.add("Ajay");
-        Iterator<String> itr = set.iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
+        Set<Dog> dogs = new HashSet<>();
+        dogs.add(new Dog("Rex"));
+        dogs.add(new Dog("John"));
+        dogs.add(new Dog("Show"));
+
+        for (Dog dog : dogs) {
+            System.out.println(dog);
         }
     }
 }
+----
+
+=== Example
+
+[.fragment]
+----
+Dog{name='John'}
+Dog{name='Rex'}
+Dog{name='Show'}
+----
+
+== Class `LinkedHashSet<E>`
+
+=== Collection Hierarchy
+
+[.fragment]
+image::java-collection-hierarchy.png[Java Collection Hierarchy]
+
+=== Class `LinkedHashSet<E>`
+
+[.fragment]
+`LinkedHashSet<E>` - множество, элементы которого расположены в порядке вставки элементов.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class LinkedHashSetExample2WithCustomObject {
+    public static void main(String[] args) {
+        Set<Dog> dogs = new LinkedHashSet<>();
+        dogs.add(new Dog("Rex"));
+        dogs.add(new Dog("John"));
+        dogs.add(new Dog("Show"));
+
+        for (Dog dog : dogs) {
+            System.out.println(dog);
+        }
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+----
+Dog{name='Rex'}
+Dog{name='John'}
+Dog{name='Show'}
 ----
 
 == Interface `SortedSet<E>`
@@ -692,22 +770,85 @@ image::java-collection-hierarchy.png[Java Collection Hierarchy]
 [.fragment]
 [source,java]
 ----
-import java.util.Iterator;
-import java.util.TreeSet;
-
-class TreeSetExample {
+public class TreeSetExample4WithCustomObject {
     public static void main(String[] args) {
-        TreeSet<String> al = new TreeSet<String>();
-        al.add("Ravi");
-        al.add("Vijay");
-        al.add("Ravi");
-        al.add("Ajay");
-        Iterator<String> itr = al.iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
+        Set<Dog> dogs = new TreeSet<>();
+        dogs.add(new Dog("Rex"));
+        dogs.add(new Dog("John"));
+        dogs.add(new Dog("Show"));
+
+        for (Dog dog : dogs) {
+            System.out.println(dog);
         }
     }
 }
+----
+
+=== Example
+
+[.fragment]
+----
+Exception in thread "main" java.lang.ClassCastException: class com.rakovets.course.java.core.example.jsf_set.model.Dog cannot be cast to class java.lang.Comparable (com.rakovets.course.java.core.example.jsf_set.model.Dog is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+	at java.base/java.util.TreeMap.compare(TreeMap.java:1291)
+	at java.base/java.util.TreeMap.put(TreeMap.java:536)
+	at java.base/java.util.TreeSet.add(TreeSet.java:255)
+	at com.rakovets.course.java.core.example.jsf_set.TreeSetExample4WithCustomObject.main(TreeSetExample4WithCustomObject.java:11)
+----
+
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class ComparableDog implements Comparable<ComparableDog> {
+    private final String name;
+
+    public ComparableDog(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(ComparableDog o) {
+        return name.compareTo(o.name);
+    }
+
+    @Override
+    public String toString() {
+        return "ComparableDog{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class TreeSetExample5WithCustomComparableObject {
+    public static void main(String[] args) {
+        Set<ComparableDog> comparableDogs = new TreeSet<>();
+        comparableDogs.add(new ComparableDog("Rex"));
+        comparableDogs.add(new ComparableDog("John"));
+        comparableDogs.add(new ComparableDog("Show"));
+
+        for (ComparableDog comparableDog : comparableDogs) {
+            System.out.println(comparableDog);
+        }
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+ComparableDog{name='John'}
+ComparableDog{name='Rex'}
+ComparableDog{name='Show'}
 ----
 
 == Interface `Map<K, V>`
@@ -723,38 +864,38 @@ image::java-map-hierarchy.png[Java Map Hierarchy]
 * Управляет парами ключ/значение.
 * `Map<K, V>` не может содержать повторяющихся ключей, каждому из которых соответствует не более одного значения.
 
+[.fragment]
+image::map.png[Map]
+
 === Methods
 
 [.step]
-* `clear(): void`
+* `get(Object k): V`
+* `put(K k, V v): V`
+* `remove(Object k): V`
 * `containsKey(Object k): boolean`
 * `containsValue(Object v): boolean`
-* `entrySet(): Set<Map.Entry<K, V>>`
-* `equals(Object obj): boolean`
+* `size(): int`
 * `isEmpty: boolean`
-* `get(Object k): V`
-* `getOrDefault(Object k, V defaultValue): V`
 
 === Methods
 
 [.step]
-* `put(K k, V v): V`
+* `getOrDefault(Object k, V defaultValue): V`
 * `putIfAbsent(K k, V v): V`
+* `putAll(Map<? extends K, ? extends V> map): void`
+* `clear(): void`
 * `keySet(): Set<K>`
 * `values(): Collection<V>`
-* `putAll(Map<? extends K, ? extends V> map): void`
-* `remove(Object k): V`
-* `size(): int`
+* `entrySet(): Set<Map.Entry<K, V>>`
 
 === Interface `Map.Entry<K, V>`
 
 [.step]
-* `equals(Object obj): boolean`
 * `getKey(): K`
 * `getValue(): V`
-* `keySet(): Set<K>`
 * `setValue(V v): V`
-* `hashCode(): int`
+* `keySet(): Set<K>`
 
 == Class `HashMap<K, V>`
 
@@ -767,7 +908,8 @@ image::java-map-hierarchy.png[Java Map Hierarchy]
 
 [.step]
 * `HashMap<K, V>` хранит ключи в хеш-таблице, из-за чего имеет наиболее высокую производительность, но не гарантирует порядок элементов.
-* Может содержать как `null`-ключи, так и `null`-значения;
+* Может содержать `null`-ключи.
+* Может содержать `null`-значения.
 
 === Example
 
@@ -802,7 +944,8 @@ image::java-map-hierarchy.png[Java Map Hierarchy]
 [.step]
 * `LinkedHashMap<K, V>` отличается от `HashMap<K, V>` тем, что хранит ключи в порядке их вставки в `Map<K, V>`.
 * Эта реализация `Map<K, V>` лишь немного медленнее `HashMap<K, V>`.
-* Может содержать как `null`-ключи, так и `null`-значения.
+* Может содержать `null`-ключи.
+* Может содержать `null`-значения.
 
 == Interface `SortedMap<K, V>`
 
@@ -871,7 +1014,8 @@ image::java-map-hierarchy.png[Java Map Hierarchy]
 
 [.step]
 * `TreeMap<K, V>` хранит ключи в отсортированном порядке, из-за чего работает существенно медленнее, чем `HashMap<K, V>`.
-* Не может содержать `null`-ключи, но может содержать `null`-значения.
+* Не может содержать `null`-ключи.
+* Может содержать `null`-значения.
 * Сортироваться элементы будут либо в зависимости от реализации интерфейса `Comparable`, либо используя объект `Comparator`, который необходимо передать в конструктор `TreeMap<K, V>`;
 
 === Constructors
