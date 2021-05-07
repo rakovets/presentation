@@ -55,6 +55,7 @@
 
 === Course: Core Java
 
+* link:./java/core/stream-api.html[Stream API (JSR 335).]
 * link:./java/core/date-and-time.html[Date and Time API (JSR 335).]
 * link:./java/core/reflection.html[Reflection.]
 * link:./java/core/annotations.html[Annotations (JSR 250, 269, 308).]
@@ -62,10 +63,10 @@
 * link:./java/core/concurrency-thread-synchronization.html[Concurrency. Thread synchronization.]
 * link:./java/core/concurrent-utilities.html[Concurrent utilities (JSR 166).]
 * link:./java/core/i18n.html[i18n.]
-* link:./java/core/javadoc.html[Javadoc.]
 
 === Course: Core Java
 
+* link:./java/core/javadoc.html[Javadoc.]
 * link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224).]
 * link:./java/core/networking.html[Networking.]
 * link:./java/core/system-classes.html[System Classes.]

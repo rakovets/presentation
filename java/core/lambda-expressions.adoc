@@ -1,5 +1,4 @@
 = JSR-335: Lambda expressions
-:imagesdir: ../../assets/img/java/core/
 
 == Intro
 
@@ -26,8 +25,10 @@ button.addActionListener(new ActionListener() {
 button.addActionListener(event -> System.out.println("Hello World!"));
 ----
 
-[.fragment]
-link:https://jcp.org/en/jsr/detail?id=335[JSR-335]: Lambda expressions
+[.step]
+* link:https://jcp.org/en/jsr/detail?id=335[JSR-335]: Lambda expressions
+[.step]
+** Lambda expressions
 
 == Lambda expressions
 
@@ -68,6 +69,11 @@ public class LambdaApp {
 }
 ----
 
+[.fragment]
+----
+30
+----
+
 === Example
 
 [.fragment]
@@ -82,6 +88,11 @@ public class LambdaApp {
         System.out.println(result);
     }
 }
+----
+
+[.fragment]
+----
+30
 ----
 
 === Steps for using Lambda Expression
@@ -137,23 +148,49 @@ System.out.println(operation3.calculate(20, 10));
 () -> {
     return 3.1415;
 }
+----
 
+[.fragment]
+[source, java]
+----
 (int a, int b) -> {
     return a + b;
 }
+----
 
+[.fragment]
+[source, java]
+----
 (a, b) -> {
     return a + b;
 }
+----
 
+=== Syntax Lambda Expressions
+
+[.fragment]
+[source, java]
+----
 (String s) -> {
     System.out.println(s);
 }
+----
 
+[.fragment]
+[source, java]
+----
 (s) -> System.out.println(s);
+----
 
+[.fragment]
+[source, java]
+----
 () -> System.out.println("Hello World");
+----
 
+[.fragment]
+[source, java]
+----
 () -> 42;
 ----
 
@@ -303,7 +340,7 @@ public class LambdaApp {
 
 [.fragment]
 ----
-45
+20
 ----
 
 === Method links as method parameters
@@ -329,6 +366,8 @@ class ExpressionHelper {
     }
 }
 ----
+
+=== Method links as method parameters
 
 [.fragment]
 [source, java]
@@ -453,138 +492,3 @@ public class LambdaApp {
 * Не хранит данные
 * Нельзя переиспользовать
 * Можно преобразовать в другие типы данных
-
-=== Stream
-
-[.fragment]
-image::stream.jpg[Stream]
-
-== `BaseStream`
-
-=== Interface `BaseStream`
-
-[.step]
-* `interface BaseStream<T , S extends BaseStream<T , S>>`
-
-=== `BaseStream` Methods
-
-[.step]
-* `close(): void`
-* `isParallel(): boolean`
-* `iterator(): Iterator<Т>`
-* `spliterator(): Spliterator<Т>`
-* `parallel(): S`
-* `sequential(): S`
-* `unordered(): S`
-
-=== `BaseStream` Inheritors
-
-[.step]
-* `Stream<T>`
-* `IntStream`
-* `DoubleStream`
-* `LongStream`
-
-== `Stream<T>`
-
-=== Intermediate methods
-
-[.step]
-* `map(Function<? super T, ? extends R> mapper): Stream<R>`
-* `filter(Predicate<? super T> predicate): Stream<T>`
-* `sorted(): Stream<T>`
-* `concat​(Stream<? extends T> a, Stream<? extends T> b): Stream<T>`
-* `distinct(): Stream<T>`
-
-=== Intermediate methods
-
-[.step]
-* `skip(long n): Stream<T>`
-* `sorted(Comparator<? super T> comparator): Stream<T>`
-* `takeWhile​(Predicate<? super T> predicate): Stream<T>`
-* `dropWhile​(Predicate<? super T> predicate): Stream<T>`
-* `limit(long maxSize): Stream<T>`
-
-=== Terminal methods
-
-[.step]
-* `forEach(Consumer<? super T> action): void`
-* `allMatch(Predicate<? super T> predicate): boolean`
-* `anyMatch(Predicate<? super T> predicate): boolean`
-* `count(): long`
-* `noneMatch(Predicate<? super T> predicate): boolean`
-* `toArray(): Object[]`
-
-=== Terminal methods
-
-[.step]
-* `collect(Collector<? super T, A, R> collector): <R, A> R`
-* `flatMap(Function<? super T, ? extends Stream<? extends R>> mapper): <R> Stream<R>`
-* `findFirst(): Optional<T>`
-* `findAny(): Optional<T>`
-* `max(Comparator<? super T> comparator): Optional<T>`
-* `min(Comparator<? super T> comparator): Optional<T>`
-
-== Creating `Stream`
-
-=== Creating `Stream`
-
-[.step]
-* `default Stream<E> stream`
-* `default Stream<E> parallelStream`
-* `Arrays.stream(T[] array)`
-* `Stream.of(T..values)`
-
-== `Optional`
-
-=== Methods
-
-[.step]
-* `Optional<T>.empty(): <T>`
-* `filter(Predicate<? super T> predicate): Optional<T>`
-* `flatMap(Function<? super T,Optional<U>> mapper): Optional<U>`
-* `get(): T`
-* `ifPresent(Consumer<? super T> consumer): void`
-* `isPresent(): boolean`
-
-=== Methods
-
-[.step]
-* `map(Function<? super T,? extends U> mapper): Optional<U>`
-* `Optional<T>.of(T value): <T>`
-* `Optional<T>.ofNullable(T value): <T>`
-* `orElse(T other): T`
-* `orElseGet(Supplier<? extends T> other): T`
-* `<X extends Throwable> orElseThrow(Supplier<? extends X> exceptionSupplier): T`
-
-== Method `collect()`
-
-=== `Collectors` Methods
-
-[.step]
-* `toList(): List<T>`
-* `toSet(): Set<T>`
-* `toMap(): Map<K, U>`
-* `toCollection(): Collection<T>`
-* `groupingBy(Function<? super T, ? extends K>): Collector<T, ?, Map<K, List<T>>>`
-* `partitioningBy(Predicate<? super T>): Collector<T, ?, Map<Boolean, List<T>>>`
-
-=== Collectors Methods
-
-[.step]
-* `counting()`
-* `summing()`
-* `maxBy(Comparator<? super T>)`
-* `minBy(Comparator<? super T>)`
-* `summarizing()`
-* `mapping()`
-
-== Parallel Stream
-
-=== Methods
-
-[.step]
-* `parallel()`
-* `sequential()`
-* `forEachOrdered()`
-* `unordered()`
