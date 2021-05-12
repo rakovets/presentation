@@ -1,6 +1,22 @@
-= Concurrency: common
+= Concurrency
+:imagesdir: ../../assets/img/java/core/concurrency/
 
-== Concurrency in Java
+== Problem
+
+[.step]
+* Современные устройства имеют несколько физических или виртуальных ядер.
+* Это значит они могут выполнять параллельно несколько различных задач.
+* Но программы, которые разрабатывались раннее, выполняются последовательно.
+* Соответственно работают медленнее чем мог ли бы.
+* Как повысить производительность программы, и утилизировать ресурс современных CPU?
+
+== Solution
+
+[.step]
+* Использовать многопоточность.
+* *Java Concurrency*.
+
+== Concurrency
 
 === Definition
 
@@ -12,7 +28,16 @@
 === Differentiation
 
 [.fragment]
-image::/assets/img/java/core/concurrency/multithreading.png[Multithreading]
+image::multithreading.png[Multithreading]
+
+=== Concurrency
+
+[.step]
+* *Concurrency* требует внимательной работы от разработчика, т.к.:
+[.step]
+** Программа одновременно имеет несколько потоков выполнения.
+** Потоки работают с общей памятью (*Heap* один для всех потоков).
+** Потокам необходимо взаимодействовать (синхронизироваться) друг с другом.
 
 == Class `Thread`
 
@@ -22,33 +47,47 @@ image::/assets/img/java/core/concurrency/multithreading.png[Multithreading]
 [source,java]
 ----
 public static void main(String[] args) {
-    Thread t = Thread.currentThread(); // получаем главный поток
-    System.out.println(t.getName()); // main
+    Thread t = Thread.currentThread();
+    System.out.println(t.getName());
 }
 ----
 
-=== Methods
-
-[.step]
-* `getName(): String`
-* `setName(String): void`
-* `getPriority(): int`
-* `setPriority(int): void`
-* `isAlive(): boolean`
-
-=== Methods
-
-[.step]
-* `isInterrupted(): boolean`
-* `join(): void`
-* `run(): void`
-* `sleep(long): void`
-* `start(): void`
-
-=== Thread Lifecycle
-
 [.fragment]
-image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
+----
+main
+----
+
+=== Fields
+
+[.step]
+* Основные поля:
+[.step]
+** `id` – идентификатор потока
+** `name` – имя потока
+** `daemon` – поток-демон
+** `priority` – приоритет
+* Эти поля не могут меняться после запуска потока.
+
+=== Methods
+
+[.step]
+* `getID(): long`
+* `final getName(): String`
+* `final setName(String): void`
+* `final getPriority(): int`
+* `final setPriority(int): void`
+* `final isDaemon():boolean`
+* `final setDaemon(boolean): void`
+
+== Priority
+
+[.step]
+* Определяется значениями от `1` до `10`
+* Но есть предопределенные константы:
+[.step]
+** `Thread.MIN_PRIORITY = 1`
+** `Thread.NORM_PRIORITY = 5`
+** `Thread.MAX_PRIORITY = 10`
 
 == Creating Thread
 
@@ -57,6 +96,9 @@ image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
 [.step]
 * By extending `Thread` class
 * By implementing `Runnable` interface
+[.step]
+** as *Class*
+** as *Anonymous Class*
 
 === Constructors
 
@@ -65,6 +107,7 @@ image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
 * `Thread(String name)`
 * `Thread(Runnable r)`
 * `Thread(Runnable r, String name)`
+
 
 === By extending `Thread` class
 
@@ -100,3 +143,140 @@ class Multi3 implements Runnable {
     }
 }
 ----
+
+=== Methods
+
+[.step]
+* `static currentThread(): Thread`
+* `final isAlive(): boolean`
+* `isInterrupted(): boolean`
+* `getState(): Thread.State`
+* `static interrupted(): boolean`
+* `final join(): void`
+* `static holdsLock(Object о): boolean`
+
+=== Methods
+
+[.step]
+* `run(): void`
+* `start(): void`
+* `interrupt(): void`
+* `static yield(): void`
+* `static sleep(long): void`
+
+== Thread Lifecycle
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Tread state
+
+[.fragment]
+[options="headers"]
+|===
+|`getState()`|`isAlive()`
+|`NEW`|`false`
+|`RUNNABLE`|`true`
+|`BLOCKED`|`true`
+|`WAITING`|`true`
+|`TIMED_WAITING`|`true`
+|`TERMINATED`|`false`
+
+|===
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Thread Lifecycle
+
+[.step]
+* `yield()` – передать ресурс CPU другому потоку
+* Методы в процессе выполнения бросаются `InterruptedException`
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Thread Lifecycle
+
+[.step]
+* Перевести поток в состояние `WAITING` (ожидающий):
+[.step]
+** `wait()`
+** `join()` – ожидать до завершения потока
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Thread Lifecycle
+
+[.step]
+* Вернуть работоспособность потоку:
+[.step]
+** `notify()`
+** `notifyAll()`
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Thread Lifecycle
+
+[.step]
+* Перевести поток в состояние `TIMED_WAITING` (ожидающий по времени):
+[.step]
+** `wait(long millis)`
+** `sleep(long millis)`
+** `join(long millis)` – ожидать до завершения или истечения `millis` миллисекунд
+
+=== Thread Lifecycle
+
+[.fragment]
+image::thread-lifecycle.jpeg[Thread lifecycle]
+
+=== Thread Lifecycle
+
+[.step]
+* Перевести поток в состояние `TERMINATED` (завершенный):
+[.step]
+* `interrupt()` – выполняется только для работоспособного потока
+* метод `run()` завершил выполнение
+* метод `run()` завершает свою работу по какому-то условию (или работает бесконечно)
+
+== Локальная память для потока
+
+=== Локальная память для потока
+
+[.step]
+* Класс `java.lang.ThreadLocal<T>` используется для хранения переменных, которые должны быть доступны для ТОЛЬКО для текущего потока.
+* Имеет методы:
+[.step]
+** `get(): T`
+** `set(T): void`
+** `remove(): void`
+
+== Группа потоков
+
+=== Группа потоков
+
+[.step]
+* *Группа потоков исполнения* - это структура данных, которая управляет состоянием всего ряда потоков исполнения в целом.
+* Каждая *группа потоков исполнения* представляется объектом класса `ThreadGroup`.
+* *Группа потоков* также может включать в себя другие *группы потоков*.
+
+=== Группа потоков
+
+[.step]
+* *Группы потоков* (*thread groups*) улучшают вопросы, связанные с _управляемостью_ и _безопасностью_, а именно:
+[.step]
+** Можно прервать работу сразу всех потоков группы.
+** Установить для них единое максимальное значение приоритета выполнения.
+** Наложить ограничения на способность потоков, принадлежащих группе, выполнять те или иные действия.
