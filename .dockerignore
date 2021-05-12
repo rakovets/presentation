@@ -1,0 +1,12 @@
+.git/
+.github/
+.idea/
+.editorconfig
+.gitignore
+.gitlab-ci.yml
+.nojekyll
+node_modules/
+CNAME
+Dockerfile
+README.adoc
+

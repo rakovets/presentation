@@ -6,67 +6,27 @@ Presentations for different courses. Use *AsciiDoc* and *Asciidoctor Reveal.js* 
 
 Need to install:
 
-* *Nginx*
-* *npm*
-* *Node.js*
+* Docker
 
-=== Install Packages
+=== Build image
 
 [source,sh]
 ----
-npm i
+docker build -t rakovets/presentation .
 ----
 
-=== Convert slides
+=== Run container
 
 [source,sh]
 ----
-node convert-slides.js
+docker run -dp 3000:80 rakovets/presentation
 ----
 
-== Local deploy
-
-=== Configure nginx
-
-Make directory `.deploy`:
-[source,sh]
-----
-mkdir .deploy
-----
-
-Plate following config to `.deploy/nginx.conf`:
-
-[source,conf]
-----
-worker_processes 1;
-error_log $PROJECT_PATH/.deploy/error.log;
-pid $PROJECT_PATH/.deploy/nginx.pid;
-
-events {
-        worker_connections 10;
-}
-
-http {
-    access_log $PROJECT_PATH/.deploy/access.log;
-    include /etc/nginx/mime.types;
-    server {
-            listen 3000;
-            server_name presentation;
-
-            location / {
-                    root $PROJECT_PATH;
-            }
-    }
-}
-----
-
-Replace `$PROJECT_PATH` to project path.
-
-=== Run nginx
+=== Force remove container on 3000 port
 
 [source,sh]
 ----
-nginx -c $(pwd)/.deploy/nginx.conf
+docker ps -aqf "publish=3000" | xargs docker rm -f
 ----
 
 == Code of Conduct
