@@ -18,19 +18,42 @@
 
 == Concurrency
 
-=== Definition
+=== Definition *Multi*
 
 [.step]
-* multitasking
-* multiprocessing
-* multithreading
+*Multiprogramming* – A computer running more than one program at a time (like running Terminal and Firefox simultaneously).
+*Multiprocessing* – A computer using more than one CPU at a time.
+*Multitasking* – Tasks sharing a common resource (like 1 CPU).
+*Multithreading* is an extension of multitasking
+
+=== Multiprogramming
+
+[.fragment]
+image::multiprogramming.jpg[Multithreading]
+
+=== Multiprocessing
+
+[.fragment]
+image::multiprocessing.jpg[Multithreading]
+
+=== Multitasking
+
+[.fragment]
+image::multitasking.jpg[Multithreading]
+
+=== Multithreading
+
+[.fragment]
+image::multithreading.jpg[Multithreading]
 
 === Differentiation
 
 [.fragment]
 image::multithreading.png[Multithreading]
 
-=== Concurrency
+== Java Concurrency
+
+=== Java Concurrency
 
 [.step]
 * *Concurrency* требует внимательной работы от разработчика, т.к.:
@@ -186,23 +209,23 @@ image::thread-lifecycle.jpeg[Thread lifecycle]
 
 |===
 
-=== Thread Lifecycle
+=== RUNNABLE
 
 [.fragment]
 image::thread-lifecycle.jpeg[Thread lifecycle]
 
-=== Thread Lifecycle
+=== RUNNABLE
 
 [.step]
 * `yield()` – передать ресурс CPU другому потоку
 * Методы в процессе выполнения бросаются `InterruptedException`
 
-=== Thread Lifecycle
+=== WAITING
 
 [.fragment]
 image::thread-lifecycle.jpeg[Thread lifecycle]
 
-=== Thread Lifecycle
+=== WAITING
 
 [.step]
 * Перевести поток в состояние `WAITING` (ожидающий):
@@ -210,12 +233,12 @@ image::thread-lifecycle.jpeg[Thread lifecycle]
 ** `wait()`
 ** `join()` – ожидать до завершения потока
 
-=== Thread Lifecycle
+=== WAITING -> RUNNABLE
 
 [.fragment]
 image::thread-lifecycle.jpeg[Thread lifecycle]
 
-=== Thread Lifecycle
+=== WAITING -> RUNNABLE
 
 [.step]
 * Вернуть работоспособность потоку:
@@ -223,12 +246,12 @@ image::thread-lifecycle.jpeg[Thread lifecycle]
 ** `notify()`
 ** `notifyAll()`
 
-=== Thread Lifecycle
+=== TIMED_WAITING
 
 [.fragment]
 image::thread-lifecycle.jpeg[Thread lifecycle]
 
-=== Thread Lifecycle
+=== TIMED_WAITING
 
 [.step]
 * Перевести поток в состояние `TIMED_WAITING` (ожидающий по времени):
@@ -237,12 +260,12 @@ image::thread-lifecycle.jpeg[Thread lifecycle]
 ** `sleep(long millis)`
 ** `join(long millis)` – ожидать до завершения или истечения `millis` миллисекунд
 
-=== Thread Lifecycle
+=== TERMINATED
 
 [.fragment]
 image::thread-lifecycle.jpeg[Thread lifecycle]
 
-=== Thread Lifecycle
+=== TERMINATED
 
 [.step]
 * Перевести поток в состояние `TERMINATED` (завершенный):
