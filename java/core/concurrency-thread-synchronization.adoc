@@ -1,62 +1,182 @@
 = Concurrency: thread synchronization
+:imagesdir: ../../assets/img/java/core/concurrency/
 
 == Problem
 
-=== Problem code
+=== Example
 
 [.fragment]
 [source,java]
 ----
-public class CommonResource {
-    public int x = 0;
+public interface Counter {
+    long incAndGet();
+
+    long get();
 }
 ----
 
-=== Problem code
+[.fragment]
+[source,java]
+----
+public class CounterSimple implements Counter {
+    private long count = 0;
+
+    public void increment() {
+        count++;
+    }
+
+    public long get() {
+        return count;
+    }
+}
+----
+
+=== Example
 
 [.fragment]
 [source,java]
 ----
-public class CountThread implements Runnable {
-    private final CommonResource res;
+public static void main(String[] args) {
+    Counter sharedCounter = new CounterSimple();
 
-    public CountThread(CommonResource res) {
-        this.res = res;
+    Thread thread1 = new Thread(getRunnable(sharedCounter, "Tread-1 final count:"));
+    Thread thread2 = new Thread(getRunnable(sharedCounter, "Tread-2 final count:"));
+
+    thread1.start();
+    thread2.start();
+}
+
+private static Runnable getRunnable(Counter counter, String message) {
+    return () -> {
+        for (int i = 0; i < 1_000_000; i++) {
+            counter.increment();
+        }
+        System.out.printf("%s %d\n", message, counter.get());
+    };
+}
+----
+
+=== Example
+
+[.fragment]
+----
+Tread-2 final count: 1011580
+Tread-1 final count: 1877091
+----
+
+=== Why?
+
+[.fragment]
+[source,java]
+----
+public class CounterDetail implements Counter {
+    private long count = 0;
+
+    public void increment() {
+        long tmp = count; // read
+        tmp = tmp + 1; // modify
+        count = tmp; // write
     }
 
-    public void run() {
-        res.x = 1;
-        for (int i = 1; i <= 4; i++) {
-            System.out.printf("%s %d \n", Thread.currentThread().getName(), res.x);
-            res.x++;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public long get() {
+        return count;
+    }
+}
+----
+
+=== Problem
+
+[.step]
+* *Data Race*
+* OR
+* *Read, Modify, Write problem*
+
+=== Definition
+
+[.step]
+
+* *Data Race* - это состояние когда разные потоки обращаются к одной ячейке памяти
+* без какой-либо синхронизации
+* и как минимум один из потоков осуществляет запись.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+private static Runnable getRunnable(Map<String, String> sharedMap, String value) {
+    return () -> {
+        for (int i = 0; i < 1_000_000; i++) {
+            if (sharedMap.containsKey("switcher")) {
+                String currentValue = sharedMap.remove("switcher");
+                if (currentValue == null) {
+                    System.out.printf("%s, iteration %d\n", value, i);
+                }
+            } else {
+                sharedMap.put("switcher", value);
             }
         }
-    }
+        System.out.println();
+    };
 }
 ----
 
-=== Problem code
+=== Example
 
 [.fragment]
 [source,java]
 ----
-public class Program {
-    public static void main(String[] args) {
-        CommonResource commonResource = new CommonResource();
-        for (int i = 1; i <= 5; i++) {
-            Thread t = new Thread(new CountThread(commonResource));
-            t.setName("Thread " + i);
-            t.start();
-        }
-    }
+public static void main(String[] args) {
+    Map<String, String> sharedMap = new HashMap<>();
+
+    Thread thread1 = new Thread(getRunnable(sharedMap, "Tread-1"));
+    Thread thread2 = new Thread(getRunnable(sharedMap, "Tread-2"));
+
+    thread1.start();
+    thread2.start();
 }
 ----
 
-== Thread Synchronization
+=== Example
+
+[.fragment]
+----
+Tread-1, iteration 699274
+Tread-2, iteration 997524
+Tread-2, iteration 997527
+Tread-1, iteration 701708
+Tread-1, iteration 701723
+----
+
+=== Why?
+
+----
+if (sharedMap.containsKey("switcher")) { // check
+    String currentValue = sharedMap.remove("switcher"); // then act
+    if (currentValue == null) {
+        System.out.printf("%s, iteration %d\n", value, i);
+    }
+} else {
+    sharedMap.put("switcher", value);
+}
+----
+
+=== Problem
+
+[.step]
+* *Race Condition*
+* OR
+* *Check Then Act  problem*
+
+=== Definition
+
+[.step]
+
+* *Race Condition* — это недостаток, возникающий, когда время или порядок событий влияют на правильность программы.
+* *Race condition* — это семантическая ошибка.
+* Нет общего способа который может отличить правильное и неправильное поведение программы в общем случае.
+
+== Concurrency: Thread Synchronization
 
 === Types of thread synchronization
 
@@ -152,7 +272,7 @@ class CountThread implements Runnable {
 === Thread Lifecycle
 
 [.fragment]
-image::/assets/img/java/core/concurrency/thread-lifecycle.jpeg[Thread lifecycle]
+image::thread-lifecycle.jpeg[Thread lifecycle]
 
 === Example
 
@@ -260,9 +380,9 @@ public class Program {
 === Deadlock
 
 [.fragment]
-image::/assets/img/java/core/concurrency/deadlock.jpg[Deadlock]
+image::deadlock.jpg[Deadlock]
 
 === Starvation
 
 [.fragment]
-image::/assets/img/java/core/concurrency/starvation.png[Starvation]
+image::starvation.png[Starvation]
