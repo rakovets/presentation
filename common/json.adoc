@@ -1,4 +1,5 @@
 = JSON
+:imagesdir: ../assets/img/common/json/
 
 == Intro
 
@@ -58,33 +59,32 @@ JSON основан на двух структурах данных:
 * Удобнее для чтения и изменения
 
 == Синтаксис
-
 === Object
 
 [.fragment]
-image::/assets/img/common/json/object.png[JSON: object]
+image::object.png[JSON: object]
 
 === Array
 
 [.fragment]
-image::/assets/img/common/json/array.png[JSON: array]
+image::array.png[JSON: array]
 
 === Value
 
 [.fragment]
-image::/assets/img/common/json/value.png[JSON: value]
+image::value.png[JSON: value]
 
 === String
 
 [.fragment]
-image::/assets/img/common/json/string.png[JSON: string]
+image::string.png[JSON: string]
 
 === Number
 
 [.fragment]
-image::/assets/img/common/json/number.png[JSON: number]
+image::number.png[JSON: number]
 
 === Whitespace
 
 [.fragment]
-image::/assets/img/common/json/whitespace.png[JSON: whitespace]
+image::whitespace.png[JSON: whitespace]
