@@ -102,6 +102,7 @@ asciidoctor.convertFile('./common/i18n.adoc', options)
 asciidoctor.convertFile('./common/architectural-patterns.adoc', options)
 asciidoctor.convertFile('./common/xml.adoc', options)
 asciidoctor.convertFile('./common/json.adoc', options)
+asciidoctor.convertFile('./common/yaml.adoc', options)
 asciidoctor.convertFile('./common/scrum.adoc', options)
 asciidoctor.convertFile('./common/regular-expressions.adoc', options)
 

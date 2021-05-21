@@ -139,6 +139,7 @@
 * link:./common/architectural-patterns.html[Architectural Patterns.]
 * link:./common/xml.html[XML.]
 * link:./common/json.html[JSON.]
+* link:./common/yaml.html[YAML.]
 * link:./common/scrum.html[Scrum.]
 
 == Course: SQL [[course-sql]]
