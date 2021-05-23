@@ -188,6 +188,19 @@ if (sharedMap.containsKey("switcher")) { // check
 ** static synchronization
 * Cooperation (Inter-thread communication in java) (кооперация)
 
+=== Mutual Exclusive
+
+[.step]
+* Для устранения некоторых проблем в многопоточности, используют блокировки с помощью объекта.
+* Любой объект может быть заблокирован.
+* Снятие блокировки производится автоматически.
+
+=== Monitor
+
+* *Монитор* – это объект, который используется для взаимоисключающей блокировки (*mutually exclusive lock*) - *mutex*.
+* Любой объект может быть монитором.
+* Для взаимодействия с монитором поток должен иметь блокировку на него.
+
 == Operator `synchronized`
 
 === `synchronized block`
@@ -381,6 +394,108 @@ public class Program {
 
 [.fragment]
 image::deadlock.jpg[Deadlock]
+
+=== Deadlock
+
+[.fragment]
+[source, java]
+----
+public class BankAccount {
+    private final String fullName;
+    private double balance;
+
+    public BankAccount(String fullName, double balance) {
+        this.fullName = fullName;
+        this.balance = balance;
+    }
+
+    public synchronized void deposit(double amount) {
+        balance += amount;
+    }
+
+    public synchronized void withdraw(double amount) {
+        balance -= amount;
+    }
+
+    public synchronized void transfer(double amount, BankAccount target) {
+        System.out.printf("%s is using monitor for object with full name: %s.\n",
+                Thread.currentThread().getName(),
+                this.getFullName());
+        withdraw(amount);
+
+        try {
+            Thread.sleep(1_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.printf("%s want to use monitor for object with full name: %s.\n",
+                Thread.currentThread().getName(),
+                target.getFullName());
+        target.deposit(amount);
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+}
+----
+
+=== Deadlock
+
+[.fragment]
+[source, java]
+----
+public class MoneyTransfer implements Runnable {
+    private final BankAccount from, to;
+    private final double amount;
+
+    public MoneyTransfer(BankAccount from, BankAccount to, double amount) {
+        this.from = from;
+        this.to = to;
+        this.amount = amount;
+    }
+
+    public void run() {
+        from.transfer(amount, to);
+    }
+}
+----
+
+=== Deadlock
+
+[.fragment]
+[source, java]
+----
+public class ExampleDeadlock {
+    public static void main(String[] args) {
+        BankAccount aliceAccount =
+                new BankAccount("Jon Turing", 5000.0);
+        BankAccount bobAccount =
+                new BankAccount("Bill Lee", 10000.0);
+
+        Runnable transaction1 =
+                new MoneyTransfer(aliceAccount, bobAccount, 1200);
+        Thread t1 = new Thread(transaction1);
+        t1.start();
+
+        Runnable transaction2 =
+                new MoneyTransfer(bobAccount, aliceAccount, 700);
+        Thread t2 = new Thread(transaction2);
+        t2.start();
+    }
+}
+----
+
+=== Deadlock
+
+[.fragment]
+----
+Thread-0 is using monitor for object with full name: Jon Turing.
+Thread-1 is using monitor for object with full name: Bill Lee.
+Thread-0 want to use monitor for object with full name: Bill Lee.
+Thread-1 want to use monitor for object with full name: Jon Turing.
+----
 
 === Starvation
 
