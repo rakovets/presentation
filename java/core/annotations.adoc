@@ -1,4 +1,4 @@
-= JSR 250, 269, 308: Annotations
+= Annotations (JSRs: 250, 269, 308)
 
 == Intro
 

@@ -1,4 +1,4 @@
-= JSR 166: Concurrency Utilities
+= Concurrency Utilities (JSR 166)
 
 == Intro
 

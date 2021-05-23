@@ -1,4 +1,4 @@
-= Stream API (JSR-335)
+= Stream API (JSR 335)
 :imagesdir: ../../assets/img/java/core/
 
 == Intro
