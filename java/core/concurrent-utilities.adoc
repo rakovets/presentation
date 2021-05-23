@@ -1,11 +1,12 @@
-= Concurrency Utilities (JSR 166)
+= Concurrent Utilities (JSR 166)
+:imagesdir: ../../assets/img/java/core/concurrent-utilities/
 
 == Intro
 
 === Problem
 
 [.fragment]
-image::/assets/img/java/core/concurrency/concurrency-theory-practice.jpg[Concurrency: Theory and Practice]
+image::concurrency-theory-practice.jpg[Concurrency: Theory and Practice]
 
 === Solution
 
@@ -17,22 +18,22 @@ image::/assets/img/java/core/concurrency/concurrency-theory-practice.jpg[Concurr
 === Whom to thank?
 
 [.fragment]
-image::/assets/img/java/core/concurrency/doug-lea.jpeg[Doug Lea]
+image::doug-lea.jpeg[Doug Lea]
 [.fragment]
 Doug Lea
 
 === Consist
 
 [.step]
-* `java.util.concurrent.atomic` - пакет с набор атомарных классов, позволяющих использовать принцип действия механизма оптимистической блокировки для выполнения атомарных операций.
+* `java.util.concurrent.atomic` - пакет с набором атомарных классов, позволяющих использовать принцип действия механизма оптимистической блокировки для выполнения атомарных операций.
 * *Concurrency collections* - набор более эффективно работающих в многопоточной среде коллекций нежели стандартные универсальные коллекции из `java.util` пакета
 * *Queues* - объекты создания блокирующих и неблокирующих очередей с поддержкой многопоточности.
 
 === Consist
 
 [.step]
-* *Synchronizers* - объекты синхронизации, позволяющие разработчику управлять и/или ограничивать работу нескольких потоков.
 * `java.util.concurrent.locks` - пакет з набором механизмов синхронизации потоков, альтернативных базовым `synchronized`, `wait()`, `notify()`, `notifyAll()`
+* *Synchronizers* - объекты синхронизации, позволяющие разработчику управлять и/или ограничивать работу нескольких потоков.
 * *Executors* - механизмы создания пулов потоков и планирования работы асинхронных задач
 
 == `java.util.concurrent.atomic`
@@ -87,38 +88,24 @@ Doug Lea
 * `ConcurrentSkipListMap` - является аналогом коллекции `TreeMap` с сортировкой данных по ключу и с поддержкой многопоточности
 * `ConcurrentSkipListSet` - выполнен на основе `ConcurrentSkipListMap` с реализацией интерфейса `Set`
 
-== *Synchronizers*
+== `java.concurrent.locks`
 
-== `Semaphore`
+== Interface `Lock`
 
-=== Constructors
+=== Methods
 
 [.step]
-* `Semaphore(int permits)`
-* `Semaphore(int permits, boolean fair)`
-
-=== `Semaphore`
-
-[.fragment]
-image::/assets/img/java/core/concurrency/semaphore.png[Semaphore]
-
-=== `Semaphore`
-
-[.fragment]
-image::/assets/img/java/core/concurrency/java-monitor.gif[Java monitor]
-
-== `java.concurrent.locks`
+* `lock(): void` – захватить блокировку
+* `unlock(): void` – отпустить блокировку
+* `newCondition(): Condition`– создать условие
 
 == `ReentrantLock`
 
 === Methods
 
 [.step]
-* `lock(): void`
 * `lockInterruptibly() throws InterruptedException: void`
 * `tryLock(): boolean`
-* `unlock(): void`
-* `newCondition(): Condition`
 
 === Example
 
@@ -180,6 +167,8 @@ public class Program {
     }
 }
 ----
+
+== `ReadWriteLock`
 
 == Interface `Condition`
 
@@ -305,6 +294,102 @@ public class Program {
 }
 ----
 
+== *Synchronizers*
+
+== `Semaphore`
+
+=== `Semaphore`
+
+[.step]
+* Ограничение на количество одновременно выполняемых сетевых запросов.
+* Ограничение на количество одновременных соединений к БД.
+* Ограничение на создание потоков выполнения.
+* Ограничение задач, высоко нагружающих память или процессор.
+* Семафор имеет емкость, указываемую при создании
+
+=== Constructors
+
+[.step]
+* `Semaphore(int permits)`
+* `Semaphore(int permits, boolean fair)`
+
+=== Methods
+
+[.step]
+* `acquire(n?)` – получить разрешение
+* `release(n?)` – отдать разрешение
+* `tryAquire(n?, time?)` – попробовать получить разрешение
+* `reducePermits(n)` – уменьшить количество разрешений
+
+=== `Semaphore`
+
+[.fragment]
+image::semaphore.png[Semaphore]
+
+=== `Semaphore`
+
+[.fragment]
+image::semaphore.gif[Semaphore]
+
+=== `Semaphore`
+
+[.fragment]
+image::java-monitor.gif[Java monitor]
+
+== `CyclicBarrier`
+
+=== `CyclicBarrier`
+
+[.step]
+* Потоки блокируются пока все потоки не прибудут к барьеру.
+* Многоразовый
+
+=== Methods
+
+[.step]
+* `await()` - ожидание у барьера всех участников
+* `reset()` - сброс барьера до первоначального состояния
+
+=== `CyclicBarrier`
+
+[.fragment]
+image::cyclic-barrier.gif[CyclicBarrier]
+
+== `CountDownLatch`
+
+=== `CountDownLatch`
+
+[.fragment]
+image::count-down-latch.gif[CountDownLatch]
+
+== `Exchanger<V>`
+
+=== `Exchanger<V>`
+
+[.fragment]
+image::exchanger.gif[Exchanger<V>]
+
+== `Phaser`
+
+=== Methods
+
+[.step]
+* `register(): int` — регистрирует нового участника, который выполняет фазы. Возвращает номер текущей фазы;
+* `getPhase(): int` — возвращает номер текущей фазы;
+* `arriveAndAwaitAdvance(): int`  — указывает что поток завершил выполнение фазы. Поток приостанавливается до момента, пока все остальные стороны не закончат выполнять данную фазу. Точный аналог `CyclicBarrier.await()`. Возвращает номер текущей фазы;
+
+=== Methods
+
+[.step]
+* `arrive(): int` — сообщает, что поток завершил фазу, и возвращает номер фазы. При вызове данного метода поток не приостанавливается, а продолжает выполнятся;
+* `arriveAndDeregister(): int` — сообщает о завершении всех фаз потоком и снимает его с регистрации. Возвращает номер текущей фазы;
+* `awaitAdvance(int phase): int` — если phase равно номеру текущей фазы, приостанавливает вызвавший его поток до её окончания. В противном случае сразу возвращает аргумент.
+
+=== `Phaser`
+
+[.fragment]
+image::phaser.gif[Phaser]
+
 == Executors
 
 == `ExecutorService`
@@ -390,6 +475,14 @@ public interface Future<V> {
 * `submit(Runnable task, T result): Future<T>`
 * `submit(Runnable task): Future<?>`
 
+=== Implementation for `ExecutorService`
+
+[.step]
+* `SingleThreadExecutor`
+* `FixedThreadPool`
+* `CachedThreadPool`
+* `ScheduledThreadPool`
+
 === Execute `Runnable`
 
 [.fragment]
@@ -435,7 +528,7 @@ Future future = executorService.submit(new Runnable() {
     }
 });
 
-future.get(); //returns null if the task has finished correctly.
+future.get(); // returns null if the task has finished correctly.
 
 executorService.shutdown();
 ----
