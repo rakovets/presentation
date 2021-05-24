@@ -1,80 +1,207 @@
-= Reflection
+= Reflection API
+:imagesdir: ../../assets/img/java/core/reflection/
 
 == Intro
 
 === Problem
 
-[.fragment]
-How research class?
+[.step]
+* How research class?
+* How create classes in _runtime_?
 
 === Solution
 
 [.fragment]
-Reflection
+Reflection API
 
 [.fragment]
-image:/assets/img/java/core/reflection/reflection-juggling.webp[Reflection juggling]
+image::reflection-juggling.webp[Reflection juggling]
 
-== Structure
+== Reflection API
+
+=== Reflection API
+
+[.step]
+* *Reflection API* — API для получения информации об объектах и их классах в _runtime_.
+* Центральный класс — `java.lang.reflect.Class`.
+* Для каждого класса, загруженного в JVM, можно получить описывающий его экземпляр класса `Class`
 
 === Structure
 
 [.fragment]
-image:/assets/img/java/core/reflection/reflection-structure.gif[Reflection Structure]
+image::reflection-structure.gif[Reflection Structure]
 
 == Класс `Class`
 
 === Класс `Class`
 
-[.fragment]
-Он предоставляет информацию:
+[.step]
+* С помощью `Class` можно осуществить:
+[.step]
+** Получение списка конструкторов, методов и полей класса.
+** Создание экземпляров класса.
+** Вызов методов и чтение/запись полей, в том числе закрытых.
+** Но нельзя получить содержимое метода.
+
+=== Как получить?
 
 [.step]
-* является ли класс интерфейсом, массивом или примитивным типом
-* каков супер класс объекта
-* каково имя класса
-* какие в нем конструкторы, поля, методы и вложенные классы
+*  Получение класса по объекту:
 
 [.fragment]
-В классе `Сlass` нет конструкторов. Экземпляр этого класса создается *JVM* во время загрузки класса и предоставляется методом `getClass()` класса `Object`.
-
-=== Методы
+[source, java]
+----
+Class c1 = object.getClass();
+----
 
 [.step]
-* `getSuperclass(): Class<?>` - возвращает супер класс объекта ссылочного типа.
-* `getPackage(): Package` - возвращает пакет.
-* `getModifiers(): int` - возвращает модификаторы класса.
-
-=== Методы
+* Получение класса через литерал:
 
 [.fragment]
-Логические методы позволяющие уточнить, является ли объект массивом, интерфейсом или примитивным типом.
+[source, java]
+----
+Class c2 = String[].class;
+----
+
+[.step]
+* Загрузка класса по имени:
+
+[.fragment]
+[source, java]
+----
+Class c3 = Class.forName("java.lang.Integer");
+----
+
+=== Class loading
+
+[.step]
+* Можно загрузить класс из файловой системы или сети в _runtime_:
+
+[.fragment]
+[source, java]
+----
+URL jarFileURL = new URL ("file://interface-impl.jar");
+ClassLoader classLoader =
+        new URLClassLoader(new URL [] { jarFileURL });
+Class c4 = classLoader.loadClass("by.rakovets.InterfaceImpl");
+----
+
+=== Custom Class Loader
+
+[.fragment]
+[source, java]
+----
+public class CustomClassLoader extends ClassLoader {
+    protected Class <?> findClass(String name) {
+        byte []b = getClassData(name);
+        return defineClass(name, b, 0, b.length);
+    }
+
+    private byte [] getClassData(String name) {
+        // code that returns contents of java class (file)
+    }
+}
+----
+
+== Методы для `Class`
+
+=== Получение имени
+
+[.fragment]
+[options="header"]
+|===
+|Method|`int[]`|`Object[]`|`Foo.Bar`
+|`getSimpleName()`|`int[]`|`Object[]`|`Bar`
+|`getCanonicalName()`|`int[]`|`java.lang.Object[]`|`Foo.Bar`
+|`getName()`|`[I`|`Ljava.jang.Object;`|`Foo$Bar`
+|===
+
+=== Уточнение типа
 
 [.step]
 * `isArray(): boolean`
 * `isInterface(): boolean`
 * `isPrimitive(): boolean`
 
-=== Методы
-
-[.fragment]
-Если объект ссылочного типа, то можно извлечь сведения о всех вложенных классах, конструкторах, методах в виде массива:
+=== Место в иерархии наследования
 
 [.step]
-* `getDeclaredClasses(): Class<?>[]`
-* `getDeclaredConstructors(): Constructors<?>[]`
-* `getDeclaredMethods(): Method[]`
-* `getDeclaredFields(): Field[]`
-
-=== Методы
-
-[.fragment]
-Методы возвращают такие же массивы, но не всех, а только `private` членов класса.
-
-[.step]
-* `getClasses(): Class<?>[]`
-* `getConstructors(): Constructors<?>[]`
-* `getMethods(): Method[]`
-* `getFields(): Field[]`
+* `getSuperclass(): Class<?>`
 * `getInterfaces(): Class<?>[]`
+
+=== Пакет и модификаторы
+
+[.step]
+* `getPackage(): Package` - возвращает пакет.
+* `getModifiers(): int` - возвращает модификаторы класса.
+
+=== Constructors for Class
+
+[.step]
+* Not `private` constructor
+[.step]
+** `getConstructor(Class... types): Constructor`
+** `getConstructors(): Constructors<?>[]`
+* All constructors:
+[.step]
+** `getDeclaredConstructor(Class... types): Constructor`
+** `getDeclaredConstructors(): Constructors<?>[]`
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+Constructor constructor = clazz.getConstructor(String.class);
+Object instance = constructor.newInstance(" Hello World !");
+----
+
+=== Methods for Class
+
+[.step]
+* Открытые методы, в том числе унаследованные:
+[.step]
+** `getMethod(String name, Class... types): Method`
+** `getMethods(): Method[]`
+* Все методы, но только из текущего класса:
+[.step]
+** `getDeclaredMethod(String name, Class... types): Method`
+** `getDeclaredMethods(): Method[]`
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+Method method = clazz.getMethod ("doSomething", int.class);
+Object result = method.invoke(instance, 42);
+----
+
+=== Fields for Class
+
+[.step]
+* Открытые поля, в том числе унаследованные:
+[.step]
+** `getField(String name): Field`
+** `getFields(): Field[]`
+* Все поля, но только из текущего класса:
+[.step]
+** `getDeclaredField(String name): Field`
+** `getDeclaredFields(): Field[]`
+
+=== Annotations
+
+[.step]
 * `getAnnotations(): Annotation[]`
+* `getDeclaredAnnotations(): Annotation[]`
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+Annotation[] annotations = studentClass.getAnnotations();
+Arrays.stream(annotations)
+        .map(a -> a.annotationType().getCanonicalName())
+        .forEach(System.out::println);
+----

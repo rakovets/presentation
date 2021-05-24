@@ -62,7 +62,7 @@
 * link:./java/core/concurrency-thread-synchronization.html[Concurrency. Thread synchronization.]
 * link:./java/core/concurrent-utilities.html[Concurrent utilities (JSR 166).]
 * link:./java/core/annotations.html[Annotations (JSR 250, 269, 308).]
-* link:./java/core/reflection.html[Reflection.]
+* link:./java/core/reflection.html[Reflection API.]
 
 === Course: Core Java
 
