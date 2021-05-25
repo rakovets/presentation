@@ -70,7 +70,7 @@
 * link:./java/core/javadoc.html[Javadoc.]
 * link:./java/core/networking.html[Networking.]
 * link:./java/core/system-classes.html[System Classes.]
-* link:./java/core/jmm.html[JMM.]
+* link:./java/core/garbage-collector.html[Garbage Collector.]
 
 == Course: Java Tools [[course-java-tools]]
 
