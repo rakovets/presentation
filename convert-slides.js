@@ -90,7 +90,9 @@ asciidoctor.convertFile('./java/spring/spring-orm.adoc', options)
 asciidoctor.convertFile('./java/spring/spring-webmvc.adoc', options)
 
 // Common themes
-asciidoctor.convertFile('./common/architectural-patterns.adoc', options)
+asciidoctor.convertFile('./common/application-architecture.adoc', options)
+asciidoctor.convertFile('./common/architectural-patterns/architectural-patterns.adoc', options)
+asciidoctor.convertFile('./common/architectural-patterns/client-server.adoc', options)
 asciidoctor.convertFile('./common/data-structures.adoc', options)
 asciidoctor.convertFile('./common/design-patterns.adoc', options)
 asciidoctor.convertFile('./common/design-principles.adoc', options)

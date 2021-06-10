@@ -136,10 +136,12 @@
 
 * link:./common/design-patterns.html[Design Patterns.]
 * link:./common/i18n.html[i18n.]
-* link:./common/architectural-patterns.html[Architectural Patterns.]
 * link:./common/xml.html[XML.]
 * link:./common/json.html[JSON.]
 * link:./common/yaml.html[YAML.]
+* link:./common/application-architecture.html[Application Architecture.]
+* link:./common/architectural-patterns/architectural-patterns.html[Architectural Patterns.]
+* link:./common/architectural-patterns/client-server.html[Architectural Patterns: Client-Server.]
 * link:./common/scrum.html[Scrum.]
 
 == Course: SQL [[course-sql]]

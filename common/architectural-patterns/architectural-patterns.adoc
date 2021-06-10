@@ -1,4 +1,5 @@
 = Architectural patterns
+:imagesdir: ../../assets/img/common/architectural-patterns/
 
 == Architectural patterns
 
@@ -69,4 +70,4 @@ MVC is a architectural pattern for GUI and Web Applications.
 
 === MVC
 
-image::/assets/img/common/architectural-patterns/mvc.png[Уровень представления]
+image::mvc.png[Уровень представления]
