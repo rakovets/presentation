@@ -142,6 +142,10 @@
 * link:./common/application-architecture.html[Application Architecture.]
 * link:./common/architectural-patterns/architectural-patterns.html[Architectural Patterns.]
 * link:./common/architectural-patterns/client-server.html[Architectural Patterns: Client-Server.]
+
+=== Course: Common
+
+* link:./common/http.html[HTTP]
 * link:./common/scrum.html[Scrum.]
 
 == Course: SQL [[course-sql]]
