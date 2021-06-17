@@ -1,0 +1,53 @@
+= Beans
+
+== Bean scoping
+
+=== Bean scoping
+
+[.step]
+* `singleton` –  тип _bean_, при котором, создается одна сущность на Spring-контейнер (default)
+* `prototype` – тип _bean_, при котором каждый раз создается новая сущность _bean_.
+
+=== Bean scoping
+
+[.step]
+* `request` –  тип _bean_, при котором сущность _bean_ создается одна на _request_. Такой тип _bean_ справедив для `WebSpringContext`.
+* `session` – тип _bean_, при котором сущность _bean_ создается одна на _session_. Такой тип _bean_ справедив для `WebSpringContext`.
+* `global-session` – тип _bean_, при котором сущность _bean_  одна создается на  приложение. Такой тип _bean_  справедлив для контекста портлета.
+
+== Bean lifecycle
+
+=== Bean lifecycle
+
+image:/assets/img/java/spring/bean-initialization.jpg[Bean initialization]
+
+=== Bean lifecycle
+
+image:/assets/img/java/spring/bean-lifecycle.png[Bean lyfecycle]
+
+== Spring Configuration Metadata
+
+=== Spring Configuration Metadata
+
+[.step]
+* XML-based configuration
+* Annotation-based configuration
+* Java-based configuration
+
+== Wiring beans
+
+=== Wiring beans
+
+[.step]
+* factory-method
+* Constructor
+
+== Wiring collections
+
+=== Wiring collections
+
+- `<list>` - собирает коллекцию объектов, позволяет добавлять дубликаты
+- `<set>` -  собирает множество объектов, не позволяет добавлять дубликаты
+- `<map>` - собирает коллекцию объектов вида _key-value_, где _key_ и _value_ могут быть любого типа данных
+- `<props>` -  собирает коллекцию объектов вида _key-value_, где _key_ и _value_ могут быть типа `String`
+

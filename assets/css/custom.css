@@ -1,0 +1,58 @@
+.reveal section.title h1 {
+    font-size: 3em;
+}
+
+.reveal section.title h3 {
+    font-size: 2.5em;
+    margin-top: 2.3em;
+}
+
+.reveal section .slide-content {
+    font-size: 0.8em;
+}
+
+.reveal section .slide-content .colist {
+    font-size: 0.8em;
+}
+
+.reveal section .slide-content img {
+    border: none;
+    box-shadow: none;
+    max-height: 450px;
+}
+
+.reveal h1 code,
+.reveal h2 code,
+.reveal h3 code,
+.reveal p code {
+    color: rgb(200, 0, 0);
+}
+
+.reveal pre code {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    text-transform: none;
+}
+
+p.tableblock {
+    margin: 0;
+    text-align: center;
+    font-size: 0.7em;
+}
+
+.columns .slide-content>.column {
+    --padding-value: 0.75rem;
+    padding: var(--padding-value) !important;
+}
+
+div.column {
+    width: calc(33.3333% - 2* var(--padding-value, 0)) !important;
+}

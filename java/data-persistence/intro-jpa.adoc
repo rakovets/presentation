@@ -1,0 +1,424 @@
+= Intro to Data Persistence
+
+== Why not JDBC?
+
+=== Сложности в работе с БД
+
+[.step]
+* Ручное написание SQL-запросов, создание объектов
+* Проблема со сравнением объектов (по ключу в БД и equals() в Java)
+* Наследование в сущностях
+* Отложенная загрузка данных (lazy loading)
+
+=== Problem
+
+image::/assets/img/java/data-persistence/intro-jpa/problem.jpg[Problem without ORM]
+
+=== Solution
+
+image::/assets/img/java/data-persistence/intro-jpa/solution.jpg[Solution with ORM]
+
+== JPA
+
+=== JPA
+
+[.step]
+* Java Persistence API (JPA)
+* Спецификация Java EE (JSR 220), описывающая:
+[.step]
+** интерфейсы ORM
+** принципы работы с интерфейсами
+** ограничения, накладываемые на доменную модель
+* Не предоставляет реализации ORM
+
+=== JPA Implementations
+
+[.step]
+* *DataNucleus*
+* *EclipseLink*
+* *OpenJPA*
+* *TopLink*
+* *Hibernate*
+
+== Hibernate
+
+=== Hibernate
+
+[.step]
+* Самая популярная реализация JPA
+* Помогает решить большинство проблем, связанных с работой с базой данных
+
+=== Hibernate
+
+image::/assets/img/java/data-persistence/intro-jpa/hibernate-history.png[Hibernate History]
+
+=== Hibernate
+
+image::/assets/img/java/data-persistence/intro-jpa/hibernate.svg[Hibernate]
+
+== POJO
+
+=== POJO
+
+[.step]
+* *POJO* - *Plain Old Java Object*
+* *POJO* - простой Java-объект, не унаследованный от какого-то специфического объекта и не реализующий никаких служебных интерфейсов сверх тех, которые нужны для бизнес-модели.
+* *POJO* - иногда ошибочно используют для объектов классов, которые необходимо сохранять и имеющих набор полей, геттеров, сеттеров.
+
+== Entity
+
+=== Entity
+
+[.step]
+* Класс с набором _fields_, _getters_, _setters_
+* Должен содержать _field_-идентификатор (`@Id`)
+* Должен иметь _constructor_ без параметров
+* Не может быть *inner*, `interface`, `enum`
+* Не может быть `final` и не может содержать `final`-fields
+
+=== Entity
+
+[.step]
+* Может содержать конструкторы с параметрами
+* Может наследоваться и быть наследованным
+* Может содержать другие методы и реализовывать интерфейсы
+* Может быть связан с другими сущностями (один-к-одному, один-ко-многим, многие-ко-многим)
+
+== Use clear JPA (impl: Hibernate)
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.18.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.6.0</version>
+</dependency>
+----
+
+=== Create Entity
+
+[source,java]
+----
+package com.rakovets.course.datapersistence.example;
+
+public class Employee {
+    private int id;
+    private String name;
+    private double salary;
+    private String position;
+
+    public Employee(String name, double salary, String position) {
+        super();
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+    }
+
+    public Employee() {
+        super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+}
+----
+
+=== Mapping Entity
+
+* `resources/META-INF/mapping.xml`:
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+
+    <description>XML Mapping file</description>
+    <entity class="com.rakovets.course.datapersistence.example.Employee">
+        <table name="employee_table"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="TABLE"/>
+            </id>
+            <basic name="name">
+                <column name="employee_name" length="100"/>
+            </basic>
+            <basic name="salary"/>
+            <basic name="position"/>
+        </attributes>
+    </entity>
+</entity-mappings>
+----
+
+=== Configuration
+
+* `resources/META-INF/persistence.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    <persistence-unit name="Hibernate" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <mapping-file>/META-INF/mapping.xml</mapping-file>
+        <class>com.rakovets.course.datapersistence.example.Employee</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/hr"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB10Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+----
+
+=== Use JPA
+
+[source,java]
+----
+public class CreateEmployeeApp {
+    public static void main(String[] args) {
+        Employee employee = new Employee("Dmitry Rakovets", 120000, "Software Engineer");
+
+        EntityManagerFactory entityManagerFactory =
+                Persistence.createEntityManagerFactory("Hibernate");
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(employee);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        entityManagerFactory.close();
+    }
+}
+----
+
+=== Entity lifecycle
+
+image::/assets/img/java/data-persistence/intro-jpa/lifecycle.jpg[JPA lifecycle]
+
+== Use Hibernate
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.18.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.6.0</version>
+</dependency>
+----
+
+=== Configuration
+
+* `resources/hibernate.cfg.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/xsd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/hr</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1234</property>
+        <property name="dialect">org.hibernate.dialect.MariaDB10Dialect</property>
+
+        <mapping class="com.rakovets.course.datapersistence.example.dal.entity.Employee"/>
+    </session-factory>
+</hibernate-configuration>
+----
+
+=== Create Entity
+
+[source,java]
+----
+@Entity
+@Table(name = "employee")
+public class Employee {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue
+    private long id;
+
+    @Column(name = "name")
+    private String name;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+----
+
+== Project Lombok
+
+=== Project Lombok
+
+[.step]
+* _library_
+* позволяет избавиться от *Boilerplate code*:
+[.step]
+** _getters_
+** _setters_
+** `toString()`
+** `hashCode()`
+** `equals()`
+** etc
+
+=== Project Lombok
+
+[.step]
+* изменяет код на этапе компиляции, автоматически генерируя вышеуказанные методы в соответствии с указанными аннотациями
+* Документация: https://projectlombok.org/features/index.html
+
+=== Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.12</version>
+    <scope>provided</scope>
+</dependency>
+----
+
+== Inmemory Database
+
+=== H2
+
+[.step]
+* База данных с возможностью создания схемы в RAM
+* Подходит для написания тестов, так как побочные эффекты тестов не остаются в файловой системе
+
+=== Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>1.4.200</version>
+    <scope>test</scope>
+</dependency>
+----
+
+=== Configuration
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/xsd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.h2.Driver</property>
+        <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="connection.url">jdbc:h2:mem:hr</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1234</property>
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <mapping class="com.rakovets.course.datapersistence.example.dal.entity.Employee"/>
+    </session-factory>
+</hibernate-configuration>
+----
+
+== Log4j
+
+=== Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.13.3</version>
+</dependency>
+----
+
+=== Configuration
+
+* Конфигурация в файле `resources/log4j.properties`
+
+[source,properties]
+----
+log4j.rootLogger=INFO, FILE, CONSOLE
+
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.Target=System.err
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n
+
+log4j.appender.FILE=org.apache.log4j.RollingFileAppender
+log4j.appender.FILE.File=log4j.log
+log4j.appender.FILE.MaxFileSize=512KB
+log4j.appender.FILE.MaxBackupIndex=3
+log4j.appender.FILE.Append=false
+log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
+log4j.appender.FILE.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n
+----

@@ -1,0 +1,87 @@
+= Spring Object/Relational Mapping
+
+== Spring Object/Relational Mapping
+
+=== Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-orm</artifactId>
+    <version>${springframework.version}</version>
+</dependency>
+----
+
+=== Bean for DataSource
+
+[source,xml]
+----
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="url" value="${jdbc.url}"/>
+    <property name="driverClassName" value="${jdbc.driver}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+</bean>
+----
+
+=== Bean for SessionFactory
+
+[source,xml]
+----
+<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan" value="com.rakovets.course.java.spring.orm.dal.entity"/>
+    <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+            <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+            <prop key="hibernate.hbm2ddl.auto">${hibernate.creation_policy}</prop>
+        </props>
+    </property>
+</bean>
+----
+
+=== `database.properties`
+
+[source,properties]
+----
+jdbc.url=jdbc:mariadb://localhost:3306/kingdom
+jdbc.driver=org.mariadb.jdbc.Driver
+jdbc.username=root
+jdbc.password=1234
+
+hibernate.dialect=org.hibernate.dialect.MariaDBDialect
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.creation_policy=update
+----
+
+== Transaction
+
+=== Bean for `TransactionManager`
+
+[source,xml]
+----
+<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+
+<tx:annotation-driven/>
+----
+
+=== Transaction Propagation Levels
+
+[.step]
+* `REQUIRED` – выполняется в текущей транзакции, если транзакции нет – создаёт новую. (default)
+* `SUPPORTS` – выполняется в текущей транзакции, если транзакции нет – выполняется вне транзакции
+* `MANDATORY` – выполняется в текущей транзакции, если транзакции нет – выбрасывает исключение
+* `REQUIRES_NEW` – создаёт новую транзакцию, приостанавливает текущую, если та существует
+
+=== Transaction Propagation Levels
+
+[.step]
+* `NOT_SUPPORTED` – выполняется вне транзакции, приостанавливает текущую, если та существует
+* `NEVER` – выполняется вне транзакции, выбрасывает исключение, если текущая существует
+* `NESTED` – выполняется как встроенная, если существует текущая, либо создаётся новая. Поддерживается не всеми `TransactionManager`

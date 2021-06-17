@@ -1,0 +1,133 @@
+= Git
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как работать с изменяющейся информацией?
+
+[.step]
+* Создавать разные версии?
+* Узнать *что* изменилось?
+* Узнать *кто* изменил?
+* Узнать *когда* изменилось?
+* Узнать *почему* изменилось?
+* Как контролировать права доступа к изменению?
+
+=== Solution
+
+[.fragment]
+*Version Control Systems*
+
+[.fragment]
+image:/assets/img/common/git/logo.png[Git Logo]
+
+== History
+
+=== The Problem of File-Sharing
+
+[.fragment]
+image:/assets/img/common/git/file-sharing-problem.png[The Problem of File-Sharing]
+
+=== The Lock-Modify-Unlock Solution
+
+[.fragment]
+image:/assets/img/common/git/lock-modify-unlock-solution.png[The Lock-Modify-Unlock Solution]
+
+=== The Copy-Modify-Merge Solution
+
+[.fragment]
+image:/assets/img/common/git/copy-modify-merge-solution-1.png[The Copy-Modify-Merge Solution]
+
+=== The Copy-Modify-Merge Solution
+
+[.fragment]
+image:/assets/img/common/git/copy-modify-merge-solution-2.png[The Copy-Modify-Merge Solution]
+
+== Git
+
+=== Git
+
+[.step]
+* *Git* is *Version Control Systems* (*VCS*/*Система контроля версий*)
+* Централизованная система для совместной работы.
+* В её основе лежит *repository* (репозиторий/хранилище), который содержит данные в форме дерева файловой системы – обычной иерархии файлов и директорий.
+
+=== Decentralized but centralized
+
+[.fragment]
+image:/assets/img/common/git/centr-decentr.png[Repository]
+
+=== Install
+
+[.fragment]
+link:https://git-scm.com/downloads[Download: Git]
+
+== Repository
+
+=== Repositories
+
+Repositories:
+[.step]
+* *Local*
+* *Remote* (on Git-hosting)
+
+=== Git hosting
+
+[.step]
+* *GitLab*
+* *GitHub*
+* *Bitbucket*
+
+=== Main possibilities
+
+[.fragment]
+image:/assets/img/common/git/repositories.png[Main commands]
+
+=== Main commands
+
+[.fragment]
+image:/assets/img/common/git/stages.png[Main commands]
+
+== Branches
+
+=== Main branches
+
+[.fragment]
+image:/assets/img/common/git/main-branches.png[Main branches]
+
+=== Feature branches
+
+[.fragment]
+image:/assets/img/common/git/feature-branches.png[Feature branches]
+
+=== Example
+
+[.fragment]
+image:/assets/img/common/git/branch.png[Branches]
+
+=== Flow
+
+[.fragment]
+image:/assets/img/common/git/git-flow.png[Git flow]
+
+== Setting in IntelliJ IDEA
+
+=== VC Setting
+
+[.fragment]
+image:/assets/img/common/git/ij-setting-vc.png[VC Setting]
+
+=== GitHub Setting
+
+[.fragment]
+image:/assets/img/common/git/ij-setting-vc.png[GitHub Setting]
+
+== Links
+
+=== Links
+
+* link:https://git-scm.com/book/ru/v2[Справочник.]
+* link:https://githowto.com/ru[Git How To.]
+* link:https://habrahabr.ru/blogs/Git/106912/[Удачная модель ветвления для Git.]

@@ -1,0 +1,180 @@
+= Wrapper Classes
+:imagesdir: ../../assets/img/java/core/
+
+== Intro
+
+=== Problem
+
+[.step]
+* Есть представление числа в виде строки. Как его сделать числом?
+* Как работать в различных системах счисления?
+* Что если мне нужен примитивный тип, но что бы с ним можно работать как с объектом?
+
+=== Solution
+
+[.step]
+* *Wrapper Classes*
+
+== Wrapper Classes
+
+=== Wrapper Classes
+
+[.fragment]
+image:wrapper-classes-hierarhy.jpg[Wrapper Classes Hierarhy]
+
+=== Wrapper Classes
+
+[options="header"]
+|===
+|Примитивный тип|Оболочка|Аргументы конструктора
+|`boolean`|`Boolean`|`boolean` or `String`
+|`byte`|`Byte`|`byte` or `String`
+|`char`|`Character`|`char`
+|`double`|`Double`|`double` or `String`
+|`float`|`Float`|`float`, double, or `String`
+|`int`|`Integer`|`int` or `String`
+|`long`|`Long`|`long` or `String`
+|`short`|`Short`|`short` or `String`
+|===
+
+=== Wrapper Classes
+
+[.step]
+* Объекты классов оболочек не могут принимать участия в арифметических операциях и по умолчанию получают значение `null`.
+* Переменную базового типа можно преобразовать к соответствующему объекту.
+* Для приведения объектов к другому типу используются методы `valueOf()`, `toString()` и др.
+* Объекты класса могут быть преобразованы к базовому типу методами `intValue()`, `digit()`, `longValue()` и др.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Float f = new Float(10.01); // double в Float
+String s1 = Float.toString(0f); // float в String
+String s2 = String.valueOf(f); // Float в String
+Byte b = Byte.valueOf("120"); // String в Byte
+double d = b.doubleValue(); // Byte в double
+short s = (short) d; // double в short
+Character ch = new Character('3');
+int i = Character.digit(ch.charValue(), 10);
+System.out.println("s1=" + s1 + ", s2=" + s2);
+System.out.println("b=" + b + ", s=" + s + ", d=" + d + ", i=" + i);
+----
+
+=== Output
+
+[.fragment]
+----
+s1=0.0, s2=10.01
+b=120, s=120, d=120.0, i=3
+----
+
+=== Principles
+
+[.step]
+* Метод `valueOf()` не всегда создает новый объект.
+* Он кэширует следующие значения:
+[.step]
+** `Boolean`,
+** `Byte`,
+** `Character` от `\u0000` до `\u007f` (`7f` это `127`),
+** `Short` и `Integer` от `-128` до `127`.
+
+=== Principles
+
+[.step]
+* *Autoboxing* происходит при прямом присвоении примитива классу-обертке (с помощью оператора `=`), либо при передаче примитива в параметры метода.
+* *Unboxing* происходит при прямом присвоении классу-обертке примитива.
+* Компилятор использует метод `valueOf()` для упаковки, а методы `intValue()`, `doubleValue()` и так далее, для распаковки.
+* *Autoboxing* в *классы-обертки* могут быть подвергнуты как переменные примитивных типов, так и литералы.
+
+=== Autoboxing/Unboxing
+
+[.step]
+* Допускается участие объектов в арифметических операциях, однако не следует этим злоупотреблять, поскольку *Autoboxing*/*Unboxing* является ресурсоемким процессом.
+
+[.fragment]
+[source,java]
+----
+Integer j = 71; // создание объекта + упаковка
+Integer k = ++j; //распаковка + операция + упаковка
+int i = 2;
+k = i + j + k;
+----
+
+=== Comparing wrapper classes
+
+[.step]
+* Несмотря на то, что значения базовых типов могут быть присвоены объектам классов-оболочек, сравнение объектов между собой происходит по ссылкам.
+
+[.fragment]
+[source,java]
+----
+int i = 1282;
+Integer oa = i; //создание объекта+упаковка
+Integer ob = i;
+System.out.println(oa == i); // true
+System.out.println(ob == i); // true
+System.out.println(oa == ob); // false (ссылки разные)
+System.out.println(oa.equals(i)); // true
+System.out.println(ob.equals(i)); // true
+System.out.println(oa.equals(ob)); // true
+----
+
+=== Other
+
+[.step]
+* При инициализации объекта класса-оболочки значением базового типа преобразование типов необходимо указывать явно.
+
+[.fragment]
+[source,java]
+----
+Float f = 1; // compile error
+----
+
+[.fragment]
+[source,java]
+----
+Float f = (float) 1;
+----
+
+=== Other
+
+[.step]
+* Возможно создавать объекты и массивы, сохраняющие различные базовые типы без взаимных преобразований, с помощью ссылки на класс `Number`.
+
+[.fragment]
+[source,java]
+----
+Number n1 = 2;
+Number n2 = 2.1;
+Number[] array = {21, 2.1, 2L};
+----
+
+[.step]
+* При *Autoboxing* значения базового типа возможны ситуации с появлением некорректных значений и непроверяемых ошибок.
+* Переменная базового типа всегда передается в метод по значению, а переменная класса-оболочки – по ссылке.
+
+== Number
+
+=== Number
+
+[.step]
+* Некоторые классы являются наследниками абстрактного класса `Number`
+* Они реализуют интерфейс `Comparable`, представляющий собой интерфейс для сравнения объектов данного типа
+
+=== Methods
+
+[.step]
+* `int intValue()`
+* `long longValue()`
+* `float floatValue()`
+* `double doubleValue()`
+* `byte byteValue()`
+* `short shortValue()`
+
+=== Как решить проблему с плавающей запятой?
+
+[.step]
+* Java включает два класса для работы с высокоточной арифметикой: `BigInteger` и `BigDecimal`, которые поддерживают целые числа и числа с фиксированной точкой произвольной точности.

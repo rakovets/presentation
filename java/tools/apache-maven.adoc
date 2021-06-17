@@ -1,0 +1,675 @@
+= Apache Maven
+
+== Why Apache Maven?
+
+=== Then
+
+All manual
+
+[.step]
+* *create* project structure
+* *search* and *download* _dependencies_
+* *compile*
+* *run* _tests_
+* *build* _artifacts_ (_jar_, _war_)
+* *deploy* to _web-server_/_application server_/_servlet container_
+
+=== Now
+
+All auto
+
+[.step]
+* *generate* project structure
+* *search* and *download* _dependencies_
+* *compile*
+* *run* _tests_
+* *build* _artifacts_ (_jar_, _war_)
+* *deploy* to _web-server_/_application server_/_servlet container_
+
+== Install and Setting
+
+=== Install and Setting
+
+[.step]
+* download binary archive (https://maven.apache.org/download.cgi)
+* check environment variable `JAVA_HOME` with CLI command `echo %JAVA_HOME%`/`echo $JAVA_HOME`
+* add path for directory `bin` of Apache Maven to environment variable `PATH`
+* check installation with CLI command `mvn -v`
+
+== Create new project
+
+=== Create new project
+
+[.step]
+* Запустите консоль (cmd в windows)
+* Запустите следующую CLI команду: `mvn archetype:generate`
+[.step]
+** При первом запуске: будет отображен статус скачивания
+** При последующих запусках: будет отображен список archetypes
+* Выбираем archetype по умолчанию (с именем `maven-archetype-quickstart`)
+* Вводим/выбираем небходимые значения для проекта
+* Смотрим структуру проекта
+
+=== Archetype generate
+
+[source,stdout]
+----
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1637:
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version:
+1: 1.0-alpha-1
+2: 1.0-alpha-2
+3: 1.0-alpha-3
+4: 1.0-alpha-4
+5: 1.0
+6: 1.1
+7: 1.3
+8: 1.4
+Choose a number: 8:
+...
+Define value for property 'groupId': com.rakovets
+Define value for property 'artifactId': apache-maven
+Define value for property 'version' 1.0-SNAPSHOT: :
+Define value for property 'package' com.rakovets: :
+Confirm properties configuration:
+groupId: com.rakovets
+artifactId: apache-maven
+version: 1.0-SNAPSHOT
+package: com.rakovets
+ Y: : y
+----
+
+=== Archetype generate
+
+[.step]
+* `groupId` - иерархического расположения проекта в Maven-repository
+* `artifactId` - идентификатор проекта
+* `version` - версия проекта
+
+
+=== Project structure
+
+[source,sh]
+----
+$ tree apache-maven/
+apache-maven/
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── rakovets
+    │               └── App.java
+    └── test
+        └── java
+            └── com
+                └── rakovets
+                    └── AppTest.java
+
+9 directories, 3 files
+----
+
+=== `pom.xml`
+
+[.step]
+* *POM* – *Project Object Model*
+* Основной конфигурационный файл для Maven-приложения или модуля
+* Содержит настройки:
+[.step]
+** общие для проекта
+** зависимостей
+** плагинов
+** профилей
+** и т.д.
+
+== Practice
+
+[.step]
+* add dependencies
+* add plugins
+* `mvn clean`
+* `mvn compile`
+* `mvn test`
+* `mvn package`
+
+== Apache Maven Concept
+
+=== Project Object Model (POM)
+
+image::/assets/img/java/tools/apache-maven/pom.png[POM]
+
+=== Project Object Model (POM)
+
+[source,xml]
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Basic -->
+    <groupId>...</groupId>
+    <artifactId>...</artifactId>
+    <version>...</version>
+    <packaging>...</packaging>
+    <dependencies>...</dependencies>
+    <parent>...</parent>
+    <dependencyManagement>...</dependencyManagement>
+    <modules>...</modules>
+    <properties>...</properties>
+
+    <!-- Setting for build/reporting -->
+    <build>...</build>
+    <reporting>...</reporting>
+
+    <!-- Metadata for project -->
+    <name>....</name>
+    <description>...</description>
+    <organization>...</organization>
+
+    <!-- Development environment -->
+    <repositories>...</repositories>
+    <pluginRepositories>...</pluginRepositories>
+    <profiles>...</profiles>
+</project>
+----
+
+=== Apache Maven Concept
+
+[.step]
+* Phase
+* Plugin
+* Goal
+* Artifact
+* Repository
+
+=== Apache Maven Concept
+
+[.step]
+* Dependency
+[.step]
+** Dependency
+** Parent
+** Module
+* Profile
+* Property
+
+== Lifecycle
+
+=== Maven Flow
+
+image::/assets/img/java/tools/apache-maven/flow.jpg[Apache Maven Flow]
+
+=== Build Life Cycles
+
+Maven provides three build-in build life cycles:
+
+[.step]
+- *default* - project deployment (`mvn`)
+- *clean* - project cleaning (`mvn clean`)
+- *site* - site documentation (`mvn site`)
+
+=== Build Phases
+
+The default-lifecycle executes the following build phases:
+
+[.step]
+- `validate` - validates the consistency of the project
+- `compile` - compiles the source code
+- `test` - runs the (local) tests
+- `package` - packages the compiled and tested code
+- `verify` - runs integration tests on the packaged software
+- `install` - pushes the package to the local Maven repository
+- `deploy` - deploys the final package to the remote repository
+
+=== Lifecycle
+
+image::/assets/img/java/tools/apache-maven/lifecycle.jpg[Apache Maven Lifecycle]
+
+=== Full lifecycle
+
+image::/assets/img/java/tools/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
+http://localhost:3000/assets/img/java/tools/apache-maven/lifecycle-full.png[Apache Maven Full Lifecycle]
+
+== Plugins
+
+=== Plugin
+
+Плагин - дополнение maven, позволяющее расширить его функциональные возможности, а также произвести конфигурацию отдельных этапов жизненного цикла
+
+=== Example
+
+Использование `maven-compiler-plugin`
+
+[source,xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+        <source>1.8</source>
+        <target>1.8</target>
+    </configuration>
+</plugin>
+----
+
+== Artifact
+
+=== Artifacts
+
+image::/assets/img/java/tools/apache-maven/artifacts.png[Artifacts]
+
+=== Artifacts
+
+[.step]
+- `jar`
+- `war`
+- `ear`
+- `pom`
+
+== Repository
+
+=== Repository
+
+[.step]
+* *Local* (`~/.m2/repository`)
+* *Remote* (some server)
+[.step]
+** _Internal_ (organization repository, examples: *JFrog Artifactory*, *Sonatype Nexus*, etc)
+** _External_ (examples: https://jcenter.bintray.com/)
+** _Central_ (https://repo1.maven.org/maven2/)
+
+=== Repository
+
+image::/assets/img/java/tools/apache-maven/repositories.jpg[Repositories]
+
+== POM Relationships
+
+=== Dependencies
+
+[source,xml]
+----
+<project>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.2</version>
+            <scope>test</scope>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+</project>
+----
+
+=== Multi-Module
+
+[source,xml]
+----
+<project>
+    ...
+    <modules>
+        <module>project1</module>
+        <module>project2</module>
+        ...
+    </modules>
+    ...
+</project>
+----
+
+=== Inheritance (Parent POM)
+
+[source,xml]
+----
+<project>
+    <groupId>com.rakovets</groupId>
+    <artifactId>project</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    ...
+    <modules>
+        <module>project1</module>
+        <module>project2</module>
+        ...
+    </modules>
+    ...
+</project>
+----
+
+=== Inheritance (Child POM)
+
+[source,xml]
+----
+<project>
+    <groupId>com.rakovets</groupId>
+    <artifactId>project1</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+    ...
+    <parent>
+        <groupId>com.rakovets</groupId>
+        <artifactId>project</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    ...
+</project>
+----
+
+=== Enable Dependency Management in Parent Project
+
+[source,xml]
+----
+<project>
+    ...
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.6.2</version>
+                <scope>test</scope>
+            </dependency>
+            ...
+        </dependencies>
+    </dependencyManagement>
+    ...
+</project>
+----
+
+=== Use Dependency in Submodules
+
+[source,xml]
+----
+<project>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+</project>
+----
+
+== Property
+
+=== Property
+
+Type properties:
+[.step]
+* объявленные внутри pom.xml
+* предопределённые переменные.
+* объявленные во внешнем файле
+
+=== Переменные объявленные внутри `pom.xml`
+
+[source,xml]
+----
+<project>
+    ...
+    <properties>
+        <temp.directory>/tmp</temp.directory>
+        <jetty.version>6.1.25</jetty.version>
+    </properties>
+
+    <dependency>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty</artifactId>
+        <version>${jetty.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-util</artifactId>
+        <version>${jetty.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-management</artifactId>
+        <version>${jetty.version}</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <build>
+        <outputDirectory>${temp.directory}<outputDirectory>
+    </build>
+    ...
+</project>
+----
+
+=== Предопределёные переменные
+
+Предопределённые переменные можно разделить на несколько видов.
+
+[.step]
+* *Встроенные свойства*:
+[.step]
+** `${basedir}` - путь к директории с `pom.xml`
+** `${version}`/${project.version}/${pom.version} - версия *artifact*
+
+=== Предопределёные переменные
+
+[.step]
+* *Свойства проекта*:
+[.step]
+** `${project.build.directory}`/`${pom.project.build.directory}` - путь к директории для сборки (default: `target`)
+** `${project.build.outputDirectory}` - путь к директории для скомпилированых классов, (default: `target/classes`)
+** `${project.name}`/`${pom.name}` - имя проекта
+** `${project.version}`/`${pom.version}` - версия проекта
+
+=== Предопределёные переменные
+
+[.step]
+* *Настройки пользователя* (из `~/.m2/settings.xml`):
+[.step]
+** `${settings.localRepository}` путь к локальному репозиторию пользователя
+* *Переменные окружения*:
+[.step]
+** `${env.M2_HOME}`
+** `${java.home}`
+
+=== Предопределёные переменные
+
+[.step]
+* *Системные свойства System.properties*
+[.step]
+** Доступ к системным свойствам возможен напрямую. Для просмотра переменных можно воспользоваться `maven-echo-plugin`.
+
+=== Переменные объявленные во внешнем файле
+
+[source,xml]
+----
+<project>
+    ...
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>maven-properties-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+            <execution>
+                <phase>initialize</phase>
+                <goals>
+                    <goal>read-project-properties</goal>
+                </goals>
+                <configuration>
+                    <files>
+                        <file>src/config/app.properties</file>
+                    </files>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    ...
+</project>
+----
+
+== Profile
+
+=== Profile
+
+*Profile* - это настройки, описанные в `pom.xml`, которые могут быть запущены когда необходимо.
+
+=== Profile
+
+Способы запуска *profiles*:
+
+[.step]
+* *CLI*
+* `~/.m2/settings.xml`
+* *system property*
+
+=== Profile with *CLI*
+
+[source,xml]
+----
+<project>
+    ...
+    <profiles>
+        <profile>
+            <id>dev</id>
+            ...
+        </profile>
+    </profiles>
+</project>
+----
+
+=== Profile with *CLI*
+
+[source,sh]
+----
+mvn test -P dev
+----
+
+=== Profile with `~/.m2/settings.xml`
+
+[source,xml]
+----
+<settings>
+    ...
+    <activeProfiles>
+        <activeProfile>test</activeProfile>
+    </activeProfiles>
+    ...
+</settings>
+----
+
+=== Profile with `~/.m2/settings.xml`
+
+[source,sh]
+----
+mvn test
+----
+
+=== Profile with *system property*
+
+[source,xml]
+----
+<project>
+    ...
+    <profiles>
+        <profile>
+            <activation>
+                <property>
+                    <name>environment</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            ...
+        </profile>
+        ...
+    </profiles>
+</project>
+----
+
+=== Profile with *system property*
+
+[source,sh]
+----
+mvn test -Denvironment=dev
+----
+
+== Install custom library
+
+=== Install custom library
+
+https://downloads.mariadb.com/Connectors/java/connector-java-2.6.1/mariadb-java-client-2.6.1.jar
+
+[source,sh]
+----
+mvn install:install-file \
+    -Dfile=mariadb-java-client-2.6.1.jar \
+    -DgroupId=org.mariadb \
+    -DartifactId=mariadb-java-client \
+    -Dversion=2.6.1 \
+    -Dpackaging=jar \
+    -DgeneratePom=true
+----
+
+=== Install custom library
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.mariadb</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.6.1</version>
+</dependency>
+----
+
+== `maven-dependency-plugin`
+
+=== `maven-dependency-plugin`
+
+[source,xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>2.5.1</version>
+    <configuration>
+        <outputDirectory>
+            ${project.build.directory}/lib/
+        </outputDirectory>
+        <overWriteReleases>false</overWriteReleases>
+        <overWriteSnapshots>false</overWriteSnapshots>
+        <overWriteIfNewer>true</overWriteIfNewer>
+    </configuration>
+    <executions>
+        <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+                <goal>copy-dependencies</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+----
+
+=== `maven-dependency-plugin` options
+
+[.step]
+* `outputDirectory` - определение директории, в которую будут копироваться зависимости
+* `overWriteReleases` - флаг необходимости перезаписывания зависимостей при создании *RELEASE* (default: `false`)
+* `overWriteSnapshots` - флаг необходимости перезаписывания неокончательных зависимостей, в которых присутствует *SNAPSHOT* (default: `false`)
+* `overWriteIfNewer` - флаг необходимости перезаписывания библиотек с наличием более новых версий (default: `true`)
+
+=== `maven-dependency-plugin` goals
+
+[.step]
+* `mvn dependency:analyze` - анализ зависимостей (используемые, неиспользуемые, указанные, неуказанные)
+* `mvn dependency:analyze-duplicate` - определение дублирующиеся зависимостей
+* `mvn dependency:resolve` - разрешение (определение) всех зависимостей
+
+=== `maven-dependency-plugin` goals
+
+[.step]
+* `mvn dependency:resolve-plugin` - разрешение (определение) всех плагинов
+* `mvn dependency:tree` - вывод на экран дерева зависимостей
+* `mvn dependency:copy-dependencies` - копирует зависимости

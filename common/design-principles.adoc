@@ -1,0 +1,167 @@
+= Design Principles
+
+== Intro
+
+=== Problem
+
+[.fragment]
+How to write code that:
+[.step]
+- easy to maintain
+- easy to read
+- very flexible
+
+=== Solution
+
+[.fragment]
+Use the experience of other software engineers:
+[.fragment]
+*Design Principles*
+
+== Common Design Principles
+
+=== DRY (Don’t Repeat Yourself)
+
+[.fragment]
+This principle states that each small pieces of knowledge (code) may only occur exactly once in the entire system. This helps us to write scalable, maintainable and reusable code.
+
+[.fragment]
+Example – Asp.Net MVC framework works on this principle.
+
+=== KISS (Keep it simple, Stupid!)
+
+[.fragment]
+This principle states that try to keep each small piece of software simple and unnecessary complexity should be avoided. This helps us to write easy maintainable code.
+
+=== YAGNI (You aren't gonna need it)
+
+[.fragment]
+This principle states that always implement things when you actually need them never implements things before you need them.
+
+== Principles of Object-Oriented Design(OOD)
+
+=== Problem
+
+[.step]
+* Poor dependency managment
+
+=== Principles of **class design**: SOLID
+
+[.fragment]
+|===
+|*SRP*|*Single Responsibility Principle*|A class should have one, and only one, reason to change.
+|*OCP*|*Open Closed Principle*|You should be able to extend a classes behavior, without modifying it.
+|*LSP*|*Liskov Substitution Principle*|Derived classes must be substitutable for their base classes.
+|*ISP*|*Interface Segregation Principle*|Make fine grained interfaces that are client specific.
+|*DIP*|*Dependency Inversion Principle*|Depend on abstractions, not on concretions.
+|===
+
+=== Principles are about **package cohesion**
+
+[.fragment]
+The first three package principles are about *package cohesion*, they tell us what to put inside packages:
+
+[.fragment]
+|===
+|*REP*|*Release Reuse Equivalency Principle*|The granule of reuse is the granule of release.
+|*CCP*|*Common Closure Principle*|Classes that change together are packaged together.
+|*CRP*|*Common Reuse Principle*|Classes that are used together are packaged together.
+|===
+
+=== Principles are about **couplings between packages**
+
+[.fragment]
+The last three principles are about the *couplings between packages*, and talk about metrics that evaluate the package structure of a system.
+
+[.fragment]
+|===
+|*ADP*|*Acyclic Dependencies Principle*|The dependency graph of packages must have no cycles.
+|*SDP*|*Stable Dependencies Principle*|Depend in the direction of stability.
+|*SAP*|*Stable Abstractions Principle*|Abstractness increases with stability.
+|===
+
+== SOLID
+
+=== SOLID
+
+[.step]
+* *SOLID* - принцип дизайна классов, которые будет легко поддерживать и расширять в течение долгого времени.
+* *S.O.L.I.D* is an acronym for the *first five object-oriented design(OOD)* principles by Robert C. Martin, popularly known as Uncle Bob.
+[.step]
+** *SRP* (single responsibility principle)
+** *OCP* (open–closed principle
+** *LSP* (Liskov substitution principle)
+** *ISP* (interface segregation principle)
+** *DIP* (dependency inversion principle)
+
+=== SRP
+
+[.fragment]
+image::/assets/img/common/design-principles/solid/SRP.jpg[SRP]
+
+[.fragment]
+Просто потому, что ты можешь, не значит, что ты должен.
+
+=== SRP (Принцип единственной ответственности)
+
+[.step]
+* У компонента в системе должна быть одна ответственность.
+* Это не означает, что компонент должен делать только что-то одно.
+
+=== OCP
+
+[.fragment]
+image::/assets/img/common/design-principles/solid/OCP.jpg[OCP]
+
+[.fragment]
+При надевании пальто не требуется операция на открытой груди.
+
+=== OCP (Принцип открытости/закрытости)
+
+[.step]
+* Программные компоненты должны быть открыты для расширения, но закрыты для изменения
+* Необходимо стремиться к тому, чтобы менять поведение компонента, не меняя кода базового класса.
+* При этом дизайн системы должен быть простым и устойчивым к изменениям за счет абстракции с инкапсуляцией и наследованием.
+* Необходимо поддерживать баланс между гибкостью изменения и скоростью разработки
+
+=== LSP
+
+[.fragment]
+image::/assets/img/common/design-principles/solid/LSP.jpg[LSP]
+
+[.fragment]
+Если оно похоже на утку, крякает как утка, но нужны батарейки - вероятно, у вас неправильная абстракци.
+
+=== LSP (Принцип подстановки Лисков)
+
+[.step]
+* Функции, использующие базовый тип, должны иметь возможность использовать подтипы базового типа не зная об этом
+* ИЛИ: тип `A` будет подтипом `B` тогда и только тогда, когда в любом месте программы `B` можно заменить на `A`.
+
+=== ISP
+
+[.fragment]
+image::/assets/img/common/design-principles/solid/ISP.jpg[ISP]
+
+[.fragment]
+Вы хотите, чтобы я подключил это? Только куда и как?
+
+=== ISP (Принцип разделения интерфейса)
+
+[.step]
+* Клиенты не должны зависеть от методов, которые они не используют
+* ИЛИ: если какой-то метод интерфейса не используется клиентом, то изменения этого метода не должны приводить к необходимости внесения изменений в клиентский код.
+
+=== DIP
+
+[.fragment]
+image::/assets/img/common/design-principles/solid/DIP.jpg[DIP]
+
+[.fragment]
+Вы бы припаяли лампу прямо к розетке в стене?
+
+=== DIP (Принцип инверсии зависимостей)
+
+[.step]
+* Класс не должен зависеть от другого класса, они оба должны зависеть от абстракции (интерфейса)
+* применим в большинстве случаев, но не везде.

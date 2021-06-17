@@ -1,0 +1,86 @@
+= System Classes
+:imagesdir: ../../assets/img/java/core/system-classes
+
+== System Classes
+
+[.step]
+* `ClassLoader` – загрузчик классов; отвечает за загрузку описания классов в память *JVM*;
+* `SecurityManager` – менеджер безопасности; содержит различные методы проверки допустимости запрашиваемой операции;
+* `System` – содержит набор полезных статических полей и методов;
+* `Runtime` – позволяет приложению взаимодействовать со средой исполнения;
+* `Process` – представляет интерфейс для взаимодействия с внешней программой, запущенной при помощи `Runtime`.
+
+== `ClassLoader`
+
+=== `ClassLoader`
+
+[.step]
+* Базовый загрузчик (*bootstrap*).
+* Загрузчик расширений (*extension*).
+* Системный загрузчик (*system*/*application*).
+
+=== `ClassLoader`
+
+[.fragment]
+image:jvm-classloader-hierarchy.png[JVM ClassLoader Hierarchy]
+
+=== `ClassLoader`
+
+[.fragment]
+image:jvm-classloader-workflow.png[JVM ClassLoader Workflow]
+
+=== `ClassLoader`
+
+[.step]
+* `ClassLoader` – Это абстрактный класс, ответственный за загрузку типов.
+* `defineClass()` преобразует массив байт в экземпляр класса `Class`.
+* `newInstance()` - создает экземпляр класса.
+* `Class findClass(String className)` – возвращает объект типа `Class`
+* `byte[] loadClassData(String className)` – используется для загрузки описания класса
+
+=== Example `ClassLoader`
+
+[.fragment]
+[source,java]
+----
+public class NetworkClassLoader extends ClassLoader {
+    String host;
+    int port;
+
+    public NetworkClassLoader(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
+
+    public Class findClass(String className) {
+        byte[] bytes = loadClassData(className);
+        return defineClass(className, bytes, 0, bytes.length);
+    }
+
+    private byte[] loadClassData(String className) {
+        byte[] result = null;
+        // open connection, load the class data
+        return result;
+    }
+}
+----
+
+=== Example `ClassLoader`
+
+[.fragment]
+[source,java]
+----
+public static void classLoaderDemo() {
+    try {
+        ClassLoader loader =
+             new NetworkClassLoader("www.tut.by", 8080);
+        Object main = loader.loadClass("Main").newInstance();
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    } catch (InstantiationException e) {
+        e.printStackTrace();
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    }
+}
+----

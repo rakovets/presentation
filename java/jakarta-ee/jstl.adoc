@@ -1,0 +1,392 @@
+= *taglib* and JSTL
+
+== Intro
+
+=== Intro
+
+[.step]
+* Possitive:
+** Java-кода в JSP-страницах
+* Negative:
+** Java-кода в JSP-страницах
+
+=== JavaEE Web history
+
+image::/assets/img/java/jakarta-ee/jstl/javaee-web-history.png[Java for Web history]
+
+== *taglib*
+
+=== How create?
+
+[.step]
+* design *tag handler class*
+* design XML-file (*Tag Library Descriptor*)
+* register in descriptor `web.xml`
+* set file placement *TLD* in JSP with directive `taglib`
+
+=== Interface `Tag`
+
+[.step]
+* `setter()` методы для инициализации переменных
+* `doStartTag()` определяет начало обработки действия тега
+* `doEndTag()` определяет окончание обработки действия тега
+* `doFinally()` определяет окончание обработки действия тега при использовании интерфейса `try .. catch .. finally`
+
+=== Interface `IterationTag`
+
+[.step]
+* `doAfterBody()`
+
+=== Interface `BodyTag`
+
+[.step]
+* `setBodyContent(BodyContent)`
+* `doInitBody()`
+
+=== `NumberFormatterTag.java`
+
+[source,java]
+----
+package com.rakovets.jsp.customtags;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.SkipPageException;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+public class NumberFormatterTag extends SimpleTagSupport {
+    private String format;
+    private String number;
+
+    public NumberFormatterTag() {
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    @Override
+    public void doTag() throws JspException, IOException {
+        System.out.println("Number is:" + number);
+        System.out.println("Format is:" + format);
+        try {
+            double amount = Double.parseDouble(number);
+            DecimalFormat formatter = new DecimalFormat(format);
+            String formattedNumber = formatter.format(amount);
+            getJspContext().getOut().write(formattedNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // stop page from loading further by throwing SkipPageException
+            throw new SkipPageException("Exception in formatting " + number
+                    + " with format " + format);
+        }
+    }
+}
+----
+
+=== `numberformatter.tld`
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <description>Number Formatter Custom Tag</description>
+    <tlib-version>2.1</tlib-version>
+    <short-name>mytags</short-name>
+    <uri>https://rakovets.com/jsp/tlds/mytags</uri>
+    <tag>
+        <name>formatNumber</name>
+        <tag-class>com.rakovets.jsp.customtags.NumberFormatterTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>format</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>number</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+</taglib>
+----
+
+=== `web.xml`
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
+        version="3.0">
+    <display-name>JSPCustomTags</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>https://rakovets.com/jsp/tlds/mytags</taglib-uri>
+            <taglib-location>/WEB-INF/numberformatter.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+</web-app>
+----
+
+=== `index.jsp`
+
+[source,jsp]
+----
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Custom Tag Example</title>
+    <%@ taglib uri="https://rakovets.com/jsp/tlds/mytags" prefix="mytags" %>
+</head>
+<body>
+    <h2>Number Formatting Example</h2>
+    <mytags:formatNumber number="100050.574" format="#,###.00"/><br><br>
+    <mytags:formatNumber number="1234.567" format="$# ###.00"/><br><br>
+    <p><strong>Thanks You!!</strong></p>
+</body>
+</html>
+----
+
+== JSTL
+
+=== JSTL
+
+[.step]
+* JSP Standard Tag Library
+* избавляет от Java-кода в JSP-страницах
+* позволяют организовать условные выражения и циклы внутри страниц
+* для работы необходима соответствующая библиотека
+
+=== How enable in jsp?
+
+Подключаются с помощью директивы:
+
+[source,jsp]
+----
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+----
+
+=== Types
+
+[.step]
+* *Core Tags* позволяют использовать условные операции и циклы без необходимости использовать Java
+* *Formatting tags* содержат механизм интернационализации приложения
+* *SQL tags* содержат инструменты для работы с SQL-запросами
+* *XML tags* содержат инструменты для обработки XML
+* *JSTL Functions* содержат инструменты для разбора/форматирования строк
+
+== Core Tags
+
+=== Core Tags
+
+[.step]
+* `<c:out>`
+* `<c:set>`
+* `<c:remove>`
+* `<c:catch>`
+* `<c:if>`
+* `<c:choose>`
+* `<c:when>`
+
+=== Core Tags
+
+[.step]
+* `<c:otherwise >`
+* `<c:import>`
+* `<c:forEach >`
+* `<c:forTokens>`
+* `<c:param>`
+* `<c:redirect >`
+* `<c:url>`
+
+== Examples
+
+=== Установка значения
+
+Значение переменной:
+[source,jsp]
+----
+<c:set var="language" value="en_US" scope="request"/>
+----
+
+Значение поля объекта:
+
+[source,jsp]
+----
+<c:set target="book" property="name" value="Зелёная миля"/>
+----
+
+=== Вывод данных
+
+Вывод данных:
+
+[source,jsp]
+----
+<c:out value="Какой-то текст"/>
+<c:out value="${book.name}"/>
+----
+
+=== Условные выражения
+
+[source,jsp]
+----
+<c:if test="${условие}">
+    Выводимый результат
+</c:if>
+----
+
+Пример:
+
+[source,jsp]
+----
+<c:if test="${book.name not empty}">
+    <span>${book.name}</span>
+</c:if>
+----
+
+=== Условные выражения
+
+[source,jsp]
+----
+<c:choose>
+    <c:when test="${ book.author eq 'Pushkin'}">
+        Российская классика
+    </c:when>
+    <c:when test="${ book.author eq 'Dickens'}">
+        Английская классика
+    </c:when>
+    <c:otherwise>
+        Мировая классика
+    </c:otherwise>
+</c:choose>
+----
+
+=== Циклы
+
+[source,jsp]
+----
+<c:forEach var="book" items="${request.books}">
+    <p>${book.name} by ${book.authorName}</p>
+</c:forEach>
+
+<c:forEach var="bookId" begin="1" end="10">
+    <p>${books[bookId].name}</p>
+</c:forEach>
+----
+
+== Formatting tags
+
+=== Formatting tags
+
+[.step]
+* `<fmt:formatNumber>`
+* `<fmt:parseNumber>`
+* `<fmt:formatDate>`
+* `<fmt:parseDate>`
+* `<fmt:bundle>`
+* `<fmt:setLocale>`
+
+=== Formatting tags
+
+[.step]
+* `<fmt:setBundle>`
+* `<fmt:timeZone>`
+* `<fmt:setTimeZone>`
+* `<fmt:message>`
+* `<fmt:requestEncoding>`
+
+== SQL tags
+
+=== SQL tags
+
+[.step]
+* `<sql:setDataSource>`
+* `<sql:query>`
+* `<sql:update>`
+* `<sql:param>`
+* `<sql:dateParam>`
+* `<sql:transaction>`
+
+== XML tags
+
+=== XML tags
+
+[.step]
+* `<x:out>`
+* `<x:parse>`
+* `<x:set>`
+* `<x:if>`
+* `<x:forEach>`
+
+=== XML tags
+
+[.step]
+* `<x:choose>`
+* `<x:when>`
+* `<x:otherwise>`
+* `<x:transform>`
+* `<x:param>`
+
+== JSTL Functions
+
+=== JSTL Functions
+
+[.step]
+* `fn:contains()`
+* `fn:containsIgnoreCase()`
+* `fn:endsWith()`
+* `fn:escapeXml()`
+* `fn:indexOf()`
+* `fn:join()`
+* `fn:length()`
+* `fn:replace()`
+
+=== JSTL Functions
+
+[.step]
+* `fn:split()`
+* `fn:startsWith()`
+* `fn:substring()`
+* `fn:substringAfter()`
+* `fn:substringBefore()`
+* `fn:toLowerCase()`
+* `fn:toUpperCase()`
+* `fn:trim()`
+
+== Examples
+
+=== Подключение
+
+Для использования утилитных функций JSTL следует подключить библиотеку:
+
+[source,jsp]
+----
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+----
+
+=== Использование
+
+* `${fn:length(аргумент)}` - подсчитывает число элементов в коллекции или длину строки
+* `${fn:toUpperCase(String str)}` и `${fn:toLowerCase(String str)}` - изменяет регистр строки
+* `${fn:substring(String str, int from, int to)}` - извлекает подстроку;
+
+=== Details
+
+Подробное описание всех функций:
+
+http://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/fn/tld-summary.html

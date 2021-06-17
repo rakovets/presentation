@@ -1,0 +1,431 @@
+= Intro to Spring
+
+== Intro to Spring
+
+image:/assets/img/java/spring/spring-logo.svg[Spring]
+
+=== Simplifying Java development
+
+[.step]
+* Простая разработка с POJOs (Plain Old Java Objects)
+* Слабая связь через dependency injection и ориентация на интерфейсное взаимодействие
+* Упрощенная конфигурация приложения
+* Сокращение объема программного кода через аспекты и шаблоны
+* Декларативная разработка через применение аспектов и общих соглашений
+* Возможность управления общими зависимостями в единственном репозитории
+
+=== About Spring
+
+[.step]
+* Actual version (Spring Framework): 5.2.8 (21.07.2020)
+* Site and Docs: https://spring.io/
+
+== Spring Projects 
+
+=== Spring Projects 
+
+[.step]
+* *Spring Boot*
+* *Spring Framework*
+* *Spring Data*
+* *Spring Cloud*
+* *Spring Cloud Data Flow*
+* *Spring Security*
+* *Spring Session*
+* *Spring Integration*
+
+=== Spring Projects 
+
+[.step]
+* *Spring HATEOAS*
+* *Spring REST Docs*
+* *Spring Batch*
+* *Spring AMQP*
+* *Spring for Android*
+* *Spring CredHub*
+* *Spring Flo*
+* *Spring for Apache Kafka*
+
+=== Spring Projects 
+
+[.step]
+* *Spring LDAP*
+* *Spring Mobile*
+* *Spring Roo*
+* *Spring Shell*
+* *Spring Statemachine*
+* *Spring Vault*
+* *Spring Web Flow*
+* *Spring Web Services*
+
+== OMG
+
+=== What to use from these projects?
+
+[.step]
+* *Spring Framework*
+* *Spring Data*
+* *Spring Security*
+* *Spring Boot*
+
+== Spring Framework
+
+=== Owerview
+
+image:/assets/img/java/spring/spring-overview.png[Owerview]
+
+=== Spring Framework Artifacts
+
+|===
+|*GroupId*|*ArtifactId*|*Description*
+|`org.springframework`|`spring-aop`|Proxy-based AOP support
+|`org.springframework`|`spring-aspects`|AspectJ based aspects
+|`org.springframework`|`spring-beans`|Beans support, including Groovy
+|`org.springframework`|`spring-context`|Application context runtime, including scheduling and remoting abstractions
+|`org.springframework`|`spring-context-support`|Support classes for integrating common third-party libraries into a Spring application context
+|`org.springframework`|`spring-core`|Core utilities, used by many other Spring modules
+|`org.springframework`|`spring-expression`|Spring Expression Language (SpEL)
+|===
+
+=== Spring Framework Artifacts
+
+|===
+|*GroupId*|*ArtifactId*|*Description*
+|`org.springframework`|`spring-instrument`|Instrumentation agent for JVM bootstrapping
+|`org.springframework`|`spring-instrument-tomcat`|Instrumentation agent for Tomcat
+|`org.springframework`|`spring-jdbc`|JDBC support package, including DataSource setup and JDBC access support
+|`org.springframework`|`spring-jms`|JMS support package, including helper classes to send/receive JMS messages
+|`org.springframework`|`spring-messaging`|Support for messaging architectures and protocols
+|`org.springframework`|`spring-orm`|Object/Relational Mapping, including JPA and Hibernate support
+|`org.springframework`|`spring-oxm`|Object/XML Mapping
+|===
+
+=== Spring Framework Artifacts
+
+|===
+|*GroupId*|*ArtifactId*|*Description*
+|`org.springframework`|`spring-test`|Support for unit testing and integration testing Spring components
+|`org.springframework`|`spring-tx`|Transaction infrastructure, including DAO support and JCA integration
+|`org.springframework`|`spring-web`|Foundational web support, including web client and web-based remoting
+|`org.springframework`|`spring-webmvc`|HTTP-based Model-View-Controller and REST endpoints for Servlet stacks
+|`org.springframework`|`spring-websocket`|WebSocket and SockJS infrastructure, including STOMP messaging support
+|===
+
+== Core Container
+
+=== Core Container
+
+image:/assets/img/java/spring/spring-overview.png[Owerview]
+
+=== Core Container modules
+
+[.step]
+* `spring-core` - provides the fundamental parts of the framework, including the *IoC* and *Dependency Injection* features
+* `spring-beans` - provides `BeanFactory`, which is a sophisticated implementation of the *factory pattern*
+* `spring-context` - builds on the solid base provided by the `spring-core` and `spring-beans` and it is a medium to access any objects defined and configured. The `ApplicationContext` interface is the focal point
+* `spring-context-support`
+* `spring-expression` - provides a powerful *expression language* for querying and manipulating an object graph at runtime
+
+== IoC, DIP and DI
+
+=== Problem
+
+image:/assets/img/java/spring/objects-dependencies.png[Objects Dependencies]
+
+=== Solution
+
+* *Inversion of Control*
+* *Dependency Inversion Principle*
+* *Dependency Injection*
+
+image:/assets/img/java/spring/definitions.png[Inversion of Control, Dependency Inversion Principle and Dependency Injection]
+
+=== Problem: strong coupling
+
+[source,java]
+----
+public class EmailSender {
+    void send(Message message) {
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+}
+----
+
+=== Problem: strong coupling
+
+[source,java]
+----
+public class SenderService {
+    private EmailSender sender;
+
+    public SenderService() {
+    }
+
+    public SenderService(EmailSender sender) {
+        this.sender = sender;
+    }
+
+    public void sendMessage(Message message) {
+        sender.send(message);
+    }
+
+
+    public void setSender(EmailSender message) {
+        this.sender = sender;
+    }
+}
+----
+
+=== Solution: weak coupling
+
+[source,java]
+----
+public interface Sender {
+    void send(Message message);
+}
+----
+
+=== Solution: weak coupling
+
+[source,java]
+----
+public class EmailSender implements Sender {
+    void send(Message message) {
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+}
+----
+
+=== Solution: weak coupling
+
+[source,java]
+----
+public class SenderService {
+    private Sender sender;
+
+    public SenderService() {
+    }
+
+    public SenderService(Sender sender) {
+        this.sender = sender;
+    }
+
+    public void sendMessage(Message message) {
+        sender.send(message);
+    }
+
+
+    public void setSender(Sender message) {
+        this.sender = sender;
+    }
+}
+----
+
+=== Benefit
+
+[.step]
+* `SenderService` не привязан к конкретной реализации `Sender`
+* `SenderService` не важно какой вид адреса передается в конструктор, т.к. передаются классы-потомки `Sender`
+* *weak coupling* -  объект знает о связи по интерфейсу, таким образом зависимость может быть вынесена с различными реализациями, без информации о конкретной реализации
+
+
+=== IoC Container
+
+[.step]
+* *IoC* - *Inversion of Control*, инверсия управления
+[.step]
+** Принцип объектно-ориентированного управления, который используется для уменьшения зацепления в программе.
+** Упрощает расширение возможностей системы
+
+=== IoC Container
+
+image:/assets/img/java/spring/spring-container.png[Spring Container]
+
+=== Dependency Injection
+
+[.step]
+* Подход в проектировании, при котором зависимости объекта передаются ему извне, а не создаются в нём
+* Упрощает тестирование системы
+* Позволяет настраивать процесс создания объектов извне
+
+=== Dependency Injection
+
+image:/assets/img/java/spring/dependency-injection.gif[Dependency Injection]
+
+=== Bean
+
+[.step]
+* Объект в терминах IoC-контейнера, жизненный цикл которого управляется этим контейнером
+* Может представлять собой любой объект:
+[.step]
+** сервис
+** дао
+** утилитный класс
+** и т.д.
+
+=== Example
+
+image:/assets/img/java/spring/ioc-container.png[IoC container]
+
+=== Example
+
+image:/assets/img/java/spring/di-testing.png[DI testing]
+
+== Bean Definition
+
+[.step]
+* Описание правил, по которым создаётся бин, а также его зависимостей и правил их внедрения
+* Может задаваться различными способами:
+[.step]
+** xml
+** java-config
+** annotations
+** groovy-config
+
+== IoC Container
+
+=== IoC Container
+
+Spring provides following two types of containers:
+
+[.step]
+* `BeanFactory` container
+* `ApplicationContext` container
+
+=== `BeanFactory`
+
+[source,java]
+----
+InputStream is = new FileInputStream("beans.xml");
+BeanFactory factory = new XmlBeanFactory(is);
+ 
+//Get bean
+HelloWorld obj = (HelloWorld) factory.getBean("helloWorld");
+----
+
+=== `BeanFactory`
+
+[source,java]
+----
+Resource resource = new FileSystemResource("beans.xml");
+BeanFactory factory = new XmlBeanFactory(resource);
+ 
+ClassPathResource resource = new ClassPathResource("beans.xml");
+BeanFactory factory = new XmlBeanFactory(resource);
+----
+
+=== `BeanFactory` methods
+
+[.step]
+- `boolean containsBean(String)`
+- `Object getBean(String)`
+- `Object getBean(String, Class)`
+- `Class getType(String name)`
+- `boolean isSingleton(String)`
+- `String[] getAliases(String)`
+
+=== `ApplicationContext`
+
+[.step]
+* Фактически `ApplicationContext` - является *IoC Container*, в котором хранятся все _beans_
+* Представляет собой `HashMap`
+
+=== Виды `ApplicationContext`
+
+[.step]
+* `FileSystemXmlApplicationContext` - считывает определения бинов из xml-файла, расположенного где-то в файловой системе
+* `ClassPathXmlApplicationContext` - считывает определения бинов из xml-файла, расположенного в classpath
+* `AnnotationConfigApplicationContext` - считывает определения бинов из конфигурационных Java-файлов
+
+=== Виды `ApplicationContext`
+
+[.step]
+* `XmlWebApplicationContext` - считывает определения бинов из xml-файла в web-приложении
+* `AnnotationConfigWebApplicationContext` - считывает определения бинов из конфигурационных Java-файлов в web-приложении
+* `GenericGroovyApplicationContext` (Spring 4+) - считывает определения бинов из конфигурационных Groovy-файлов
+
+== How create?
+
+=== Add dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>${springframework.version}</version>
+</dependency>
+----
+
+=== Bean Definition
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="quest" class="com.rakovets.course.spring.example.bean.knights.SlayDragonQuest">
+        <property name="steps">
+            <list>
+                <value type="java.lang.String">Find dragon lair</value>
+                <value type="java.lang.String">Create trap</value>
+                <value type="java.lang.String">Slay dragon</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.rakovets.course.spring.example.bean.knights.BraveKnight">
+        <constructor-arg name="quest" ref="quest"/>
+        <property name="name" value="Fedor"/>
+    </bean>
+</beans>
+----
+
+=== Use with `ApplicationContext`
+
+[source,java]
+----
+public class XmlFileConfigApp {
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context
+                = new ClassPathXmlApplicationContext("application-context.xml");
+        Knight knight = context.getBean(BraveKnight.class);
+        knight.embarkOnQuest();
+    }
+}
+----
+
+== Spring namespaces
+
+=== Spring namespaces
+
+[.step]
+* `aop` – предоставляют элементы для декларирования аспектов, и для автоматического проксирования `@AspectJ` – аннотированные классы как Spring аспекты.
+* `beans` – базовые примитивы *Spring namespace*, включая декларирование бинов и как они должны быть связаны.
+* `context` – приходят с элементами для конфигурирования Spring контекст приложения, включая возможность для автоопределения и автосвязи бинов и введения объектов не прямо управлемые Spring.
+
+=== Spring namespaces
+
+[.step]
+* `jee` – предлагает интеграцию с *Jakarta EE* API таких как *JNDI* и *EJB*
+* `jms` – предоставляет конфигурационные элементы для декларирования *message-driven POJOs*
+* `lang` – включает декларирование бинов, которые реализованы на *Groovy*, *JRuby* или *BeanShell* скриптов.
+
+=== Spring namespaces
+
+[.step]
+* `mvc` – включает *Spring MVC* возможности, такие как аннотационно-ориентированных контроллеров, view-контроллеров, и интерсептеров.
+* `oxm` – поддержка конфигурации *Spring object-to-XML* маппинг возможности.
+* `tx` – предоставляет декларативные транзакционные конфигурации.

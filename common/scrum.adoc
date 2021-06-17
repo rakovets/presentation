@@ -1,0 +1,243 @@
+= Scrum
+
+== Intro
+
+[.notes]
+Intro
+Представим себе ситуацию: вы разработчик. Вы в поисках работы, уже получили оффер от одной известной компании с отлично зарплатой и плюшками. Казалось бы, все круто, но в душе вы понимаете что что-то не то... И тут вам ваш знакомый предлагает присоединить в один очень перспективный стартап и вы соглашаетесь... 
+Раньше:
+Требование/ТЗ/Спецификация, которые появлялись свыше от некого ПМ и БА...
+Работа над конкретной задачей
+Сдача готовой задачи
+Сейчас:
+Вы не знаете каким будет продукт в конце
+Решения принимаете совместно
+Методологии разработки работавшие раньше, теперь терпят крах... И вообще: World Taekwando Federation?!
+Спасение есть: гибкие методологии разработки. А в частность: методология управления проектами Scrum, используемая в Agile.
+Скрам – это фреймворк, предназначенный для разработки и поддержки сложных продуктов.
+Definition of Scrum
+1.
+Scrum (n): A framework within which people can address complex adaptive problems, while productively and creatively delivering products of the highest possible value.
+2. 
+Scrum is one of the methodologies that adhere to the values and principles set forth in Agile Manifesto
+Scrum is free
+Scrum is not a process, technique, or definitive method
+3.
+Scrum is:
+Lightweight
+Simple to understand (devil, scrum guide only 19 pages)
+Difficult to master (will be a lot of pain)
+4.
+The Scrum framework consist of:
+Scrum Teams and their associated
+roles
+events
+artifacts
+rules
+Scrum Theory
+1.
+Scrum is founded on empirical process control theory, or empiricism.
+knowledge comes from experience
+making decisions based on what is known
+2.
+Three whales (principles) of empiricism:
+transparency (every member of the team must understand what the other is doing.)
+inspection (for timely detection of undesirable deviations)
+adaptation (If there are deviations, it is necessary to make appropriate changes)
+3.
+Scrum prescribes four formal events for inspection and adaptation:
+Sprint Planning
+Daily Scrum
+Sprint Review
+Sprint Retrospective
+More about this a little later
+Scrum Values
+1.
+Courage:
+Scrum Team members have courage to do the right thing and work on tough problems
+Focus:
+Everyone focuses on the work of the Sprint and the goals of the Scrum Team
+Commitment:
+People personally commit to achieving the goals of the Scrum Team
+Respect:
+Scrum Team members respect each other to be capable, independent people
+Openness:
+The Scrum Team and its stakeholders agree to be open about all the work and the challenges with performing the work 
+The Scrum Team
+1.
+The Scrum Team consist of:
+Product Owner
+Development Team
+Scrum Master
+Self-organizing teams choose how best to do their work, rather than being managed from outside. Cross-functional teams have the competence necessary to perform work. The Scrum team model is designed to optimize flexibility, creativity and productivity.
+2.
+Product Owner:
+Management of Backlog
+Co-ordination with Scrum Master
+Analysis of Product Vision
+Modulating Development Team
+3.
+Scrum Master:
+Helps the Scrum Team to follow the process
+Helps product Owner to understand and create the Product
+4.
+This is the Scrum team ... Very stereotyped images about the developers? Picture is an example, but not a guide on the composition of the team.
+All these are developers who are professionals.
+They are working on creating a potentially ready-to-release Product Increment during the sprint. Only they create an Increment.
+The team should be flexible and productive, so the size of the team is from 5 to 9 people.
+Scrum Events 
+1.
+Main Scrum Event is Sprint. Sprint consist of:
+Sprint Planning
+Daily Scrum
+Sprint Review
+Sprint Retrospective
+These events are needed to give the process:
+regular character
+make the number of unnecessary meetings minimal.
+Each event is limited in time.
+The maximum duration of the sprint is one month. In the sprint definition, the team creates a functioning and ready-to-use and release Product Increment. The new Sprint begins after the end of the previous one.
+2. 
+On Sprint planning, the team discusses the scope of work and creates an action plan. A maximum of 8 hours. In the results the team gets answers to the questions:
+What will be the Increment?
+How to organize work to get a ready-made Product Increment?
+3.
+A maximum of 15 minutes. The daily Scrum is held at the same time, in the same place.
+Each member of the Development Team responds to the following questions:
+What I've done?
+What am I going to?
+What problems did I have?
+4.
+Sprint's review is held at the end of the Sprint. Not more than 4 hours. The Scrum team and stakeholders during the Sprint Review jointly discuss what was done for the Sprint. The result of the Sprint Review is a revised Product Backlog.
+5.
+Retrospective of the Sprint is an opportunity for the Scrum team to explore themselves and create an improvement plan for the next Sprint.
+The Sprint retrospective is held after the Sprint Review and before planning for the next Sprint. Maximum 3 hours
+Артефакты Скрама
+Отражая работу или ценность, артефакты Скрама также обеспечивают прозрачность и создают новые возможности для инспекции и адаптации. Артефакты Скрама призваны обеспечить максимальную прозрачность ключевой информации, чтобы все участники процесса обладали ее одинаковым пониманием.
+
+Бэклог Продукта
+Бэклог Продукта – это упорядоченный список всего, что может понадобиться в продукте. Это единственный источник требовании для любого вида изменении˘, которые могут быть внесены в продукт. Бэклог со временем меняется. Каждый элемент Бэклога Продукта должен содержать описание, номер позиции в Бэклоге, оценку объема работы и ценность.
+Бэклог Спринта
+Бэклог Спринта – это набор элементов Бэклога Продукта, выбранный для исполнения в текущем Спринте. Он включает в себя как план разработки Инкремента продукта, так и план достижения Цели Спринта.
+Бэклог Спринта является прогнозом Команды Разработки.
+Бэклог Спринта отображает весь объем работ, который Команда разработки считает необходимым для достижения Цели Спринта.
+
+Бэклог Спринта претерпевает изменения, а в ходе выполнения плана появляется новый спектр работ.
+Бэклог Спринта принадлежит исключительно Команде Разработки и служит наглядным представлением реального объема работ, который планирует выполнить Команда Разработки в течение Спринта.
+
+Инкремент
+Инкремент – это сумма, как всех элементов Бэклога Продукта, завершенных во время Спринта, так и всех инкрементов предыдущих Спринтов.
+К концу Спринта Инкремент должен быть Готов, что подразумевает его соответствие критериям Готовности Скрам‐команды и готовность к использованию.
+
+История
+Впервые Скрам был представлен на конференции OOPSLA (Object‐Oriented Programming Systems, Languages and Applications) в 1995 году. Кен Швабер и Джефф Сазерленд представили доклад, который отражал знания, полученные в течение нескольких лет практики применения Скрам.
+
+История развития Скрама достаточно длительная. Среди многочисленных компаний, внедривших и усовершенствовавших фреймворк, следует отдельно упомянуть Individual, Inc., Fidelity Investments и IDX (сегодня ‐ GE Medical).
+
+== Definition of Scrum
+
+[.colums]
+=== Scrum
+
+[.colum]
+a framework within with people can adress complex adaptive problems, while productively and creatively delivering products of the highest possible value
+
+[.colum]
+image::/assets/img/common/scrum/scrum.png[Scrum]
+
+=== Scrum
+
+[.step]
+* Scrum is one of the methodologies that adhere to the values and principles set forth in Agile Manifesto
+* Scrum is free
+* Scrum is not a process, technique, or definitive method
+
+=== Scrum is
+
+[.step]
+* Lightweight
+* Simple to understand
+* Difficult to master
+
+=== The Scrum framework consist of
+
+[.step]
+* Scrum Teams and their associated
+* roles
+* events
+* artifacts
+* rules
+
+== Scrum Theory
+
+=== Empiricism
+
+Scrum is founded on empirical process control theory, or empiricism.
+
+* knowledge comes from experience
+* making decisions based on what is known
+
+=== Three keiths (principles) of empiricism:
+
+[.step]
+* transparency
+* inspection
+* adaptation
+
+=== Scrum prescribes four formal events for inspection and adaptation
+
+[.step]
+* Sprint Planning
+* Daily Scrum
+* Sprint Review
+* Sprint Retrospective
+
+== Scrum Values
+
+=== Scrum Values
+
+image::/assets/img/common/scrum/scrum-values.png[Scrum Values]
+
+== The Scrum Team
+
+=== The Scrum Team consist of
+
+image::/assets/img/common/scrum/scrum-team.jpg[Scrum team]
+
+=== Product owner
+
+image::/assets/img/common/scrum/product-owner.png[Product owner]
+
+=== Scrum Master
+
+image::/assets/img/common/scrum/scrum-master.png[Scrum master]
+
+=== Scrum Team
+
+image::/assets/img/common/scrum/scrum-team-2.png[Scrum team]
+
+== Scrum Events
+
+=== Scrum Framework
+
+image::/assets/img/common/scrum/scrum-framework.jpg[Scrum Framework]
+
+=== Scrum Planning
+
+image::/assets/img/common/scrum/scrum-planning.png[Scrum Planning]
+
+=== Scrum Daily Meeting
+
+image::/assets/img/common/scrum/scrum-daily-meeting.png[Scrum Daily Meeting]
+
+=== Sprint Review Meeting
+
+image::/assets/img/common/scrum/sprint-review-meeting.jpg[Sprint Review Meeting]
+
+== Scrum Artifacts
+
+=== Scrum Dashboard
+
+image::/assets/img/common/scrum/scrum-dashboard.jpeg[Scrum Dashboard]
+
+== Finally

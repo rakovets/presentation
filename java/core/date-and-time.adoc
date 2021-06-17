@@ -1,0 +1,645 @@
+= Date and Time API (JSR 310)
+
+== Intro
+
+=== Problem
+
+[.step]
+* До Java 8 для работы с датой и временем использовались классы:
+[.step]
+** `java.util.Date`
+** `java.util.Calendar`
+* Какие проблемы при их использовании
+[.step]
+** не потокобезопасные
+** изменяемые объекты
+** временная зона даты – это временная зона JVM по умолчанию
+** месяца начинаются с нуля
+
+=== Problem
+
+[.step]
+* Использовали сторонние библиотеки (например: *Joda-Time*)
+* _Joda-Time is the de facto standard date and time library for Java prior to Java SE 8_ (c) *joda.org*
+
+=== Solution
+
+[.step]
+* JSR 310: Date and Time API
+* Содержит классы:
+[.step]
+** *неизменные* (*immutable*),
+** *потокобезопасные* (*thread-safe*)
+** с *продуманным дизайном*
+
+== `java.time`
+
+=== Basics
+
+[.step]
+* `java.time` — содержит, часто используемые классы.
+* `java.time.format` — класс для преобразования даты и форматирования.
+* `java.time.temporal` — класс для конвертирования даты и время, и для внесения в них корректировок (например добавить 30 дней к текущей дате).
+
+=== Basics
+
+[.step]
+* `java.time.temporal.Temporal`
+[.step]
+** `LocalTime`
+** `LocalDate`
+** `LocalDateTime`
+** `Instant`
+* `java.time.temporal.TemporalAmount`
+[.step]
+** `Period`
+** `Duration`
+
+=== Basics
+
+[.fragment]
+image::/assets/img/java/core/date-time.png[Java Date and Time API]
+
+== `Temporal`
+
+=== `Temporal`
+
+[.step]
+* `isSupported(TemporalUnit): boolean`
+* `with(TemporalAdjuster): Temporal`
+* `with(TemporalField, long): Temporal`
+* `plus(TemporalAmount): Temporal`
+* `plus(long, TemporalUnit): Temporal`
+* `minus(TemporalAmount): Temporal`
+* `minus(long, TemporalUnit): Temporal`
+* `until(Temporal, TemporalUnit): long`
+
+=== `ChronoField`
+
+[.step]
+* `HOUR_OF_AMPM`
+* `HOUR_OF_DAY`
+* `MINUTE_OF_DAY`
+* `MINUTE_OF_HOUR`
+* `SECOND_OF_DAY`
+* `SECOND_OF_MINUTE`
+* `NANO_OF_DAY`
+* `NANO_OF_SECOND`
+
+=== `ChronoUnit`
+
+[.step]
+* `NANOS`
+* `MICROS`
+* `MILLIS`
+* `SECONDS`
+* `MINUTES`
+* `HOURS`
+* `HALF_DAYS`
+* `DAYS`
+
+=== `ChronoUnit`
+
+[.step]
+* `WEEKS`
+* `MONTHS`
+* `YEARS`
+* `DECADES`
+* `CENTURIES`
+* `MILLENNIA`
+* `ERAS`
+* `FOREVER`
+
+== `LocalTime`
+
+=== `LocalTime`
+
+[.step]
+* `LocalTime` — объекты представляют время, но без данных о дате или часовом поясе.
+
+=== Creating `LocalTime`
+
+[.step]
+* `LocalTime.now(): LocalTime`
+* `LocalTime.of(int, int): LocalTime`
+* `LocalTime.of(int, int, int): LocalTime`
+* `LocalTime.of(int, int, int, int): LocalTime`
+
+=== Methods
+
+[.step]
+* `getHour(): int`
+* `getMinute(): int`
+* `getSecond(): int`
+* `getNano(): int`
+* `get(ChronoField): int`
+
+=== Compare `LocalTime`
+
+[.step]
+* `isAfter(LocalTime): boolean`
+* `isBefore(LocalTime): boolean`
+* `equals(LocalTime): boolean`
+
+=== Set units
+
+[.step]
+* `with(ChronoField, int): LocalTime`
+* ...
+
+=== Change units
+
+[.step]
+* `plus(int, ChronoUnit): LocalTime`
+* `minus(int, ChronoUnit): LocalTime`
+* ...
+
+== `LocalDate`
+
+=== `LocalDate`
+
+[.step]
+* `LocalDate` — объекты представляют дату, но без какого-либо времени или часового пояса.
+* Same as `LocalDate`
+
+== `LocalDateTime`
+
+=== `LocalDateTime`
+
+[.step]
+* `LocalDateTime` — объекты представляют дату и время, но без данных о часовом поясе.
+* Same as `LocalTime` + few methods
+
+== Time Zone
+
+=== `ZoneId`
+
+[.step]
+* `ZoneId` — объекты представляют часовые пояса
+* имеет методы для преобразования *UTC* времени в/из местного времени.
+
+=== `ZonedDateTime`
+
+[.step]
+* `ZonedDateTime` — сочетание `LocalDateTime` и `ZoneID`.
+* Используется, когда:
+[.step]
+** необходимо смешивать даты и время из разных часовых поясов
+** разрешать пользователям выбирать зону, отличную от локальной (для веб-приложений, где сервер часто находится в другом часовом поясе от клиентов).
+
+== `Instant`
+
+[.step]
+* `Instant` — объекты представляют собой конкретную наносекунду во времени, используя *00:00:00, 1 января 1970 г. GMT (UTC)* в качестве нулевой точки.
+* При работе с отметками времени, или в некоторых случаях, продолжительностью, используют этот класс.
+* Пример: `Instant.now().plusHours(1);`
+
+== `TemporalAmount`
+
+=== `TemporalAmount`
+
+[.step]
+* `get(TemporalUnit): long`
+* `getUnits(): List<TemporalUnit>`
+* `addTo(Temporal): Temporal`
+* `subtractFrom(Temporal): Temporal`
+
+== `Duration`
+
+=== `Duration`
+
+[.step]
+* time range
+* use for:
+[.step]
+** hours
+** minutes
+** seconds
+** millis
+** nanos
+
+=== `Duration`
+
+[.step]
+* `Duration` — используется чаще всего с классом `Instant`, задает несколько наносекунд.
+* Можно использовать с помощью методов типа _plus()_ и _minus()_.
+* Продолжительность не зависит от часовых поясов или других изменений календаря.
+
+== `Period`
+
+=== `Period`
+
+[.step]
+* time range
+* use for:
+[.step]
+** years
+** months
+** days
+
+=== `Period`
+
+[.step]
+* `Period` — подобен `Duration`, но использует дни, месяцы и годы для представления продолжительности времени.
+* Добавление дня учитывает (например) переключатели летнего времени.
+
+== `DateTimeFormatter`
+
+=== `DateTimeFormatter`
+
+[.step]
+* `DateTimeFormatter` — предоставляет методы стандартного формата и анализа для новых классов Date and Time.
+
+=== Creating
+
+[.step]
+* `ofPattern(String, Locale)`: DateTimeFormatter
+
+[.fragment]
+[source, java]
+----
+String pattern = "MMMM, dd, yyyy HH:mm:ss"
+DateTimeFormatter formatter =
+        DateTimeFormatter.ofPattern(pattern, Locale.US);
+----
+
+=== Pattern
+
+[.fragment]
+[options="header"]
+|===
+|Символ|Что означает|Пример
+|`y`|год в эре|`2014`, `14`
+|`M/L`|месяц (название или номер)|`9`, `09`, `Sep`, `September`, `S`
+|`d`|день месяца|`17`
+|`E`|день недели|`Вт`, `вторник`
+|===
+
+=== Pattern
+
+[.fragment]
+[options="header"]
+|===
+|Символ|Что означает|Пример
+|`h`|время в 12-часовом формате|`1`
+|`H`|часы в 24-часовом формате|`13`
+|`m`|минуты|`32`
+|`s`|секунды|`11`
+|`S`|миллисекунды|`109`
+|===
+
+=== Parsing
+
+[.step]
+* `parse(CharSequence text)` - конвертация строки, которая содержит дату и время, в объект `LocalDateTime`. При этом используется формат строки вида `2007-12-03T10:15:30`.
+* `parse(CharSequence text, DateTimeFormatter formatter)` - конвертация строки, которая содержит дату и время, в объект `LocalDateTime` с использованием указанного формата.
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+String dateAsString = "June 5, 2021 12:10:56";
+String pattern = "MMMM d, yyyy HH:mm:ss";
+
+DateTimeFormatter dtf =
+        DateTimeFormatter.ofPattern(pattern, Locale.US);
+LocalDateTime localDateTime =
+        LocalDateTime.parse(dateAsString, dtf);
+
+System.out.println(localDateTime);
+----
+
+[.fragment]
+----
+2021-06-05T12:10:56
+----
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+DateTimeFormatter dtf =
+        DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US);
+LocalDate localDate = LocalDate.parse("June 5, 2021", dtf);
+
+System.out.println(localDate);
+----
+
+[.fragment]
+----
+2021-06-05
+----
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+String pattern = "MMMM, dd, yyyy HH:mm:ss";
+
+LocalDateTime dateTime = LocalDateTime.now();
+DateTimeFormatter dtf =
+        DateTimeFormatter.ofPattern(pattern, Locale.US);
+
+System.out.println(dateTime.format(dtf));
+----
+
+[.fragment]
+----
+May, 07, 2021 06:09:58
+----
+
+== `TemporalAdjusters`
+
+=== `TemporalAdjusters`
+
+[.step]
+* `TemporalAdjusters` — предоставляет множество статических методов для использования с различными методами других классов.
+* Можно создавать собственные `TemporalAdjusters`.
+
+=== Examples
+
+[.fragment]
+[source,java]
+----
+LocalDate date = LocalDate.now();
+LocalDate first = date.with(firstDayOfMonth());
+LocalDate monday = date.with(firstInMonth(MONDAY));
+----
+
+[.fragment]
+где `MONDAY`, является константой класса `DayOfWeek`.
+
+== Old API
+
+=== `java.util.Date` и `java.util.Calendar`
+
+[.step]
+* Для хранения и работы с датой (до Java 8) в пакете `java.util` используются два класса:
+[.step]
+** `Date`
+** `Calendar`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Date date = new Date();
+
+System.out.println(date);
+----
+
+[.fragment]
+----
+Fri May 07 06:21:13 MSK 2021
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Calendar calendar = Calendar.getInstance();
+System.out.println(calendar);
+
+Date date = calendar.getTime();
+System.out.println(date);
+----
+
+=== Example
+
+[.fragment]
+----
+java.util.GregorianCalendar[
+    time=1620357770174,
+    areFieldsSet=true,
+    areAllFieldsSet=true,
+    lenient=true,
+    zone=sun.util.calendar.ZoneInfo[
+        ...
+    ],
+    firstDayOfWeek=1,
+    minimalDaysInFirstWeek=1,
+    ERA=1,
+    YEAR=2021,
+    MONTH=4,
+    WEEK_OF_YEAR=19,
+    WEEK_OF_MONTH=2,
+    DAY_OF_MONTH=7,
+    DAY_OF_YEAR=127,
+    DAY_OF_WEEK=6,
+    DAY_OF_WEEK_IN_MONTH=1,
+    AM_PM=0,
+    HOUR=6,
+    HOUR_OF_DAY=6,
+    MINUTE=22,
+    SECOND=50,
+    MILLISECOND=174,
+    ZONE_OFFSET=10800000,
+    DST_OFFSET=0
+]
+Fri May 07 06:22:50 MSK 2021
+----
+
+=== Examples
+
+[.fragment]
+[source,java]
+----
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM dd HH:mm:ss");
+Calendar cal = Calendar.getInstance();
+cal.set(Calendar.YEAR, 2020);
+cal.set(Calendar.MONTH, Calendar.AUGUST);
+cal.set(Calendar.DAY_OF_MONTH, 9);
+System.out.println("Initially set date: "
+        + sdf.format(cal.getTime()));
+
+cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+System.out.println("Date with month changed: "
+        + sdf.format(cal.getTime()));
+
+cal.set(Calendar.DAY_OF_MONTH, 3);
+System.out.println("Date with day changed: "
+        + sdf.format(cal.getTime()));
+----
+
+[.fragment]
+----
+Initially set date: 2020 August 09 06:24:48
+Date with month changed: 2020 September 09 06:24:48
+Date with day changed: 2020 September 03 06:24:48
+----
+
+=== Форматирование дат
+
+[.step]
+* При записи даты и времени в разных странах и языках используются не только разные названия месяцев и т.д., но может отличаться последовательность записи.
+* Чтобы вывести дату в соответствии с региональными настройками используется объект класса `DateFormat`.
+
+=== `DateFormat`
+
+[.step]
+* Объект создается одним из статических методов:
+[.step]
+** `getDatelnstance(DateFormat, Locale)` — для получения даты
+** `getTimelnstance(DateFormat, Locale)` — для получения времени
+** `getDateTimelnstance(DateFormat, Locale)` — для получения времени и даты
+
+=== `DateFormat`
+
+[.step]
+* Любой раннее приведенный метод на вход конструктора должен получить два параметра.
+[.step]
+** *константу*, задающая стиль вывода даты
+** *локаль*, в соответствии с которой выводится дата.
+
+=== Стили при форматировании дат
+
+[.step]
+* Возможны следующие стили даты:
+[.step]
+** `DateFormat.DEFAULT` — формат даты по умолчанию
+** `DateFormat.FULL` — полный формат даты
+** `DateFormat.LONG` — длинный формат даты
+** `DateFormat.MEDIUM` — средний формат даты
+** `DateFormat.SHORT` — короткий формат даты
+
+=== Example: `DateFormat.FULL`
+
+[.fragment]
+[source,java]
+----
+Date currentDate = new Date();
+DateFormat df =
+        DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.US);
+System.out.println(df.format(currentDate));
+----
+
+[.fragment]
+----
+May 7, 2021
+----
+
+=== Examples: for another
+
+[.step]
+* `FULL`
+
+    Friday, May 7, 2021
+
+* `LONG`
+
+    May 7, 2021
+
+* `MEDIUM`
+
+    May 7, 2021
+
+* `SHORT`
+
+    5/7/21
+
+=== Форматирование дат
+
+[.step]
+* Объекты класса `DateFormat` также умеют преобразовывать дату из строкового вида в объект `Date` с помощью метода `parse()`.
+* Следует учитывать, что выбранный стиль описания даты должен соответствовать стилю исходной строки.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Locale;
+
+public class Demo {
+    public static void main(String[] args) {
+        DateFormat df =
+                DateFormat.getDateInstance(DateFormat.SHORT, Locale.US);
+        try {
+            Date parsedDate = df.parse("10/12/2021");
+            System.out.println(parsedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+}
+----
+
+[.fragment]
+----
+Tue Oct 12 00:00:00 MSK 2021
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Demo {
+    public static void main(String[] args) {
+        SimpleDateFormat shortDateFormat =
+                new SimpleDateFormat("dd.MM.yyyy");
+        String formatted = shortDateFormat.format(new Date());
+        System.out.println(formatted);
+    }
+}
+----
+
+[.fragment]
+----
+07.05.2021
+----
+
+=== Спецификатор формата даты и времени
+
+[.fragment]
+[options="header"]
+|===
+|Символ|Описание|Пример
+|`G`|Обозначение эры|н.э.
+|`y`|Год из четырех цифр|2016
+|`M`|Номер месяца года|11
+|`d`|Число месяца|13
+|`h`|Формат часа в A.M./P.M.(1~12)|7
+|`H`|Формат часа(0~23)|19
+|`m`|Минуты|30
+|`s`|Секунды|a
+|`S`|Миллисекунды|511
+|===
+
+=== Спецификатор формата даты и времени
+
+[.fragment]
+[options="header"]
+|===
+|Символ|Описание|Пример
+|`E`|День недели|Вс
+|`D`|Номер дня в году|318
+|`F`|Номер дня недели в месяце|2 (второе воскресение в этом месяце)
+|`w`|Номер неделя в году|46
+|`W`|Номер недели в месяце|2
+|`a`|Маркер A.M./P.M.|AM
+|`k`|Формат часа(1~24)|24
+|`K`|Формат часа в A.M./P.M.(0~11)|0
+|`z`|Часовой пояс|FET (Дальневосточно европейское время)
+|===
+
+=== Спецификатор формата даты и времени
+
+[.fragment]
+[options="header"]
+|===
+|Символ|Описание|Пример
+|`'`|Выделение для текста|Текст
+|`''`|Одинарная кавычка|'
+|===

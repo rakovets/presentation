@@ -1,0 +1,27 @@
+= Class `Arrays`
+
+== Class `Arrays`
+
+=== Methods
+
+[.step]
+* `toString(T[]): String`
+* `toString(T[]): String`
+* `copyOf(T[], int): T[]`
+* `copyOfRange(T[], int, int): T[]`
+* `sort(T[]): void`
+* `sort(T[], int, int): void`
+* `binarySearch(T[], T): int`
+* `binarySearch(T[], int, int, T): int`
+
+=== Methods
+
+[.step]
+* `fill(T[], T): void`
+* `fill(T[], int, int, T): void`
+* `equals(T[], T[]): boolean`
+* `equals(T[], int, int, T[], int, int): boolean`
+* `compare(T[], T[]): int`
+* `compare(T[], int, int, T[], int, int): int`
+* `deepEquals(Object[], Object[]): boolean`
+* `asList(T ...): List<T>`

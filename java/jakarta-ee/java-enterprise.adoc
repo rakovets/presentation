@@ -1,0 +1,69 @@
+= Java Enterprise
+
+== JavaEE vs Spring Framework
+
+=== JavaEE focus on
+
+[.step]
+* Веб-приложения
+* Безопасность транзакций
+* Администрирование пользователей и данных
+* Высокая доступность
+
+=== JavaEE focus on
+
+[.step]
+* Безопасность ресурсов
+* Коррупционной безопасности
+* Масштабируемость
+* Четко определенные интерфейсы
+* Модульные компоненты
+
+=== JavaEE Architecture
+
+image::/assets/img/java/jakarta-ee/java-enterprise/jee-component-technologies.png[JavaEE Architecture]
+
+=== Spring Architecture
+
+image::/assets/img/java/jakarta-ee/java-enterprise/spring-component-technologies.png[Spring Framework Architecture]
+
+== JavaEE
+
+=== History
+
+https://docs.google.com/spreadsheets/d/14EZFEr5uqSVzLbQSims-qjA91K4BDMd66Y7Ju6ObW-w/edit#gid=0[JavaEE History]
+
+=== Current State
+
+* *Spring* > *JavaEE*
+* ORM Mapping: *Hibernate*
+* *JavaEE* (Oracle) -> *JakartaEE* (Eclipse Foundation)
+* *GlassFish* (Oracle) -> *Eclipse GlassFish* (Eclipse Foundation)
+* *Java Community Process* -> *Eclipse Foundation Specification Process*
+
+=== JCP compared to the EFCP
+
+image::/assets/img/java/jakarta-ee/java-enterprise/jcp-efcp.png[JCP -> EFCP]
+
+== JavaEE Web Server
+
+=== Web Servers
+
+* Web server (support basic API)
+* Application Server (full support JavaEE)
+
+=== Web Servers
+
+image::/assets/img/java/jakarta-ee/java-enterprise/javaee-spec-support.png[JavaEE spec support]
+
+=== Popular Web Servers
+
+[.step]
+* Apache Tomcat
+* WildFlay (JBoss)
+* Oracle WebLogic
+* GlassFish
+* WebSphere
+* Apache TomEE
+* Apache Geronimo
+* Jetty

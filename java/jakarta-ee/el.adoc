@@ -1,0 +1,199 @@
+= Expression Language (EL)
+
+== Intro
+
+=== JavaEE Web history
+
+image::/assets/img/java/jakarta-ee/el/javaee-web-history.png[Java for Web history]
+
+=== Intro
+
+Специальный язык, позволяющий максимально просто вставлять в страницу JSP результаты выражений
+
+Общий вид:
+
+[source,jsp]
+----
+${ выражение }
+----
+
+Пример:
+
+[source,jsp]
+----
+${ requestScope.book.name }
+----
+
+== Объекты в EL
+
+=== Объекты в EL
+
+В EL определены объекты соответствующие определённым областям видимости:
+
+[.step]
+* `applicationScope`
+* `sessionScope`
+* `requestScope`
+* `pageScope`
+
+=== Объекты в EL
+
+Дополнительные объекты:
+
+[.step]
+* `param`
+* `header`
+* `cookie`
+* `initParam`
+* `paramValues`
+* `headerValues`
+* `pageContext`
+
+== Операторы EL
+
+=== Property Access Operator
+
+* `.`
+
+Examples:
+
+[source,jsp]
+----
+${firstObj.secondObj}
+${requestScope.employee.address}
+----
+
+=== Collection Access Operator
+
+* `[]`
+
+Examples:
+
+[source,jsp]
+----
+${myList[1]} and ${myList[“1”]}
+${myMap[expr]}
+${myMap[myList[1]]}
+${requestScope[“foo.bar”]} 
+----
+
+=== Операторы отношения
+
+[.step]
+* `==` (`eq`)
+* `!=` (`ne`)
+* `<` (`lt`) 
+* `>` (`gt`)
+* `<=` (`le`)
+* `>=` (`ge`)
+
+=== Арифметические операторы
+
+[.step]
+* `+`
+* `-`
+* `*`
+* `/` (`div`)
+* `%` (`mod`)
+
+=== Логические операторы
+
+[.step]
+* `&&` (`and`)
+* `||` (`or`)
+* `!` (`not`)
+* Оператор `empty` (проверка на `null` или пустое значение/пустой массив)
+
+=== Operators Priority
+
+* `[]` `.`
+* `()` изменения приоритета операторов
+* `-` (unary) `not` `!` `empty`
+* `*` `/` `div` `%` `mod`
+* `+` `-` (binary)
+* `<` `>` `<=` `>=` `lt` `gt` `le` `ge`
+* `==` `!=` `eq` `ne`
+* `&&` `and`
+* `||` `or`
+* `?` `:`
+
+== Reserved Words
+
+=== Reserved Words
+
+[.step]
+* `and`
+* `or`
+* `not`
+* `eq`
+* `ne`
+* `lt`
+* `gt`
+* `le`
+
+=== Reserved Words
+
+[.step]
+* `ge`
+* `true`
+* `false`
+* `null`
+* `instanceof`
+* `empty`
+* `div`
+* `mod`
+
+== Examples
+
+=== Examples
+
+[source,jsp]
+----
+${ not empty ob and empty ob.text } 
+${ 1 > (7/3) } = false
+${ 7.0 >= 5 } = true
+${ 'Z' < 'a' } = true
+${ 'dog' gt 'doc' } = true
+${ 7.0E3 + 1.4 } = 7001.4
+${ 17 mod 7 } = 3
+----
+
+=== Example
+
+[source,jsp]
+----
+<%@ page
+    language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP EL Example Home</title>
+</head>
+<body>
+    <%
+        List<String> names = new ArrayList<String>();
+        names.add("Pankaj");names.add("David");
+        pageContext.setAttribute("names", names);
+    %>
+    <strong>Simple . EL Example:</strong> ${requestScope.person} <br><br>
+    <strong>Simple . EL Example without scope:</strong> ${person} <br><br>
+    <strong>Simple [] Example:</strong> ${applicationScope["User.Cookie"]} <br><br>
+    <strong>Multiples . EL Example:</strong> ${sessionScope.employee.address.address} <br><br>
+    <strong>List EL Example:</strong> ${names[1]} <br><br>
+    <strong>Header information EL Example:</strong> ${header["Accept-Encoding"]} <br><br>
+    <strong>Cookie EL Example:</strong> ${cookie["User.Cookie"].value} <br><br>
+    <strong>pageContext EL Example:</strong> HTTP Method is ${pageContext.request.method} <br><br>
+    <strong>Context param EL Example:</strong> ${initParam.AppID} <br><br>
+    <strong>Arithmetic Operator EL Example:</strong> ${initParam.AppID + 200} <br><br>
+    <strong>Relational Operator EL Example:</strong> ${initParam.AppID < 200} <br><br>
+    <strong>Arithmetic Operator EL Example:</strong> ${initParam.AppID + 200} <br><br>
+</body>
+</html>
+----
+
+=== Example
+
+image::/assets/img/java/jakarta-ee/el/el-example.png[EL example]

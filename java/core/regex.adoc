@@ -1,0 +1,366 @@
+= Regex
+
+== Intro
+
+=== Problem
+
+[.step]
+* Что если нам необходимо искать весьма специфические подстроки в тексте?
+* Что если нам необходимо проверить соответствие текста, какому-то шаблону?
+
+=== Solution
+
+[.step]
+* *Regular Expression*
+
+=== Disclaimer
+
+[.fragment]
+В строках на Java спецсимволы регулярных выражений надо записывать с помощью экранирования.
+
+[.fragment]
+Например:
+
+[.step]
+* `\t` -> `\\t`
+* `\d` -> `\\d`
+* `?` -> `\?`
+
+== Regular Expression in `String`
+
+=== matches(String): boolean`
+
+[.fragment]
+[source,java]
+----
+String input = "+375221234567";
+boolean result = input.matches("(\\+375)\\d{9}");
+System.out.println(result);
+----
+
+[.fragment]
+[source,java]
+----
+true
+----
+
+=== `split(String): String[]`
+
+[.fragment]
+[source,java]
+----
+String text = "Java.    Java?    Java         will never regret it!";
+String[] words = text.split("\\s*(\\s|,|!|\\?|\\.)\\s*");
+for (String word : words) {
+    System.out.println(word);
+}
+----
+
+[.fragment]
+[source,java]
+----
+Java
+Java
+Java
+will
+never
+regret
+it
+----
+
+=== `replaceAll(String, String): String`
+
+[.fragment]
+[source,java]
+----
+String input = "Hello Java! Hello Javac! JavaSE 11.";
+String myStr = input.replaceAll("Java(\\w*)", "HTML");
+System.out.println(myStr);
+----
+
+[.fragment]
+[source,java]
+----
+Hello HTML! Hello HTML! HTML 11.
+----
+
+=== `replaceFirst(String, String): String`
+
+[.fragment]
+[source,java]
+----
+String input = "Hello Java! Hello Javac! JavaSE 11.";
+String myStr = input.replaceFirst("Java(\\w*)", "HTML");
+System.out.println(myStr);
+----
+
+[.fragment]
+[source,java]
+----
+Hello HTML! Hello Javac! JavaSE 11.
+----
+
+== Regular Expression with `Pattern` and `Matcher`
+
+=== `Pattern` and `Matcher`
+
+[.step]
+* Более мощные средства, для работы с регулярными выражениями предлагают классы из пакета `java.util.regex`:
+[.step]
+** `Pattern`
+** `Matcher`
+
+=== `Pattern` and `Matcher`
+
+[.step]
+* Класс `Pattern` служит для хранения регулярного выражения.
+* Класс `Matcher` служит для выполнения операций поиска и сравнения.
+
+== `Pattern`
+
+=== Creating `Pattern` from Regular Expression
+
+[.fragment]
+Для этого используется статический метод `compile(String regex)` класса `Pattern`
+
+[.fragment]
+[source,java]
+----
+Pattern pattern = Pattern.compile("[ ,.!?]");
+----
+
+=== `split(CharSequence): String[]`
+
+[.fragment]
+[source,java]
+----
+import java.util.regex.Pattern;
+
+public class Example {
+    public static void main(String[] args) {
+        String input = "Hello Java! Hello Javac! JavaSE 11.";
+        Pattern pattern = Pattern.compile("[ ,.!?]");
+        String[] words = pattern.split(input);
+        for (String word : words) {
+            System.out.println(word);
+        }
+    }
+}
+----
+
+=== Output
+
+[.fragment]
+[source,out]
+----
+Hello
+Java
+
+Hello
+Javac
+
+JavaSE
+11
+----
+
+=== `matches(String, CharSequence): boolean`
+
+[.fragment]
+[source,java]
+----
+String text = "Hello Java! How are you?";
+boolean isMatched = Pattern.matches("Hello.+", text);
+System.out.println(isMatched);
+----
+
+[.fragment]
+----
+true
+----
+
+=== `matcher(String): Matcher`
+
+[.fragment]
+[source,java]
+----
+String text = "Hello Java! How are you?";
+Matcher matcher = pattern.matcher("Hello.+");
+----
+
+== `Matcher`
+
+=== `matches(): boolean`
+
+[.fragment]
+[source,java]
+----
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Example {
+    public static void main(String[] args) {
+        String text = "Hello Java! How are you?";
+        Pattern pattern = Pattern.compile("Hello.+");
+        Matcher matcher = pattern.matcher(text);
+        boolean isMatched = matcher.matches();
+        System.out.println(isMatched);
+    }
+}
+----
+
+[.fragment]
+----
+true
+----
+
+=== `lookingAt(): boolean`
+
+[.fragment]
+[source,java]
+----
+String text = "Hello Java! How are you?";
+Pattern pattern = Pattern.compile("Hello");
+Matcher matcher = pattern.matcher(text);
+boolean isLookingAt = matcher.lookingAt();
+System.out.println(isLookingAt);
+----
+
+[.fragment]
+----
+true
+----
+
+=== `replaceAll(String): String`
+
+[.fragment]
+[source,java]
+----
+String text = "Hello Java! Hello Javac! JavaSE 11.";
+Pattern pattern = Pattern.compile("Java(\\w*)");
+Matcher matcher = pattern.matcher(text);
+String newStr = matcher.replaceAll("HTML");
+System.out.println(newStr);
+----
+
+[.fragment]
+----
+Hello HTML! Hello HTML! HTML 11.
+----
+
+=== `find(): boolean`
+
+[.fragment]
+Метод ищет соответствие регулярному выражению в строке:
+[.step]
+* возвращает `true`, если соответствие найдено
+* `false` – если нет
+
+=== `find(): boolean`
+
+[.fragment]
+[source,java]
+----
+String text = "Hello Java! Hello Javac! JavaSE 11.";
+Pattern pattern = Pattern.compile("Java(\\w*)");
+Matcher matcher = pattern.matcher(text);
+System.out.println(matcher.find());
+----
+
+[.fragment]
+----
+true
+----
+
+=== `start(): int` and `end(): int`
+
+[.fragment]
+Позицию найденного совпадения можно найти с помощью методов:
+[.step]
+* `start()`
+* `end()`
+
+[.fragment]
+[source,java]
+----
+Pattern p = Pattern.compile(" +- +");
+Matcher matcher = p.matcher("Test -    string -    test");
+while (matcher.find()) {
+    System.out.printf("[%d;%d)\n", matcher.start(), matcher.end());
+}
+----
+
+[.fragment]
+----
+[4;10)
+[16;22)
+----
+
+=== `group(): String`
+
+[.fragment]
+Чтобы узнать, как выглядит очередная найденная методом `find(): boolean` строка, можно использовать метод `group(): String`.
+
+[.fragment]
+[source,java]
+----
+String input = "Hello Java! Hello Javac! JavaSE 11.";
+Pattern pattern = Pattern.compile("Java(\\w*)");
+Matcher matcher = pattern.matcher(input);
+while (matcher.find()) {
+    System.out.println(matcher.group());
+}
+----
+
+=== `group(): String`
+
+[.fragment]
+----
+Java
+Javac
+JavaSE
+----
+
+=== `group(): String`
+
+[.step]
+* Часть регулярного выражения можно выделить в группу, для этого его следует взять в круглые скобки.
+* При нахождении соответствия, указав методу `group()` номер, начиная с единицы, можно получить не все соответствие, а только одну из его групп.
+
+[.fragment]
+[source,java]
+----
+Pattern pattern = Pattern.compile("www\\.(\\w+)\\.com");
+Matcher matcher = pattern.matcher("  www.rakovets.com        ");
+boolean found = matcher.find();
+if (found) {
+    System.out.println(matcher.group(1));
+}
+----
+
+[.fragment]
+----
+rakovets
+----
+
+=== `matcher.reset(String): Matcher`
+
+[.fragment]
+Если необходимо работать с новой строкой, то необязательно создавать новый объект класса `Matcher`, можно использовать метод `reset()`.
+
+[.fragment]
+----
+String text = "Hello";
+Pattern pattern = Pattern.compile("Hello");
+Matcher matcher = pattern.matcher(text);
+System.out.println(matcher.matches());
+Matcher reset = matcher.reset("Hello Java! How are you?");
+System.out.println(matcher.matches());
+----
+
+=== `matcher.reset(String): Matcher`
+
+[.fragment]
+----
+true
+false
+----

@@ -1,0 +1,690 @@
+= Design Patterns
+
+== Problem
+
+image::/assets/img/common/design-patterns/creating-bike.gif[Custom solution]
+
+=== How not to create a bike?
+
+== Design Patterns
+
+=== What’s a design pattern?
+
+[.step]
+* is typical solution to commonly problems
+* is general concept for solving problems
+* is high-level description of a solution to problems
+
+=== What does the pattern consist of?
+
+[.step]
+* Intent
+* Motivation
+* Structure
+* Code example
+
+=== Classification of patterns
+
+[.step]
+* Creational patterns
+* Structural patterns
+* Behavioral patterns
+
+== Creational patterns
+
+== Factory Method
+
+=== Intent
+
+image::/assets/img/common/design-patterns/factory-method/factory-method.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-problem1.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-structure.png[Pattern structure]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/factory-method/factory-method-example.png[Pattern example]
+
+== Abstract Factory
+
+=== Intent
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/abstract-factory/abstract-factory-example.png[Pattern example]
+
+== Builder
+
+=== Intent
+
+image::/assets/img/common/design-patterns/builder/builder.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/builder/builder-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/builder/builder-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/builder/builder-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/builder/builder-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/builder/builder-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/builder/builder-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/builder/builder-example.png[Pattern example]
+
+== Prototype
+
+=== Intent
+
+image::/assets/img/common/design-patterns/prototype/prototype.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/prototype/prototype-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/prototype/prototype-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/prototype/prototype-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/prototype/prototype-structure1.png[Pattern structure]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/prototype/prototype-structure2.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/prototype/prototype-example.png[Pattern example]
+
+== Singleton
+
+=== Intent
+
+image::/assets/img/common/design-patterns/singleton/singleton.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/singleton/singleton-problem.png[Pattern problem]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/singleton/singleton-structure.png[Pattern structure]
+
+== Structural patterns
+
+== Adapter
+
+=== Intent
+
+image::/assets/img/common/design-patterns/adapter/adapter.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/adapter/adapter-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/adapter/adapter-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/adapter/adapter-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/adapter/adapter-structure1.png[Pattern structure]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/adapter/adapter-structure2.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/adapter/adapter-example.png[Pattern example]
+
+== Bridge
+
+=== Intent
+
+image::/assets/img/common/design-patterns/bridge/bridge.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/bridge/bridge-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/bridge/bridge-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/bridge/bridge-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/bridge/bridge-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/bridge/bridge-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/bridge/bridge-example.png[Pattern example]
+
+== Composite
+
+=== Intent
+
+image::/assets/img/common/design-patterns/composite/composite.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/composite/composite-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/composite/composite-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/composite/composite-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/composite/composite-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/composite/composite-example.png[Pattern example]
+
+== Decorator
+
+=== Intent
+
+image::/assets/img/common/design-patterns/decorator/decorator.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/decorator/decorator-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/decorator/decorator-problem2.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/decorator/decorator-problem3.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/decorator/decorator-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/decorator/decorator-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/decorator/decorator-solution3.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/decorator/decorator-solution4.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/decorator/decorator-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/decorator/decorator-example.png[Pattern example]
+
+== Facade
+
+=== Intent
+
+image::/assets/img/common/design-patterns/facade/facade.png[Pattern]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/facade/facade-solution.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/facade/facade-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/facade/facade-example.png[Pattern example]
+
+== Flyweight
+
+=== Intent
+
+image::/assets/img/common/design-patterns/flyweight/flyweight.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/flyweight/flyweight-example.png[Pattern example]
+
+== Proxy
+
+=== Intent
+
+image::/assets/img/common/design-patterns/proxy/proxy.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/proxy/proxy-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/proxy/proxy-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/proxy/proxy-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/proxy/proxy-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/proxy/proxy-example.png[Pattern example]
+
+== Behavioral patterns
+
+== Chain of Responsibility
+
+=== Intent
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-example1.png[Pattern example]
+
+=== Example
+
+image::/assets/img/common/design-patterns/chain-of-responsibility/chain-of-responsibility-example2.png[Pattern example]
+
+== Command
+
+=== Intent
+
+image::/assets/img/common/design-patterns/command/command.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/command/command-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/command/command-problem2.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/command/command-problem3.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/command/command-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/command/command-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/command/command-solution3.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/command/command-solution4.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/command/command-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/command/command-example.png[Pattern example]
+
+== Iterator
+
+=== Intent
+
+image::/assets/img/common/design-patterns/iterator/iterator.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/iterator/iterator-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/iterator/iterator-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/iterator/iterator-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/iterator/iterator-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/iterator/iterator-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/iterator/iterator-example.png[Pattern example]
+
+== Mediator
+
+=== Intent
+
+image::/assets/img/common/design-patterns/mediator/mediator.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/mediator/mediator-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/mediator/mediator-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/mediator/mediator-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/mediator/mediator-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/mediator/mediator-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/mediator/mediator-example.png[Pattern example]
+
+== Momento
+
+=== Intent
+
+image::/assets/img/common/design-patterns/momento/momento.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/momento/momento-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/momento/momento-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/momento/momento-solution.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/momento/momento-structure1.png[Pattern structure]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/momento/momento-structure2.png[Pattern structure]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/momento/momento-structure3.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/momento/momento-example.png[Pattern example]
+
+== Observer
+
+=== Intent
+
+image::/assets/img/common/design-patterns/observer/observer.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/observer/observer-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/observer/observer-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/observer/observer-solution2.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/observer/observer-solution3.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/observer/observer-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/observer/observer-example.png[Pattern example]
+
+== State
+
+=== Intent
+
+image::/assets/img/common/design-patterns/state/state.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/state/state-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/state/state-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/state/state-solution.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/state/state-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/state/state-example.png[Pattern example]
+
+== Strategy
+
+=== Intent
+
+image::/assets/img/common/design-patterns/strategy/strategy.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/strategy/strategy-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/strategy/strategy-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/strategy/strategy-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/strategy/strategy-structure.png[Pattern structure]
+
+== Template Method
+
+=== Intent
+
+image::/assets/img/common/design-patterns/template-method/template-method.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/template-method/template-method-problem.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/template-method/template-method-solution1.png[Pattern solution]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/template-method/template-method-solution2.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/template-method/template-method-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/template-method/template-method-example.png[Pattern example]
+
+== Visitor
+
+=== Intent
+
+image::/assets/img/common/design-patterns/visitor/visitor.png[Pattern]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/visitor/visitor-problem1.png[Pattern problem]
+
+=== Motivation: problem
+
+image::/assets/img/common/design-patterns/visitor/visitor-problem2.png[Pattern problem]
+
+=== Motivation: solution
+
+image::/assets/img/common/design-patterns/visitor/visitor-solution.png[Pattern solution]
+
+=== Structure
+
+image::/assets/img/common/design-patterns/visitor/visitor-structure.png[Pattern structure]
+
+=== Example
+
+image::/assets/img/common/design-patterns/visitor/visitor-example.png[Pattern example]
+

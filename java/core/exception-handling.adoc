@@ -1,0 +1,340 @@
+= Exception handling
+:imagesdir: ../../assets/img/java/core/
+
+== Problem
+
+=== Problem
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+numbers[4] = 45;
+System.out.println(numbers[4]);
+----
+
+=== Problem
+
+[.fragment]
+Что делать если произошла нештатная ситуация, ошибка во время выполнения программы?
+
+[.fragment]
+Например:
+[.step]
+* Пользователь ввел некорректные данные.
+* Не смогли подключиться к стороннему сервису.
+* Не найден файл с которым выполняются какие-то действия.
+* Не выполняются бизнес требования.
+
+== Throwable
+
+=== Hierarchy
+
+image:exception-hierarchy.png[Hierarchy for Exceptions]
+
+=== `Throwable`
+
+[.step]
+* `Error`
+* `Exception`
+
+=== `Error`
+
+[.step]
+* представляют собой более серьёзные проблемы
+* согласно спецификации Java, не следует пытаться обрабатывать в собственной программе
+* связаны с проблемами уровня JVM
+
+=== Subclasses `Error`
+
+[.step]
+* `StackOverflowError`
+* `OutOfMemoryError`
+* `UnknownError`
+* etc.
+
+=== `Exception`
+
+[.step]
+* являются результатом проблем в программе
+* в принципе решаемы и предсказуемы
+
+=== `Exception`
+
+[.step]
+* `RuntimeException` (unchecked exceptions)
+* Another Exception (checked exceptions)
+
+=== Types
+
+[.step]
+* *unchecked* (*неконтролируемые*)
+[.step]
+** `RuntimeException` и его наследники
+** `Error` и его наследники
+* *checked* (*контролируемые*)
+[.step]
+** все остальные
+
+=== `RuntimeException`
+
+[.step]
+* `NullPointerException` - неверное использование пустой ссылки
+* `ClassCastException` - неверное приведение
+* `ArrayIndexOutOfBoundsException` - выход индекса за границу массива
+* `NumberFormatException` - неверное преобразование строки в числовой формат
+* `ArithmeticException` - арифметическая ошибка, например, деление на нуль
+* `ArrayStoreException` - присваивание элементу массива объекта несовместимого типа
+
+=== Another Exceptions
+
+[.step]
+* `ClassNotFoundException` - класс не найден
+* `CloneNotSupportedException` - попытка клонировать объект, который не реализует интерфейс `Cloneable`
+* `IllegalAccessException` - запрещен доступ к классу
+* `InstantiationException` - попытка создать объект абстрактного класса или интерфейса
+* `InterruptedException` - поток прерван другим потоком
+* `NoSuchFieldException` - запрашиваемое поле не существует
+* `NoSuchMethodException` - запрашиваемый метод не существует
+
+== Exception handling
+
+=== Exception handling
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+numbers[4] = 45;
+System.out.println(numbers[4]);
+----
+
+=== `try`...`catch`
+
+[.fragment]
+[source,java]
+----
+try {
+    int[] numbers = new int[3];
+    numbers[4] = 45;
+    System.out.println(numbers[4]);
+} catch (Exception e) {
+    // error processing
+    // usually logging
+}
+System.out.println("Программа завершена");
+----
+
+=== `try`...`catch`...`finally`
+
+[.fragment]
+[source,java]
+----
+try {
+    int[] numbers = new int[3];
+    numbers[4] = 45;
+    System.out.println(numbers[4]);
+} catch (Exception e) {
+    // exception processing
+    // usually logging
+} finally {
+    // mandatory actions AFTER exception processing
+}
+System.out.println("Программа завершена");
+----
+
+== Multiple `catch`
+
+=== Multiple `catch`
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+try {
+    numbers[6] = 45;
+    numbers[6] = Integer.parseInt("gfd");
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Выход за пределы массива");
+} catch (NumberFormatException e) {
+    System.out.println("Ошибка преобразования из строки в число");
+}
+----
+
+=== Multiple `catch`
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+try {
+    numbers[6] = 45;
+    numbers[6] = Integer.parseInt("gfd");
+} catch (Exception e) {
+    System.out.println("Какой-то Exception"); // WRONG!!!
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Выход за пределы массива");
+} catch (NumberFormatException e) {
+    System.out.println("Ошибка преобразования из строки в число");
+}
+----
+
+=== Multiple `catch`
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+try {
+    numbers[6] = 45;
+    numbers[6] = Integer.parseInt("gfd");
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Ошибка при обработке массива чисел");
+} catch (NumberFormatException e) {
+    System.out.println("Ошибка при обработке массива чисел");
+}
+----
+
+=== Multiple `catch`
+
+[.fragment]
+[source,java]
+----
+int[] numbers = new int[3];
+try {
+    numbers[6] = 45;
+    numbers[6] = Integer.parseInt("gfd");
+} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+    System.out.println("Ошибка при обработке массива чисел");
+}
+----
+
+== Operators for Exception handling
+
+=== Operator `throw`
+
+[.fragment]
+[source,java]
+----
+import java.util.Scanner;
+
+public class FirstApp {
+    public static void main(String[] args) {
+        try {
+            Scanner in = new Scanner(System.in);
+            int x = in.nextInt();
+            if (x >= 30) {
+                throw new Exception("Число х должно быть меньше 30");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Программа завершена");
+    }
+}
+----
+
+=== Operator `throws`
+
+[.fragment]
+[source,java]
+----
+public static int getFactorial(int num) throws Exception {
+    if (num < 1) {
+        throw new Exception("The number is less than 1");
+    }
+    int result = 1;
+    for (int i = 1; i <= num; i++) {
+        result *= i;
+    }
+    return result;
+}
+----
+
+=== Operator `throws`
+
+[.fragment]
+[source,java]
+----
+public static void main(String[] args) {
+    int result = getFactorial(-6); // compile error
+    System.out.println(result);
+}
+----
+
+=== Operator `throws`
+
+[.fragment]
+[source,java]
+----
+public static void main(String[] args) {
+    try {
+        int result = getFactorial(-6);
+        System.out.println(result);
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
+----
+
+=== How do without `throws`
+
+[.fragment]
+[source,java]
+----
+public static int getFactorial(int num) {
+    int result = 1;
+    try {
+        if (num < 1) {
+            throw new Exception("The number is less than 1");
+        }
+        for (int i = 1; i <= num; i++) {
+            result *= i;
+        }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        result = num;
+    }
+    return result;
+}
+----
+
+== Custom Exception
+
+=== Custom Exception
+
+[.fragment]
+[source,java]
+----
+class FactorialException extends Exception {
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public FactorialException(String message, int num) {
+        super(message);
+        number = num;
+    }
+}
+----
+
+=== Custom Exception
+
+[.fragment]
+[source,java]
+----
+class Factorial {
+    public static int getFactorial(int num) throws FactorialException {
+        int result = 1;
+        if (num < 1) {
+            throw new FactorialException("The number is less than 1", num);
+        }
+        for (int i = 1; i <= num; i++) {
+            result *= i;
+        }
+        return result;
+    }
+}
+----

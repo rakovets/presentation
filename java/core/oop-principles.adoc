@@ -1,0 +1,1281 @@
+= OOP. Principles.
+:imagesdir: ../../assets/img/java/core/oop/principles
+
+== Intro
+
+=== Problem
+
+[.step]
+* Возникает необходимость создания классов, которые отличаются несколькими полями/методами.
+* Как писать меньше кода?
+
+=== Solution
+
+[.step]
+* OOP Principles.
+
+== OOP principles
+
+=== OOP principles
+
+[.fragment]
+image::oop-principles-mem.png[OOP principles]
+
+=== OOP principles
+
+[.step]
+* *Inheritance* (*Наследование*)
+* *Encapsulation* (*Инкапсуляция*)
+* *Polymorphism* (*Полиморфизм*)
+* *Abstraction* (*Абстракция*)
+
+== Inheritance
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-without.svg[Without Inheritance]
+
+=== Inheritance
+
+[.fragment]
+image::inheritance.svg[Inheritance]
+
+=== Superclass: example
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println("Name: " + name);
+    }
+}
+----
+
+=== Subclass: example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+}
+----
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-profit.svg[Inheritance profit]
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-with-extends.svg[Inheritance with extends]
+
+=== Extends subclass: example
+
+[.fragment]
+[source,java]
+----
+class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println("Name: " + name);
+    }
+}
+----
+
+=== Extends subclass: example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+    private String company;
+
+    public Employee(String name, String company) {
+        super(name);
+        this.company = company;
+    }
+
+    public void work() {
+        System.out.printf("%s works in %s\n", getName(), company);
+    }
+}
+----
+
+=== Extends subclass: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Employee sam = new Employee("Sam", "Canonical");
+        sam.display();
+        sam.work();
+    }
+}
+----
+
+[.fragment]
+----
+Sam
+Sam works in Canonical
+----
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-override.svg[Inheritance: override]
+
+=== `@Override`: example
+
+[.fragment]
+[source,java]
+----
+class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println("Name: " + name);
+    }
+}
+----
+
+=== `super` keyword
+
+Ключевое слово `super` используется
+[.step]
+* Для вызова *methods* *superclass*, при переопределении в *subclass*.
+* Для доступа к *fields* *superclass*, если *superclass* и *subclass* имеют *fields* с одинаковыми именами.
+* Чтобы явно вызвать *superclass* no-args (по умолчанию) или параметризованный *constructor* из *constructor* *subclass*.
+
+=== `@Override`: example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+    private String company;
+
+    public Employee(String name, String company) {
+        super(name);
+        this.company = company;
+    }
+
+    @Override
+    public void display() {
+        System.out.printf("Name: %s\n", getName());
+        System.out.printf("Works in %s\n", company);
+    }
+}
+----
+
+=== `@Override`: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Employee sam = new Employee("Sam", "Canonical");
+        sam.display();
+    }
+}
+----
+
+[.fragment]
+----
+Sam
+Works in Canonical
+----
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-example-iphone.svg[Inheritance example: iPhone]
+
+=== Inheritance
+
+[.step]
+* Повторное использование кода
+* Расширение *superclass*
+* *Subclass* будет уметь всё, что умел *superclass* плюс добавляет что-то своё
+
+=== Inheritance
+
+[.fragment]
+image::inheritance-example-auto.svg[Inheritance example: auto]
+
+=== Subclass
+
+[.fragment]
+*Subclass* видит:
+
+[.step]
+* *fields* и *methods* с модификатором `public`.
+* *fields* и *methods* с модификатором `protected`.
+* *fields* и *methods* без модификатора доступа, если *superclass* в том же *package*, что и *subclass* – так делать нежелательно.
+
+=== Inheritance
+
+[.step]
+* Все *objects* наследуются от `Object`, даже если не указан `*** extends Object`.
+* *superclasses* не наследуют *members* *subclasses*!
+* В *subclasses* при наследовании можно расширять *accesses modifier*, но нельзя сужать.
+* В Java *НЕТ* множественного наследования, как в C++.
+
+=== Inheritance
+
+[.step]
+* Когда есть общее поведение для каких-либо *objects* – нужно выносить его в *superclass*.
+* Нужно уметь правильно наследоваться, т.е. выделять общие *classes*.
+* Наследование избавляет вашу программу от избыточности.
+
+=== Inheritance
+
+[.step]
+* Если нужно изменить общее поведение, то наследование автоматически передаст это изменение для всех *subclasses*.
+* *subclass* наследует доступные *methods* и *fields* от *superclass* и может прибавлять свои собственные *methods* и *fields*.
+
+== Inheritance vs Composition
+
+=== Inheritance vs Composition
+
+[.step]
+* *Inheritance* – не всегда лучший инструмент для повторного использования кода из-за привязки к архитектуре наследования.
+* Старайтесь использовать *composition* вместо *inheritance*.
+* По времени жизни внутренние объекты зависят от объекта, в котором они созданы.
+
+=== Inheritance vs Composition
+
+[.step]
+* Если объекты связаны по типу *has a* («содержит»), то нужно применять композицию
+* Если объекты связаны по типу *is a* («является»), то нужно применять наследование
+
+== Dynamic binding
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.printf("Person %s\n", name);
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+    private String company;
+
+    public Employee(String name, String company) {
+        super(name);
+        this.company = company;
+    }
+
+    @Override
+    public void display() {
+        System.out.printf("Employee %s works in %s\n", super.getName(), company);
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person tom = new Person("Tom");
+        tom.display();
+        Person sam = new Employee("Sam", "Canonical");
+        sam.display();
+    }
+}
+----
+
+[.fragment]
+----
+Person Tom
+Employee Sam works in Canonical
+----
+
+== Inheritance Hierarchy and Type Conversion
+
+=== Upcasting: example
+
+[.fragment]
+[source,java]
+----
+class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.printf("Person %s\n", name);
+    }
+}
+----
+
+=== Upcasting: example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+    private String company;
+
+    public Employee(String name, String company) {
+        super(name);
+        this.company = company;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void display() {
+        System.out.printf("Employee %s works in %s\n",
+                super.getName(), company);
+    }
+}
+----
+
+=== Upcasting: example
+
+[.fragment]
+[source,java]
+----
+class Client extends Person {
+    private int sum;
+    private String bank;
+
+    public Client(String name, String bank, int sum) {
+        super(name);
+        this.bank = bank;
+        this.sum = sum;
+    }
+
+    public void display() {
+        System.out.printf("Client %s has account in %s\n",
+                super.getName(), bank);
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+}
+----
+
+=== Upcasting: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person tom = new Person("Tom");
+        tom.display();
+        Person sam = new Employee("Sam", "Canonical");
+        sam.display();
+        Person bob = new Client("Bob", "Rakovets & Co.", 3000);
+        bob.display();
+    }
+}
+----
+
+[.fragment]
+----
+Person Tom
+Employee Sam works in Canonical
+Client Bob has account in Rakovets & Co.
+----
+
+=== Upcasting: example
+
+[.fragment]
+[source,java]
+----
+Object tom = new Person("Tom");
+Object sam = new Employee("Sam", "Canonical");
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+Person bob = new Client("Bob", "Rakovets & Co.", 3000);
+Person alice = new Employee("Alice", "Rad Hat");
+----
+
+=== Downcasting: example
+
+[.fragment]
+[source,java]
+----
+Object sam = new Employee("Sam", "Canonical");
+// many, many code
+Employee emp = (Employee) sam;
+emp.display();
+System.out.println(emp.getCompany());
+----
+
+[.fragment]
+----
+Employee Sam works in Canonical
+Canonical
+----
+
+=== Bad Practice
+
+[.fragment]
+[source,java]
+----
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
+Employee emp = (Employee) kate;
+emp.display();
+((Employee) kate).display();
+----
+
+[.fragment]
+[source,java]
+----
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
+((Employee) kate).display();
+----
+
+[.fragment]
+JVM throws `ClassCastException`
+
+=== `instanceof` keyword
+
+[.fragment]
+[source,java]
+----
+Object kate = new Client("Kate", "Rakovets & Co.", 2000);
+// many, many code
+if (kate instanceof Employee) {
+    ((Employee) kate).display();
+} else {
+    System.out.println("Conversion is invalid");
+}
+----
+
+[.fragment]
+----
+Conversion is invalid
+----
+
+== Encapsulation
+
+=== Encapsulation
+
+[.step]
+* *Encapsulation* (*Инкапсуляция*) — это процесс объединения кода и данных в единый блок.
+* *Encapsulation* - это ограничение доступа одних компонентов программы к другим.
+
+[.fragment]
+image::encapsulation.png[Encapsulation]
+
+=== Encapsulation
+
+[.fragment]
+image::encapsulation-example.png[Encapsulation example]
+
+=== Encapsulation
+
+[.fragment]
+*Encapsulation* в Java достигается с помощью:
+[.step]
+* *packages*
+* *access modifiers*
+* *modules* (`@since 9`)
+
+== Packages
+
+=== Packages
+
+[.step]
+* Для логического группирования множеств классов в связанные группы в Java применяется понятие *package* (*пакета*).
+* *Packages* обеспечивают:
+[.step]
+** независимые пространства имён (*namespaces*)
+** ограничение доступа к классам
+
+[.step]
+* *Packages* — это фактически обычная директория.
+
+=== Packages
+
+[.step]
+* *Packages* — это фактически обычная директория.
+
+[.fragment]
+[source,java]
+----
+package your.package.which.can.has.any.name;
+----
+
+=== Package definition: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+public class User {
+    public String name;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    void tellAboutYourself() {
+        System.out.printf("Name: %s\n", name);
+    }
+}
+----
+
+=== Package definition: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+public class Program {
+    public static void main(String[] args) {
+        User dmitry = new User("Dmitry");
+        dmitry.tellAboutYourself();
+    }
+}
+----
+
+[.fragment]
+----
+Name: Dmitry
+----
+
+=== Packages and Terminal: example
+
+[.fragment]
+[source,shell script]
+----
+cd D:\home\rakovets\dev
+javac com\rakovets\Program.java
+java com.rakovets.Program
+----
+
+[.fragment]
+----
+Name: Dmitry
+----
+
+=== `import` Packages and Classes: example
+
+[.fragment]
+[source,java]
+----
+package com.rakovets;
+
+import java.util.Scanner;
+
+public class Program {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+    }
+}
+----
+
+=== `import` Packages and Classes: example
+
+[.fragment]
+[source,java]
+----
+java.util.Date utilDate = new java.util.Date();
+java.sql.Date sqlDate = new java.sql.Date();
+----
+
+== Access modifiers
+
+=== Access modifiers (Модификаторы доступа)
+
+[.step]
+* `public` - доступно из любого места, но чаще всего для внешнего интерфейса.
+* `protected` - внутри пакета и в дочерних классах.
+* _friendly_/_default_/_package_ - доступно внутри пакета.
+* `private` - доступно только внутри класса – для скрытия реализации (инкапсуляции).
+
+=== Access modifiers
+
+[.fragment]
+[options="header",cols="3,1,1,1,1"]
+|===
+||`private`|_friendly_|`protected`|`public`
+|same class|+|+|+|+
+|same package subclass|-|+|+|+
+|same package non-subclass|-|+|+|+
+|different package subclass|-|-|+|+
+|different package non-subclass|-|-|-|+
+|===
+
+=== Access modifiers
+
+[.fragment]
+[source,java]
+----
+class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+----
+
+[.fragment]
+Bad practice.
+
+=== Access modifiers
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person kate = new Person("Kate", 30);
+        System.out.println(kate.age);
+        kate.age = 33;
+        System.out.println(kate.age);
+    }
+}
+----
+
+[.fragment]
+----
+30
+33
+----
+
+[.fragment]
+Bad practice.
+
+=== Access modifiers
+
+[.fragment]
+Good practice.
+
+[.fragment]
+[source,java]
+----
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+----
+
+=== Access modifiers
+
+[.fragment]
+Good practice.
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person kate = new Person("Kate", 30);
+        System.out.println(kate.getAge());
+        kate.setAge(33);
+        System.out.println(kate.getAge());
+    }
+}
+----
+
+[.fragment]
+----
+30
+33
+----
+
+== Abstraction and Polymorphism
+
+=== Abstraction
+
+[.fragment]
+image::abstraction.svg[Abstraction]
+
+=== Polymorphism
+
+[.step]
+* Один *interface* – множество *implementations* (*реализаций*).
+* Одно имя – множество вариантов выполнения.
+
+=== Polymorphism
+
+[.step]
+* *overloading methods*
+* *overriding methods*
+* *abstract classes*
+* *interfaces*
+
+=== Polymorphism: overloading methods
+
+[.fragment]
+image::polymorphism-overloading.svg[Polymorphism: overloading]
+
+== Abstract classes
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public abstract class Human {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public abstract void sleep();
+}
+----
+
+=== Abstract classes
+
+[.step]
+* Абстрактный класс нужен для того, чтобы задать модель поведения для всех дочерних объектов.
+* Нельзя создать экземпляр абстрактного класса (через `new`), потому что он ничего не умеет, это просто шаблон поведения для дочерних классов.
+
+=== Abstract classes
+
+[.step]
+* Если класс имеет хотя бы один абстрактный метод, то он будет абстрактным.
+* Любой дочерний класс должен реализовать все абстрактные методы родительского, либо он сам должен быть абстрактным.
+* Абстрактный класс может быть абстрактным и при этом не иметь ни одного абстрактного метода.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+abstract class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public abstract void display();
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+class Employee extends Person {
+    private String bank;
+
+    public Employee(String name, String company) {
+        super(name);
+        this.bank = company;
+    }
+
+    public void display() {
+        System.out.printf("Employee Name: %s \t Bank: %s\n",
+                super.getName(), bank);
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+class Client extends Person {
+    private String bank;
+
+    public Client(String name, String company) {
+        super(name);
+        this.bank = company;
+    }
+
+    public void display() {
+        System.out.printf("Client Name: %s \tBank: %s\n",
+                super.getName(), bank);
+    }
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Person sam = new Employee("Sam", "Leman Brothers");
+        sam.display();
+        Person bob = new Client("Bob", "Leman Brothers");
+        bob.display();
+    }
+}
+----
+
+[.fragment]
+[source,java]
+----
+Employee Name: Sam    Bank: Leman Brothers
+Client Name: Bob    Bank: Leman Brothers
+----
+
+== Interfaces
+
+=== Interfaces
+
+[.step]
+* *Interface* (*интерфейс*) – более «строгий» вариант *abstract class*.
+* *Interface* задаёт только поведение, без реализации.
+* *Interface* может наследоваться от одного или нескольких *interfaces*.
+* Все объявленные в интерфейсе методы автоматически трактуются как `public` и `abstract`
+* Все объявленные в интерфейсе поля трактуются как `public`, `static` и `final`, даже если они так не объявлены.
+
+=== `Interfaces` definition
+
+[.fragment]
+[source,java]
+----
+interface Printable {
+    void print();
+}
+----
+
+=== `Interfaces` implements
+
+[.fragment]
+[source,java]
+----
+class Book implements Printable {
+    String name;
+    String author;
+
+    Book(String name, String author) {
+        this.name = name;
+        this.author = author;
+    }
+
+    public void print() {
+        System.out.printf("%s (%s)\n", name, author);
+    }
+}
+----
+
+=== `Interfaces` implements
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Printable b1 = new Book("Java. Complete Referense.", "H. Shildt");
+        b1.print();
+    }
+}
+----
+
+[.fragment]
+----
+Java. Complete Referense. (H. Shildt)
+----
+
+=== `Interfaces` and `default` method: example
+
+[.fragment]
+[source,java]
+----
+interface Printable {
+    default void print() {
+        System.out.println("Undefined printable");
+    }
+}
+----
+
+=== `Interfaces` and `default` method: example
+
+[.fragment]
+[source,java]
+----
+class Journal implements Printable {
+    private String name;
+
+    String getName() {
+        return name;
+    }
+
+    Journal(String name) {
+        this.name = name;
+    }
+}
+----
+
+=== `Interfaces` and `static` method: example
+
+[.fragment]
+[source,java]
+----
+interface Printable {
+    void print();
+
+    static void read() {
+        System.out.println("Read printable");
+    }
+}
+----
+
+=== `Interfaces` and `static` method: example
+
+[.fragment]
+[source,java]
+----
+public static void main(String[] args) {
+    Printable.read();
+}
+----
+
+[.fragment]
+----
+Read printable
+----
+
+=== `Interfaces` and `private` method (`@since 9`)
+
+[.fragment]
+[source,java]
+----
+interface Calculatable {
+    default int sum(int a, int b) {
+        return sumAll(a, b);
+    }
+
+    default int sum(int a, int b, int c) {
+        return sumAll(a, b, c);
+    }
+
+    private int sumAll(int... values) {
+        int result = 0;
+        for (int n : values) {
+            result += n;
+        }
+        return result;
+    }
+}
+----
+
+=== `Interfaces` and `private` method: example
+
+[.fragment]
+[source,java]
+----
+class Calculation implements Calculatable {
+}
+----
+
+=== `Interfaces` and `private` method: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Calculatable c = new Calculation();
+        System.out.println(c.sum(1, 2));
+        System.out.println(c.sum(1, 2, 4));
+    }
+}
+----
+
+[.fragment]
+[source,java]
+----
+3
+7
+----
+
+=== `Interfaces` and constants: example
+
+[.fragment]
+[source,java]
+----
+interface Stateable {
+    int OPEN = 1;
+    int CLOSED = 0;
+
+    void printState(int n);
+}
+----
+
+=== `Interfaces` and constants: example
+
+[.fragment]
+[source,java]
+----
+class WaterPipe implements Stateable {
+    public void printState(int n) {
+        if (n == OPEN) {
+            System.out.println("Water is opened");
+        } else if (n == CLOSED) {
+            System.out.println("Water is closed");
+        } else {
+            System.out.println("State is invalid");
+        }
+    }
+}
+----
+
+=== `Interfaces` and constants: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        WaterPipe pipe = new WaterPipe();
+        pipe.printState(1);
+    }
+}
+----
+
+[.fragment]
+----
+Water is opened
+----
+
+=== Multiple implements: example
+
+[.fragment]
+[source,java]
+----
+interface Printable {
+}
+----
+
+[.fragment]
+[source,java]
+----
+interface Searchable {
+}
+----
+
+[.fragment]
+[source,java]
+----
+class Book implements Printable, Searchable {
+}
+----
+
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+[source,java]
+----
+interface Printable {
+    void print();
+}
+----
+
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+[source,java]
+----
+class Book implements Printable {
+    String name;
+    String author;
+
+    Book(String name, String author) {
+        this.name = name;
+        this.author = author;
+    }
+
+    public void print() {
+        System.out.printf("%s (%s)\n", name, author);
+    }
+}
+----
+
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+[source,java]
+----
+class Journal implements Printable {
+    private String name;
+
+    String getName() {
+        return name;
+    }
+
+    Journal(String name) {
+        this.name = name;
+    }
+
+    public void print() {
+        System.out.println(name);
+    }
+}
+----
+
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+[source,java]
+----
+public class Program {
+    public static void main(String[] args) {
+        Printable printable = createPrintable("Foreign Affairs", false);
+        printable.print();
+
+        read(new Book("Java for impatients", "Cay Horstmann"));
+        read(new Journal("Java Dayly News"));
+    }
+
+    static void read(Printable p) {
+        p.print();
+    }
+
+    static Printable createPrintable(String name, boolean option) {
+        if (option) {
+            return new Book(name, "Undefined");
+        } else {
+            return new Journal(name);
+        }
+    }
+}
+----
+
+=== Interfaces as arguments and result for method: example
+
+[.fragment]
+----
+Foreign Affairs
+Java for impatients (Cay Horstmann)
+Java Dayly News
+----
+
+=== Interface types
+
+[.step]
+* Интерфейсы, определяющие контракт для классов посредством методов
+* Интерфейсы-маркеры, реализация которых автоматически (без реализации методов) придает классу определенные свойства
+[.step]
+** `Cloneable` - клонирование объекта
+** `Serializable` - сериализация объектов
+* Функциональные интерфейсы (с java 1.8) – интерфейс с одним методом.
+
+== Abstract classes vs Interfaces
+
+=== Abstract classes vs Interfaces
+
+[.step]
+* Интерфейс может наследоваться от множества интерфейсов, абстрактный класс — только от одного класса.
+* Совет: если есть возможность — используйте интерфейсы.
+
+== Interfaces
+
+=== Interfaces
+
+[.fragment]
+Под *Interface* могут понимать одно из понятий
+[.step]
+* *Interface* как один из элементов языка Java (как и *class*)
+* *Interface* как *API* (контракт/договор) для какой-то функциональность доступной для потребителя (клиента или клиентского кода)
+
+=== Interface in a broad sense (as API)
+
+[.fragment]
+image:interface.png[Interface in a broad sense]

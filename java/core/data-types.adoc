@@ -1,0 +1,567 @@
+= Data Types
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как с помощью языка программирования хранить информацию в оперативной памяти?
+
+=== Solution
+
+[.step]
+* Data types
+* Variables
+
+== Variables
+
+=== Variables
+
+[.step]
+* *Переменная* (*variable*) - это именованная *ячейка памяти*
+* Содержимое *переменной* может изменяться в процессе выполнения программы.
+* При объявлении переменной:
+[.step]
+** сначала указывается *data type* (*тип данных*) переменной
+** затем *identifier* (*идентификатор*) задаваемой переменной
+** например: `int age`.
+
+=== Variables
+
+[.fragment]
+image::/assets/img/java/core/data-types/variables-in-java.png[Variables in Java]
+
+=== Variables
+
+[.fragment]
+image::/assets/img/java/core/data-types/variable-in-memory.jpeg[Variable in Memory.jpeg]
+
+== Data Types
+
+=== Типы данных
+
+[.fragment]
+Типы данных в языке Java делятся на:
+
+[.step]
+* *primitive* (*примитивные*)
+* *reference*/*non-primitive* (*ссылочные*)
+
+=== Типы данных
+
+[.fragment]
+image::/assets/img/java/core/data-types/data-types.png[Data Types]
+
+=== Типы данных
+
+[.fragment]
+Существует несколько предопределённых примитивных типов:
+
+[.step]
+* `byte` - целочисленный
+* `short` - целочисленный
+* `int` - целочисленный
+* `long` - целочисленный
+
+=== Типы данных
+
+[.step]
+* `boolean` - логический
+* `char` - символьный
+* `float` - числовой, с плавающей точкой
+* `double` - числовой, с плавающей точкой
+
+=== Типы данных в языке Java
+
+[.fragment]
+Все остальные типы — *ссылочные*. Если быть точным, то любой `Object`
+
+=== Примитивные типы данных
+
+[.fragment]
+|====
+|Тип|Размер (байт)|По умолчанию|Мин|Макс
+|`boolean`|1|`false`|`false`|`true`
+|`char`|2|`\u0000`|`\u0000`|`\uffff`
+|`byte`|1|`0`|`-128`|`127`
+|`short`|2|`0`|`-32 768`| `32 767`
+|`int`|4|`0`|`-2 147 483 648`|`2 147 483 647`
+|`long`|8|`0`|`-9 223 372 036 854 775 808`|`9 223 372 036 854 775 807`
+|`float`|4|`0.0`|-3.4E+38|3.4E+38 (стандарт IEEE 754)
+|`double`|8|`0.0`|-1.7E+308|1.7E+308 (стандарт IEEE 754)
+|====
+
+=== Default value
+
+[.step]
+* Это значение, которое помещается в память
+* НО без инициализации переменной будет *compile error*
+
+=== Why char uses 2 byte in java and what is \u0000 ?
+
+[.step]
+* It is because java uses *Unicode* system not *ASCII* code system.
+* The `\u0000` is the lowest range of *Unicode* system.
+
+== Definition and Initialization
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int x; // объявление переменной
+x = 10; // присвоения значения
+System.out.println(x); // 10
+----
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int y = 10; // объявление и инициализация переменной
+System.out.println(y); // 10
+----
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int z;
+System.out.println(z);
+----
+
+[.fragment]
+Compile error: `java: variable z might not have been initialized`
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int x, y;
+x = 10;
+y = 25;
+System.out.println(x); // 10
+System.out.println(y); // 25
+----
+
+[.fragment]
+Bad
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int a = 8, b = 15;
+System.out.println(a); // 8
+System.out.println(b); // 15
+----
+
+[.fragment]
+Bad
+
+=== Definition and Initialization
+
+[.fragment]
+[source,java]
+----
+int i = 1;
+int j = 11;
+System.out.println(i); // 1
+System.out.println(j); // 11
+----
+
+[.fragment]
+Well
+
+== Identifier
+
+=== Identifier
+
+[.step]
+* *Идентификаторы* – это имена, которые даются различным элементам языка для упрощения доступа к ним.
+* В именах переменных используются символы:
+[.step]
+** `A`-`Z`
+** `a`-`z`
+** `0`-`9`
+** `$`, `_`
+
+=== Identifier
+
+[.fragment]
+Запрещено применение:
+[.step]
+* `\_` - error: as of release 9, '_' is a keyword, and may not be used as an identifier
+* использовать первым символом цифру
+* арифметических и логических операторов
+* и других символов
+
+=== Identifier
+
+[options="header"]
+|===
+|Possible|Impossible
+|`my$money`|`field#`
+|`_flag`|`open^flag`
+|`new_string`|`1searchIndex`
+|===
+
+=== Code Convention
+
+[.step]
+* Как правило:
+** Переменные именуются с использованием `camelCase`.
+** Название должно объяснять что за значение находится в переменной.
+
+=== Code Convention
+
+[.fragment]
+[source,java]
+----
+int cargo = 11;
+int carryingCapacity = 2;
+int depositAmount = 1500;
+int depositYears = 5;
+int depositAnnualPercentage = 3;
+----
+
+== Literals
+
+=== Literals
+
+[.step]
+* *Литералы* — это явно заданные значения в коде программы.
+* Фактически, _константы определенного типа_, которые _находятся в коде в момент запуска_.
+
+=== Literals
+
+[.fragment]
+[source,java]
+----
+class Test {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+----
+
+=== Типы литералов
+
+[.step]
+* Числовые:
+[.step]
+** Целочисленные.
+** С плавающей точкой.
+* Строковые.
+* Символьные.
+* Логические.
+
+=== Literal type `long`
+
+[.fragment]
+[source,java]
+----
+long a = 12_345_678_901; // error: integer number too large
+long b = 12_345_678_901L; // Все в порядке
+long c = 12_345_678_901l; // Not recommend. Use `L`
+----
+
+=== Literal type `float`
+
+[.fragment]
+[source,java]
+----
+// float d = 2.718; // error: incompatible types: possible lossy conversion from double to float
+float f1 = 2.718F; // Все в порядке
+float f2 = 2.718f; // Все в порядке
+float f3 = 0.0f / 0.0f; // NaN - Not-a-Number
+float f4 = 1.0f / 0.0f; // Infinity - бесконечность
+float f5 = -1.0f / 0.0f; // -Infinity - отрицательная бесконечность
+----
+
+=== Literal type `double`
+
+[.fragment]
+[source,java]
+----
+double d1 = 2.123_456_789; // Тип double в классическом виде
+double d2 = 4.05E-13; // Тип double в научном виде
+double d3 = .5; // Тип double эквивалентный 0.5
+double d4 = 3.; // Тип double эквивалентный 3.0
+double d5 = 0.0 / 0.0; // NaN - Not-a-Number
+double d6 = 1.0 / 0.0; // Infinity - бесконечность
+double d7 = -1.0 / 0.0; // -Infinity - отрицательная бесконечность
+----
+
+=== Literal type `char`
+
+[.fragment]
+[source,java]
+----
+char c1 = 'A'; // A (latin) Glyph
+char c2 = '\u0041'; // A (latin) Unicode Code
+char c3 = '\101'; // A (latin) Octal
+char c4 = 65; // A (latin) Decimal
+----
+
+[.fragment]
+*Unicode*: `\uUNICODE_HEX` от `\u0000` до `\u00ff` символа в шестнадцатеричном формате.
+
+=== Literal type `char`
+
+[.fragment]
+[options="header",cols="1,1,4"]
+|===
+|Symbol|Unicode|Description
+|`\b`|`\u0008`|*backspace* - *BS* – забой
+|`\t`|`\u0009`|*horizontal tab* - *HT* – табуляция
+|`\n`|`\u000a`|*linefeed* - *LF* – конец строки
+|`\f`|`\u000c`|*form feed* - *FF* – конец страницы
+|`\r`|`\u000d`|*carriage return* - *CR* – возврат каретки
+|`\"`|`\u0022`|*double quote* - `"` – двойная кавычка
+|`\'`|`\u0027`|*single quote* - `'` – одинарная кавычка
+|`\\`|`\u005c`|*backslash* - `\` – обратная косая черта
+|===
+
+=== Text Literal
+
+[.fragment]
+[source,java]
+String text = "text literal";
+
+=== Literal `null`
+
+[.fragment]
+[source,java]
+String text = null;
+
+=== Другие системы счисления
+
+[.step]
+* *Decimal*
+* *Binary*
+* *Octal*
+* *Hexadecimal*
+
+=== Другие системы счисления
+
+[.step]
+* *Decimal* declaration and possible chars are `[0-9]`
+* *Binary* representation starts with `0B` or `0b` and possible chars are `[0-1]`
+* *Octal* declaration starts with `0` and possible chars are `[0-7]`
+* *Hexadecimal* declaration starts with `0X` or `0x` and possible chars are `[0-9A-Fa-f]`
+
+=== Другие системы счисления
+
+[.fragment]
+[source,java]
+----
+int decimalNumber = 42;
+int binaryNumber = 0b101010;
+int octalNumber = 052;
+int hexadecimalNumber = 0x2A;
+----
+
+=== Поразрядное разделение
+
+[.fragment]
+[source,java]
+----
+int x = 123456789;
+int y = 123_456_789;
+int z = 123___456______789;
+System.out.println(x); // 123456789
+System.out.println(y); // 123456789
+System.out.println(z); // 123456789
+----
+
+== Ключевое слово `var`
+
+=== Ключевое слово `var` (`@since 10`)
+
+[.fragment]
+[source,java]
+----
+var x = 10;
+System.out.println(x); // 10
+----
+
+=== Ключевое слово `var` (`@since 10`)
+
+[.fragment]
+[source,java]
+----
+var y; // error: cannot infer type for local variable y
+y = 10;
+----
+
+== Constants
+
+=== Constants
+
+[.step]
+* Кроме переменных, в Java для хранения данных можно использовать *константы*.
+* Константы позволяют задать такие переменные, которые не должны больше изменяться.
+* В отличие от переменных константам можно присвоить значение ТОЛЬКО один раз.
+* Объявляется, как и переменные, но только со служебным словом `final`.
+
+=== Code Convention
+
+[.step]
+* Как правило:
+** Константы именуются с использованием `UPPER_SNAKE_CASE`.
+** Название должно объяснять что за значение находится в константы.
+
+=== Code Convention
+
+[.fragment]
+[source,java]
+----
+final int LIMIT = 5;
+final String NUMBER_SYSTEM = "BINARY";
+----
+
+== Type Casting
+
+=== Преобразование типов
+
+[.step]
+* *Widening Casting* (automatically)
+* *Narrowing Casting* (manually)
+
+=== Преобразование типов
+
+[.fragment]
+image::/assets/img/java/core/data-types/type-casting.png[Type casting]
+
+=== Examples: Widening Casting
+
+[.fragment]
+[source,java]
+----
+short a = 'Z';
+System.out.println(a); // 90
+double b = 1_234_567_890_123_456L;
+System.out.println(b); // 1.234567890123456E15
+----
+
+=== Examples: Widening Casting with lossy
+
+[.fragment]
+[source,java]
+----
+float c1 = 1_234_567_890_123_456L;
+System.out.println(c1); // 1.23456795E15
+float c2 = 123_456_789;
+System.out.println(c2); // 1.23456792E8
+double c3 = 1_234_567_890_123_456_789L;
+System.out.println(c3); // 1.23456789012345677E18
+----
+
+=== Examples: Narrowing Casting
+
+[.fragment]
+[source,java]
+----
+byte d = 128; // error: incompatible types: possible lossy conversion from int to byte
+char e = 2L; // error: incompatible types: possible lossy conversion from long to char
+short f = '\uffff'; // error: incompatible types: possible lossy conversion from char to short
+
+byte i1 = (byte) 128;
+byte i2 = (byte) 129;
+System.out.println(i1); // -128
+System.out.println(i2); // -127
+----
+
+== Структура кода
+
+=== Структура кода
+
+[.step]
+* *Пробелы*
+* *Комментарии*
+* *Лексемы*
+
+=== Пробелы
+
+[.step]
+* Whitespace (Пробел) - *ASCII 32*
+* `CR` - *ASCII 10*
+* `LF` (`NL`) - *ASCII 13*
+* `TAB` - *ASCII 9*
+
+=== Комментарии
+
+[.step]
+* Однострочный
+
+[.fragment]
+----
+// java 4 U
+----
+
+[.step]
+* Многострочный
+
+[.fragment]
+----
+i++/* increment comment*/;
+----
+
+[.step]
+* Документирования
+
+[.fragment]
+----
+/**
+* @author Dmitry Rakovets
+*/
+----
+
+=== Лексемы
+
+[.step]
+* *ключевые слова* (*key words*)
+* *идентификаторы* (*identifiers*)
+* *литералы* (*literals*)
+* *разделители* (*separators*)
+* *операторы* (*operators*)
+
+=== Ключевые слова
+
+[.fragment]
+[source,java]
+----
+abstract   continue   for          new         switch
+assert     default    if           package     synchronized
+boolean    do         goto         private     this
+break      double     implements   protected   throw
+byte       else       import       public      throws
+case       enum       instanceof   return      transient
+catch      extends    int          short       try
+char       final      interface    static      void
+class      finally    long         strictfp    volatile
+const      float      native       super       while
+_ (underscore)
+----
+
+=== Разделители
+
+[.fragment]
+----
+( ) [ ] { } ; . ,
+----
+
+== Java
+
+=== Java
+
+[.step]
+* *Java* - *строго типизированный* язык программирования.
+* Типы переменных должны быть известны до *compile time*
+* (@since 10) или могут *ОДНОЗНАЧНО* установлены во время *compile time*

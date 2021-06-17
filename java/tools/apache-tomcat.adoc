@@ -1,0 +1,156 @@
+= Apache Tomcat
+
+== Apache Tomcat
+
+image::/assets/img/java/tools/apache-tomcat/apache-software-foundation.png[Apache Software Foundation, 300]
+image::/assets/img/java/tools/apache-tomcat/tomcat.png[Apache Tomcat]
+
+=== Versions
+
+|===
+|Tomcat|Java|Servlet|JSP|EL|WebSocket|JASPIC
+|10.0.x|8|5.0|3.0|4.0|2.0|2.0
+|9.0.x|8|4.0|2.3|3.0|1.1|1.1
+|8.5.x|7|3.1|2.3|3.0|1.1|1.1
+|8.0.x|7|3.1|2.3|3.0|1.1|N/A
+|7.0.x|6/7|3.0|2.2|2.2|1.1|N/A
+|6.0.x|5|2.5|2.1|2.1|N/A|N/A
+|5.5.x|1.4|2.4|2.0|N/A|N/A|N/A
+|4.1.x|1.3|2.3|1.2|N/A|N/A|N/A
+|3.3.x|1.1|2.2|1.1|N/A|N/A|N/A
+|===
+
+=== Components
+
+[.step]
+* Catalina
+* Coyote
+* Jasper
+
+== Architecture
+
+=== Architecture
+
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+
+=== Architecture
+
+*Tomcat* instance is the top-level component
+
+[.step]
+* only one instance per *JVM*
+** multiple instances can run on separate *JVM* and network ports
+* `server.xml` provides an XML representation of
+relationships between the different containers
+
+=== `server.xml`
+
+[source,xml]
+----
+<Server>
+    <Service>
+        <Connector/>
+        <Engine>
+            <Host>
+                <Context></Context>
+            </Host>
+        </Engine>
+    </Service>
+</Server>
+----
+
+=== Architecture
+
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+
+=== Architecture
+
+[.step]
+* `<Server>` represents the entire *Catalina* server
+engine
+** *Catalina* is the Java servlet container implementation
+** may contain one or more `<Service>` containers
+
+=== Architecture
+
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+
+=== Architecture
+
+[.step]
+* `<Service>` holds a collection of `<Connector>`
+** connectors share one `<Engine>`
+* `<Connector>` defines the port for handling request
+and response
+
+=== Architecture
+
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+
+=== Architecture
+
+[.step]
+* `<Engine>` handles all requests received by the
+connectors
+* `<Host>` defines virtual hosts
+** the virtual hosts are contained in an instance of engine
+** each host can be a parent to one or more `<Context>`
+component
+* `<Context>` represents a web application
+
+=== Architecture
+
+image::/assets/img/java/tools/apache-tomcat/tomcat-architecture.png[Apache Tomcat Architecture]
+
+=== Apache Tomcat overview
+
+[.step]
+* Tomcat is not
+** a Web Profile server
+** a httpd server
+*** Apache httpd is better
+* Tomcat is
+** just a Java EE web container
+* Tomcat is part of many projects
+** JBoss
+** ...
+
+=== Practice
+
+[.step]
+* Install Apache Tomcat 9
+* Run Apache Tomcat 9 (TOMCAT_HOME/bin/startup.bin)
+* Check with http://localhost:8080
+
+=== Directories
+
+[.step]
+* `bin`
+* `conf`
+* `lib`
+* `logs`
+* `temp`
+* `webapps`
+* `work`
+
+=== `webapps`
+
+[.step]
+* `*.war` (*Web Archive*) – представляет собой упакованное, готовое к запуску с помощью Apache Tomcat приложение
+* oбязательно содержит директорию `WEB-INF`
+[.step]
+** `classes/` содержит скомпилированные java-классы (сервлеты, сущности и т.д.)
+** `lib/` содержит необходимые библиотеки
+** `web.xml` файл конфигурации приложения (в нём описывается конфигурация сервлетов
+
+=== Live-coding
+
+=== How works it?
+
+image::/assets/img/java/tools/apache-tomcat/web-static-app.png[Web static app]
+
+=== Practice
+
+[.step]
+* Create static web-application 'CV'
+* Deploy to Apache Tomcat 9

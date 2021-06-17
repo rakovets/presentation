@@ -1,0 +1,503 @@
+= Looping statements
+
+== Intro
+
+=== Problem
+
+[.step]
+* Что если нужно вывести сообщение 100 раз?
+* Повторим код по выводу 100 раз!
+
+=== Solution
+
+[.fragment]
+Вместо того, чтобы писать один и тот же код 100 раз, можно использовать цикл.
+
+== Looping statements
+
+=== Looping statements
+
+[.step]
+* `for`
+* `while`
+* `do...while`
+
+== `for` statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+for (initialExpression; testExpression; updateExpression) {
+    // body of the loop
+}
+----
+
+=== Flowchart
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/for-loop.png[For loop]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int n = 5;
+// for loop
+for (int i = 1; i <= n; ++i) {
+    System.out.println("Java is fun");
+}
+----
+
+[.fragment]
+[source,output]
+----
+Java is fun
+Java is fun
+Java is fun
+Java is fun
+Java is fun
+----
+
+=== How this program works?
+
+[.fragment]
+[options="header", cols="^1,^2,^2,^4"]
+|===
+|Iteration|Variable|`i \<= n`|Action
+|*1st*|`i = 1`, `n = 5`|`true`|`Java is fun` is printed. `i` is increased to `2`.
+|*2nd*|`i = 2`, `n = 5`|`true`|`Java is fun` is printed. `i` is increased to `3`.
+|*3rd*|`i = 3`, `n = 5`|`true`|`Java is fun` is printed. `i` is increased to `4`.
+|*4th*|`i = 4`, `n = 5`|`true`|`Java is fun` is printed. `i` is increased to `5`.
+|*5th*|`i = 5`, `n = 5`|`true`|`Java is fun` is printed. `i` is increased to `6`.
+|*6th*|`i = 6`, `n = 5`|`false`|The loop is terminated.
+|===
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int n = 5;
+// for loop
+for (int i = 1; i <= n; ++i) {
+    System.out.println(i);
+}
+----
+
+[.fragment]
+[source,output]
+----
+1
+2
+3
+4
+5
+----
+
+=== How this program works?
+
+[.fragment]
+[options="header", cols="^1,^2,^2,^4"]
+|===
+|Iteration|Variable|`i \<= n`|Action
+|*1st*|`i = 1`, `n = 5`|`true`|`1` is printed. `i` is increased to `2`.
+|*2nd*|`i = 2`, `n = 5`|`true`|`2` is printed. `i` is increased to `3`.
+|*3rd*|`i = 3`, `n = 5`|`true`|`3` is printed. `i` is increased to `4`.
+|*4th*|`i = 4`, `n = 5`|`true`|`4` is printed. `i` is increased to `5`.
+|*5th*|`i = 5`, `n = 5`|`true`|`5` is printed. `i` is increased to `6`.
+|*6th*|`i = 6`, `n = 5`|`false`|The loop is terminated.
+|===
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int sum = 0;
+int n = 1000;
+
+// for loop
+for (int i = 1; i <= n; ++i) {
+    // body inside for loop
+    sum += i; // sum = sum + i
+}
+
+System.out.println("Sum = " + sum);
+----
+
+[.fragment]
+[source,output]
+----
+Sum = 500500
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int sum = 0;
+int n = 1000;
+
+// for loop
+for (int i = n; i >= 1; --i) {
+    // body inside for loop
+    sum += i; // sum = sum + i
+}
+
+System.out.println("Sum = " + sum);
+----
+
+[.fragment]
+[source,output]
+----
+Sum = 500500
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int sum = 0;
+
+for (int i = 1; i <= 10; --i) {
+    System.out.println("Hello");
+}
+----
+
+[.fragment]
+[source,output]
+----
+Hello
+...
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+for (int i = 1, j = 1; (i <= 10) && (j >= 5); --i, j++) {
+    ...
+}
+----
+
+[.fragment]
+[source,java]
+----
+int i = 1, j = 1;
+for ( ; (i <= 10) && (j >= 5); --i, j++) {
+    ...
+}
+----
+
+[.fragment]
+[source,java]
+----
+for (int i = 1, j = 1; (i <= 10) && (j >= 5); ) {
+    ...
+    --i; j++;
+}
+----
+
+[.fragment]
+[source,java]
+----
+for ( ; ; ) {
+    ...
+}
+----
+
+== `for-each` loop
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+for(dataType item : array) {
+    ...
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// create an array
+int[] numbers = {3, 9, 5, -5};
+
+// for each loop
+for (int number: numbers) {
+    System.out.println(number);
+}
+----
+
+[.fragment]
+[source,output]
+----
+3
+9
+5
+-5
+----
+
+=== How to this program works?
+
+[.step]
+* In the *first* iteration, item will be `3`.
+* In the *second* iteration, item will be `9`.
+* In the *third* iteration, item will be `5`.
+* In the *fourth* iteration, item will be `-5`.
+
+== `for` vs. `for-each` loops
+
+=== Example: `for`
+
+[.fragment]
+[source,java]
+----
+char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+
+// iterating through an array using a for loop
+for (int i = 0; i < vowels.length; ++ i) {
+    System.out.println(vowels[i]);
+}
+----
+
+[.fragment]
+[source,output]
+----
+a
+e
+i
+o
+u
+----
+
+=== Example: `for-each`
+
+[.fragment]
+[source,java]
+----
+char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+
+// iterating through an array using the for-each loop
+for (char item: vowels) {
+    System.out.println(item);
+}
+----
+
+[.fragment]
+[source,output]
+----
+a
+e
+i
+o
+u
+----
+
+== `while` loop
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+while (testExpression) {
+    // body of loop
+}
+----
+
+=== Flowchart
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/while-loop.png[While loop]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// declare variables
+int i = 1, n = 5;
+
+// while loop from 1 to 5
+while(i <= n) {
+    System.out.println(i);
+    i++;
+}
+----
+
+[.fragment]
+[source,java]
+----
+1
+2
+3
+4
+5
+----
+
+=== How this program works?
+
+[.fragment]
+[options="header", cols="^1,^2,^2,<4"]
+|===
+|Iteration|Variable|`i \<= n`|Action
+|*1st*|`i = 1`, `n = 5`|`true`|`1` is printed. `i` is increased to `2`.
+|*2nd*|`i = 2`, `n = 5`|`true`|`2` is printed. `i` is increased to `3`.
+|*3rd*|`i = 3`, `n = 5`|`true`|`3` is printed. `i` is increased to `4`.
+|*4th*|`i = 4`, `n = 5`|`true`|`4` is printed. `i` is increased to `5`.
+|*5th*|`i = 5`, `n = 5`|`true`|`5` is printed. `i` is increased to `6`.
+|*6th*|`i = 6`, `n = 5`|`false`|The loop is terminated.
+|===
+
+== Loop `do .. while`
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+do {
+    // body of loop
+} while(textExpression)
+----
+
+=== Flowchart
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/do-while-loop.png[Do While loop]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int i = 1, n = 5;
+
+// do...while loop from 1 to 5
+do {
+    System.out.println(i);
+    i++;
+} while(i <= n);
+----
+
+[.fragment]
+[source,output]
+----
+1
+2
+3
+4
+5
+----
+
+== `break` statement
+
+=== How `break` statement works?
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/break-statement-works.jpg[Break statement works]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// for loop
+for (int i = 1; i <= 10; ++i) {
+    // if the value of i is 5 the loop terminates
+    if (i == 5) {
+        break;
+    }
+    System.out.println(i);
+}
+----
+
+[.fragment]
+[source,output]
+----
+1
+2
+3
+4
+----
+
+=== `break` and Nested Loop
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/nested-while-loop-break.jpg[`break` and Nested Loop]
+
+=== Labeled `break` Statement
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/labeled-break-statement.jpg[Labeled `break` Statement]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// the for loop is labeled as first
+first:
+for (int i = 1; i < 5; i++) {
+    // the for loop is labeled as second
+    second:
+    for (int j = 1; j < 3; j++) {
+        System.out.println("i = " + i + "; j = " + j);
+        // the break statement breaks the first for loop
+        if (i == 2)
+            break first;
+    }
+}
+----
+
+[.fragment]
+[source,output]
+----
+i = 1; j = 1
+i = 1; j = 2
+i = 2; j = 1
+----
+
+== `continue` statement
+
+=== How `continue` statement works?
+
+[.fragment]
+image:/assets/img/java/core/looping-statements/continue.png[`continue` statement works]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// for loop
+for (int i = 1; i <= 10; ++i) {
+    // if value of i is between 4 and 9
+    // continue is executed
+    if (i > 4 && i < 9) {
+        continue;
+    }
+    System.out.println(i);
+}
+----
+
+[.fragment]
+[source,output]
+----
+1
+2
+3
+4
+9
+10
+----

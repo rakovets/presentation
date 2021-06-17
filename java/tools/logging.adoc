@@ -1,0 +1,363 @@
+= Logging
+
+== Логирование
+
+=== Логирование
+
+[.step]
+* Без логов найти проблему на продакшене очень сложно (не возможно)
+* Принцип «Чем больше логов, тем лучше» – не работает.
+* Вывод логов требует процессорного времени
+
+=== Frameworks
+
+[.step]
+* *Log4j*
+* `java.util.logging`
+* *Logback*
+* *Apache Commons logging*
+* *Simple Logging Facade for Java* (*SLF4J*)
+
+== Log4j
+
+=== Log4j
+
+[.step]
+* Появился первым
+* Очень широко используется
+* Большой ассортимерт возможностей
+
+== `java.util.logging`
+
+=== `java.util.logging`
+
+[.step]
+* С версии JavaSE 1.4
+* Не требует дополнительных библиотек
+* Уступает *Log4j* по возможностями и по популярности
+
+== Apache Commons Logging
+
+=== Apache Commons Logging
+
+[.step]
+* Прослойка между разработчиком и конкретным фреймворком логрирования
+* «унифицированный» интерфейс
+* Абстрагирует *Log4j*, `java.util.Logging`, *Avalon LogKit*, *Lumberjack*
+* Не занимается инициализацией и конфигурация конкретных фреймворков
+
+== SLF4J
+
+=== SLF4J
+
+[.step]
+* Абстрагирующий фреймворк логирония
+* Поддерживает намного шире набор возможностей 
+* Структура:
+[.step]
+** общая часть библиотеки - *API*
+** Дополнительно подключаются нужные библиотеки 
+
+== Logback
+
+=== Logback
+
+[.step]
+* Вырос из *Log4j* (один автор у  *Logback*, *Log4j* и *SLF4J*)
+* Взял самое лучшее у своего прародителя
+
+== *Log4j*
+
+=== Использование *Log4j*
+
+В основе лежат понятия:
+[.step]
+* *Логгер* (*Logger*)
+* *Аппендер* (*Appender*)
+* *Компоновка* (*Layout*)
+
+== Logger
+
+=== Logger
+
+[.step]
+* `org.apache.log4j.Logger`
+* Установка уровня означает – сообщения, выводимые с этим уровнем или более высоким попадут в лог.
+* Все логгеры иерархичны
+
+=== Levels
+
+[.step]
+* `TRACE`
+* `DEBUG`
+* `INFO`
+* `WARN`
+* `ERROR`
+* `FATAL`
+* `OFF`
+
+=== Examples
+
+|===
+|Имя|Назначенный уровень|Эффективный уровень
+|`ru`|`INFO`|`INFO`
+|`ru.skipy`|`WARN`|`WARN`
+|`ru.skipy.logger`|`DEBUG`|`DEBUG`
+|`ru.skipy.logger.test`|`ERROR`|`ERROR`
+|===
+
+=== Examples
+
+|===
+|Имя|Назначенный уровень|Эффективный уровень
+|`ru`|`INFO`|`INFO`
+|`ru.skipy`|нет|`INFO`
+|`ru.skipy.logger`|`DEBUG`|`DEBUG`
+|`ru.skipy.logger.test`|нет|`DEBUG`
+|===
+
+=== Examples
+
+|===
+|Имя|Назначенный уровень|Эффективный уровень
+|`root`|`INFO`|`INFO`
+|`ru`|нет|`INFO`
+|`ru.skipy`|нет|`INFO`
+|`ru.skipy.logger`|`DEBUG`|`DEBUG`
+|`ru.skipy.logger.test`|нет|`DEBUG`
+|===
+
+== Appender
+
+=== Appender
+
+[.step]
+* *Logger* – это та точка, куда уходят сообщения в коде. *Appender* – то та точка, куда они приходят в конечном итоге
+* Интерфейс `org.apache.log4j.Appender`
+* *Appender* наследуется от родительских логгеров
+
+=== Реализации
+
+[.step]
+* Console
+* File
+* JDBC
+* JMS Topic
+* `java.io.Writer`
+* `java.io.OutputStream`
+
+=== Loggers
+
+|===
+|Имя|Назначенный уровень|Эффективный уровень
+|`root`|`INFO`|`INFO`
+|`ru`|нет|`INFO`
+|`ru.skipy`|нет|`INFO`
+|`ru.skipy.logger`|`DEBUG`|`DEBUG`
+|`ru.skipy.logger.test`|нет|`DEBUG`
+|===
+
+=== `additivity`
+
+|===
+|Имя логгера|Назначенные аппендеры|Значение `additivity`|Эффективные аппендеры|Комментарии
+|`root`|A1||A1|Родительских аппендеров нет, `additivity` значения не имеет
+|`ru`|A2,A3|`true`|A1,A2,A3|Аппендеры родительского (корневого) логгера плюс собственные
+|`ru.skipy`|-|`true`|A1,A2,A3|Все аппендеры родительского логгера (включая унаследованные), собственных нет
+|`ru.skipy.logger`|A4|`true`|A1,A2,A3,A4|Все аппендеры родительского логгера (включая унаследованные) плюс собственные
+|`info`|A5|`false`|A5|Только собственные аппендеры – родительские не наследуются
+|`info.skipy`|-|`true`|A5|Только родительские аппендеры – от ближайшего родителя, собственных нет
+|===
+
+=== `org.apache.log4j.ConsoleAppender`
+
+[.step]
+* Вовод данных в консоль (STDOUT)
+* Удобно при отладке
+* Как правило бессмысленно на продакшене (часто вывод в консоль глушится - перехватывается и никуда не пишется)
+
+=== File Appenders
+
+[.step]
+* `org.apache.log4j.FileAppender`
+[.step]
+** Добавляет даные в конец файла до бесконечности
+* `org.apache.log4j.RollingFileAppender`
+[.step]
+** Под достижению файлом заданного размера, текущему файлу добавялется расширение `.0` и создается новый. Предыдущей с расширением `.0` меняется расширение на `.1`. В конфигурации задается максимальный размер файла и максимальный индекс, по достижению которого файлы будут удаляться
+
+=== File Appender
+
+[.step]
+* `org.apache.log4j.varia.ExternallyRolledFileAppender`
+[.step]
+** Делает то же самое что и `org.apache.log4j.RollingFileAppender`
+** Слушает определнный порт. Если туда послать сообщение `RollOver`, то он сделает внеочередную смену индекса
+* `org.apache.log4j.DailyRollingFileAppender`
+[.step]
+** Ротирует файл с определенной частотой (а не по размеру файла). Например: `'.'yyyy-MM` – файл ротируется раз в месяц
+** К имени лога будет добавляться соответствующая дата. Благодаря этому логи уникальны и удобны в поиске
+
+== *Layout*
+
+=== *Layout*
+
+[.step]
+* Конфигурация формата вывода
+* Наследуют org.apache.log4j.Layout
+[.step]
+** `org.apache.log4j.SimpleLayout` - самый простой, на выходе уровень лога и само сообщение
+** `org.apache.log4j.HTMLLayout`
+** `org.apache.log4j.xml.XMLLayout`
+** `org.apache.log4j.TTCCLayout` - Time-Thread-Category-Context
+** `org.apache.log4j.PatternLayout` - самый популярный и мощный
+** `org.apache.log4j.EnhancedPatternLayout` с версии 1.2.16
+
+== Конфигурация
+
+=== Конфигурация
+
+[.step]
+* Через
+[.step]
+** properties файл (`log4j.properties`)
+** xml файл(`log4j.xml`)
+* Оба варианта равнозначны
+* При инициализации _classpath_ ищется сначала `log4j.xml` потом `log4j.properties`.
+
+=== `log4j.xml`
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <param name="Encoding" value="Cp866"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                    value="%d{ISO8601} [%-5p][%-16.16t][%32.32c] - %m%n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <priority value="ERROR"/>
+        <appender-ref ref="ConsoleAppender"/>
+    </root>
+</log4j:configuration>
+----
+
+=== `log4j.properties`
+
+[source,properties]
+----
+log4j.debug=false
+
+log4j.rootLogger=ERROR, ConsoleAppender
+
+log4j.appender.ConsoleAppender=org.apache.log4j.ConsoleAppender
+log4j.appender.ConsoleAppender.encoding=Cp866
+log4j.appender.ConsoleAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.ConsoleAppender.layout.ConversionPattern=%d{ISO8601} [%-5p][%-16.16t][%32.32c] - %m%n
+----
+
+== Использование
+
+=== Использование
+
+[.step]
+* Инициализация *Log4j*: автоматически ищется в _classpath_ конфигурация
+* Использование *Logger*:
+
+[source,java]
+----
+private static final Logger logger=Logger.getLogger(MyClass.class);
+
+void someMethod() {
+    logger.info("Info level message");
+    try { 
+        // код, вызывающий исключение 
+    } catch(RateCalculationException ex) {
+        logger.error("Error while calculating rate change!", ex);
+    }
+}
+----
+
+=== Вывод в Debug/Trace
+
+* Так делать не стоит:
+
+[source,java]
+----
+logger.debug("Starting rate charge calculation for account " + accountNum
+        + " with parameters: rest=" + rest
+        + ", percent=" + percent
+        + " period=" + period);
+----
+
+* Выводить в `DEBUG`/`TRACE` с дополнительно проверкой:
+
+[source,java]
+----
+if (logger.isDebugEnabled()) {
+    logger.debug("Starting rate charge calculation for account " + accountNum
+            + " with parameters: rest=" + rest
+            + ", percent=" + percent
+            + " period=" + period);
+}
+----
+
+== Diagnostic context
+
+=== Diagnostic context
+
+[.step]
+* Используется для вывода дополнительной информации (например `id`, `name` пользователя, который совершает действия)
+* Реализации
+[.step]
+** *Nested Diagnostic Context*
+** *Mapped Diagnostic Context*
+* Привязывает к потоку с помощью `ThreadLocal` (обеспечивает доступность в любой точке)
+
+=== NDC - Nested Diagnostic Context
+
+[.step]
+* Класс `org.apache.log4j.NDC`
+* Добавление информации `NDC.push(String)`
+* Удаление унформации `NDC.pop()`. Метод `push()` и `pop()` должны быть парными
+* При завершении работы `NDC.remove()`.
+* Для вывода используется опция `%x`
+
+=== NDC examples
+
+[source,java]
+----
+public void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    NDC.push(getUserName());
+    // тут выполняем какие-то действия
+    doWork(); // вызываем метод
+    // тут выполняем какие-то действия
+    NDC.pop();
+    NDC.remove();
+}
+
+private void doWork() {
+    NDC.push(getPermissions());
+    // тут выполняем какие-то действия
+    NDC.pop();
+}
+----
+
+=== MDC - Mapped Diagnostic Context
+
+[.step]
+* Класс `org.apache.log4j.MDC`
+* Методы
+[.step]
+** `put(String,Object)` - помещает в контекст объект
+** `remove(String)` - удаляет из контекста объект 
+** `get(String)` - получает из контекста
+** `clear()` - очищает контекст
+* Для вывода используется опция `%X`

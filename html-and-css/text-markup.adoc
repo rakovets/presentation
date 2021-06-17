@@ -1,0 +1,104 @@
+= Text Markup
+:imagesdir: ../assets/img/html-and-css/
+
+== Text Markup
+
+=== Tag Structure
+
+[.fragment]
+image::tag-structure.jpg[Tag structure]
+
+=== Tag Types
+
+[.step]
+* Парные:
+[.step]
+** `<div></div>`
+** `<header></header>`
+** `<a></a>`
+** ...
+
+=== Tag Types
+
+[.step]
+* Не парные:
+[.step]
+** `<br/>`
+** `<img/>`
+** `<input/>`
+** `<link/>`
+** `<meta/>`
+
+=== Attributes
+
+[.fragment]
+Для атрибутов тегов используются значения по умолчанию, а так же существую атрибуты без значений.
+
+[.fragment]
+[source,html]
+----
+<form action="self.php">
+    <p><input type="text"></p>
+    <p><input type="submit" disabled></p>
+</form>
+----
+
+[.fragment]
+В данном примере используется атрибут `disabled`, у которого явно не задано значение. Подобная запись называется `сокращенный атрибут тега`.
+
+=== Attributes
+
+[.step]
+* Порядок атрибутов в любом теге не имеет значения и на результат отображения элемента не влияет.
+* Форматы атрибутов:
+[.step]
+** Текст
+** Число
+** Ссылка
+
+=== Example
+
+[.fragment]
+[source,html]
+----
+<img src="images/html.png" width="189" height="255" alt="HTML">
+<link rel="stylesheet" href="style.css">
+----
+
+=== Attributes
+
+[.fragment]
+Атрибуты могут располагаться как в одну строку, так и в несколько. Главное условие - наличие разделительного символа.
+
+[.fragment]
+[source,html]
+----
+<img src="images/girl.png" width="189" height="255" alt="boy">
+
+<img src="images/girl.png"
+    width="189"
+    height="255"
+    alt="boy">
+----
+
+== Document Structure
+
+=== Example
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html> <1>
+<html>
+    <head> <2>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <6>
+        <title>Пример веб-страницы</title> <4>
+    </head>
+    <body> <3>
+        <h1>Заголовок</h1>
+        <!-- Комментарий -->
+        <p>Первый абзац.</p>
+        <p>Второй абзац.</p>
+    </body>
+</html>
+----

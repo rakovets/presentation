@@ -1,0 +1,56 @@
+= i18n in Jakarta EE
+
+== i18n with JSTL
+
+* Для работы с механизмом интернационализации JSTL необходимо подключить к странице библиотеку `fmt`:
+
+[source,jsp]
+----
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+----
+
+== Set language
+
+Установка текущей локали:
+
+[source,jsp]
+----
+<fmt:setLocale value="en_US"/>
+<fmt:setLocale value="${sessionScope.language}"/>
+----
+
+Установка бандла (набора `.properties`-файлов с переводами)
+
+[source,jsp]
+----
+<fmt:setBundle basename="translations" var="myBundle"/>
+----
+
+== How use it?
+
+[source,jsp]
+----
+<fmt:message key="login.username" bundle="${currentBundle}"/>
+<fmt:message key="login.password" bundle="${currentBundle}"/>
+<fmt:message key="login.submit" bundle="${currentBundle}"/>
+----
+
+== What contains Bundle?
+
+`translations_en_US.properties`:
+
+[source,property]
+----
+login.username=Username
+login.password=Password
+login.submit=Submit
+----
+
+`translations_by_BY.properties`:
+
+[source,property]
+----
+login.username=Імя карыстальніка
+login.password=Пароль
+login.submit=Увайсці
+----

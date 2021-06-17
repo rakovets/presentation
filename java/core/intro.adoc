@@ -1,0 +1,303 @@
+= Intro
+
+== Intro
+
+=== Problem
+
+[.step]
+* PC understand: `0110010101001010`.
+* Human understand: Languages (English, Belarusian, German).
+
+=== Solution
+
+[.step]
+* Use Programing Languages.
+* For example: Java.
+
+== Why Java?
+
+=== Profit
+
+[.step]
+* Объектно-ориентированное программирование.
+* Автоматическое управление памятью.
+* Многопоточность.
+* Стабильность и огромное сообщество.
+
+=== Profit
+
+[.step]
+* Независимость от платформы («Написать один раз и использовать везде»).
+* Стандарт для корпоративных вычислительных систем.
+* Java — язык высокого уровня с простым синтаксисом и плавной кривой обучения.
+* Безопасность.
+
+=== Loss
+
+[.step]
+* Низкая производительность по сравнению с C/C++.
+* Отсутствие нативного дизайна (работа с GUI).
+* Платная коммерческая поддержка.
+
+=== Where use?
+
+[.step]
+* Приложения для Android
+* Финансовые программы
+* Автоматизация тестирования
+* Программные продукты
+* Программы для работы с большими данными
+
+== Java
+
+=== Java
+
+[.fragment]
+image::/assets/img/java/core/intro/java-logo.png[Java logo, 400]
+
+[.step]
+* *Java* - объектно-ориентированный язык программирования
+* разработан компанией *Sun Microsystems*
+* в последующем приобретённой компанией *Oracle*
+
+=== Author
+
+[.fragment]
+image::/assets/img/java/core/intro/james-gosling.jpg[James Gosling]
+
+[.fragment]
+*James Gosling*
+
+=== Java Platforms
+
+[.step]
+* *Java Platform, Standard Edition* (*Java SE*)
+* *Java Platform, Enterprise Edition* (*Java EE*) -> *Jakarta EE*
+* *Java Platform, Mobile Edition* (*Java ME*)
+* *Java Card*
+* *JavaFX* -> *OpenJFX*
+
+=== Java versions
+
+[.fragment]
+image::/assets/img/java/core/intro/java-versions.png[Java versions]
+
+=== Java versions releases
+
+[.fragment]
+image::/assets/img/java/core/intro/java-se-lifecycle.jpg[Java SE Lifecycle]
+
+=== JVM
+
+[.fragment]
+*Java Virtual Machine* (*JVM*) - ключевой компонент платформы Java
+
+[.fragment]
+image::/assets/img/java/core/intro/boxer-engine.jpg[Boxer Engine]
+
+=== JVM
+
+[.fragment]
+image::/assets/img/java/core/intro/jvm.png[JVM]
+
+=== JRE
+
+[.step]
+* *Java Runtime Environment* (*JRE*) - это исполнительная система Java, необходимая для исполнения Java-программ.
+* *JRE* содержит:
+[.step]
+** минимальную реализацию *JVM*
+** Java *libraries*.
+
+=== JDK
+
+[.fragment]
+*Java Development Kit* (*JDK*) - бесплатно распространяемый комплект разработчика приложений на языке Java.
+
+[.fragment]
+*JDK* включает в себя:
+[.step]
+* исполнительную систему Java (*JRE*).
+* компилятор Java (`javac`)
+* стандартные библиотеки классов Java
+* примеры
+* документацию
+* различные утилиты
+
+=== Recap
+
+[.fragment]
+image::/assets/img/java/core/intro/jvm-jre-jdk.png[JVM, JRE, JDK]
+
+== Install JDK (OS Windows)
+
+=== Проверка наличия JRE и JDK
+
+[.step]
+* Открыть _PowerShell_.
+[.step]
+** _Пуск_ -> _PowerShell_.
+** `Shift` + `Mouse Right Click` in currency directory.
+* Для проверки наличия *JDK*, необходимо выполнить команду:
+
+[source,shell script]
+javaс --version
+
+* Проанализировать результат работы команды.
+* Для проверки наличия *JRE*, необходимо выполнить команду:
+
+[source,shell script]
+java --version
+
+* Проанализировать результат работы команды.
+
+=== Установка OpenJDK
+
+[.step]
+* Скачиваем *OpenJDK 11.0.2* (_build 11.0.2_) с сайта link:https://jdk.java.net/archive/[jdk.java.net] для _OS Windows_
+* Распаковываем в `d:\opt\java\openjdk-11.0.2`
+
+=== Установка системных переменных среды (с помощью UI)
+
+[.step]
+* Зайти в _Этот компьютер_ -> _Свойства_ -> _Дополнительные параметры системы_ -> _Дополнительно_ -> _Переменные среды_.
+* Добавить системную переменную `JAVA_HOME` с значением `d:\opt\java\openjdk-11.0.2`.
+* Отредактировать системную переменную `PATH`, создав `%JAVA_HOME%\bin`.
+* Проверить установку JDK.
+
+=== Установка системных переменных среды (с помощью CLI)
+
+[.step]
+* Выполнить команды:
+
+[.fragment]
+[source,shell script]
+----
+setx JAVA_HOME d:\opt\java\openjdk-11.0.2
+setx PATH "%PATH%;%JAVA_HOME%\bin"
+----
+
+[.step]
+* Перезапустить OS.
+* Проверить установку JDK.
+
+== Compile and Run time
+
+=== How computer understands Java?
+
+[.fragment]
+image::/assets/img/java/core/intro/compiler-interpreter.jpg[Compiler and Interpreter]
+
+=== Compile and Run time
+
+[.fragment]
+image::/assets/img/java/core/intro/compile-and-run-time.gif[Compile and Run time]
+
+=== Write `source code`
+
+[.fragment]
+[source,java]
+----
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+----
+
+=== Compile with `javac` to `byte code`
+
+[.fragment]
+[source,shell script]
+----
+javac Hello.java
+----
+
+=== Have `byte code`
+
+[.fragment]
+----
+// class version 55.0 (55)
+// access flags 0x21
+public class Hello {
+
+  // compiled from: Hello.java
+
+  // access flags 0x1
+  public <init>()V
+   L0
+    LINENUMBER 1 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+    RETURN
+   L1
+    LOCALVARIABLE this LHello; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x9
+  public static main([Ljava/lang/String;)V
+   L0
+    LINENUMBER 3 L0
+    GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+    LDC "Hello World!"
+    INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
+   L1
+    LINENUMBER 4 L1
+    RETURN
+   L2
+    LOCALVARIABLE args [Ljava/lang/String; L0 L2 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+}
+----
+
+=== Run with interpreter `java` on JVM
+
+[.fragment]
+[source,shell script]
+----
+java Hello
+----
+
+[.fragment]
+[source,shell script]
+----
+java -cp . Hello
+----
+
+=== See in output
+
+[.fragment]
+----
+Hello World!
+----
+
+== Very hard?
+
+[.columns.wrap]
+=== Integrated development environment (IDE)
+
+[.fragment]
+[.column.is-one-third]
+--
+image::/assets/img/java/core/intro/ide-intellij-idea.png[IntelliJ IDEA]
+
+IntelliJ IDEA
+--
+
+[.fragment]
+[.column.is-one-third]
+--
+image::/assets/img/java/core/intro/ide-eclipse.svg[Eclipse]
+
+Eclipse
+--
+
+[.fragment]
+[.column.is-one-third]
+--
+image::/assets/img/java/core/intro/ide-netbeans.png[NetBeans]
+
+NetBeans
+--

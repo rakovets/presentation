@@ -1,0 +1,964 @@
+= Query Language
+
+== Query Languages
+
+=== Query Languages
+
+[.step]
+* *Native SQL Queries*
+* *Java Persistence Query Language* (*JPQL*) as subset *Hibernate  Query Language* (*HQL*)
+* *Criteria API* (legacy *Hibernate Criteria Queries*)
+
+== Native SQL
+
+== JPQL/HQL
+
+=== JPQL/HQL
+
+[.step]
+* объектно ориентированный язык запросов, похожий на SQL
+* вместо операций над таблицами работает с _persistent objects_ (_entities_)
+* вместо операций над столбками работает с _fields_
+
+=== `FROM`
+
+[.step]
+* условие `FROM` используется, если необходимо загрузить все объекты из _DB_ в _memory_.
+
+=== `FROM`
+
+[source,java]
+----
+@Test
+public void selectTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    Session session = em.unwrap(Session.class);
+    Query query = session.createQuery("from Employee");
+    query.list().forEach(System.out::println);
+}
+----
+
+=== `FROM`
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+
+[Employee{id=1, name='Dmitry, age=30, salary=8500}, 
+Employee{id=2, name='Alex, age=28, salary=5500}, 
+Employee{id=3, name='Sergey, age=40, salary=7500}, 
+Employee{id=4, name='Dmitry, age=40, salary=9500}, 
+Employee{id=5, name='Maria, age=28, salary=3500}]
+----
+
+=== `AS`
+
+[.step]
+* условие `AS` используется для *alias* классов в HQL-query, особенно, если используются длинные запросы
+
+=== `SELECT`
+
+[.step]
+* условие `SELECT` используется для предоставления большего контроля над результатом вывода чем условие `FROM`
+* если необходимо вывести не все поля объекта, тогда необходимо использовать `SELECT`
+* можно доставать объекты, которые являются _field_ данной _entity_ при помощи `SELECT`
+
+=== `WHERE`
+
+[.step]
+* условие `WHERE` используется для выборки результата с фильтрацией
+* можно использовать ключевые слова после условия `WHERE`:
+[.step]
+** `=`, `>=`, `<=`, `<>`, `!=`, `like`
+** `in`, `not in`, `between`, `is null`, `is not null`, `is empty`, `is not empty`, `member of`, `not member of`
+** `current_date()`, `current_time()`, `current_timestamp()`
+** `substring()`, `trim()`, `lower()`, `upper()`, `abs()`, `sqrt()`, `bit_length()`, `mod()`, `str()`
+
+=== `SELECT CASE`
+
+[.step]
+* `CASE {operand} WHEN {test_value} THEN {match_result} ELSE {miss_result} END`
+* `CASE [ WHEN {test_conditional} THEN {match_result} ]* ELSE {miss_result} END`
+
+=== `ORDER BY`
+
+[.step]
+* условие `ORDER BY` используется для сортировки результата
+* может использовать один из следующих параметров сортировки:
+[.step]
+** `ASC` – по возрастанию
+** `DESC` – по убыванию
+
+=== `ORDER BY`
+
+[source,java]
+----
+@Test
+public void orderByTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    Session session = em.unwrap(Session.class);
+    Query query = session.createQuery("from Employee order by salary desc");
+    query.list().forEach(System.out::println);
+}
+----
+
+=== `ORDER BY`
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+        employee0_.age as age2_2_,
+        employee0_.name as name3_2_,
+        employee0_.salary as salary4_2_
+from Employee employee0_
+order by employee0_.salary desc
+
+Employee{id=4, name='Dmitry, age=40, salary=9500}
+Employee{id=1, name='Dmitry, age=30, salary=8500}
+Employee{id=3, name='Sergey, age=40, salary=7500}
+Employee{id=2, name='Alex, age=28, salary=5500}
+Employee{id=5, name='Maria, age=28, salary=3500}
+----
+
+=== `GROUP BY`
+
+[.step]
+* условие `GROUP BY` используется для группировки собранных данных по какому-либо _field_ объекта
+
+=== `GROUP BY`
+
+[source,java]
+----
+@Test
+public void groupByTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    javax.persistence.Query query = em.createQuery(
+        "select count(e.name), e.name from Employee e group by e.name");
+    query.getResultList().forEach(employees -> {
+        Object[] emp = (Object[]) employees;
+        System.out.println("Имя: " + emp[1] + " количество:" + emp[0]);
+    });
+}
+----
+
+=== `GROUP BY`
+
+[source,out]
+----
+select count(employee0_.name) as col_0_0_,
+        employee0_.name as col_1_0_
+from Employee employee0_
+group by employee0_.name
+
+Имя: Dmitry количество:2
+Имя: Sergey количество:1
+Имя: Alex количество:1
+Имя: Maria количество:1
+----
+
+
+=== Using Named Parameters
+
+[.step]
+* `Named Parameters` используются для задания значения переменной в HQL-запрос
+
+=== Using Named Parameters
+
+[source,java]
+----
+@Test
+public void parameterTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    javax.persistence.Query query = em.createQuery(
+        "from Employee e where e.name= :name");
+    query.setParameter("name", "Dmitry")
+            .getResultList().forEach(System.out::println);
+}
+----
+
+=== Using Named Parameters
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where employee0_.name=?
+
+Employee{id=1, name='Dmitry, age=30, salary=8500}
+Employee{id=4, name='Dmitry, age=40, salary=9500}
+----
+
+=== Using Named Parameters
+
+[source,java]
+----
+@Test
+public void parameterOrderTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    javax.persistence.Query query = em.createQuery(
+            "from Employee e where e.name=? and e.salary > :salary");
+    query.setParameter(0, "Dmitry")
+            .setParameter("salary", 5000)
+            .getResultList().forEach(System.out::println);
+}
+----
+
+=== Using Named Parameters
+
+[source,out]
+----
+select employee0_.id as id1_6_,
+    employee0_.age as age2_6_,
+    employee0_.name as name3_6_,
+    employee0_.salary as salary4_6_
+from Employee employee0_
+where employee0_.name=? and employee0_.salary>?
+
+binding parameter [1] as [VARCHAR] - [Dmitry]
+binding parameter [2] as [INTEGER] - [5000]
+
+Employee{id=9, name='Dmitry, age=30, salary=8500}
+Employee{id=12, name='Dmitry, age=40, salary=9500}
+----
+
+=== Using Named Parameters
+
+[source,java]
+----
+@Test
+public void parameterListTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    javax.persistence.Query query = em.createQuery(
+        "from Employee e where e.id in(:ids)");
+    query.setParameter("ids", Stream.of(1L,4L).collect(Collectors.toList()))
+            .getResultList().forEach(System.out::println);
+}
+----
+
+=== Using Named Parameters
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where employee0_.id in (? , ?)
+
+Employee{id=1, name='Dmitry, age=30, salary=8500}
+Employee{id=4, name='Dmitry, age=40, salary=9500}
+----
+
+=== `UPDATE`
+
+[.step]
+* условие `UPDATE` используется для обновления полей и свойств объектов в HQL
+
+=== `DELETE`
+
+[.step]
+* условие `DELETE` используется для удаления одного или более объектов
+
+=== `INSERT`
+
+[.step]
+* условие `INSERT` используется для внесения одной записи из другой, или другого объекта
+
+
+=== Aggregate Methods
+
+HQL содержит ряд агрегационных функций:
+
+[.step]
+* `avg(property name)`
+* `max(property name)`
+* `min(property name)`
+* `sum(property name)`
+* `count(property name or *)`
+* `count(...)`
+* `count(distinct ...)`
+* `count(all ...)`
+
+=== `JOIN`
+
+[source,java]
+----
+@Test
+public void joinTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    List<Author> authors = em.createQuery(
+            "select distinct a " +
+                    "from Author a " +
+                    "left join a.books b " +
+                    "where b.title = 'War & Piece'", Author.class)
+            .getResultList();
+}
+----
+
+=== `JOIN`
+
+[source,out]
+----
+select distinct author0_.id as id1_0_,
+    author0_.name as name2_0_
+from Author author0_
+    left outer join Book books1_ on author0_.id=books1_.author_id
+where books1_.title='War & Piece'
+
+select books0_.author_id as author_i4_1_0_,
+    books0_.id as id1_1_0_,
+    books0_.id as id1_1_1_,
+    books0_.author_id as author_i4_1_1_,
+    books0_.title as title2_1_1_,
+    books0_.year as year3_1_1_
+from Book books0_
+where books0_.author_id=?
+
+Author(id=1, name=Tolstoy, books=[
+          Book{id=2, title='Alice', year=1872, author=Tolstoy}, 
+          Book{id=3, title='War & Piece', year=1869, author=Tolstoy}, 
+          Book{id=4, title='Philipok', year=1865, author=Tolstoy}
+])
+----
+
+=== `JOIN ... WITH`/`JOIN ... ON`
+
+[source,java]
+----
+@Test
+public void withJoinTest() {
+    EntityManager em = EMUtil.getEntityManager();
+    List<Author> authors = em.createQuery(
+            "select distinct a " +
+                    "from Author a " +
+                    "inner join a.books b on b.title = 'War & Piece'")
+            .getResultList();
+    authors.forEach(System.out::println);
+}
+----
+
+=== `JOIN ... WITH`/`JOIN ... ON`
+
+[source,out]
+----
+select distinct author0_.id as id1_0_,
+    author0_.name as name2_0_
+from Author author0_ 
+    inner join Book books1_ on author0_.id=books1_.author_id
+            and (books1_.title='War & Piece')
+
+select books0_.author_id as author_i4_1_0_,
+    books0_.id as id1_1_0_, books0_.id as id1_1_1_,
+    books0_.author_id as author_i4_1_1_,
+    books0_.title as title2_1_1_,
+    books0_.year as year3_1_1_
+from Book books0_
+where books0_.author_id=?
+
+Author(id=1, name=Tolstoy, books=[
+    Book{id=2, title='Alice', year=1872, author=Tolstoy}, 
+    Book{id=3, title='War & Piece', year=1869, author=Tolstoy}, 
+    Book{id=4, title='Philipok', year=1865, author=Tolstoy}
+])
+----
+
+=== Pagination using Query
+
+[.step]
+* *Pagination* - это разбиение результата на страницы, т.е. на коллекции части ограниченного размера.
+* Для пагинации в hibernate существуют следующие методы:
+[.step]
+** `Query setFirstResult(int startPosition)`
+** `Query setMaxResults(int maxResult)`
+
+== Criteria API
+
+=== Criteria API
+
+[.step]
+* *Criteria API* - представляет объектно-ориентированную альтернативу *JPQL*/*HQL*
+
+=== Get all
+
+[source,java]
+----
+@Test
+public void getAllEmployee() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    criteria.from(Employee.class);
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+----
+
+=== Get all
+
+[source,out]
+----
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=3, name='Max, age=38, salary=10000.0}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+Employee{id=6, name='Li, age=62, salary=13099.0}
+Employee{id=7, name='Alex, age=22, salary=4500.0}
+----
+
+=== Restrictions with Criteria
+
+[source,java]
+----
+@Test
+public void getEmployeeByNameTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    Root<Employee> emp = criteria.from(Employee.class);
+    criteria.select(emp)
+            .where(cb.equal(emp.get("name"), "Yuli"));
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+----
+
+=== Restrictions with Criteria
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where employee0_.name=?
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+----
+
+=== Restrictions with Criteria (>)
+
+[source,java]
+----
+@Test
+public void greaterTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    Root<Employee> emp = criteria.from(Employee.class);
+    criteria.select(emp)
+            .where(cb.gt(emp.get("salary"), 10000));
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+
+----
+
+=== Restrictions with Criteria (>)
+
+[source,out]
+----
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+Employee{id=6, name='Li, age=62, salary=13099.0}
+----
+
+=== Restrictions with Criteria (<=)
+
+[source,java]
+----
+@Test
+public void lessTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    Root<Employee> emp = criteria.from(Employee.class);
+    criteria.select(emp)
+            .where(cb.le(emp.get("age"), 43));
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+----
+
+=== Restrictions with Criteria (<=)
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_ 
+where employee0_.age<=43
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=3, name='Max, age=38, salary=10000.0}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+Employee{id=7, name='Alex, age=22, salary=4500.0}
+----
+
+=== Restrictions with Criteria (like)
+
+[source,java]
+----
+@Test
+public void likeTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    Root<Employee> emp = criteria.from(Employee.class);
+    criteria.select(emp)
+            .where(cb.like(emp.get("name"), "%ul%"));
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+----
+
+=== Restrictions with Criteria (like)
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where employee0_.name like ?
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+----
+
+=== Restrictions with Criteria (between)
+
+[source,java]
+----
+@Test
+public void betweenTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+    Root<Employee> emp = criteria.from(Employee.class);
+    criteria.select(emp)
+            .where(cb.between(emp.get("age"), 35, 50));
+    List<Employee> employees = em.createQuery(criteria).getResultList();
+    employees.forEach(System.out::println);
+}
+----
+
+=== Restrictions with Criteria (between)
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_ 
+where employee0_.age between 20 and 35
+
+Employee{id=3, name='Max, age=38, salary=10000.0}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+----
+
+=== Restrictions with Criteria (isNotNull)
+
+[source,java]
+----
+@Test
+    public void isNullTest() {
+        EntityManager em = HibernateUtil.getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+        Root<Employee> emp = criteria.from(Employee.class);
+        criteria.select(emp)
+                .where(cb.isNotNull(emp.get("name")));
+//              .where(cb.isNull(emp.get("name")));
+        List<Employee> employees = em.createQuery(criteria).getResultList();
+        employees.forEach(System.out::println);
+    }
+----
+
+=== Restrictions with Criteria (isNotNull)
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where employee0_.name is not null
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=3, name='Max, age=38, salary=10000.0}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+Employee{id=6, name='Li, age=62, salary=13099.0}
+Employee{id=7, name='Alex, age=22, salary=4500.0}
+----
+
+=== LogicalExpression
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+Root<Employee> emp = criteria.from(Employee.class);
+Predicate predicate = cb.and(
+        cb.like(emp.get("name"), "%ul%"),
+        cb.gt(emp.get("age"), 30)
+);
+criteria.select(emp).where(predicate);
+
+List<Employee> employees = em.createQuery(criteria).getResultList();
+employees.forEach(System.out::println);
+----
+
+=== LogicalExpression
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where (employee0_.name like ?) and employee0_.age>30
+
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+----
+
+=== LogicalExpression
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+Root<Employee> emp = criteria.from(Employee.class);
+Expression<Integer> age = emp.get("age");
+Predicate predicate = cb.and(
+        cb.or(age.in(24, 28, 35), cb.equal(emp.get("name"), "Yulij")),
+        cb.like(emp.get("name"), "%ul%"),
+        cb.gt(emp.get("age"), 30)
+);
+criteria.select(emp).where(predicate);
+
+List<Employee> employees = em.createQuery(criteria).getResultList();
+employees.forEach(System.out::println);
+----
+
+=== LogicalExpression
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_
+where (employee0_.age in (24 , 28 , 35) or employee0_.name=?)
+    and (employee0_.name like ?)
+    and employee0_.age>30
+----
+
+=== Pagination using Criteria
+
+Для постраничного вывода в hibernate существуют следующие методы
+[.step]
+** `TypedQuery<X> setFirstResult(int startPosition)`
+** `TypedQuery<X> setMaxResults(int maxResult)`
+
+=== Pagination using Criteria
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+int pageNumber = 1;
+int pageSize = 2;
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+criteria.from(Employee.class);
+TypedQuery<Employee> typedQuery = em.createQuery(criteria);
+typedQuery.setFirstResult(pageSize * (pageNumber-1));
+typedQuery.setMaxResults(pageSize);
+List<Employee> employees = typedQuery.getResultList();
+----
+
+=== Pagination using Criteria
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_ limit ?
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=3, name='Max, age=38, salary=10000.0}
+----
+
+=== Sorting the Results
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+Root<Employee> emp = criteria.from(Employee.class);
+criteria.select(emp).orderBy(
+        cb.desc(emp.get("salary")),
+        cb.asc(emp.get("name"))
+);
+
+List<Employee> employees = em.createQuery(criteria).getResultList();
+employees.forEach(System.out::println);
+----
+
+=== Sorting the Results
+
+[source,out]
+----
+select employee0_.id as id1_2_,
+    employee0_.age as age2_2_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_2_,
+    employee0_.name as name3_2_,
+    employee0_.salary as salary4_2_
+from Employee employee0_ 
+order by employee0_.salary desc, employee0_.name asc
+
+Employee{id=2, name='Yuli, age=27, salary=16000.99}
+Employee{id=5, name='Gleb, age=37, salary=15000.0}
+Employee{id=4, name='Paul, age=43, salary=15000.0}
+Employee{id=6, name='Li, age=62, salary=13099.0}
+Employee{id=3, name='Max, age=38, salary=10000.0}
+Employee{id=7, name='Alex, age=22, salary=4500.0}
+Employee{id=8, name='null, age=18, salary=300.0}
+----
+
+=== Projections & Aggregations: `count()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+criteria.select(cb.count(criteria.from(Employee.class)));
+long count = em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `count()`
+
+[source,out]
+----
+select count(employee0_.id) as col_0_0_
+from Employee employee0_
+
+7
+----
+
+=== Projections & Aggregations: `avg()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+criteria.select(cb.avg(criteria.from(Employee.class).get("salary")));
+double count =  em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `avg()`
+
+[source,out]
+----
+select avg(employee0_.salary) as col_0_0_
+from Employee employee0_
+
+10557.141428571427
+----
+
+=== Projections & Aggregations: `countDistinct()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+criteria.select(cb.countDistinct(criteria.from(Employee.class)));
+long count = em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `countDistinct()`
+
+[source,out]
+----
+select count(distinct employee0_.id) as col_0_0_
+from Employee employee0_
+
+7
+----
+
+=== Projections & Aggregations: `max()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+criteria.select(cb.max(criteria.from(Employee.class).get("salary")));
+double count =  em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `max()`
+
+[source,out]
+----
+select max(employee0_.salary) as col_0_0_
+from Employee employee0_
+
+16000.99
+----
+
+=== Projections & Aggregations: `min()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+criteria.select(cb.min(criteria.from(Employee.class).get("age")));
+Number count =  em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `min()`
+
+[source,out]
+----
+select min(employee0_.age) as col_0_0_
+from Employee employee0_
+
+18
+----
+
+=== Projections & Aggregations: `sum()`
+
+[source,java]
+----
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Double> criteria = cb.createQuery(Double.class);
+criteria.select(cb.sum(criteria.from(Employee.class).get("salary")));
+Number count =  em.createQuery(criteria).getSingleResult();
+System.out.println(count);
+----
+
+=== Projections & Aggregations: `sum()`
+
+[source,out]
+----
+select sum(employee0_.salary) as col_0_0_
+from Employee employee0_
+
+73899.98999999999
+----
+
+=== `join()`
+
+[source,java]
+----
+@Test
+public void joinTest() {
+    EntityManager em = HibernateUtil.getEntityManager();
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Department> criteria = cb.createQuery(Department.class);
+    Root<Department> department = criteria.from(Department.class);
+    Join<Department, Employee> employeeJoin = department.join("employees", JoinType.INNER);
+    criteria.where(cb.equal(employeeJoin.get("name"), "Yuli"));
+    List<Department> departments = em.createQuery(criteria).getResultList();
+    departments.forEach(System.out::println);
+}
+----
+
+=== `join()`
+
+[source,out]
+----
+select department0_.id as id1_0_,
+    department0_.name as name2_0_ 
+from Department department0_ 
+    inner join Employee employees1_ on department0_.id=employees1_.DEPARTMENT_ID 
+where employees1_.name=?
+
+Department(id=1, name=Developer, employees=[
+    Employee{id=2, name='Yuli, age=27, salary=16000.99}, 
+    Employee{id=3, name='Max, age=38, salary=10000.0}, 
+    Employee{id=4, name='Paul, age=43, salary=15000.0}
+])
+----
+
+=== `fetch()`
+
+[source,java]
+----
+Integer age = 40;
+EntityManager em = HibernateUtil.getEntityManager();
+CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> criteria = cb.createQuery(Employee.class);
+Root<Employee> employee = criteria.from(Employee.class);
+employee.fetch("department");
+ParameterExpression<Integer> ageParameter = cb.parameter(Integer.class);
+criteria.where(cb.gt(employee.get("age"), ageParameter));
+List<Employee> employees = em.createQuery(criteria)
+        .setParameter(ageParameter, age)
+        .getResultList();
+employees.forEach(System.out::println);
+----
+
+=== `fetch()`
+
+[source,out]
+----
+select employee0_.id as id1_1_0_,
+    department1_.id as id1_0_1_,
+    employee0_.age as age2_1_0_,
+    employee0_.DEPARTMENT_ID as DEPARTME5_1_0_,
+    employee0_.name as name3_1_0_,
+    employee0_.salary as salary4_1_0_,
+    department1_.name as name2_0_1_ 
+from Employee employee0_ 
+    inner join Department department1_ on employee0_.DEPARTMENT_ID=department1_.id 
+where employee0_.age>40
+
+Employee{id=4, name='Paul, age=43, salary=15000.0
+	Department{id=1, name='Developer'}}
+Employee{id=7, name='Li, age=62, salary=13099.0
+	Department{id=5, name='QA'}}
+----

@@ -1,0 +1,92 @@
+= Database normalization
+
+== Intro
+
+=== Normal Froms
+
+Database normalization is the process of restructuring a relation database
+
+image::/assets/img/sql/database-normalization/normal-forms.png[Normal Forms]
+
+=== Normalisation Steps
+
+image::/assets/img/sql/database-normalization/normalisation-steps.gif[Normalisation Steps]
+
+=== UNF
+
+image::/assets/img/sql/database-normalization/unf.png[UNF]
+
+== 1NF
+
+=== Rules for 1NF
+
+[.step]
+* It should only have single(atomic) valued attributes/columns
+* Values stored in a column should be of the same domain
+* All the columns in a table should have unique names
+* And the order in which data is stored, does not matter
+
+=== Example
+
+image::/assets/img/sql/database-normalization/1nf.png[1NF]
+
+== Primary Key
+
+=== Attributes for Primary Key
+
+* Primary key cannot be NULL
+* Primary key value must be unique
+* Primary key values cannot be changed
+* The original key must be assigned a value when inserting a new entry
+
+=== Composite Primary Key
+
+image::/assets/img/sql/database-normalization/composite-key.png[Composite Key]
+
+== 2NF
+
+=== Rules for 2NF
+
+* It should be in the First Normal form
+* It should not have Partial Dependency
+
+=== Example
+
+image::/assets/img/sql/database-normalization/2nf-01.png[2NF]
+image::/assets/img/sql/database-normalization/2nf-02.png[2NF]
+
+== Foreign Key
+
+=== Attributes for Foreign Key
+
+* A foreign key may have a different name from its primary key
+* It ensures that rows in one table have corresponding rows in another
+* Unlike the primary key, they do not have to be unique. Most often they are not
+* Foreign keys may be null, although primary keys cannot
+
+=== Example
+
+image::/assets/img/sql/database-normalization/2nf-02.png[2NF]
+
+=== Example
+
+image::/assets/img/sql/database-normalization/foreign-key.png[Foreign Key]
+
+== Transitive Functional Dependencies
+
+=== Example
+
+image::/assets/img/sql/database-normalization/transitive-functional-dependencies.png[Transitive Functional Dependencies]
+
+== 3NF
+
+=== Rules for 3 NF
+
+* It is in the Second Normal form
+* It doesn't have Transitive Dependency
+
+=== Example
+
+image::/assets/img/sql/database-normalization/3nf-01.png[3NF]
+image::/assets/img/sql/database-normalization/3nf-02.png[3NF]
+image::/assets/img/sql/database-normalization/3nf-03.png[3NF]

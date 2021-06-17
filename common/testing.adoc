@@ -1,0 +1,30 @@
+= Testing
+:imagesdir: ../assets/img/common
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как после модификации кода быть уверенным, что он все ещё работает правильно?
+
+=== Solution
+
+[.fragment]
+*Testing*
+
+== Testing
+
+=== The Cost of Defects
+
+[.fragment]
+image::cost-of-defects.jpg[The Cost of Defects]
+
+=== Цель Unit-тестирования
+[.fragment]
+Цель Unit-тестирования:
+
+[.step]
+* изолирование каждого программного модуля
+* проведение тестирования корректности работы модуля независимо друг от друга
+

@@ -1,0 +1,144 @@
+= Servlet Filters
+
+== Filter
+
+=== Filter
+
+Java-объекты, которые могут выполнять действия с запросами и ответами перед выполнением сервлета, например:
+
+[.step]
+* Изменять исходные данные выполняемого запроса
+* Изменять ответ сервлета
+* Блокировать определённые сервлеты
+
+=== Filter
+
+image::/assets/img/java/jakarta-ee/filter/filter.png[Filter]
+
+=== `javax.servlet.Filter`
+
+[.step]
+* Интерфейс, служащий для создания новых фильтров
+* Содержит методы:
+[.step]
+** `void init(FilterConfig config)`
+** `void destroy()`
+** `void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)`
+
+== Life cycle
+
+=== Life cycle
+
+[.step]
+* При создании фильтра единожды запускается метод `init()`
+* При уничтожении фильтра выполняется метод `destroy()`
+* При каждом обращении к сервлету, с которым связан _filter_, выполняется метод `doFilter()`
+
+=== `init()`
+
+Метод `init()` получает на вход объект класса `FilterConfig`, содержащий исходные данные для фильтра. Данные могут быть получены также как в сервлете, с помощью метода `getInitParameter()`.
+
+[source,java]
+----
+public void init (FilterConfig config) throws ServletException {
+    this.config = config;
+    String act = config.getInitParameter("active");
+    if (act != null) {
+        active = (act.toUpperCase().equals("TRUE"));
+    }
+}
+----
+
+=== `doFilter()`
+
+[.step]
+* Метод выполняет обработку `HttpRequest`/`HttpResponse`
+* Объект `FilterChain` хранит информацию о цепочке фильтров
+* В методе обязательно нужно вызвать метод `chain.doFilter(…)` для запуска других фильтров и сервлета
+
+[source,java]
+----
+public void doFilter (ServletRequest request, ServletResponse response,
+        FilterChain chain) throws IOException, ServletException {
+    // Код обработки запроса
+    chain.doFilter(request, response);
+}
+----
+
+== Filter registration
+
+=== Filter registration
+
+_Filters_ должны регистрироваться в `web.xml` аналогично сервлетам. Для этого используется тег `<filter>`. В нем кроме самого _filter_ прописываются исходные параметры:
+
+[source,xml]
+----
+<filter> 
+    <filter-name>Encoder</filter-name>
+    <filter-class>filter.Utf8EncodingFilter</filter-class>
+    <init-param>
+        <param-name>encoding</param-name>
+        <param-value> UTF-8 </param-true>
+    </init-param>
+</filter>
+----
+
+Параметры инициализации будут доступны в методе `init()` _filter_
+
+=== Filter registration
+
+[.step]
+* Зарегистрированный _filter_ должен быть подключен к _servlet_
+* Подключение можно сделать к одному _servlet_, или сразу к нескольким
+* Подключение к конкретному _servlet_ выполняется следующим образом
+
+[source,xml]
+----
+<filter-mapping>
+    <filter-name>FilterName</filter-name>
+    <servlet-name>ServletName</servlet-name>
+</filter-mapping>
+----
+
+=== Filter registration
+
+Также можно привязать _filter_ к группе _servlets_ и других страниц по адресу:
+
+[source,xml]
+----
+<filter-mapping>
+    <filter-name>FilterName</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+    <dispatcher>FORWARD<dispatcher>
+</filter-mapping>
+----
+
+В данном случае _filter_ будет привязан к _servlets_, адреса которых соответствуют данному _url-pattern_.
+
+Значения `dispatcher`:
+
+[.step]
+* `REQUEST` - обработка только запросов от пользователя
+* `FORWARD` - обработка только _forward_-запросов
+
+=== Filter registration with Annotation
+
+Для регистрации можно использовать аннотацию `@WebFilter`
+
+[source,java]
+----
+@WebFilter(urlPatterns = "*")
+public class Encoder implements Filter {
+    // …
+}
+----
+
+== Authorization and Authentication
+
+=== Authentication
+
+* *Authentication* - проверка соответствия субъекта и того, за кого он пытается себя выдать, с помощью некой уникальной информации (например, имени пользователя и пароля)
+
+=== Authorization
+
+* *Authorization* - проверка и определение полномочий на выполнение некоторых действий (например, чтение файла) в соответствии с ранее выполненное аутентификацией

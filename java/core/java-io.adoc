@@ -1,0 +1,1548 @@
+= Java IO
+:imagesdir: ../../assets/img/java/core/java-io/
+
+== Problem
+
+=== Problem
+
+[.step]
+* Как читать/писать данные из/в файла?
+* Как принимать/отправлять данные из/в сети?
+* How is *data* *reading* from *Input* and *writing* to *Output*?
+
+== Solution
+
+[.step]
+* Java IO API
+
+== Java IO
+
+[.step]
+* package `java.io`
+* reading and writing data (input and output)
+
+=== Concept IO
+
+[.fragment]
+image::concept-io.png[Concept IO]
+
+=== Concept Java IO
+
+[.fragment]
+image::concept-java-io.png[Concept Java IO]
+
+== Streams
+
+=== Types
+
+[.step]
+* Byte Based
+* Character Based
+
+=== Types (target)
+
+[.step]
+* Basic
+* Arrays
+* Files
+* Pipes
+* Buffering
+* Filtering
+
+=== Types (target)
+
+[.step]
+* Parsing
+* Strings
+* Data
+* Data-Formatted
+* Objects
+* Utilities
+
+=== Hierarchy
+
+[.fragment]
+image::io-hierarchy.gif[IO hierarchy]
+
+== Exceptions
+
+=== Exceptions
+
+[.step]
+* Класс `IOException`.
+[.step]
+** Корень иерархии исключений ввода-вывода.
+** Бросается всеми операциями ввода/вывода.
+* Класс `EOFException`.
+[.step]
+** Достигнут конец потока.
+
+=== Exceptions
+
+[.step]
+* Класс `FileNotFoundException`.
+[.step]
+** Файл не найден.
+* Класс `UnsupportedEncodingException`.
+[.step]
+** Неизвестная кодировка.
+
+== Class `File`
+
+=== Class `File`
+
+[.step]
+* Для работы с физическим файлами и директориями, расположенными в файловой системе на внешних носителях, используются классы `из пакета java.io`.
+
+=== Constructors
+
+[.step]
+* `File(File parent, String child)`
+* `File(String pathname)`
+* `File(String parent, String child)`
+* `File(URI uri)`
+
+=== Examples
+
+[.step]
+* Для OS Unix-like (Linux, MacOS and etc.)
+
+[.fragment]
+[source,java]
+----
+File myFile1 = new File("/home/rakovets/file.adoc");
+File myFile2 = new File("/home/rakovets", "file.adoc");
+File myDir  = new File("/home/rakovets");
+File myFile3 = new File(myDir, "file.adoc");
+URI ftpFile = new URI("ftp://localhost:21/rakovets/file.adoc");
+File myFile4 = new File(ftpFile);
+----
+
+=== Examples
+
+[.step]
+* Для OS Windows
+
+[.fragment]
+[source,java]
+----
+File myFile1 = new File("d:\\home\\rakovets\\file.adoc");
+File myFile2 = new File("d:\\home\\rakovets", "file.adoc");
+File myDir  = new File("d:\\home\\rakovets");
+URI ftpFile = new URI("ftp://localhost:21/rakovets/file.adoc");
+File myFile4 = new File(ftpFile);
+----
+
+=== Class `File`
+
+[.step]
+* Существует разница между разделителями, употребляющимися при записи пути к файлу:
+[.step]
+**  `/` - для системы OS Unix-like (Linux, MacOS and etc.)
+** `\\` - для OS Windows.
+
+=== Class `File`
+
+* Для работы с разделителями используют fields:
+[.step]
+** `File.separator` - платформно-зависимый символ, который используется для разделения каталогов на пути к файлу.
+** `File.pathSeparator` - платформно-зависимый символ, который используется в `PATH` или `CLASSPATH`.
+
+=== Fields
+
+[.fragment]
+[options="headers"]
+|===
+|Field|Type|Unix-like value|Windows value
+|`separator`|`String`|`/`|`\`
+|`separatorChar`|`char`|`/`|`\`
+|`pathSeparator`|`String`|`:`|`;`
+|`pathSeparatorChar`|`char`|`:`|`;`
+|===
+
+=== Methods
+
+[.step]
+* Управление жизненным циклом:
+[.step]
+** `createNewFile(): boolean`
+** `renameTo(File dest): boolean`
+** `delete(): boolean`
+* Проверка типа:
+[.step]
+** `isFile(): boolean`
+** `isDirectory(): boolean`
+** `isHidden(): boolean`
+
+=== Methods
+
+[.step]
+* Получение информации о файле
+[.step]
+** `exists(): boolean`
+** `length(): long`
+** `lastModified(): long`
+** `getName(): String`
+** `getParent(): String`
+** `getAbsolutePath(): String`
+
+=== Methods
+
+[.step]
+* Работа с директориями
+[.step]
+** `list(): String[]`
+** `listFiles(): File[]`
+** `mkdir(): boolean`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try {
+    File file = new File("tmp-file.txt");
+    if (file.exists()) {
+        System.out.printf("File '%s' already exists.\n",
+                file.getCanonicalPath());
+    } else {
+        if (file.createNewFile()) {
+            System.out.printf("New file '%s' is created.\n",
+                    file.getCanonicalPath());
+        } else {
+            System.out.printf("New file '%s' isn't created.\n",
+            file.getCanonicalPath());
+        }
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+=== Example
+
+[.fragment]
+----
+New file '/home/rakovets/dev/course-java-core/tmp-file.txt' is created.
+----
+
+[.fragment]
+----
+File '/home/rakovets/dev/course-java-core/tmp-file.txt' already exists.
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public abstract class ExampleFiles {
+    public static File INPUT_FILE = new File("src" + File.separator
+            + "main" + File.separator
+            + "resources" + File.separator
+            + "example" + File.separator
+            + "io" + File.separator
+            + ".." + File.separator
+            + "io" + File.separator
+            + "input.file" + File.separator);
+    public static File OUTPUT_FILE = new File("src" + File.separator
+            + "main" + File.separator
+            + "resources" + File.separator
+            + "example" + File.separator
+            + "io" + File.separator
+            + "output.file" + File.separator);
+    public static File TRANSFER_FILE = new File("src" + File.separator
+            + "main" + File.separator
+            + "resources" + File.separator
+            + "example" + File.separator
+            + "io" + File.separator
+            + "transfer.file" + File.separator);
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+File fp = ExampleFiles.INPUT_FILE;
+
+if (fp.isFile()) {
+    System.out.printf("Name: %s\n", fp.getName());
+    System.out.printf("Parent: %s\n", fp.getParent());
+    System.out.printf("Path: %s\n", fp.getPath());
+    System.out.printf("Absolute path: %s\n", fp.getAbsolutePath());
+    try {
+        System.out.printf("Canonical path: %s\n", fp.getCanonicalPath());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    System.out.printf("File size: %s\n", fp.length());
+    System.out.printf("Last Modified: %s\n",
+            DateUtil.convertFromEpochMilli(fp.lastModified()));
+    System.out.printf("Readable: %s\n", fp.canRead());
+    System.out.printf("Writable: %s\n", fp.canWrite());
+    System.out.printf("Executable: %s\n", fp.canExecute());
+}
+----
+
+=== Example
+
+[.fragment]
+----
+Name: input.txt
+Parent: src/main/resources/example/io/../io
+Path: src/main/resources/example/io/../io/input.txt
+Absolute path: /home/rakovets/dev/course-java-core/src/main/resources/example/io/../io/input.txt
+Canonical path: /home/rakovets/dev/course-java-core/src/main/resources/example/io/input.txt
+File size: 0
+Last Modified: 2021-05-09T07:51:16.945
+Readable: true
+Writable: true
+Executable: false
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+File dir = new File("src" + File.separator + "main");
+if (dir.exists() && dir.isDirectory()) {
+    File[] files = dir.listFiles();
+    if (files != null) {
+        System.out.printf("%-20s%-10s%s\n", "Path", "Size", "Last modified");
+        for (File file : files) {
+            System.out.printf("%-20s%-10d%s\n", file.getPath(), file.length(),
+                    DateUtil.convertFromEpochMilli(file.lastModified()));
+        }
+    }
+}
+
+File root = File.listRoots()[0];
+System.out.printf("\nDirectory: %s\n", root.getPath());
+System.out.printf("Total space:\t%,d\n", root.getTotalSpace());
+System.out.printf("Usable space:\t%,d\n", root.getUsableSpace());
+----
+
+=== Example
+
+[.fragment]
+----
+Path                Size      Last modified
+src/main/java       6         2021-04-20T18:25:14.146
+src/main/resources  30        2021-05-06T19:13:58.817
+
+Directory:		/
+Total space:	160,000,114,688 byte
+Usable space:	132,915,920,896 byte
+----
+
+== Byte-based streams
+
+=== Byte-based streams
+
+[.fragment]
+image::byte-based-stream.png[Byte-based stream]
+
+=== Byte-based streams
+
+[.fragment]
+
+[.fragment]
+[options="headers"]
+|===
+.2+| 2+|Byte Based
+|Input|Output
+|Basic|`InputStream`|`OutputStream`
+|Arrays|`ByteArrayInputStream`|`ByteArrayOutputStream`
+|Files|`FileInputStream`|`FileOutputStream`
+|Buffering|`BufferedInputStream`|`BufferedOutputStream`
+|Filtering|`FilterInputStream`|`FilterOutputStream`
+|Data|`DataInputStream`|`DataOutputStream`
+|Objects|`ObjectInputStream`|`ObjectOutputStream`
+|===
+
+=== Hierarchy
+
+[.fragment]
+image::io-streams-hierarchy.png[IO Streams hierarchy]
+
+=== `InputStream`
+
+[.step]
+* `available(): int`
+* `close(): void`
+* `read(): int` вернет `-1` для конца потока, иначе `0`-`255`
+* `read(byte[] buffer): int`
+* `read(byte[] buffer, int offset, int length): int`
+* `skip(long number): long`
+
+=== `OutputStream`
+
+[.step]
+* `close(): void`
+* `flush(): void`
+* `write(int b): void`
+* `write(byte[] buffer): void`
+* `write(byte[] buffer, int offset, int length): void`
+
+=== `flush()`
+
+[.step]
+* Класс выходного потока может использовать внутренний механизм для буферизации данных.
+* Чтобы гарантированно записать данные в поток, а не хранить в буфере, необходимо вызвать метод `flush()`.
+* Метод `flush()` определен в классе `OutputStream`.
+
+=== `read()` and `write()`
+
+[.step]
+* Методы:
+[.step]
+** `write()`
+** `read()`
+* БЛОКИРУЮТ поток до тех пор, пока байт не будет записан или прочитан
+
+== Closing Streams
+
+=== Closing Streams
+
+[.step]
+* Все потоки:
+[.step]
+** чтения и записи
+** символьный и байтовые
+* автоматически открываются при их создании.
+* После использования необходимо принудительно закрывать потоки с помощью метода `close()`.
+
+=== `Closeable`
+
+[.fragment]
+[source,java]
+----
+public interface Closeable extends AutoCloseable {
+    public void close() throws IOException;
+}
+----
+
+=== Ways to Close Streams
+
+[.step]
+* `try` ... `catch` ... `finally`
+* try-with-resource
+
+=== `try` ... `catch` ... `finally`
+
+[.fragment]
+[source,java]
+----
+InputStream fin = null;
+try {
+    fin = new FileInputStream(ExampleFiles.INPUT_FILE);
+    int i = -1;
+    while ((i = fin.read()) != -1) {
+        System.out.print((char) i);
+    }
+} catch (IOException e) {
+    System.out.println(e.getMessage());
+} finally {
+    try {
+        if (fin != null) {
+            fin.close();
+        }
+    } catch (IOException e) {
+        System.out.println(e.getMessage());
+    }
+}
+----
+
+=== `try` ... `catch` ... `finally`
+
+[.fragment]
+----
+What is Lorem Ipsum?
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+----
+
+=== try-with-resources
+
+[.fragment]
+[source,java]
+----
+try (InputStream fin = new FileInputStream(ExampleFiles.INPUT_FILE)) {
+    int i = -1;
+    while ((i = fin.read()) != -1) {
+        System.out.print((char) i);
+    }
+} catch (IOException e) {
+    System.out.println(e.getMessage());
+}
+----
+
+=== try-with-resources
+
+[.fragment]
+----
+What is Lorem Ipsum?
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+----
+
+== `ByteArrayInputStream`
+
+=== Constructors
+
+[.step]
+* `ByteArrayInputStream(byte[] buf)`
+* `ByteArrayInputStream(byte[] buf, int offset, int length)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+byte[] bytes = {-128, -127, -1, 0, 1, 127};
+InputStream bais = new ByteArrayInputStream(bytes);
+
+int readByte;
+for (byte b : bytes) {
+    readByte = bais.read();
+    System.out.printf("Element: '%d' - Read byte: `%d`\n", b, readByte);
+}
+----
+
+== `ByteArrayOutputStream`
+
+=== Constructors
+
+[.step]
+* `ByteArrayOutputStream()`
+* `ByteArrayOutputStream(int size)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (OutputStream fos = new FileOutputStream(ExampleFiles.OUTPUT_FILE);
+     OutputStream fos2 = new FileOutputStream(ExampleFiles.OUTPUT_FILE_2);
+     ByteArrayOutputStream bout = new ByteArrayOutputStream()) {
+
+    bout.write("Hell to world!".getBytes());
+    bout.writeTo(fos);
+    bout.writeTo(fos2);
+
+    bout.flush();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+=== Example
+
+[.fragment]
+----
+Hell to world!
+----
+
+== `FileInputStream`
+
+=== Constructors
+
+[.step]
+* `FileOutputStream(String filePath)`
+* `FileOutputStream(File fileObj)`
+* `FileOutputStream(String filePath, boolean append)`
+* `FileOutputStream(File fileObj, boolean append)`
+
+== `FileOutputStream`
+
+=== Constructors
+
+[.step]
+* `FileInputStream(File file)`
+* `FileInputStream(FileDescriptor fdObj)`
+* `FileInputStream(String name)`
+
+== Buffering
+
+=== Buffering
+
+[.step]
+* Буферизация данных при чтении или записи, уменьшает количество обращений к источнику данных.
+* Буферизованные потоки, как правило, более эффективны.
+* Буферизованные потоки часто используют с другими потоками.
+
+=== Buffering
+
+[.fragment]
+image::buffering.png[Buffering]
+
+=== Buffering
+
+[.fragment]
+image::buffering-stream.png[Buffering stream]
+
+== `BufferedInputStream`
+
+=== Constructors
+
+[.step]
+* `BufferedInputStream(InputStream inputStream)`
+* `BufferedInputStream(InputStream inputStream, int bufSize)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (InputStream fin = new FileInputStream(ExampleFiles.INPUT_FILE);
+     InputStream bin = new BufferedInputStream(fin)) {
+    int i;
+    while ((i = bin.read()) != -1) {
+        System.out.print((char) i);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+=== Example
+
+[.fragment]
+----
+What is Lorem Ipsum?
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+----
+
+== `BufferedOutputStream`
+
+=== Constructors
+
+[.step]
+* `BufferedOutputStream(OutputStream outputStream)`
+* `BufferedOutputStream(OutputStream outputStream, int bufSize)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (OutputStream fout = new FileOutputStream(ExampleFiles.OUTPUT_FILE);
+     OutputStream bout = new BufferedOutputStream(fout)) {
+    String s = "Hell to world by BufferedOutputStream!";
+    byte[] stringAsBytes = s.getBytes();
+    bout.write(stringAsBytes);
+    bout.flush();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+Hell to world by BufferedOutputStream!
+----
+
+== `DataOutputStream`
+
+=== Methods
+
+[.step]
+* `writeBoolean(boolean v): void`
+* `writeByte(int v): void`
+* `writeChar(int v): void`
+* `writeDouble(double v): void`
+* `writeFloat(float v): void`
+* `writeInt(int v): void`
+* `writeLong(long v): void`
+* `writeShort(int v): void`
+* `writeUTF(String str): void`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (OutputStream file = new FileOutputStream(ExampleFiles.OUTPUT_FILE);
+     DataOutputStream data = new DataOutputStream(file)) {
+    data.writeInt(12);
+    data.writeDouble(12.34);
+    data.flush();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+   @(�z�G�
+----
+
+== `DataInputStream`
+
+=== Methods
+
+[.step]
+* `readBoolean(): boolean`
+* `readByte(): byte`
+* `readChar(): char`
+* `readDouble(): double`
+* `readFloat(): float`
+
+=== Methods
+
+[.step]
+* `readInt(): int`
+* `readLong(): long`
+* `readShort(): short`
+* `readUTF(): String`
+* `skipBytes(int n): int`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (InputStream fis = new FileInputStream(ExampleFiles.TRANSFER_FILE);
+     DataInputStream dis = new DataInputStream(fis)) {
+    int readInt = dis.readInt();
+    double readDouble = dis.readDouble();
+    System.out.println(readInt);
+    System.out.println(readDouble);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+12
+12.34
+----
+
+== Char-based streams
+
+=== Char-based streams
+
+[.fragment]
+[options="headers"]
+|===
+.2+| 2+|Character Based
+|Input|Output
+|Basic|`Reader`, `InputStreamReader`|`Writer`, `OutputStreamWriter`
+|Arrays|`CharArrayReader`|`CharArrayWriter`
+|Files|`FileReader`|`FileWriter`
+|Strings|`StringReader`|`StringWriter`
+|Buffering|`BufferedReader`|`BufferedWriter`
+|Filtering|`FilterReader`|`FilterWriter`
+|===
+
+=== Hierarchy
+
+[.fragment]
+image::io-writers-readers-hierarchy.png[IO Writers and Readers hierarchy]
+
+=== `Reader`
+
+[.step]
+* `abstract void close()`
+* `abstract int read(char[] buffer, int offset, int count)`
+* `read(): int`
+* `read(char[] buffer): int`
+* `read(CharBuffer buffer): int`
+* `skip(long count): long`
+
+=== `Writer`
+
+[.step]
+* `abstract void close()`
+* `abstract void flush()`
+* `abstract void write(char[] buffer, int off, int len)`
+* `append(char c): Writer`
+* `append(CharSequence chars): Writer`
+
+=== `Writer`
+
+* `write(int c): void`
+* `write(char[] buffer): void`
+* `write(String str): void`
+* `write(String str, int off, int len): void`
+
+== `FileWriter`
+
+=== Constructors
+
+[.step]
+* `FileWriter(File file)`
+* `FileWriter(File file, boolean append)`
+* `FileWriter(FileDescriptor fd)`
+* `FileWriter(String fileName)`
+* `FileWriter(String fileName, boolean append)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (Writer fw = new FileWriter(ExampleFiles.OUTPUT_FILE)) {
+    fw.write("Hell to world by FileWriter!");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+Hell to world by FileWriter!
+----
+
+== `FileReader`
+
+=== Constructors
+
+[.step]
+* `FileReader(String fileName)`
+* `FileReader(File file)`
+* `FileReader(FileDescriptor fd)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (Reader fr = new FileReader(ExampleFiles.INPUT_FILE)) {
+    int i;
+    while ((i = fr.read()) != -1) {
+        System.out.print((char) i);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+What is Lorem Ipsum?
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+----
+
+== `BufferedWriter`
+
+=== Constructors
+
+[.step]
+* `BufferedWriter(Writer out)`
+* `BufferedWriter(Writer out, int sz)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (Writer fw = new FileWriter(ExampleFiles.OUTPUT_FILE);
+     Writer bw = new BufferedWriter(fw)) {
+    bw.write("Hell to world by BufferedWriter!");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+Hell to world by BufferedWriter!
+----
+
+== `BufferedReader`
+
+=== Constructors
+
+[.step]
+* `BufferedReader(Reader in)`
+* `BufferedReader(Reader in, int sz)`
+
+=== Methods
+
+[.step]
+* `readLine(): String`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (Reader fr = new FileReader(ExampleFiles.INPUT_FILE);
+     BufferedReader br = new BufferedReader(fr)) {
+    String line;
+    while ((line = br.readLine()) != null) {
+        System.out.println(line);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+== Serialization and Deserialization
+
+=== Serialization and Deserialization
+
+[.step]
+* *Сериализация* - это процесс сохранения состояния объекта в последовательность байт.
+* *Десериализация* - это процесс восстановления объекта из этих байт.
+
+=== Serialization and Deserialization
+
+[.fragment]
+image::serialization.png[Serialization and Deserialization]
+
+=== Interface `Serializable`
+
+[.step]
+* Для сериализации объекта класс должен реализовывать интерфейс `Serializable`.
+
+[.fragment]
+[source,java]
+----
+public interface Serializable {
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.io.Serializable;
+
+public class Person implements Serializable {
+    private final String name;
+    private final transient double height;
+
+    public Person(String name, double height) {
+        this.name = name;
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", height=" + height +
+                '}';
+    }
+}
+----
+
+== `ObjectOutputStream`
+
+=== Methods
+
+[.step]
+* `close(): void`
+* `flush(): void`
+* `write(byte[] buf): void`
+* `write(int val): void`
+* `writeBoolean(boolean val): void`
+* `writeByte(int val): void`
+* `writeChar(int val): void`
+
+=== Methods
+
+[.step]
+* `writeDouble(double val): void`
+* `writeFloat(float val): void`
+* `writeInt(int val): void`
+* `writeLong(long val): void`
+* `writeShort(int val): void`
+* `writeUTF(String str): void`
+* `writeObject(Object obj): void`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Person tom = new Person("Tom", 180);
+try (OutputStream fos = new FileOutputStream(ExampleFiles.TRANSFER_FILE);
+     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    oos.writeObject(tom);
+    oos.flush();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+�� sr 5com.rakovets.course.java.core.example.io.model.Person�4���M; L namet Ljava/lang/String;xpt Tom
+----
+
+== `ObjectInputStream`
+
+=== Methods
+
+[.step]
+* `close(): void`
+* `skipBytes(int len): int`
+* `available(): int`
+* `read(): int`
+* `readBoolean(): boolean`
+* `readByte(): byte`
+* `readChar(): char`
+
+=== Methods
+
+[.step]
+* `readDouble(): double`
+* `readFloat(): float`
+* `readInt(): int`
+* `readLong(): long`
+* `readShort(): short`
+* `readUTF(): String`
+* `readObject(): Object`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (InputStream fis = new FileInputStream(ExampleFiles.TRANSFER_FILE);
+     ObjectInputStream ois = new ObjectInputStream(fis)) {
+    Object readObject = ois.readObject();
+    System.out.println(readObject);
+} catch (IOException | ClassNotFoundException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+Person{name='Tom', height=0.0}
+----
+
+=== Example
+
+[.fragment]
+----
+java.io.InvalidClassException:
+    com.rakovets.course.java.core.example.io.model.Person;
+    local class incompatible:
+        stream classdesc serialVersionUID = 5181901209139047180,
+        local class serialVersionUID = -8989654875390893074
+----
+
+=== Solution
+
+[.fragment]
+[source,java]
+----
+import java.io.Serializable;
+
+public class Person implements Serializable {
+    private static final long serialVersionUID = -1909254337192130771L;
+
+    private final String name;
+    private final transient double height;
+
+    public Person(String name, double height) {
+        this.name = name;
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", height=" + height +
+                '}';
+    }
+}
+----
+
+== Class `Formatter`
+
+=== Class `Formatter`
+
+[.step]
+* *General* - any argument type.
+* *Character* -  `char`, `Character`, `byte`, `Byte`, `short`, `Short`.
+* *Numeric*:
+[.step]
+** *Integral* - `byte`, `Byte`, `short`, `Short`, `int`, `Integer`, `long`, `Long`, `BigInteger`.
+** *Floating Point* - `float`, `Float`, `double`, `Double`, `BigDecimal`.
+
+=== Class `Formatter`
+
+[.step]
+* *Date/Time* - `long`, `Long`, `Calendar`, `Date`.
+* *Percent* - produces a literal `%` (`\u0025`).
+* *Line Separator* - produces the platform-specific line separator.
+
+=== Class `Formatter`
+
+[.fragment]
+[options="header"]
+|===
+|Conversion|Argument Category|Description
+|`b`, `B`|*general*| `String.valueOf(arg)` for `boolean`, `Boolean` or `"true"` or `"false"` for `null`.
+|`h`, `H`|*general*|`Integer.toHexString(arg.hashCode())` or `"null"`.
+|`s`, `S`|*general*|`arg.formatTo()` for `Formattable`, `arg.toString()` for another or "null".
+|`c`, `C`|*character*|The result is a Unicode character
+|`d`|*integral*|The result is formatted as a decimal integer
+|===
+
+=== Class `Formatter`
+
+[.fragment]
+[options="header"]
+|===
+|Conversion|Argument Category|Description
+|`o`|*integral*|The result is formatted as an octal integer
+|`x`, `X`|*integral*|The result is formatted as a hexadecimal integer
+|`e`, `E`|*floating point*|The result is formatted as a decimal number in computerized scientific notation
+|`f`|*floating point*|The result is formatted as a decimal number
+|`%`|*percent*|The result is a literal `%` (`\u0025`)
+|===
+
+=== Class `Formatter`
+
+[.fragment]
+[options="header"]
+|===
+|Conversion|Argument Category|Description
+|`g`, `G`|*floating point*|The result is formatted using computerized scientific notation or decimal format, depending on the precision and the value after rounding.
+|`a`, `A`|*floating point*|The result is formatted as a hexadecimal floating-point number with a significand and an exponent
+|`t`, `T`|*date/time*|Prefix for date and time conversion characters. See Date/Time Conversions.
+|`n`|*line separator*|The result is the platform-specific line separator
+|===
+
+=== Constructors
+
+[.step]
+* `Formatter()`
+* `Formatter(Appendable buf)`, где `buf` - буфер для форматированного вывода
+* `Formatter(Appendable buf, Locale locale)`
+* `Formatter(String filename) throws FileNotFoundException`
+* `Formatter(String filename, String charset) throws FileNotFoundException, UnsupportedEncodingException`
+
+=== Methods
+
+[.step]
+* `format (String fmtString, Object... args): Formatter` - форматирует аргументы, переданные в аргументе переменной длины `args` в соответствии со спецификаторами формата, содержащимися в `fmtString`.
+* `format(Locale loc, String fmtString, Object... args): Formatter` — при форматировании используются региональные установки, заданные в `loc`.
+* `toString(): String` — возвращает объект типа `String`, содержащий отформатированный вывод.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Formatter fmt = new Formatter();
+Formatter simpleFormatter = fmt.format(
+        "Formatting %s is easy %d %f.",
+        "with Java", 42, 33.3);
+System.out.println(simpleFormatter);
+----
+
+[.fragment]
+----
+Formatting with Java is easy 42 33.300000.
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Formatter decimalFormatter = new Formatter();
+for (double i = 1000.0; i < 1.0e+10; i *= 100) {
+    decimalFormatter.format("%g ", i);
+    System.out.println(decimalFormatter);
+}
+----
+
+[.fragment]
+----
+1000.00
+1000.00 100000
+1000.00 100000 1.00000e+07
+1000.00 100000 1.00000e+07 1.00000e+09
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Formatter anotherSystemFormatter = new Formatter();
+anotherSystemFormatter.format("Hex: %x. Octal:  %o",  42, 42);
+System.out.println(anotherSystemFormatter);
+----
+
+[.fragment]
+----
+Hex: 2a. Octal:  52
+----
+
+=== Спецификаторы `%n` и `%%`
+
+[.step]
+* Представляют собой ESC-последовательности, вставляющие символ в поток вывода.
+* Спецификатор `%n` вставляет символ перехода на новую строку.
+* Спецификатор `%%` — знак процента.
+
+=== Спецификатор точности
+
+[.step]
+* Применяется только в спецификаторах формата: `%f`, `%е`, `%g` для данных с плавающей точкой и в спецификаторе `%s` — для строк.
+* Задает количество выводимых десятичных знаков или символов.
+* Например, `%6.2f` выводит число с минимальной шириной поля 6 символов и с 2 десятичными знаками.
+
+=== Флаги форматирования
+
+[.step]
+* Выравнивание вывода
+[.step]
+** Выравнивание вправо (по умолчанию).
+** Выравнивание  влево. Поместить знак `-` (минус) сразу после символа `%` в спецификаторе формата.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Formatter alignmentFormatter = new Formatter();
+alignmentFormatter.format("|%8.2f|", 123.456);
+System.out.println(alignmentFormatter);
+
+alignmentFormatter = new Formatter();
+alignmentFormatter.format("|%-8.2f|", 123.456);
+System.out.println(alignmentFormatter);
+----
+
+[.fragment]
+----
+|  123.46|
+|123.46  |
+----
+
+=== Использование порядкового номера аргумента
+
+[.step]
+* Порядковый номер аргумента указан за знаком `%` в спецификаторе формата и имеет следующий формат: `n$`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Formatter orderFormatter = new Formatter();
+orderFormatter.format("%3$d  %1$d %2$d", 1, 22, 333);
+System.out.println(orderFormatter);
+----
+
+[.fragment]
+----
+333  1 22
+----
+
+=== Метод `printf()`
+
+[.step]
+* `printf()` автоматически использует объект типа `Formatter` для создания форматированной строки.
+* Она выводится как строка в стандартный поток вывода по умолчанию на консоль.
+* Метод `printf()` определен в классах `PrintStream` и `PrintWriter`.
+
+=== Метод `printf()`
+
+[.step]
+* В классе `PrintStream` у метода `printf()` две синтаксические формы записи:
+[.step]
+** `printf(String fmtString, Object...args): PrintStream`
+** `printf(Local loc, String fmtString, Object...args): PrintStream`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+System.out.printf("%3$d  %1$d %2$d", 1, 22, 333);
+----
+
+[.fragment]
+----
+333  1 22
+----
+
+== Class `Scanner`
+
+=== Class `Scanner`
+
+[.step]
+* Класс `Scanner` из пакета `java.util` — это дополнение к классу `Formatter`.
+* Объекты класса `Scanner` читают форматированный ввод и преобразуют его в двоичное представление.
+* Они могут использоваться для чтения данных с:
+[.step]
+** консоли
+** файла
+** строки
+** любого другого источника, реализующего интерфейс `Readable`
+
+=== How create?
+
+[.step]
+* `Scanner(InputStream)`
+* `Scanner(String)`
+* `Scanner(Readable)`
+* `Scanner(File)`
+* `Scanner(Path)`
+
+=== Форматирование входных данных
+
+[.step]
+* Объект класса `Scanner` используется  для чтения форматированных входных данных.
+* Объект класса `Scanner` читает *лексемы* (*tokens*) из базового источника, который задали при создании объекта типа `Scanner`.
+[.step]
+** Применительно к классу `Scanner`, *лексема* — это порция вводимых данных, обособленная набором разделителей, по умолчанию пробелами.
+
+=== Форматирование входных данных
+
+[.step]
+* При использовании класса Scanner необходимо выполнить следующие шаги.
+[.step]
+** С помощью одного из методов `hasNextXxx()` класса `Scanner` определить, доступна ли для ввода порция данных типа `Xxx`.
+** Если да, считать ее с помощью одного из методов `nextXxx()` класса `Scanner`.
+** Повторять процесс, пока не исчерпан поток ввода.
+
+=== Methods
+
+[.step]
+* `hasNextXxx()` определяет, доступны ли для ввода данные заданного типа.
+[.step]
+** hasNextInt() возвращает `true`, только если следующая лексема, предназначенная для считывания является целым числом.
+* `nextXxx()` считывание данных заданного типа (если они доступны).
+[.step]
+** `nextInt()` - считывает целое число.
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+Scanner inScanner = new Scanner(System.in);
+int i;
+while (inScanner.hasNextInt()) {
+    i = inScanner.nextInt();
+    System.out.println(i);
+}
+----
+
+== `PrintStream`
+
+=== Constructors
+
+[.step]
+* `PrintStream(OutputStream outputStream)`
+* `PrintStream(OutputStream outputStream, boolean autoFlushingOn)`
+* `PrintStream(OutputStream outputStream, boolean autoFlushingOn, String charSet) throws UnsupportedEncodingException`
+* `PrintStream(File outputFile) throws FileNotFoundException`
+
+=== Constructors
+
+[.step]
+* `PrintStream(File outputFile, String charSet) throws FileNotFoundException, UnsupportedEncodingException`
+* `PrintStream(String outputFileName) throws FileNotFoundException`
+* `PrintStream(String outputFileName, String charSet) throws FileNotFoundException, UnsupportedEncodingException`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+try (OutputStream fout = new FileOutputStream(ExampleFiles.OUTPUT_FILE);
+     PrintStream pout = new PrintStream(fout)) {
+    pout.println(2021);
+    pout.println("Hell to world!");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+----
+
+[.fragment]
+----
+2021
+Hell to world!
+
+----
+
+== `PrintWriter`
+
+=== Constructors
+
+[.step]
+* `PrintWriter(File file)`
+* `PrintWriter(File file, String csn)`
+* `PrintWriter(OutputStream out)`
+* `PrintWriter(OutputStream out, boolean autoFlush)`
+* `PrintWriter(String fileName)`
+* `PrintWriter(String fileName, String csn)`
+* `PrintWriter(Writer out)`
+* `PrintWriter(Writer out, boolean autoFlush)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+double[] javaVersions = {1.1, 1.22, 1.333, 1.4444, 5.0};
+try (FileWriter fw = new FileWriter(ExampleFiles.OUTPUT_FILE, false);
+     BufferedWriter bw = new BufferedWriter(fw);
+     PrintWriter pw = new PrintWriter(bw)) {
+    for (double version : javaVersions) {
+        pw.printf("Java %.2g\n", version);
+    }
+} catch (IOException e) {
+    System.err.println("ошибка открытия потока " + e);
+    System.exit(1);
+}
+----
+
+=== Example
+
+----
+Java 1.1
+Java 1.2
+Java 1.3
+Java 1.4
+Java 5.0
+
+----
+
+== `Console`
+
+=== `Console`
+
+[.step]
+* Специально для работы с консолью в Java определен класс `Console`.
+* Находится в пакете `java.io`.
+* Использует уже имеющиеся потоки `System.in` и `System.out`.
+* Значительно упрощает ряд операций, связанных с консолью/терминалом.
+
+=== How to create?
+
+[.step]
+* `System.console(): Console`
+
+=== Methods
+
+[.step]
+* `format(String, Object...): Console`
+* `printf(String, Object...): Console`
+* `readLine(): String`
+* `readLine(String, Object...): String`
+* `readPassword(): char[]`
+* `readPassword(String, Object...): char[]`
+* `flush(): void`
+
+=== Methods
+
+[.step]
+* `writer(): PrintWriter`
+* `reader(): Reader`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+Console console = System.console();
+System.out.println("Enter your name: ");
+try {
+    String name = console.readLine();
+    System.out.printf("Welcome %s!\n", name);
+} catch (NullPointerException e) {
+    System.out.println("\nThrew: NullPointerException\n" +
+            "No console associated to the JVM.\n" +
+            "Please read JavaDoc for method 'System.console()`");
+}
+----
+
+== Class `ZipOutputStream`
+
+=== Constructor
+
+[.step]
+* `ZipOutputStream(OutputStream out)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+public class Program {
+    public static void main(String[] args) {
+        String filename = "C:\\SomeDir\\notes.txt";
+        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("C:\\SomeDir\\output.zip"));
+             FileInputStream fis = new FileInputStream(filename);) {
+            ZipEntry entry1 = new ZipEntry("notes.txt");
+            zout.putNextEntry(entry1);
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            zout.write(buffer);
+            zout.closeEntry();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+----
+
+== `ZipInputStream`
+
+=== Constructor
+
+[.step]
+* `ZipInputStream(InputStream in)`
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+public class Program {
+    public static void main(String[] args) {
+        try (ZipInputStream zin = new ZipInputStream(new FileInputStream("C:\\SomeDir\\output.zip"))) {
+            ZipEntry entry;
+            String name;
+            long size;
+            while ((entry = zin.getNextEntry()) != null) {
+                name = entry.getName();
+                size = entry.getSize();
+                System.out.printf("File name: %s \t File size: %d \n", name, size);
+                FileOutputStream fout = new FileOutputStream("C:\\somedir\\new" + name);
+                for (int c = zin.read(); c != -1; c = zin.read()) {
+                    fout.write(c);
+                }
+                fout.flush();
+                zin.closeEntry();
+                fout.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+----

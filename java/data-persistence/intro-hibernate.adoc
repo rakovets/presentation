@@ -1,0 +1,84 @@
+= Intro to Hibernate
+
+== Hibernate
+
+=== Схема взаимодействия программных компонентов
+
+image::/assets/img/java/data-persistence/intro-hibernate/hibernate.svg[Hibernate]
+
+=== Hibernate Architecture
+
+image::/assets/img/java/data-persistence/intro-hibernate/architecture.png[Hibernate Architecture]
+
+== Внутренняя архитектура классов Hibernate
+
+=== Внутренняя архитектура классов Hibernate (5.4.18)
+
+image::/assets/img/java/data-persistence/intro-hibernate/classes-hierarhy.svg[Classes Hierarhy]
+
+=== `SessionFactory`
+
+`SessionFactory` (`org.hibernate.SessionFactory`) - threadsafe, immutable кэш откомпилированных маппинг для одной DB. 
+
+image::/assets/img/java/data-persistence/intro-hibernate/session-factory.jpeg[Session Factory]
+
+=== `Session`
+
+`Session` (`org.hibernate.Session`) - однопоточный, короткоживущий объект, являющийся посредником между приложением и хранилищем долгоживущих объектов.
+
+image::/assets/img/java/data-persistence/intro-hibernate/session.png[Session]
+
+=== `Session`
+
+[.step]
+* Объект, являющийся посредником между приложением и базой данных
+* По сути – обёртка вокруг JDBC-соединения
+* Содержит набор методов для получения/сохранения/удаления объектов
+* Также является кэшем для долгоживущих объектов
+
+=== Entity lifecycle in `Session`
+
+*Transient Objects and Collections* - временные Объекты и Коллекции. Экземпляры долгоживущих (persistent) классов, которые в данный момент не ассоциированы с сессией (`Session`).
+
+image::/assets/img/java/data-persistence/intro-hibernate/object-lifecycle.png[Session Lifecycle]
+
+=== `Transaction`
+
+`Transaction` (`org.hibernate.Transaction`) - транзакция. Опциональный, однопоточный, короткоживущий объект, используется приложением для указания атомарной единицы выполняемой работы (atomic unit of work).
+
+image::/assets/img/java/data-persistence/intro-hibernate/transaction.png[Transaction]
+
+=== `TransactionFactory`
+
+`TransactionFactory` (`org.hibernate.TransactionFactory`) - фабрика транзакций. Опциональная фабрика для экземпляров класса `Transaction`. Это внутренний объект *Hibernate*, он недоступен для приложения, но может быть расширен/реализован разработчиком.
+
+image::/assets/img/java/data-persistence/intro-hibernate/transaction-factory.png[Transaction Factory]
+
+=== `ConnectionProvider`
+
+`ConnectionProvider` (`org.hibernate.engine.jdbc.connections.spi.ConnectionProvider`) - поставщик соединений. Опциональная фабрика и пул для JDBC-соединений. Абстрагирует приложение от нижележащих объектов `Datasource` или `DriverManager`.
+
+image::/assets/img/java/data-persistence/intro-hibernate/connection-provider.jpeg[Connection Provider]
+
+== Object Lifecycle
+
+=== Object Lifecycle
+
+image::/assets/img/java/data-persistence/intro-hibernate/object-lifecycle.png[Object Lifecycle]
+
+=== Object Lifecycle
+
+image::/assets/img/java/data-persistence/intro-hibernate/object-lifecycle-visual.png[Object Lifecycle Visual]
+
+== CRUD operations
+
+=== Persist
+
+=== Save
+
+=== Merge
+
+=== Update
+
+=== SaveOrUpdate
+

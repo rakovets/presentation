@@ -1,0 +1,98 @@
+= Database Connection Pool
+
+== Database Connection Pool
+
+=== Profit
+
+[.step]
+* позволяет переиспользовать ранее закрытые соединения
+* ускоряя процесс установки соединения
+* экономит ресурсы сервера
+* корректно управляет работой с несколькими соединениями в многопоточной среде
+
+=== Providers
+
+[.step]
+* *HicariCP*
+* *C3P0*
+* *Apache Commons DBCP*
+* *BoneCP*
+* *Tomcat*
+* *Vibur*
+* etc
+
+=== Benchmark
+
+image::/assets/img/java/data-persistence/database-connection-pool/benchmark.png[Benchmark]
+
+== Tomcat Connection Pool
+
+=== Tomcat Connection Pool
+
+[.step]
+* `tomcat-jdbc.jar` – библиотека, содержащая в себе классы для работы с простейшим пулом соединений Tomcat
+* Для отображения необходимых классов в IDE нужно добавить её в classpath в процесс разработки.
+* В сборку добавлять не нужно, так как она поставляется в сборке tomcat в директории `/lib`
+
+=== Creating Connection Pool
+
+[.step]
+* Создание объекта `org.apache.tomcat.jdbc.pool.PoolProperties`
+* Указание значений `url`, `username`, `password`, `driverClassName`
+* Создание объекта `org.apache.tomcat.jdbc.pool.DataSource`
+
+=== Example
+
+[source,java]
+----
+// Создание пула соединения
+PoolProperties poolProperties = new PoolProperties();
+poolProperties.setUrl("jdbc:mariadb://localhost:3306/dbname");
+poolProperties.setUsername("user");
+poolProperties.setPassword("password");
+poolProperties.setDriverClassName("org.mariadb.jdbc.Driver");
+DataSource dataSource = new DataSource(poolProperties);
+
+// Устанавка соединения
+Connection connection = dataSource.getConnection();
+----
+
+== HicariCP
+
+=== Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+    <version>3.4.5</version>
+</dependency>
+----
+
+=== Example
+
+[source,java]
+----
+public class DataSource {
+    private static HikariConfig config = new HikariConfig();
+    private static HikariDataSource ds;
+
+    static {
+        config.setJdbcUrl("jdbc_url");
+        config.setUsername("database_username");
+        config.setPassword("database_password");
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        ds = new HikariDataSource(config);
+    }
+
+    private DataSource() {}
+
+    public static Connection getConnection() throws SQLException {
+        return ds.getConnection();
+    }
+}
+----
+

@@ -1,0 +1,329 @@
+= YAML
+
+== Intro
+
+=== Problem
+
+[.step]
+* В каком формате представлять структурированные данные для использования различными языками программирования?
+* Сообщество разработчиков устало от «зоопарка» различных форматов для конфигураций, им хотелось упростить себе жизнь и прийти к единому понятному формату.
+
+=== Solution
+
+[.step]
+* *YAML*
+
+== YAML
+
+=== YAML
+
+[.step]
+* *YAML* - *YAML Ain't Markup Language*
+* What It Is: *YAML* is a human friendly data serialization standard for all programming languages.
+* *YAML 1.0*, *2001* год, *Кларк Эванс*.
+
+=== Цели YAML
+
+[.step]
+* быть понятным человеку;
+* поддерживать структуры данных, родные для языков программирования;
+* быть переносимым между языками программирования;
+* использовать цельную модель данных для поддержки обычного инструментария;
+* поддерживать потоковую обработку;
+* быть выразительным и расширяемым;
+* быть лёгким в реализации и использовании.
+
+=== Где используется?
+
+[.step]
+* Как формат для файлов конфигурации:
+[.step]
+** *CI/CD* pipelines
+** *docker-compose*
+** *Helm*
+** *Spring*
+** *Ruby on Rails*
+** *Dancer*
+
+=== Где используется?
+
+[.step]
+* Как формат для файлов конфигурации:
+[.step]
+** *Symfony*
+** *GAE framework*
+** *Google App Engine*
+** *Dart*
+
+=== Где используется?
+
+[.step]
+* Как основной язык описания классов, ресурсов и манифестов для:
+[.step]
+** *OpenAPI Specification*
+** *OpenStack Murano Project*
+
+=== JSON vs. YAML
+
+[.step]
+* По сути *YAML* — это расширенная версия формата *JSON*.
+
+=== JSON vs. YAML
+
+.tsconfig.json
+[.fragment]
+[source, json]
+----
+{
+  "compilerOptions": {
+    "module": "system",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "../../built/local/tsc.js",
+    "sourceMap": false,
+    "types": ["node", "lodash", "express"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
+----
+
+=== JSON vs. YAML
+
+.tsconfig.yaml
+[.fragment]
+[source, yaml]
+----
+compilerOptions:
+  module: system,
+  noImplicitAny: true
+  removeComments: true
+  preserveConstEnums: true
+  outFile: '../../built/local/tsc.js'
+  sourceMap: false
+  types:
+    - node
+    - lodash
+    - express
+include:
+  - src/**/*
+exclude:
+  - node_modules
+  - '**/*.spec.ts'
+----
+
+=== JSON vs. YAML
+
+[.step]
+* JSON-формата есть некоторые ограничения:
+[.step]
+** нельзя создавать переменные;
+** нельзя использовать внешние переменные (например, переменные окружения);
+** нельзя переопределять значения.
+
+== Синтаксис
+
+=== Отступы
+
+[.step]
+* Для отступов используются *ТОЛЬКО* пробелы, *tab* не допускается.
+* При отсутствии отступа перед первым объявлением *YAML* поймет, что это *корень* (*уровень 0*) вашего файла.
+* Вопрос с *tab* решают плагины для IDE или редактора кода, которые меняют *tab* на пробелы.
+
+=== Комментарии
+
+[.fragment]
+[source, yaml]
+----
+# Если не умеете давать названия
+person: # то можете использовать комментарии
+  age: 20 # но лучше этому научиться
+----
+
+=== Ключ/Значение
+
+[.fragment]
+[source, yaml]
+----
+key: value
+key_one: value one
+key one: value # так можно, но не стоит
+'key two': value two # так получше
+----
+
+=== Списки
+
+[.step]
+* Как *JSON*
+
+[.fragment]
+[source, yaml]
+----
+people: ['Anne', 'John', 'Max']
+----
+
+[.step]
+* Предпочтительно использовать:
+
+[.fragment]
+[source, yaml]
+----
+people:
+  - Anne
+  - John
+  - Max
+----
+
+=== Числа
+
+[.fragment]
+[source, yaml]
+----
+year: 2021 # Integer
+javaVersion: 16.0.1 # Float
+population: 2.89e+6 # Scientific notation
+----
+
+=== Boolean
+
+[.fragment]
+[source, yaml]
+----
+# Boolean values can be written in different ways:
+published: false
+published: False
+published: FALSE
+----
+
+=== Null values
+
+[.fragment]
+[source, yaml]
+----
+# Null can be represented by simply not setting a value:
+null-value:
+
+# Or more explicitly:
+null-value: null
+null-value: NULL
+null-value: Null
+----
+
+
+=== Dates & timestamps
+
+[.fragment]
+[source, yaml]
+----
+date: 2002-12-14
+canonical: 2001-12-15T02:59:43.1Z
+iso8601: 2001-12-14t21:59:43.10-05:00
+spaced: 2001-12-14 21:59:43.10 -5
+----
+
+
+=== Строки
+
+[.fragment]
+[source, yaml]
+----
+# Отдельное слово, без кавычек
+title: YAML
+# Полное предложение, без кавычек
+title-quotes: Introduction to YAML
+# Полное предложение, с одинарными кавычками
+title-quotes: 'Introduction to YAML'
+# Полное предложение, с двойными кавычками
+title-with-quotes: "Introduction to YAML"
+# Многострочный текст
+execute: |
+    npm ci
+    npm build
+    npm test
+----
+
+=== Nested values
+
+[.fragment]
+[source, yaml]
+----
+# Nineteen eighty four novel data.
+nineteen-eighty-four:
+  author: George Orwell
+  published-at: 1949-06-08
+  page-count: 328
+  description: |
+      A Novel, often published as 1984, is a dystopian novel by English novelist George Orwell.
+      It was published in June 1949 by Secker & Warburg as Orwell's ninth and final book.
+----
+
+=== Explicit data types with tags
+
+[.fragment]
+[source, yaml]
+----
+# The following value should be an int, no matter what:
+should-be-int: !!int 3.2
+
+# Parse any value to string:
+should-be-string: !!str 30.25
+
+# I need the next value to be boolean:
+should-be-boolean: !!bool yes
+----
+
+=== Якорь
+
+[.fragment]
+[source, yaml]
+----
+# The author data:
+author: &gOrwell
+  name: George
+  last-name: Orwell
+# Some books:
+books:
+  - 1984:
+      author: *gOrwell
+  - animal-farm:
+      author: *gOrwell
+----
+
+=== А как же JSON?
+
+[.fragment]
+[source, yaml]
+----
+{
+    "author": {
+        "name": "George",
+        "last-name": "Orwell"
+    },
+    "books": [
+        {
+            "1984": {
+                "author": {
+                    "name": "George",
+                    "last-name": "Orwell"
+                }
+            }
+        },
+        {
+            "animal-farm": {
+                "author": {
+                    "name": "George",
+                    "last-name": "Orwell"
+                }
+            }
+        }
+    ]
+}
+----
+
+== Resume
+
+[.step]
+* Использование *YAML* не зависит от языка программирования.
+* *YAML* применяют для конфигураций фреймворков и инструментов.
+* *YAML* применяют для описания манифестов, например *OpenAPI Specification*.

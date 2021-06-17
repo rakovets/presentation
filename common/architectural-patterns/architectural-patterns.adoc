@@ -1,0 +1,73 @@
+= Architectural patterns
+:imagesdir: ../../assets/img/common/architectural-patterns/
+
+== Architectural patterns
+
+=== Architectural patterns
+
+[.step]
+* *Action-Domain-Responder* (*ADR*)
+* *Active record*
+* *Broker*
+* *Client–server*
+* *Components-Based Development* (*CBD*)
+* *Data Access Object* (*DAO*)
+* *Data Transfer Object* (*DTO*)
+* *Domain-Driven Design* (*DDD*)
+
+=== Architectural patterns
+
+[.step]
+* *Entity-Control-Boundary* (*ECB*)
+* *Entity-Component-System* (*ECS*)
+* *Event-Driven Architecture* (*EDA*)
+* *Front controller*
+* *Identity map*
+* *Interceptor*
+* *Implicit invocation*
+* *Inversion of control*
+
+=== Architectural patterns
+
+[.step]
+* *Model 2*
+* *Message-Oriented Middleware* (*MOM*)
+* *Microservices*
+* *Model–View–Adapter* (*MVA*)
+* *Model–View–Controller* (*MVC*)
+* *Model–View–Presenter* (*MVP*)
+* *Model–View–ViewModel* (*MVVM*)
+* *Monolithic*
+
+=== Architectural patterns
+
+[.step]
+* *Multitier*
+* *Naked objects*
+* *Object Request Broker* (*ORB*)
+* *Peer-TO-Peer* (*P2P*)
+* *Publish–subscribe*
+* *Presentation–Abstraction–Control* (*PAC*)
+* *REpresentational State Transfer* (*REST*)
+* *Service-oriented architecture* (*SOA*)
+
+=== Architectural patterns
+
+[.step]
+* *Service locator*
+* *Specification*
+
+== MVC
+
+=== What is MVC?
+
+MVC is a architectural pattern for GUI and Web Applications.
+
+[.step]
+* *M* = *Model*
+* *V* = *View*
+* *C* = *Controller*
+
+=== MVC
+
+image::mvc.png[Уровень представления]

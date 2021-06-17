@@ -1,0 +1,141 @@
+= UML: Unified Modeling Language
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как программные системы ... ?
+[.step]
+* визуализировать
+* специфицировать
+* конструировать
+* документировать
+
+=== Solution
+
+[.fragment]
+image::/assets/img/common/uml/uml.png[UML]
+
+== UML: class-diagram
+
+[.fragment]
+One of many
+
+== Common
+
+=== Class
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram.png[UML class diagram: class]
+
+=== OOP: abstraction
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-abstraction.png[UML class diagram: abstraction]
+
+=== OOP: inheritance
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-inheritance.png[UML class diagram: inheritance]
+
+=== OOP: inheritance
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-inheritance-simple.png[UML class diagram: inheritance (simple)]
+
+=== Interface
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-interface.png[UML class diagram: interface]
+
+=== Inheritance vs. Interface
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-inheritance-vs-interface.png[UML class diagram: inheritance vs. interface]
+
+=== Abstract Class
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-abstract-class.png[UML class diagram: abstract class]
+
+== Relations
+
+=== Relation: dependency
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-relation-dependency.png[UML class diagram: dependency]
+
+[.fragment]
+*Зависимость*:
+[.step]
+* Класс `А` могут затронуть изменения в классе `B`. Другими словами: изменяя класс `B` (названия полей, методов, их параметры и возвращаемый тип) возможно потребуется делать изменения и в классе `A`
+
+=== Relation: association
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-relation-association.png[UML class diagram: association]
+
+[.fragment]
+*Ассоциация*:
+[.step]
+* Класс `A` зависит от `B`.
+* Объект `A` знает об объекте `B`.
+
+=== Relation: aggregation
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-relation-aggregation.png[UML class diagram: aggregation]
+
+[.fragment]
+*Агрегация*:
+[.step]
+* Класс `A` зависит от `B`.
+* Объект `A` знает об объекте `B`.
+* Объект `A` состоит из объекта `B`.
+
+=== Relation: composition
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-relation-composition.png[UML class diagram: composition]
+
+[.fragment]
+*Композиция*:
+[.step]
+* Класс `A` зависит от `B`.
+* Объект `A` знает об объекте `B`.
+* Объект `A` состоит из объекта `B`.
+* Объект `A` управляет жизненным циклом объекта `B`.
+
+=== Relation: Interface
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-interface.png[UML class diagram: interface]
+
+=== Relation: Interface
+
+[.fragment]
+*Реализация*:
+[.step]
+* Класс `A` зависит от `B`.
+* Класс `A` определяет методы объявленные интерфейсом `B`.
+* Объекты `A` можно рассматривать через интерфейс `B`.
+
+=== Relation: inheritance
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-inheritance-simple.png[UML class diagram: inheritance]
+
+=== Relation: inheritance
+
+[.fragment]
+*Наследование*:
+[.step]
+* Класс `A` зависит от `B`.
+* Класс `A` наследует интерфейс и реализацию класса `B`, но может переопределить её.
+* Объекты `A` можно рассматривать через интерфейс класса `B`.
+
+=== Relations
+
+[.fragment]
+image::/assets/img/common/uml/uml-class-diagram-relations.png[UML class diagram: relations]

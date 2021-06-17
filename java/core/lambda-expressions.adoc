@@ -1,0 +1,494 @@
+= JSR-335: Lambda expressions
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Сложность решения некоторых простых задач в сравнении с функциональными языками программирования.
+
+[.fragment]
+[source, java]
+----
+button.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent event) {
+        System.out.println("Hello World!");
+    }
+});
+----
+
+=== Solution
+
+[.fragment]
+[source, java]
+----
+button.addActionListener(event -> System.out.println("Hello World!"));
+----
+
+[.step]
+* link:https://jcp.org/en/jsr/detail?id=335[JSR-335]: Lambda expressions
+[.step]
+** Lambda expressions
+
+== Lambda expressions
+
+=== Lambda expressions
+
+[.step]
+* Анонимный блок кода со списком параметров и телом (по сути – анонимная функция)
+[.step]
+** `(parameters) -> expressions`
+** `(parameters) -> { expressions; }`
+
+
+=== Functional Interface
+
+[.fragment]
+[source, java]
+----
+interface Operationable {
+    int calculate(int x, int y);
+}
+----
+
+=== Anonymous Classes
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Operationable op = new Operationable() {
+            public int calculate(int x, int y) {
+                return x + y;
+            }
+        };
+        int z = op.calculate(20, 10);
+        System.out.println(z);
+    }
+}
+----
+
+[.fragment]
+----
+30
+----
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Operationable operation;
+        operation = (x, y) -> x + y;
+
+        int result = operation.calculate(10, 20);
+        System.out.println(result);
+    }
+}
+----
+
+[.fragment]
+----
+30
+----
+
+=== Steps for using Lambda Expression
+
+[.fragment]
+[source, java]
+----
+// Defining reference to functional interface:
+Operationable operation;
+----
+
+[.fragment]
+[source, java]
+----
+// Creating Lambda Expression
+operation = (x, y) -> x + y;
+----
+
+[.fragment]
+[source, java]
+----
+// Using Lambda Expression
+int result = operation.calculate(10, 20);
+----
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+Operationable operation1 = (int x, int y) -> x + y;
+Operationable operation2 = (int x, int y) -> x - y;
+Operationable operation3 = (int x, int y) -> x * y;
+
+System.out.println(operation1.calculate(20, 10));
+System.out.println(operation2.calculate(20, 10));
+System.out.println(operation3.calculate(20, 10));
+----
+
+[.fragment]
+[source, java]
+----
+30
+10
+200
+----
+
+=== Syntax Lambda Expressions
+
+[.fragment]
+[source, java]
+----
+() -> {
+    return 3.1415;
+}
+----
+
+[.fragment]
+[source, java]
+----
+(int a, int b) -> {
+    return a + b;
+}
+----
+
+[.fragment]
+[source, java]
+----
+(a, b) -> {
+    return a + b;
+}
+----
+
+=== Syntax Lambda Expressions
+
+[.fragment]
+[source, java]
+----
+(String s) -> {
+    System.out.println(s);
+}
+----
+
+[.fragment]
+[source, java]
+----
+(s) -> System.out.println(s);
+----
+
+[.fragment]
+[source, java]
+----
+() -> System.out.println("Hello World");
+----
+
+[.fragment]
+[source, java]
+----
+() -> 42;
+----
+
+=== Terminal Lambda Expressions
+
+[.fragment]
+[source, java]
+----
+interface Printable {
+    void print(String s);
+}
+----
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Printable printer = s -> System.out.println(s);
+        printer.print("Hello Java!");
+    }
+}
+----
+
+[.fragment]
+----
+Hello Java!
+----
+
+=== Lambda Expressions and global variables
+
+[.fragment]
+[source, java]
+----
+interface Operation {
+    int calculate();
+}
+----
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    static int x = 10;
+    static int y = 20;
+
+    public static void main(String[] args) {
+        Operation op = () -> {
+            x = 30;
+            return x + y;
+        };
+        System.out.println(op.calculate());
+        System.out.println(x);
+    }
+}
+----
+
+[.fragment]
+----
+50
+----
+
+=== Lambda Expressions and local variables
+
+[.fragment]
+[source, java]
+----
+public static void main(String[] args) {
+    int n = 70;
+    int m = 30;
+    Operation op = () -> {
+        // n = 100;
+        return m + n;
+    };
+    // n = 100;
+    System.out.println(op.calculate());
+}
+----
+
+[.fragment]
+----
+100
+----
+
+=== Generic Functional Interface
+
+[.fragment]
+[source, java]
+----
+interface Operationable<T> {
+    T calculate(T x, T y);
+}
+----
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Operationable<Integer> operation1 = (x, y) -> x + y;
+        Operationable<String> operation2 = (x, y) -> x + y;
+
+        System.out.println(operation1.calculate(20, 10));
+        System.out.println(operation2.calculate("20", "10"));
+    }
+}
+----
+
+[.fragment]
+----
+30
+2010
+----
+
+== Lambda as parameters and results of methods
+
+=== Lambda as parameters method
+
+[.fragment]
+[source, java]
+----
+interface Expression {
+    boolean isEqual(int n);
+}
+----
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Expression func = (n) -> n % 2 == 0;
+        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        System.out.println(sum(nums, func));
+    }
+
+    private static int sum(int[] numbers, Expression func) {
+        int result = 0;
+        for (int i : numbers) {
+            if (func.isEqual(i))
+                result += i;
+        }
+        return result;
+    }
+}
+----
+
+[.fragment]
+----
+20
+----
+
+=== Method links as method parameters
+
+[.fragment]
+[source, java]
+----
+interface Expression {
+    boolean isEqual(int n);
+}
+----
+
+[.fragment]
+[source, java]
+----
+class ExpressionHelper {
+    static boolean isEven(int n) {
+        return n % 2 == 0;
+    }
+
+    static boolean isPositive(int n) {
+        return n > 0;
+    }
+}
+----
+
+=== Method links as method parameters
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        int[] nums = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
+        System.out.println(sum(nums, ExpressionHelper::isEven));
+
+        Expression expr = ExpressionHelper::isPositive;
+        System.out.println(sum(nums, expr));
+    }
+
+    private static int sum(int[] numbers, Expression func) {
+        int result = 0;
+        for (int i : numbers) {
+            if (func.isEqual(i))
+                result += i;
+        }
+        return result;
+    }
+}
+----
+
+[.fragment]
+----
+0
+15
+----
+
+=== Links to constructors
+
+[.fragment]
+[source, java]
+----
+interface UserBuilder {
+    User create(String name);
+}
+----
+
+[.fragment]
+[source, java]
+----
+class User {
+    private String name;
+
+    String getName() {
+        return name;
+    }
+
+    User(String n) {
+        this.name = n;
+    }
+}
+----
+
+=== Links to constructors
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        UserBuilder userBuilder = User::new;
+        User user = userBuilder.create("Tom");
+        System.out.println(user.getName());
+    }
+}
+----
+
+[.fragment]
+----
+Tom
+----
+
+=== Lambda as a result of methods
+
+[.fragment]
+[source, java]
+----
+interface Operation {
+    int execute(int x, int y);
+}
+----
+
+=== Lambda as a result of methods
+
+[.fragment]
+[source, java]
+----
+public class LambdaApp {
+    public static void main(String[] args) {
+        Operation func = action(1);
+        int a = func.execute(6, 5);
+        System.out.println(a); // 11
+
+        int b = action(2).execute(8, 2);
+        System.out.println(b); // 6
+    }
+
+    private static Operation action(int number) {
+        switch (number) {
+            case 1:
+                return (x, y) -> x + y;
+            case 2:
+                return (x, y) -> x - y;
+            case 3:
+                return (x, y) -> x * y;
+            default:
+                return (x, y) -> 0;
+        }
+    }
+}
+----
+
+== Stream
+
+=== Stream
+
+[.step]
+* Предназначен для *обработки* данных
+* Не хранит данные
+* Нельзя переиспользовать
+* Можно преобразовать в другие типы данных

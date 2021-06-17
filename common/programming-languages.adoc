@@ -1,0 +1,145 @@
+= Programming languages
+
+== Intro
+
+=== Problem
+
+[.fragment]
+image::/assets/img/common/programming-languages/programming-languages.png[Programming languages]
+
+=== Problem
+
+[.fragment]
+Which programming language to choose?
+
+=== Solution
+
+[.fragment]
+Let's find out ...
+
+== Programming languages
+
+=== How is PC understand us?
+
+[.fragment]
+image::/assets/img/common/programming-languages/compiler-vs-interpreter.jpg[Compiler vsInterpreter]
+
+
+=== Types for Programming Languages
+
+[.fragment]
+image::/assets/img/common/programming-languages/pl-types.jpeg[Types for Programming Languages]
+
+=== Python
+
+[.step]
+* Очень просто в изучении
+* Очень популярный
+* Interpreted Language
+* Используется для web-приложений (Django)
+* Используется в науке и технике
+* Используется в стартапах
+
+=== C
+
+[.step]
+* Не простой в изучении
+* Популярный
+* Compiled Language
+* Старый, широко распространенный
+* Используется для разработки системного и аппаратного программирования
+
+=== C++
+
+[.step]
+* Очень сложный в освоении
+* Популярный
+* Compiled Language
+* Как C только с расширенными возможностями
+* Используется для разработки игр
+* Используется для разработки высокопроизводительных систем
+
+=== C#
+
+[.step]
+* Простой в освоении
+* Популярный
+* Intermediate Language
+* Используется для разработки web-приложений (.NET)
+* Используется для разработки игр (Unity)
+* Используется для desktop-приложений для OS Windows
+
+=== JavaScript
+
+[.step]
+* Очень простой в освоении
+* Очень, очень популярный
+* Interpreted Language
+* Используется для разработки клиентских web-приложений (Angular/React/etc.)
+* Используется для разработки web-приложений (Node.js)
+* Используется для многих других задач
+
+=== Ruby
+
+[.step]
+* Прост в освоении
+* Не популярный
+* Interpreted Language
+* Очень быстрая разработка
+* Используется в стартапах
+* Используется для разработки web-приложений (Ruby on Rails)
+
+=== PHP
+
+[.step]
+* Прост в освоении
+* Популярный
+* Interpreted Language
+* Быстрая разработка
+* Используется для разработки full-web-приложений (небольших и средних)
+
+=== Objective-C / Swift
+
+[.step]
+* Прост в освоении
+* Очень, очень популярный но ТОЛЬКО для Mac OS и iOS
+* Compiled Language
+* Используется для разработки приложений под все устройста компании Apple
+
+=== Java
+
+[.step]
+* Прост в освоении
+* Очень популярный
+* Intermediate Language
+* Используется для разработки web-приложений (огромных)
+* Используется для разработки Big Data приложений
+* Используется для разработки высоконагруженны-приложений
+* Используется для разработки Android-приложений (постепенно вытесняется Kotlin)
+
+== Which programming language to choose?
+
+=== It depends from task!
+
+[.step]
+* Разработать web-приложение (огромное)
+* Разработать приложение для OS Windows
+* Добавить на сайт "динамичности"
+* Разработать приложение для OS Linux
+* Разработать простой сайт
+* Разработать приложение для OS Android
+* Разработать приложение для OS Mac OS
+* Разработать быстро приложение
+
+=== It depends from task!
+
+[.step]
+* Разработать web-приложение (небольшое)
+* Произвести вычисления над некоторыми данными
+* Разработать web-приложение (среднее)
+* Разработать игру
+
+=== TIOBE
+
+[.fragment]
+image::/assets/img/common/programming-languages/tiobe-index.png[TIOBE index]

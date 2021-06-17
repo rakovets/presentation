@@ -1,0 +1,762 @@
+= Mapping
+
+== Mapping
+
+=== Mapping
+
+Type Mapping:
+
+[.step]
+* Annotation mapping
+* XML mapping
+* Dynamic mapping
+
+=== Annotation mapping
+
+[source,java]
+----
+/**
+ * Single financial operation.
+ */
+@SuppressWarnings("PMD")
+@ToString
+@Entity
+@Table(name = "journal",
+        indexes = {@Index(name = "j_account_idx", columnList = "account_id", unique = false)},
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "account_id"})})
+@SecondaryTable(name = "operations_details",
+        pkJoinColumns = @PrimaryKeyJoinColumn(name = "op_id", referencedColumnName = "id"))
+public class Operation {
+    /**
+     * Operation id.
+     */
+    @Id
+    @GeneratedValue
+    @Getter
+    @Setter
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long rowId;
+
+    /**
+     * Related transaction id.
+     *
+     * Single transaction could have
+     * more then one operations.
+     */
+    @Getter
+    @Setter
+    @Column(name = "trxId", nullable = false, updatable = false)
+    private Long id;
+
+    /**
+     * Operation's account.
+     */
+    @Getter
+    @Setter
+    @Column(nullable = false, updatable = false)
+    private Integer accountId;
+
+    /**
+     * Operation's amount.
+     */
+    @Getter
+    @Setter
+    @Column(nullable = false, updatable = false, scale = 2, precision = 10)
+    private BigDecimal amount;
+
+    /**
+     * Operation's timestamp.
+     */
+    @Getter
+    @Setter
+    @Column(nullable = false, updatable = false)
+    private ZonedDateTime timestamp;
+
+    /**
+     * Optional operation description.
+     */
+    @Getter
+    @Setter
+    @Column(table = "operations_details", length = 64)
+    private String description;
+
+    /**
+     * Optional operation code.
+     */
+    @Getter
+    @Setter
+    @Column(table = "operations_details")
+    private Integer opCode;
+}
+----
+
+=== Configuration
+
+[source,xml]
+----
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:test</property>
+
+        <mapping class="ru.easyjava.data.hibernate.entity.Operation"/>
+    </session-factory>
+</hibernate-configuration>
+----
+
+=== XML mapping
+
+[source,xml]
+----
+<hibernate-mapping package="ru.easyjava.data.hibernate.entity">
+    <class name="Person" abstract="true" table="PERSONS">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="firstName" type="string" column="FIRST_NAME"/>
+        <property name="lastName" type="string" column="LAST_NAME"/>
+        <property name="dob" type="timestamp" column="DOB"/>
+        <one-to-one name="passport" class="ru.easyjava.data.hibernate.entity.Passport" cascade="save-update"/>
+        <many-to-one name="primaryAddress" class="ru.easyjava.data.hibernate.entity.Address">
+        <column name="PRIMARY_ADDRESS"/>
+        </many-to-one>
+            <set name="workingPlaces" table="WORKERS" inverse="false" lazy="true" cascade="all">
+            <key column="PERSON_ID"/>
+            <many-to-many column="COMPANY_ID" class="ru.easyjava.data.hibernate.entity.Company"/>
+        </set>
+    </class>
+</hibernate-mapping>
+----
+
+=== Configuration
+
+[source,xml]
+----
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:test</property>
+
+        <mapping resource="Passport.hbm.xml"/>
+        <mapping resource="Address.hbm.xml"/>
+        <mapping resource="Company.hbm.xml"/>
+        <mapping resource="Person.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
+----
+
+=== Dynamic mapping
+
+[source,xml]
+----
+<hibernate-mapping>
+    <class entity-name="Passport">
+        <id name="id" type="long" column="ID">
+            <generator class="native"/>
+        </id>
+        <property name="series" column="SERIES" type="string"/>
+        <property name="no" column="NO" type="string"/>
+        <property name="issueDate" column="ISSUE_DATE" type="timestamp"/>
+    </class>
+</hibernate-mapping>
+----
+
+=== Configuration
+
+[source,xml]
+----
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:test</property>
+        <property name="default_entity_mode">dynamic-map</property>
+        
+        <mapping resource="Passport.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
+----
+
+== Basics Mapping
+
+=== Entity Mapping
+
+[.step]
+* `@Entity`
+* `@Table`
+* `@DynamicInsert` (default: `true`)
+* `@DynamicUpdate` (default: `true`)
+* `@SelectBeforeUpdate` (deafult: `true`)
+* `@Polymorphism` (default: `implicit`)
+
+=== Entity Mapping
+
+[.step]
+* `@ClassPersister`
+* `@OptimisticLoking` (default: `version`)
+* `@Proxy(lazy = true, proxyClass = "com.some.package.SomeProxyClass.java")`
+* `@BatchSize` (default: `1`)
+* `@Check`
+* `@Immutable`
+
+=== Entity Mapping
+
+[.step]
+* `@Where`
+* `@DiscriminatorValue`
+* `@Subselct("Some SQL query")`
+* `@RowId`
+
+=== Entity Fields Mapping
+
+[.step]
+* `@Column`
+* `@Type`
+* `@NotNull`
+* `@Formula`
+* `@Enumearted`
+
+=== `@Column`
+
+[.step]
+* `name`
+* `unique`
+* `nullable`
+* `insertable`
+* `updatable`
+
+=== `@Column`
+
+[.step]
+* `columnDifinition`
+* `table`
+* `length`
+* `precision`
+* `scale`
+
+=== `@Enumerated`
+
+[.step]
+* Нужна для маппинга объектов типа *enum*
+* Можно указать сохранять *enum* как:
+[.step]
+** строку (`EnumType.STRING`)
+** целое число (`EnumType.ORDINAL`)
+
+=== `@Enumerated`
+
+[source,java]
+----
+@Enumerated(EnumType.STRING)
+private Gender gender;
+----
+
+=== Table and Column Naming Strategy
+
+[source,java]
+----
+public class DefaultNamingStrategy implements PhysicalNamingStrategy {
+    @Override
+    public Identifier toPhysicalCatalogName(final Identifier identifier,
+            final JdbcEnvironment jdbcEnv) {
+        return convertToSnakeCase(identifier);
+    }
+
+    @Override
+    public Identifier toPhysicalColumnName(final Identifier identifier,
+            final JdbcEnvironment jdbcEnv) {
+        return convertToSnakeCase(identifier);
+    }
+
+    @Override
+    public Identifier toPhysicalSchemaName(final Identifier identifier,
+            final JdbcEnvironment jdbcEnv) {
+        return convertToSnakeCase(identifier);
+    }
+
+    @Override
+    public Identifier toPhysicalSequenceName(final Identifier identifier,
+            final JdbcEnvironment jdbcEnv) {
+        return convertToSnakeCase(identifier);
+    }
+
+    @Override
+    public Identifier toPhysicalTableName(final Identifier identifier,
+            final JdbcEnvironment jdbcEnv) {
+        return convertToSnakeCase(identifier);
+    }
+
+    private Identifier convertToSnakeCase(final Identifier identifier) {
+        final String regex = "([a-z])([A-Z])";
+        final String replacement = "$1_$2";
+        final String newName = identifier.getText()
+          .replaceAll(regex, replacement)
+          .toLowerCase();
+        return Identifier.toIdentifier(newName);
+    }
+}
+----
+
+=== Table and Column Naming Strategy
+
+[source,java]
+----
+Configuration conf = new Configuration()
+        .configure()
+        .setNamingStrategy(new DefaultNamingStrategy());
+        .buildSessionFactory();
+----
+
+=== Table and Column Naming Strategy
+
+[source,xml]
+----
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.physical_naming_strategy">
+            com.rakovers.course.datapersistence.dal.config.DefaultNamingStrategy
+        </property>
+    </session-factory>
+</hibernate-configuration>
+----
+
+=== Object Identity and Equality
+
+[.step]
+* *Object Identity*
+* *Object Equality*
+* *Database Identity*
+
+=== Object Identity and Equality
+
+[.step]
+* `@Id`
+* `@Type`
+* `@Column`
+* `@Access`
+* `@GeneratedValue`
+
+=== `GenerationType`
+
+[.step]
+* `AUTO`
+* `TABLE`
+* `SEQUENCE`
+* `IDENTITY`
+
+=== `org.hibernate.id.IdentifierGenerator`
+
+[.step]
+* `uuid2` - `UUIDGenerator`
+* `guid` - `GUIDGenerator`
+* `uuid` - `UUIDHexGenerator`
+* `uuid.hex` - `UUIDHexGenerator`
+* `assigned` - `Assigned`
+* `identity` - `IdentityGenerator`
+* `select` - `SelectGenerator`
+
+=== `org.hibernate.id.IdentifierGenerator`
+
+[.step]
+* `sequence` - `SequenceStyleGenerator`
+* `seqhilo` - `SequenceHiLoGenerator`
+* `increment` - `IncrementGenerator`
+* `foreign` - `ForeignGenerator`
+* `sequence-identity` - `SequenceIdentityGenerator`
+* `enhanced-sequence` - `SequenceStyleGenerator`
+* `enhanced-table`- `TableGenerator`
+
+=== Component Mapping
+
+[.step]
+* *Entity* - объект, наделенный уникальным идентификатором
+* *Component* - объект, без идентификатора
+
+=== Component Mapping
+
+[.step]
+* `@Embedded`
+* `@Embeddable`
+
+== Mapping of Inheritance
+
+=== Mapping of Inheritance
+
+Three inheritance mapping strategies:
+
+[.step]
+* Table Per Hierarchy
+* Table Per Concrete class
+* Table Per Subclass
+
+=== Table Per Hierarchy
+
+[source,java]
+----
+@Entity
+@Table(name = "employees")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "employee_type", discriminatorType = DiscriminatorType.STRING)
+@NoArgsConstructor
+@ToString(callSuper = true)
+public abstract class EmployeeEntity extends BaseEntity {
+    @Column(name = "name")
+    @Getter
+    @Setter
+    private String name;
+}
+----
+
+=== Table Per Hierarchy
+
+[source,java]
+----
+@Entity
+@Table(name = "managers")
+@ToString(callSuper = true)
+@DiscriminatorValue("manager")
+public class ManagerEntity extends EmployeeEntity {
+    @Getter
+    @Setter
+    @Column(name = "number_of_idle_hours", nullable = false)
+    private Integer numberOfIdleHours;
+}
+----
+
+=== Table Per Concrete class
+
+[source,java]
+----
+@Entity
+@Table(name = "employees")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoArgsConstructor
+@ToString(callSuper = true)
+public abstract class EmployeeEntity extends BaseEntity {
+    @Column(name = "name")
+    @Getter
+    @Setter
+    private String name;
+}
+----
+
+=== Table Per Concrete class
+
+[source,java]
+----
+@Entity
+@Table(name = "managers")
+@ToString(callSuper = true)
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "id")),
+        @AttributeOverride(name = "name", column = @Column(name = "name"))
+})
+public class ManagerEntity extends EmployeeEntity {
+    @Getter
+    @Setter
+    @Column(name = "number_of_idle_hours", nullable = false)
+    private Integer numberOfIdleHours;
+}
+----
+
+=== Table Per Subclass
+
+[source,java]
+----
+@Entity
+@Table(name = "employees")
+@Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
+@ToString(callSuper = true)
+public abstract class EmployeeEntity extends BaseEntity {
+    @Column(name = "name")
+    @Getter
+    @Setter
+    private String name;
+}
+----
+
+=== Table Per Subclass
+
+[source,java]
+----
+@Entity
+@Table(name = "managers")
+@ToString(callSuper = true)
+@PrimaryKeyJoinColumn(name = "employee_id")
+public class ManagerEntity extends EmployeeEntity {
+    @Getter
+    @Setter
+    @Column(name = "number_of_idle_hours", nullable = false)
+    private Integer numberOfIdleHours;
+}
+----
+
+== Mapping of Associations
+
+=== Mapping of Associations
+
+Type associations:
+
+[.step]
+* Many-to-One Associations
+[.step]
+** Unidirectional Many-to-One Association
+** Unidirectional One-to-Many Association
+** Bidirectional Many-to-One Associations
+
+=== Mapping of Associations
+
+Type associations:
+
+[.step]
+* Many-to-Many Associations
+[.step]
+** Unidirectional Many-to-Many Associations
+** Bidirectional Many-to-Many Associations
+* One-to-One Associations
+[.step]
+** Unidirectional One-to-One Associations
+** Bidirectional One-to-One Associations
+
+=== Unidirectional Many-to-One Association
+
+[source,java]
+----
+@Entity
+public class OrderItem {
+    @ManyToOne
+    private Order order;
+
+    ...
+}
+----
+
+=== Unidirectional Many-to-One Association
+
+[source,java]
+----
+@Entity
+public class OrderItem {
+    @ManyToOne
+    @JoinColumn(name = “fk_order”)
+    private Order order;
+
+    ...
+}
+----
+
+=== Unidirectional Many-to-One Association
+
+[source,java]
+----
+Order o = em.find(Order.class, 1L);
+
+OrderItem i = new OrderItem();
+i.setOrder(o);
+
+em.persist(i);
+----
+
+=== Unidirectional One-to-Many Association
+
+[source,java]
+----
+@Entity
+public class Order {
+    @OneToMany
+    private List<OrderItem> items = new ArrayList<OrderItem>();
+
+    ...
+}
+----
+
+=== Unidirectional One-to-Many Association
+
+[source,java]
+----
+@Entity
+public class Order {
+    @OneToMany
+    @JoinColumn(name = “fk_order”)
+    private List<OrderItem> items = new ArrayList<OrderItem>();
+
+    ...
+}
+----
+
+=== Unidirectional One-to-Many Association
+
+[source,java]
+----
+Order o = em.find(Order.class, 1L);
+
+OrderItem i = new OrderItem();
+
+o.getItems().add(i);
+
+em.persist(i);
+----
+
+=== Bidirectional Many-to-One Associations
+
+[source,java]
+----
+@Entity
+public class OrderItem {
+    @ManyToOne
+    @JoinColumn(name = “fk_order”)
+    private Order order;
+
+    ...
+}
+----
+
+=== Bidirectional Many-to-One Associations
+
+[source,java]
+----
+@Entity
+public class Order {
+    @OneToMany(mappedBy = “order”)
+    private List<OrderItem> items = new ArrayList<OrderItem>();
+
+    ...
+}
+----
+
+=== Bidirectional Many-to-One Associations
+
+[source,java]
+----
+Order o = em.find(Order.class, 1L);
+
+OrderItem i = new OrderItem();
+i.setOrder(o);
+
+o.getItems().add(i);
+
+em.persist(i);
+----
+
+=== Unidirectional Many-to-Many Associations
+
+[source,java]
+----
+@Entity
+public class Store {
+    @ManyToMany
+    private Set<Product> products = new HashSet<Product>();
+
+    ...
+}
+----
+
+=== Unidirectional Many-to-Many Associations
+
+[source,java]
+----
+@Entity
+public class Store {
+    @ManyToMany
+    @JoinTable(name = “store_product”,
+           joinColumns = { @JoinColumn(name = “fk_store”) },
+           inverseJoinColumns = { @JoinColumn(name = “fk_product”) })
+    private Set<Product> products = new HashSet<Product>();
+
+    ...
+}
+----
+
+=== Unidirectional Many-to-Many Associations
+
+[source,java]
+----
+Store s = em.find(Store.class, 1L);
+
+Product p = new Product();
+
+s.getProducts().add(p);
+
+em.persist(p);
+----
+
+=== Bidirectional Many-to-Many Associations
+
+[source,java]
+----
+@Entity
+public class Store {
+    @ManyToMany
+    @JoinTable(name = “store_product”,
+           joinColumns = { @JoinColumn(name = “fk_store”) },
+           inverseJoinColumns = { @JoinColumn(name = “fk_product”) })
+    private Set<Product> products = new HashSet<Product>();
+
+    ...
+}
+----
+
+=== Bidirectional Many-to-Many Associations
+
+[source,java]
+----
+@Entity
+public class Product{
+    @ManyToMany(mappedBy=”products”)
+    private Set<Store> stores = new HashSet<Store>();
+
+    ...
+}
+----
+
+=== Unidirectional One-to-One Associations
+
+[source,java]
+----
+@Entity
+public class Customer{
+    @OneToOne
+    @JoinColumn(name = “fk_shippingaddress”)
+    private ShippingAddress shippingAddress;
+
+    ...
+}
+----
+
+=== Unidirectional One-to-One Associations
+
+[source,java]
+----
+Customer c = em.find(Customer.class, 1L);
+ShippingAddress sa = c.getShippingAddress();
+----
+
+=== Bidirectional One-to-One Associations
+
+[source,java]
+----
+@Entity
+public class Customer{
+    @OneToOne
+    @JoinColumn(name = “fk_shippingaddress”)
+    private ShippingAddress shippingAddress;
+
+    ...
+}
+----
+
+=== Bidirectional One-to-One Associations
+
+[source,java]
+----
+@Entity
+public class ShippingAddress{
+    @OneToOne(mappedBy = “shippingAddress”)
+    private Customer customer;
+
+    ...
+}
+----

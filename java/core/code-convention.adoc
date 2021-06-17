@@ -1,0 +1,162 @@
+= Code Convention
+
+== Intro
+
+=== Problem
+
+[.step]
+* Как упростить чтение кода для себя?
+* Как упростить чтение кода для других разработчиков?
+* Почему важно повышать читаемость кода?
+[.step]
+** Hа понимание того, что делает код, тратится меньше времени.
+* Как достичь высокой читаемости кода?
+
+=== Solution
+
+[.step]
+* Использовать стандартные соглашения по написанию кода.
+
+== Code Convention
+
+=== Conventions/Styles
+
+[.step]
+* link:https://www.oracle.com/java/technologies/javase/codeconventions-contents.html[Code Conventions for the Java™ Programming Language]
+* link:https://google.github.io/styleguide/javaguide.html[Google Java Style Guide]
+* Internal *Convention*/*Style* of a specific *company*/*project*
+
+== Naming Convention
+
+=== Naming Convention
+
+[.step]
+* Использовать какой-то *Naming Convention*.
+* *Naming Convention* - это ТОЛЬКО соглашение.
+* *Naming Convention* не несет принудительные правила.
+* *Naming Convention* несет рекомендуемые правила.
+
+=== Packages
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *lower_snake_case*
+* уникальные имена в рамках одного *package*
+* обратное *domain name* как *prefix* для *packages*
+* `_` для исключительных случаев
+
+=== Example
+
+[.step]
+* `java.util`
+* `javax.xml`
+* `com.rakovets.code_convention`
+* `com.rakovets._do`
+* `com.rakovets._2d_array`
+* link:hyphenated-name.example.org[] -> `org.example.hyphenated_name`
+* link:example.int[] -> `_int.example`
+* link:123name.example.com[] -> `com.example._123name`
+
+=== Classes
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *UpperCamelCase*
+* существительные
+
+=== Example
+
+[.step]
+* `String`
+* `ArrayList`
+* `StringRegexUtil`
+
+=== Interfaces
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *UpperCamelCase*
+* прилагательные (иногда существительные)
+
+=== Example
+
+[.step]
+* `Runnable`
+* `Comparable`
+* `Serializeable`
+* `Remote`
+* `ActionListener`
+
+=== Methods
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *lowerCamelCase*
+* глаголы (чаще всего)
+* имя отражающее то, что он делает или возвращает
+
+=== Example
+
+[.step]
+* `getName()`
+* `addElement()`
+* `size()`
+* `calculate()`
+
+=== Variables
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *lowerCamelCase*
+* существительные
+* имя отражающее смысл хранимого значения
+
+=== Example
+
+[.step]
+* `i` - *index*
+* `k` - *key*
+* `firstname`
+* `currentTitle`
+
+=== Constants
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *UPPER_SNAKE_CASE*
+* `final`
+
+=== Example
+
+[.step]
+* `static final double PI = 3.141592653`
+* `final int MAX_AGE = 150`
+
+=== Types Parameters
+
+[.fragment]
+Для именования использовать:
+
+[.step]
+* *UPPERLETTER*
+
+=== Example
+
+[.step]
+* `E` - *Element*
+* `T` - *Type*
+* `K` - *Key*
+* `V` - *Value*
+* etc. - for other types

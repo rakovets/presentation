@@ -1,0 +1,215 @@
+= Annotations (JSRs: 250, 269, 308)
+
+== Intro
+
+=== Problem
+
+[.fragment]
+How add information for developer to class?
+
+=== Solution
+
+[.fragment]
+Annotations
+
+== Annotations
+
+=== Annotations
+
+[.step]
+* *Аннотация* (`@Annotation`) — специальная форма метаданных, которая может быть добавлена в исходный код.
+* Аннотированы могут быть пакеты, классы, методы, поля класса и параметры, локальные переменные, а так же сами аннотации.
+
+=== Example
+
+[.fragment]
+[source, java]
+----
+@Override
+public void go() {
+    ...
+}
+----
+
+=== Annotations
+
+[.step]
+* Все аннотации содержат только объявления методов, добавлять тела этим методам не нужно, так как их реализует сам язык.
+* Эти методы не могут содержать параметров, секции throws и действуют скорее как поля.
+* Допустимые типы возвращаемого значения: базовые типы, `String`, *Enum*, *Class* и массив любого из вышеперечисленных типов.
+
+=== Types
+
+[.step]
+* аннотация-маркер
+* одночленная
+* многочленная
+
+=== Types
+
+[.step]
+* *Аннотация-маркер* не содержит методов-членов. Цель – пометить объявление. В этом случае достаточно присутствия аннотации;
+* *Одночленная аннотация* содержит единственный метод-член. Для этого типа аннотации допускается краткая условная форма задания значения для метода-члена;
+* *Многочленные аннотации* содержат несколько методов-членов.
+
+=== Применение аннотации
+
+[.step]
+* *Информация для компилятора* — аннотации могут использоваться компилятором для определения ошибки, подавления сообщений с предупреждениями.
+* *Обработка на этапе развертывания и компиляции* — инструменты разработки могут анализировать аннотации и на их основе генерировать информацию (например XML).
+* *Обработка на этапе выполнения* — некоторые аннотации могут быть доступны на этапе выполнения.
+
+== Predefined/Standard Annotations
+
+=== Predefined/Standard Annotations
+
+[.step]
+* `@Override`
+* `@Deprecated`
+* `@FunctionalInterface`
+* `@Documented`
+* `@SuppressWarnings`
+
+=== Predefined/Standard Annotations
+
+[.step]
+* `@Retention`
+* `@Target`
+* `@Inherited`
+* `@SafeVarargs`
+* `@Repeatable`
+
+== `@Deprecated`
+
+=== `@Deprecated`
+
+[.fragment]
+`@Deprecated` - аннотация `@Deprecated` помечает элемент как устаревший, это означает, что его не желательно использовать. Компилятор создает предупреждение, если программа использует методы, поля или классы, помеченные как устаревшие.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+@Deprecated
+public void setDate(int date)
+----
+
+== `@Override`
+
+=== `@Override`
+
+[.fragment]
+`@Override` - аннотация `@Override` сообщает компилятору, что мы собираемся переопределить метод родительского класса.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+@Override
+public void go() {
+}
+----
+
+== `@SuppressWarnings`
+
+=== `@SuppressWarnings`
+
+[.fragment]
+`@SuppressWarnings` - аннотация `@SuppressWarnings` используется для устранения предупреждений, создаваемых компилятором.
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+@SuppressWarnings("deprecation")
+public void useDeprecatedMethod() {
+    Date date = new Date();
+    date.setDate(…);
+}
+----
+
+== Definition Annotation
+
+=== Creating Custom Annotation
+
+[.fragment]
+[source,java]
+----
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Description {
+    String title();
+    int version() default 1;
+    String text();
+}
+----
+
+=== Using Annotation
+
+[.fragment]
+[source,java]
+----
+@Description(title="title", version=2, text="text")
+public class Logger() {
+    // members
+}
+----
+
+== `@Retention`
+
+=== `@Retention`
+
+[.fragment]
+[source, java]
+----
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Retention {
+    RetentionPolicy value();
+}
+----
+
+=== `RetentionPolicy`
+
+[.step]
+* `SOURCE` - аннотация используется в _compile time_ и должна отбрасываться компилятором.
+* `CLASS` - аннотация будет записана в class-файл компилятором, но не должна быть доступна во время выполнения (runtime).
+* `RUNTIME` - аннотация будет записана в class-файл и доступна в _runtime_ через _reflection_.
+
+== `@Target`
+
+=== `@Target`
+
+[.fragment]
+[source, java]
+----
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Target {
+    ElementType[] value();
+}
+----
+
+=== `ElementType`
+
+[.step]
+* `TYPE`
+* `FIELD`
+* `METHOD`
+* `PARAMETER`
+* `CONSTRUCTOR`
+* `LOCAL_VARIABLE`
+
+=== `ElementType`
+
+[.step]
+* `ANNOTATION_TYPE`
+* `PACKAGE`
+* `TYPE_PARAMETER`
+* `TYPE_USE`
+* `MODULE`

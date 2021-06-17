@@ -1,0 +1,176 @@
+= CSS: Intro
+
+== Problem
+
+=== Problem
+
+HTML-files содержат кроме HTML большое количество styles
+
+== CSS
+
+=== CSS-rules: syntax
+
+[.fragment]
+[source,css]
+----
+селектор {
+    свойство1: значение;
+    свойство2: значение;
+    ...
+}
+----
+
+=== CSS-rules: example
+
+[.fragment]
+[source,css]
+----
+p {
+    color: white;
+    margin: 10px 15px;
+}
+----
+
+
+=== Advanced selectors: syntax
+
+[.fragment]
+[source,css]
+----
+.имя-класса {
+    ...
+}
+----
+
+=== Advanced selectors: example
+
+[.fragment]
+HTML-file:
+
+[.fragment]
+[source,html]
+----
+<p class=“help”></p>
+----
+
+[.fragment]
+CSS-file:
+
+[.fragment]
+[source,css]
+----
+.help {
+    ...
+}
+----
+
+== CSS box model
+
+=== CSS box model
+
+[.fragment]
+image::/assets/img/html-and-css/box-model-css.png[CSS box model]
+
+=== CSS box model
+
+[.step]
+* `margin` — очищает пространство вокруг границы элемента, не позволяя другим элементам приближаться к границе элемента. Можно сказать, что это "личное пространство" элемента.
+* `margin` не имеет фонового цвета и прозрачен
+
+=== CSS box model
+
+[.step]
+* `border` — граница (рамка), окружающая `padding` и `content` (содержимое).
+* Цвет границы можно изменить
+
+=== CSS box model
+
+[.step]
+* `padding` — очищает пространство вокруг content (содержимого). Можно сказать, что это "личное пространство" контента.
+* `padding` окрашивается в цвет фона элемента.
+
+=== CSS box model
+
+[.step]
+* `content` — пространство для содержимого, куда помещается текст и/или изображения.
+
+== CSS properties
+
+=== CSS properties
+
+[.step]
+* оформление текста
+* работа с размерами и отступами
+* позиционирование элементов
+* создание сеток
+* декоративные: цвета, фон, тени
+* другие
+
+=== Оформление текста
+
+[.step]
+* `text-decoration`
+* `font-weigth`
+* `font-style`
+
+=== Работа с размерами и отступами
+
+[.step]
+* `margin`
+* `padding`
+* `width`
+
+=== Позиционирование элементов
+
+[.step]
+* `position`
+* `top`
+* ...
+* `left`
+
+=== Создание сетки страницы
+
+[.step]
+* `float`
+* `clear`
+
+=== Декоративные
+
+[.step]
+* `background-color`
+* `border-radius`
+* `color`
+
+== CSS properties
+
+=== CSS – Cascading Style Sheets
+
+[.step]
+* *Каскадность* – комбинирование стилей из разных CSS-правил, для элементов страницы.
+* Комбинирование происходит по четким правилам, опирающихся на приоритетность и специфичность
+
+=== CSS – Cascading Style Sheets
+
+[.fragment]
+[source,css]
+----
+p {
+    padding: 10px;
+}
+
+.second-p {
+    background-color: red;
+}
+----
+
+[.fragment]
+analogically
+
+[.fragment]
+[source,css]
+----
+.second-p {
+    padding: 10px;
+    background-color: red;
+}
+----

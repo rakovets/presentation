@@ -1,0 +1,24 @@
+{
+    "name": "presentation",
+    "version": "1.0.0",
+    "description": "= presentation",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rakovets/presentation.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rakovets/presentation/issues"
+    },
+    "homepage": "https://github.com/rakovets/presentation#readme",
+    "dependencies": {
+        "@asciidoctor/reveal.js": "^4.1.0",
+        "asciidoctor": "^2.2.1"
+    }
+}

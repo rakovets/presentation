@@ -1,0 +1,90 @@
+= JSON
+:imagesdir: ../assets/img/common/json/
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как удобно передавать данные между системами написанными на различных языках программирования?
+
+=== Solution
+
+[.fragment]
+JSON
+
+== JSON
+
+=== JSON
+
+[.step]
+* *JSON* (*JavaScript Object Notation*)
+* Текстовый формат обмена данными
+* Основан на JavaScript
+* Легко читается людьми
+* Current specification link:https://tools.ietf.org/html/rfc8259[RFC 8259]
+
+=== JSON
+
+[.fragment]
+JSON основан на двух структурах данных:
+[.step]
+* Коллекция пар ключ/значение. В разных языках, эта концепция реализована как объект, запись, структура, словарь, хэш, именованный список или ассоциативный массив.
+* Упорядоченный список значений. В большинстве языков это реализовано как массив, вектор, список или последовательность.
+
+=== JSON: example
+
+[.fragment]
+[source,json]
+----
+{
+  "employees":[
+    {
+      "firstName":"John",
+      "lastName":"Doe"
+    },
+    {
+      "firstName":"Anna",
+      "lastName":"Smith"
+    }
+  ]
+}
+----
+
+=== Преимущества перед XML
+
+[.step]
+* Не использует теги
+* Поддерживает массивы
+* Удобнее для чтения и изменения
+
+== Синтаксис
+=== Object
+
+[.fragment]
+image::object.png[JSON: object]
+
+=== Array
+
+[.fragment]
+image::array.png[JSON: array]
+
+=== Value
+
+[.fragment]
+image::value.png[JSON: value]
+
+=== String
+
+[.fragment]
+image::string.png[JSON: string]
+
+=== Number
+
+[.fragment]
+image::number.png[JSON: number]
+
+=== Whitespace
+
+[.fragment]
+image::whitespace.png[JSON: whitespace]

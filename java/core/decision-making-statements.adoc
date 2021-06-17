@@ -1,0 +1,436 @@
+= Decision-making statements
+:imagesdir: ../../assets/img/java/core/decision-making-statements
+
+== Intro
+
+=== Problem
+
+[.step]
+* Последовательное (линейное) выполнение программы (алгоритма) позволяет решать ограниченный круг задач.
+
+=== Solution
+[.step]
+* Использование конструкций позволяющих изменять последовательность выполнение в зависимости от условия (*condition*)
+
+== Decision-making statements
+
+=== Decision-making statements
+
+[.step]
+* `if...else`
+[.step]
+** `if`
+** `if...else`
+** `if...else if...else`
+** Nested `if...else`
+* `switch`
+
+== `if` statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+if (condition) {
+    // statements
+}
+----
+
+=== How `if` statement works?
+
+[.fragment]
+image:if-working.png[if working]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 10;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+}
+System.out.println("Statement outside if block");
+----
+
+[.fragment]
+[source,output]
+----
+The number is positive.
+Statement outside if block;
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// create a string variable
+String language = "Java";
+// if statement
+if (language == "Java") {
+    System.out.println("Best Programming Language");
+}
+----
+
+[.fragment]
+[source,output]
+----
+Best Programming Language
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// create a string variable
+String language = "Java";
+// if statement
+if (language == "Java")
+    System.out.println("Best Programming Language");
+----
+
+== `if...else` (`if-then-else`) statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+if (condition) {
+    // codes in if block
+} else {
+    // codes in else block
+}
+----
+
+=== How `if` statement works?
+
+[.fragment]
+image:if-else-working.png[if-then-else working]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 10;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+} else { // execute this block if number is not greater than 0
+    System.out.println("The number is not positive.");
+}
+System.out.println("Statement outside if...else block");
+----
+
+[.fragment]
+[source,output]
+----
+The number is positive.
+Statement outside if...else block
+----
+
+== `if...else...if` statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+if (condition1) {
+    // codes
+} else if(condition2) {
+    // codes
+} else if (condition3) {
+    // codes
+} else {
+    // codes
+}
+----
+
+=== How `if...else...if` statement works?
+
+[.fragment]
+image:if-else-if-working.png[if-else-if working]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 0;
+// checks if number is greater than 0
+if (number > 0) {
+    System.out.println("The number is positive.");
+} else if (number < 0) { // checks if number is less than 0
+    System.out.println("The number is negative.");
+} else { // if both condition is false
+    System.out.println("The number is 0.");
+}
+----
+
+[.fragment]
+[source,output]
+----
+The number is 0.
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 0;
+// checks if number is greater than 0
+if (number > 0)
+    System.out.println("The number is positive.");
+else if (number < 0) // checks if number is less than 0
+    System.out.println("The number is negative.");
+else // if both condition is false
+    System.out.println("The number is 0.");
+----
+
+== Nested `if..else` Statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+if (condition1) {
+    if (condition2) {
+        // codes
+    } else {
+        // codes
+    }
+} else {
+    // codes
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+// declaring double type variables
+double n1 = -1.0;
+double n2 = 4.5;
+double n3 = -5.3;
+double largest;
+
+if (n1 >= n2) { // checks if n1 is greater than or equal to n2
+    // checks if n1 is greater than or equal to n3
+    if (n1 >= n3) { // if...else statement inside the if block
+        largest = n1;
+    } else {
+        largest = n3;
+    }
+} else { // if..else statement inside else block
+    // checks if n2 is greater than or equal to n3
+    if (n2 >= n3) {
+        largest = n2;
+    } else {
+        largest = n3;
+    }
+}
+System.out.println("Largest Number: " + largest);
+----
+
+[.fragment]
+[source,output]
+----
+Largest Number: 4.5
+----
+
+== `switch` statement
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+switch(expression) {
+case exp1:
+    // code block
+    break;
+// ...
+case expN:
+    // code block
+    break;
+default:
+    // code block
+}
+----
+
+=== Syntax
+
+[.step]
+* До Java 7: в качестве значений `exp1`, ..., `expN` могли быть константы и значения типа `byte`, `short`, `char`, `int` или `enum`.
+* C *Java 7*: в качестве значений стали допустимы типы `String`, `Character`, `Byte`, `Short` и `Integer`
+
+=== How work?
+
+[.fragment]
+image:switch-case-implementation.png[switch-case implementation]
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 44;
+String size;
+// switch statement to check size
+switch (number) {
+    case 29:
+        size = "Small";
+        break;
+    case 42:
+        size = "Medium";
+        break;
+    case 44:
+        size = "Large";
+        break;
+    case 48:
+        size = "Extra Large";
+        break;
+    default:
+        size = "Unknown";
+        break;
+}
+System.out.println("Size: " + size);
+----
+
+[.fragment]
+[source,output]
+----
+Size: Large
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int number = 30;
+String size;
+switch (number) {
+    case 29:
+    case 30:
+    case 31:
+        size = "Small";
+        break;
+    case 42:
+    case 43:
+        size = "Medium";
+        break;
+    case 44:
+    case 45:
+    case 46:
+        size = "Large";
+        break;
+    case 48:
+        size = "Extra Large";
+        break;
+    default:
+        size = "Unknown";
+        break;
+}
+System.out.println("Size: " + size);
+----
+
+[.fragment]
+[source,output]
+----
+Size: Small
+----
+
+== `break` statement in `switch...case`
+
+=== Example: strange behavior
+
+[.fragment]
+[source,java]
+----
+int expression = 2;
+// switch statement to check size
+switch (expression) {
+    case 1:
+        System.out.println("Case 1");
+    case 2: // matching case
+        System.out.println("Case 2");
+    case 3:
+        System.out.println("Case 3");
+    default:
+        System.out.println("Default case");
+}
+----
+
+[.fragment]
+[source,output]
+----
+Case 2
+Case 3
+Default case
+----
+
+== Ternary Operator (Short hand `if ... else`)
+
+=== Ternary Operator
+
+image:ternary-operator.svg[Ternary Operator,200%]
+
+=== Syntax
+
+[.fragment]
+[source,java]
+----
+variable = (condition) ? expressionTrue : expressionFalse;
+
+variable = (condition)
+        ? expressionTrue
+        : expressionFalse;
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int time = 20;
+if (time < 18) {
+    System.out.println("Good day.");
+} else {
+    System.out.println("Good evening.");
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+int time = 20;
+String result = (time < 18)
+    ? "Good day."
+    : "Good evening.";
+System.out.println(result);
+----
+
+== Total
+
+[.step]
+* *if statement*
+** когда необходимо работать с диапазонами или сложными условиями
+[.step]
+* *switch statement*
+[.step]
+** когда известны все возможные варианты и их количество конечно
+* *ternary operator*
+[.step]
+** когда результат необходимо сразу же использовать в выражении

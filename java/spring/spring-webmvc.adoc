@@ -1,0 +1,81 @@
+= Spring MVC
+
+== Spring MVC
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>${springframework.version}</version>
+</dependency>
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>4.0.4</version>
+</dependency>
+----
+
+=== Architecture
+
+image:/assets/img/java/spring/webmvc/architecture.png[Spring Web MVC]
+
+=== DispatcherServlet
+
+[.step]
+* Реализация паттерна *FrontController*
+* Точка входа в приложение
+* Перенаправляет пользовательские запросы на зарегистрированные в системе контроллеры
+
+=== `ViewResolver`
+
+[.step]
+* Компонент Spring MVC, необходимый для определения расположения необходимого _view_ по его имени
+* Пример:
+[.step]
+** имя _view_ – `registration`
+** расположение – `/WEB-INF/jsp/registration.jsp`
+
+=== Инициализация приложения
+
+[source,java]
+----
+public class WebApplicationInitializer 
+        extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[0];
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+}
+----
+
+=== Инициализация приложения
+
+[source,java]
+----
+@Configuration
+@ComponentScan(basePackages = "com.rakovets.course.java.spring.webmvc.controller")
+@EnableWebMvc
+public class WebConfig {
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/jsp/");
+        viewResolver.setSuffix(".jsp");
+        viewResolver.setExposeContextBeansAsAttributes(true);
+        return viewResolver;
+    }
+}
+----

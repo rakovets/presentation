@@ -1,0 +1,75 @@
+= Javadoc
+
+== Intro
+
+=== Problem
+
+[.fragment]
+Как быстро понять: как работает тот или иной метод в Java?
+
+=== Solution
+
+[.fragment]
+*Javadoc*
+
+== Javadoc
+
+=== Javadoc
+
+[.step]
+* В языке Java используются блочные и однострочные комментарии `/* */` и `//`, аналогичные комментариям, применяемым в C++.
+* В языке Java также введен новый вид комментария `/** */`, который может содержать дескрипторы.
+
+=== Descriptors
+
+[.step]
+* `@author` – задает сведения об авторе
+* `@version` – задает номер версии класса
+* `@exception` – задает имя класса исключения
+* `@param` – описывает параметры, передаваемые методу
+* `@return` – описывает тип, возвращаемый методом
+* `@deprecated` – указывает, что метод устаревший и у него есть более совершенный аналог
+* `@since` – с какой версии метод (член класса) присутствует
+* `@throws` – описывает исключение, генерируемое методом
+* `@see` – что следует посмотреть дополнительно
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class User {
+    /**
+     * user's password
+     */
+    private String password;
+
+    /**
+     * Default constructor for creating User
+     */
+    public User() {
+        this.password = "default";
+    }
+
+    /**
+     * @return the password
+     * return the password
+     */
+    public String getPassword() {
+        return this.password;
+    }
+
+    /**
+     * @param password the password to set
+     * parameter password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+----
+
+=== Generated Javadoc
+
+[.fragment]
+image::/assets/img/java/core/javadoc-example.png[Generated Javadoc]

@@ -1,0 +1,534 @@
+= Servlet
+
+== Основы
+
+=== What is Servlet?
+
+[.step]
+* Компонент Java Enterprise Edition
+* Java-класс
+* Выполняется на стороне сервера
+
+=== What is Servlet?
+
+[.step]
+* Обрабатывает запросы клиентов и динамически генерирует ответы на них
+* Если запросы отсутствуют – находится в состоянии ожидания
+* Для работы необходим контейнер сервлетов
+
+=== Servlet Application Architecture
+
+image::/assets/img/java/jakarta-ee/servlet/servlet-application-architecture.jpg[Servlet Application Architecture]
+
+=== Servlet Container
+
+[.step]
+* Программа, являющаяся сервером
+* Обеспечивает жизненный цикл сервлетов в соответствии со спецификацией
+* Обеспечивает обмен данными между сервлетом и клиентами, а также между различными сервлетами
+
+=== Servlet API
+
+* Классы для работы с сервлетами находятся в библиотека `servlet-api.jar`, которой нет в поставке JDK. Разработчик загружает её в проект самостоятельно, либо с помощью IDE. Она присутствует в директории lib сервера tomcat.
+* Наиболее распространным классом сервлета является `HttpServlet`
+
+=== Servlet Hierarchy
+
+image::/assets/img/java/jakarta-ee/servlet/servlet-hierarchy.jpg[Servlet Hierarchy]
+
+== Создание сервлета
+
+=== Servlet Lifecycle
+
+image::/assets/img/java/jakarta-ee/servlet/servlet-lifecycle.jpg[Servlet Lifecycle]
+
+=== `HelloServlet`
+
+[source,java]
+----
+public class HelloServlet extends HttpServlet {
+    @Override
+    protected void doGet( <1>
+        HttpServletRequest req, HttpServletResponse resp) <2>
+        throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        writer.write("<p>
+            <span style='color: blue;'>Hello, world!</span>
+        </p>"); <3>
+    }
+}
+----
+
+<1> Метод `doGet()` – один из ряда методов, обрабатывающих соответствующие запросы. Также есть методы `doPost()`, `doDelete()`, `doPut()`, `doOptions()` и т.д.
+<2> метод принимает объект запрос и объект ответа и оперирует ими
+<3> записывает в ответ HTML-тег с текстом `Hello, World!`
+
+=== XML-конфигурация сервлета. `web.xml`
+
+[source,xml]
+----
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+    http://java.sun.com/xml/ns/j2ee/web-app_4_0.xsd"
+    version="4.0">
+
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>classes.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/sayhello</url-pattern>
+    </servlet-mapping>
+</web-app>
+----
+
+=== XML-конфигурация сервлета. `web.xml`
+
+[source,xml]
+----
+<servlet> <1>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>classes.HelloServlet</servlet-class>
+</servlet>
+----
+
+<1> задает внутреннее имя сервлета, по которому к нему можно обратиться в дескрипторе
+
+=== XML-конфигурация сервлета. `web.xml`
+
+[source,xml]
+----
+<servlet-mapping> <1>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/sayhello</url-pattern>
+</servlet-mapping>
+----
+
+<1> привязывает сервлет к определенному суффиксу URL адреса. Полный адрес образуется следующим образом: `${tomcat-url}/${project-name}/${servlet-url-pattern}`
+
+Пример: `http://localhost:8080/myApp/test`
+
+=== Live-coding
+
+=== How works it?
+
+image::/assets/img/java/jakarta-ee/servlet/web-dynamic-app.png[Web dynamic app]
+
+=== Annotation `@WebServlet`
+
+С выходом *Servlet Api 3.0* и *Tomcat 7* можно производить регистрацию сервлетов не используя файл `web.xml`, а используя аннотацию `@WebServlet`:
+
+[source,java]
+----
+@WebServlet(name = "HelloWorldServlet", urlPatterns = {"/test"})
+public class HelloWorldServlet extends HttpServlet {
+    // servlet code
+}
+----
+
+=== Live-coding
+
+=== Practice
+
+[.step]
+* Cоздать сервлет, на который можно перейти по URL `…/counter`. Он должен выводить число посещений этого адреса.
+* Создать сервлет, обращающийся к базе данных и выводящий любую информацию, полученную из неё.
+
+== Обработка данных сервлетами
+
+=== Получение данных из формы
+
+Сервлет может получить данные, введенные пользователем в `form` или заданные в адресной строке. Например, имеется форма со следующим исходным текстом:
+
+[source, html]
+----
+<form action="nameservlet">
+    Введите имя:<input name="fullname" type="text"><br/>
+    <input type="submit"/>
+</form>
+----
+
+=== Получение данных из формы
+
+При каждом вызове методы `doGet()` и `doPost()` класса `HttpServlet` принимают в качестве параметра объект, который реализует интерфейс `HttpServletRequest`.
+
+У этого объекта есть метод, который по имени параметра получает его значение:
+
+[source,java]
+----
+String getParameter(String paramName)
+----
+
+Example:
+
+[source,java]
+----
+String name = request.getParameter(String name);
+----
+
+=== Получение данных из формы
+
+Надо помнить, что данные из форм передаются всегда в текстовом виде. Если вам необходимо ввести число, вы должны полученную строку преобразовать к числовому виду, например:
+
+[source,java]
+----
+Integer.parseInt(request.getParameter("age"));
+----
+
+Если параметра с указанным именем не существует, например, если вы ошиблись с написанием имени, или сервлет был вызван без передачи данных (его адрес был набран в браузере напрямую), метод `getParameter(String paramName)` вернет значение `null`.
+
+=== Получение данных из формы
+
+Если имена параметров заранее неизвестны, можно получить список имен параметров, полученных сервлетом с помощью метода:
+
+[source,java]
+----
+Enumeration<String> params  = request.getParameterNames();
+----
+
+Список методов интерфейса `Enumeration`:
+* `hasMoreElements()` 
+* `nextElement()`
+
+=== Получение данных из формы
+
+Имеется запрос вида:
+`http://localhost:8080/shop/nameservlet?num1=12&num2=10`
+
+В сервлете `MyTestServlet` имеется код:
+[source,java]
+----
+int totalNumber = request.getParameter("num1") + request.getParameter("num2");
+out.println(totalNumber);
+----
+
+=== Получение дополнительной информации
+
+В процессе запроса страницы браузер сообщает серверу информацию о себе, своих возможностях, пользователе и т.д. Данная информация может быть получена с помощью метода `getHeader(String name)`.Данный метод получает на вход строку с именем интересующего заголовка, а возвращает строку с его текстом. Если браузер не передал заголовок с таким именем, возвращается `null`.
+
+[source,java]
+----
+String info = request.getHeader("User-Agent");
+----
+
+=== Получение дополнительной информации
+
+|===
+|Имя заголовка|Значение заголовка
+|Accept|Список типов данных, которые понимает браузер.
+|Accept-Charset|Кодировка, которую ожидает увидеть браузер.
+|Accept-Encoding|Поддержка браузером сжатия данных.
+|Accept-Language|Ожидаемый браузером язык.
+|Host|Имя хоста, в адресе.
+|Referer|Страница, с которой пользователь пришел сюда.
+|User-Agent|Информация о браузере. Может также включать информацию о операционной системе пользователя, и другую.
+|===
+
+=== Передача служебной информации
+
+|===
+|Имя заголовка|Значение заголовка
+|Cache-Control|Определяет, каким образом можно кешировать этот документ
+|Retry-After|Указывает, через какое время можно повторить запрос, если сервер оказался недоступным
+|Expires|Указывает промежуток времени, через который содержание страницы будет считаться устаревшим.
+|Location|Указывает новый адрес страницы. Используется для перенаправления на другую страницу со сменой адреса.
+|Content-Encoding|Указывает используемое сжатие данных. Возможные значения: `gzip`/`x-gzip`) и `compress`/`x-compress`
+|===
+
+=== Передача служебной информации
+
+Сервлет может сообщать браузеру дополнительную информацию, например, тип передаваемых данных. Эта операция выполняется с помощью метода `setContentType()` класса `HttpServletResponse`.
+
+Например, перед выводом страницы в виде текстового html рекомендуется ставить операцию вида:
+
+[source,java]
+----
+response.setContentType("text/html");
+----
+
+=== Перенаправление запроса
+
+Один запрос может выполняться несколькими сервлетами. Механизм перенаправления запросов позволяет передать выполнение запроса другому запрашиваему ресурсу. 
+
+Чтобы сделать перенаправление, используется специальный объект класса RequestDispatcher. Создается он методом `getRequestDispatcher()` объекта класса `ServletContext`. Этот метод в качестве аргумента берет _URL_ запрашиваемого ресурса.
+
+[source,java]
+----
+ServletContext context = getServletContext();
+RequestDispatcher dispatcher = 
+    context.getRequestDispatcher("/servlets/SecondServlet");
+----
+
+=== Перенаправление запроса
+
+Если необходимо вставить результат работы второго сервлета, и продолжить выполнение, используется метод `include()`. Методу надо передать объекты запроса и ответа:
+
+[source,java]
+----
+dispatcher.include(request, response);
+----
+
+В результате работы этого метода будет вызван второй сервлет, он выполнит свою часть работы, и после этого первый сервлет продолжит выполнение.
+
+=== Перенаправление запроса
+
+Запрос можно также перенаправить другим методом: `forward()`. Данный метод отличается от `include()` тем, что не возвращает обработку в вызвавший запрос, а сам заканчивает обработку запроса.
+
+Так как вызванный по `forward()` сервлет сам будет заканчивать обработку запроса, все что стоит после него выполнено не будет.
+
+=== Пересылка запроса
+
+Запрос можно переслать другому сервлету, но при этом инициировать новый запрос от браузера. Для этого используется метод `sendRedirect()` объекта `HttpServletResponse`.
+
+[source,java]
+----
+response.sendRedirect("new URI");
+----
+
+== Обмен информацией
+
+=== Обмен информацией
+
+При создании веб-приложения, состоящего из нескольких сервлетов или jsp, возникает проблема обмена информацией между различными элементами. 
+
+Для обмена можно использовать собственные механизмы реализованные в сервлетах, но можно воспользоваться одним из двух механизмов, работающих практически в любых браузерах и веб-серверах, вне зависимости от программных технологий.
+
+Эти два механизма называются *cookie* и *session*.
+
+=== Cookie
+
+*Cookie* (куки) - информация, хранящаяся в браузере конечного пользователя. Они хранятся в текстовом виде, и доступны любому пользователю, имеющему непосредственный доступ к данному браузеру.
+
+=== Cookie
+
+*Cookie* состоит из следующей информации:
+
+[.step]
+* Имени cookie
+* Значения
+* Срока хранения
+* Домена, его создавшего
+
+=== Создание и добавление cookie
+
+Для создания *сookie* используется класса `Cookie` пакета `javax.servlet.http`. Объект создается обычным образом с помощью оператора new, конструктор имеет два параметра.
+
+[source,java]
+----
+Cookie myCookie = new Cookie("testCookie", "cookieValue");
+myCookie.setMaxAge(24 * 60 * 60);
+response.addCookie(myCookie);
+----
+
+=== Получение cookies
+
+Если в сервлете вы используете `Writer` для вывода информации на страницу, надо закончить всю работу с куки до его создания.
+
+Для того, чтобы получить значение уже существующего куки, следует воспользоваться специальным методом `getCookies()` объекта `HttpServletRequest`. Этот объект возвращает массив из объектов класса `Cookie`.
+
+[source,java]
+----
+Cookie[] myCookies = request.getCookies();
+----
+
+=== Получение cookies
+
+Перебрав этот массив можно получить нужные значение *cookie*.
+
+[source,java]
+----
+Cookie[] myCookies = request.getCookies();
+String cookieName = "testCookie";
+String cookieValue = "";
+for (int i = 0; i < myCookies.length; i++) {
+    Cookie cookie = myCookies[i];
+    if (cookieName.equals(cookie.getName())) {
+       cookieValue = cookie.getValue();
+       break;
+    }
+}
+----
+
+=== Session
+
+*Session* также позволяют передавать данные между различными компонентами вашего веб-приложения.
+
+В нашем случае "сессия" - набор данных, которые хранятся на сервере начиная с первого захода пользователя и до закрытия браузера.
+
+В отличие от cookie, данные сессии хранятся не в браузере пользователя, а на сервере. У пользователя хранится только идентификатор сессии, который позволяет определить, что это именно тот пользователь с той сессией.
+
+=== Создание объекта сессии
+
+Чтобы начать работу с сессией, надо создать ее объект. Объект не создается обычным образом, а получается методом `getSession()` объекта `HttpServletRequest`.
+
+[source,java]
+----
+HttpSession session = request.getSession();
+----
+
+=== Session
+
+После этого, в сессию можно занести значени с помощью метода `setAttribute(String name, Object value)`. `name` - имя переменной в сессии, `value` - значение переменной.
+
+[source,java]
+----
+session.setAttribute("userId", "us1000");
+----
+
+Следует обратить внимание, что тип второго аргумента - `Object`. Это означает, что в сессии может храниться любой объектный тип, а не только строка, как в случае с *cookie*.
+
+=== Session
+
+Чтобы получить данные занесенные в сессию, можно воспользоваться методом `getAttribute(String name)` который возвращает ссылку на хранимый объект.
+
+[source,java]
+----
+String str = (String) session.getAttribute("userId");
+----
+
+Так как возвращаемое значение имеет тип `Object`, при получении значения должно использоваться приведение типов.
+
+=== Session
+
+Какие ошибки присутствуют в следующем коде?
+
+[source,java]
+----
+PrintWriter out = response.getWriter();
+HttpSession session = request.getSession();
+String str = session.getAttribute("value");
+out.println("String length:" + str.length());
+----
+
+=== Session
+
+Также при работе с сессиями могут использоваться следующие методы:
+
+[.step]
+* `invalidate()` уничтожение сессии.
+* `removeAttribute(String name)` удаление переменной в сессии.
+* `isNew()` определяет, является ли сессия свежесозданной, и возвращает соответствующее логическое значение.
+
+=== Session
+
+[.step]
+* `getCreationTime()` возвращает дату создания сессии в виде большого целого числа.
+* `getLastAccessedTime()` возвращает дату последнего обращения в виде большого целого числа.
+* `getMaxInactiveInterval()` возвращает временной интервал в секундах, сколько сессия может существовать на сервере без обращений к ней.
+
+=== HTTP Request
+
+Сервлеты могут передавать данные не только через cookies или сессии. Данные могут передаваться через запрос. В этом случае используются метод `setAttribute()`, но вызываются они не от объекта сессии, а от объекта запроса.
+
+[source,java]
+----
+request.setAttribute("userId", "us1000");
+----
+
+Переменные, создаваемые в объекте запроса будут существовать только пока существует данный запрос. То есть, этот метод имеет смысл использовать только если один запрос обрабатывают несколько сервлетов, например с помощью методов `include()` или `forward()`. Как только закончится выполнение запроса, будет удален его объект, и соответственно, потеряны хранимые в нем данные.
+
+=== HTTP Request
+
+Например, если происходит формирование разных частей страницы в разных сервлетах, и основной сервлет должен сообщить другому, формирующему заголовок, какое название туда вставить, главный сервлет может положить нужное значение в объект запроса:
+
+[source,java]
+----
+request.setAttribute("header", "value");
+----
+
+После чего, сервлет формирующий шапку страницы получает это значение и выводит его на страницу:
+
+[source,java]
+----
+String headVal = (String) request.getAttribute("header");
+out.println(headVal);
+----
+
+=== `ServletContex`
+
+Данные могут передаваться также в пределах всего приложения. Для этого используется объект класса `ServletContext`, все сервлеты, зарегистрированные в вашем `web.xml` будут иметь общий объект класса `ServletContext`.
+
+Чтобы получить объект `ServletContext` следует использовать метод `getServletContext()`.
+
+[source,java]
+----
+ServletContext app = request.getServletContext();
+----
+
+После чего можно пользоваться методами `setAttribute()` и `getAttribute()` чтобы заносить и получать значения.
+
+== Начальные данные сервлета и приложения
+
+=== Начальные данные сервлета и приложения
+
+Файл `web.xml` позволяет записать различные исходные данные, как для отдельных сервлетов, так и для приложения в целом. 
+
+=== `ServletContex`
+
+Чтобы указать начальные данные, доступные всему приложению, в файле `web.xml` используются теги `<context-param>`.
+
+[source,xml]
+----
+<context-param>
+    <param-name>contextParam</param-name>
+    <param-value>context param value</param-value>
+</context-param>
+----
+
+=== `ServletContex`
+
+Для получения начальных данных приложения нужно воспользоваться объектом класса `ServletContext`, вызвав метод `getInitParameter(String paramName)`. 
+
+[source,java]
+----
+PrintWriter out = response.getWriter();
+ServletContext servletCont = request.getServletContext();
+out.println(servletCont.getInitParameter("contextParam"));
+----
+
+=== `ServletConfig`
+
+Если исходные данные предназначены не для всего приложения, а только для одного сервлета, используется тег `<init-param>`, находящийся внутри тега `<servlet>`.
+
+[source,xml]
+----
+<servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>servlet.TestServlet</servlet-class>
+    <init-param>
+        <param-name>initParam</param-name>
+        <param-value>init param value</param-value>
+    </init-param>
+</servlet>
+----
+
+=== `ServletConfig`
+
+Для получения начальных данных сервлета нужно воспользоваться объектом класса `ServletConfig`, вызвав метод `getInitParameter(String paramName)`. 
+
+[source,java]
+----
+private ServletConfig sc;
+
+@Override
+public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+    sc = config;
+}
+----
+
+[source,java]
+----
+out.println(sc.getInitParameter("initParam"));
+----
+
+== UTF-8
+
+=== UTF-8
+
+https://stackoverflow.com/questions/138948/how-to-get-utf-8-working-in-java-webapps/138950[How to get UTF-8 working in Java webapps?]
