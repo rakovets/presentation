@@ -11,8 +11,10 @@
 
 === HTML tags for table
 
+[.fragment]
+[options="header"]
 |===
-|tag|content
+|Tag|Description
 |`caption`|название таблицы
 |`table`|таблица
 |`thead`|заголовки таблицы
@@ -41,8 +43,10 @@
 
 === Style for table
 
+[.fragment]
+[options="header"]
 |===
-|style|content
+|CSS-property|Description
 |`border-collapse: collapse;`|Схлопывание границ ячеек
 |`border-collapse: separate;`|«Расклеивание» границ ячеек
 |`border-spacing: 10px;`|Отступы между ячейками
@@ -50,8 +54,10 @@
 
 === Complex table
 
+[.fragment]
+[options="header"]
 |===
-|attribute|content
+|Attribute|Description
 |`colspan`|объединяет ячейки по горизонтали
 |`rowspan`|объединяет ячейки по вертикали
 |===

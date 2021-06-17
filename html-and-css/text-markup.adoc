@@ -1,37 +1,40 @@
 = Text Markup
+:imagesdir: ../assets/img/html-and-css/
 
 == Text Markup
 
 === Tag Structure
 
-image::/assets/img/html-and-css/url.jpg[URL]
+[.fragment]
+image::tag-structure.jpg[Tag structure]
 
-=== Tag Structure
+=== Tag Types
 
-Тэги глобально деляться на парные:
+[.step]
+* Парные:
+[.step]
+** `<div></div>`
+** `<header></header>`
+** `<a></a>`
+** ...
 
-* `<div></div>`
-* `<span></span>`
-* `<header></header>`
-* `<a></a>`
-* ...
+=== Tag Types
 
+[.step]
+* Не парные:
+[.step]
+** `<br/>`
+** `<img/>`
+** `<input/>`
+** `<link/>`
+** `<meta/>`
 
+=== Attributes
 
-=== Tag Structure
-
-и непарные:
-
-* `<br/>`
-* `<img/>`
-* `<input/>`
-* `<link/>`
-* `<meta/>`
-
-=== Attributes 
-
+[.fragment]
 Для атрибутов тегов используются значения по умолчанию, а так же существую атрибуты без значений.
 
+[.fragment]
 [source,html]
 ----
 <form action="self.php">
@@ -40,35 +43,34 @@ image::/assets/img/html-and-css/url.jpg[URL]
 </form>
 ----
 
+[.fragment]
 В данном примере используется атрибут `disabled`, у которого явно не задано значение. Подобная запись называется `сокращенный атрибут тега`.
 
-=== Attributes 
+=== Attributes
 
-Порядок атрибутов в любом теге не имеет значения и на результат отображения элемента не влияет.
+[.step]
+* Порядок атрибутов в любом теге не имеет значения и на результат отображения элемента не влияет.
+* Форматы атрибутов:
+[.step]
+** Текст
+** Число
+** Ссылка
 
-Форматы атрибутов:
+=== Example
 
-* Текст `<input type="password">``
-* Число
-[source,html]
-----
-<p>
-    <textarea rows="10" cols="45" name="text"></textarea>
-</p>
-----
-
-* Ссылка
-
+[.fragment]
 [source,html]
 ----
 <img src="images/html.png" width="189" height="255" alt="HTML">
 <link rel="stylesheet" href="style.css">
 ----
 
-=== Attributes 
+=== Attributes
 
+[.fragment]
 Атрибуты могут располагаться как в одну строку, так и в несколько. Главное условие - наличие разделительного символа.
 
+[.fragment]
 [source,html]
 ----
 <img src="images/girl.png" width="189" height="255" alt="boy">
@@ -79,10 +81,11 @@ image::/assets/img/html-and-css/url.jpg[URL]
     alt="boy">
 ----
 
-== Document Structure 
+== Document Structure
 
-=== Document Structure 
+=== Example
 
+[.fragment]
 [source,html]
 ----
 <!DOCTYPE html> <1>
@@ -99,11 +102,3 @@ image::/assets/img/html-and-css/url.jpg[URL]
     </body>
 </html>
 ----
-<1> - актуальная краткая запись
-<2> - раздел заголовка <head> - содержимое не  отображается на странице, но влияет на отображение <body>
-<3> - раздел тела документа <body> - содержимое  отображается на странице
-<4> - <title> - заголовок документа, отображается во вкладке, в поисковике, т.д.
-<5> - <link> - подключение сторонних файлов к документу - css, favicon  и т.д.
-<6> - <meta> - информация для браузеров и поисковых систем (кодировка, ключевые слова)
-<7> - <sсript> - подключение внешних скриптов 
-<3> - <body>  Здесь записывается та информация, которая будет отображена на  экране (списки, заголовки, меню, параграфы, картинки и т.д.)

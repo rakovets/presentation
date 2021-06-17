@@ -159,7 +159,7 @@
 === Course: HTML and CSS
 
 * link:./html-and-css/text-markup.html[Text Markup.]
-* link:./html-and-css/link.html[Link.]
+* link:./html-and-css/links.html[Link.]
 * link:./html-and-css/form.html[Form.]
 * link:./html-and-css/html-tables.html[Tables.]
 * link:./html-and-css/css-intro.html[CSS. Intro.]

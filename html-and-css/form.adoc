@@ -1,151 +1,182 @@
 = Form
+:imagesdir: ../assets/img/html-and-css/form/
 
 == Form
 
 === Example Form
 
-image::/assets/img/html-and-css/form/form.png[Form]
+[.fragment]
+image::form.png[Form]
 
 === `<form>`
 
+[.fragment]
 [source,html]
 ----
 <form action="https://rakovets.com/login" method="get">
     поля формы
 </form>
 ----
-`action` - задает адрес (URL) отправки формы
-`method` - задает метод отправки формы
+
+== `<input>`
+
+[.step]
+* `action` - задает адрес (*URL*) отправки формы
+* `method` - задает метод отправки формы
 
 === `<input>`
 
+[.fragment]
 [source,html]
 ----
 <form action="https://rakovets.com/registr" method="get">
-    <input type=“type” name=“name”>
+    <input type="type" name="name">
 </form>
 ----
-`type` - задает тип поля
-`name` - задает имя поля
+
+[.step]
+* `type` - задает тип поля
+* `name` - задает имя поля
+
+=== `<input type="file">`
+
+[.fragment]
+[source,html]
+----
+<form action="https://rakovets.com/file" method="get" enctype="multipart/form-data">
+    <input type="file" name="upload-file">
+</form>
+----
+
+[.fragment]
+image::file.png[file]
+
+=== `<input type="text" hidden>`
+
+[.fragment]
+[source,html]
+----
+<input type="text" name="hide" value="15135" hidden>
+----
 
 === Values for attribute `type`
 
-image::/assets/img/html-and-css/form/values-for-attribute-type.png[Values for attribute `type`]
+[.fragment]
+image::values-for-attribute-type.png[Values for attribute `type`]
 
 === Values for attribute `type` (HTML5)
 
-image::/assets/img/html-and-css/form/values-for-attribute-type-html5.png[Values for attribute `type` (HTML5)]
+[.fragment]
+image::values-for-attribute-type-html5.png[Values for attribute `type` (HTML5)]
 
 === Values for attribute `type` (HTML5) support
 
-image::/assets/img/html-and-css/form/values-for-attribute-type-html5-support.png[Values for attribute `type` (HTML5) support]
+[.fragment]
+image::values-for-attribute-type-html5-support.png[Values for attribute `type` (HTML5) support]
+
+== Another tags
 
 === `<label>`
 
+[.fragment]
 Связывает текст (подпись) и поле ввода.
 
+[.fragment]
 [source,html]
 ----
 <label>
-    Подпись<input type=“text” name=“username”>
+    Подпись<input type="text" name="username">
 </label>
 ----
 
-image::/assets/img/html-and-css/form/label.png[Label]
+[.fragment]
+image::label.png[Label]
 
-image::/assets/img/html-and-css/form/label2.png[Label]
-
+[.fragment]
+image::label2.png[Label]
 
 === `submit`
 
+[.fragment]
 [source,html]
 ----
-<input type=“submit” value=“text”>
+<input type="submit" value="text">
 ----
 
-image::/assets/img/html-and-css/form/submit.png[“submit”]
-
+[.fragment]
+image::submit.png["submit"]
 
 === `<textarea>`
 
+[.fragment]
 [source,html]
 ----
-<textarea rows=“45” cols=“32”> text </textarea>
+<textarea rows="45" cols="32"> text </textarea>
 ----
 
-image::/assets/img/html-and-css/form/textarea.png[textarea]
-
+[.fragment]
+image::textarea.png[textarea]
 
 === `checkbox`
 
+[.fragment]
 [source,html]
 ----
-<input type=“checkbox” checked>
+<input type="checkbox" checked>
 ----
 
-
+[.fragment]
 Работает как выбор: ДА или НЕТ. `checked` – по умолчанию установить
 
-image::/assets/img/html-and-css/form/checkbox.png[checkbox]
-
+[.fragment]
+image::checkbox.png[checkbox]
 
 === `radio`
 
+[.fragment]
 [source,html]
 ----
-<input type=“radio” name=“question-tag” value=“p”>
-<input type=“radio” name=“question-tag” value=“b”>
+<input type="radio" name="question-tag" value="p">
+<input type="radio" name="question-tag" value="b">
 ----
 
+[.fragment]
 Работает как выбор ОДНОГО из вариантов. `checked` - значение по умолчанию
 
-image::/assets/img/html-and-css/form/radio.png[radio]
+[.fragment]
+image::radio.png[radio]
 
+== `<select>`
 
 === `<select>`
 
+[.fragment]
 [source,html]
 ----
-<select name=“year”>
-    <option value=“2000”>2000 год</option>
-    <option value=“2015”>2015 год</option>
+<select name="year">
+    <option value="2000">2000 год</option>
+    <option value="2015">2015 год</option>
 </select>
 ----
 
+[.fragment]
 Работает как выбор ОДНОГО из вариантов.
 
-image::/assets/img/html-and-css/form/select.png[select]
-
+[.fragment]
+image::select.png[select]
 
 === `<select multiple>`
 
+[.fragment]
 [source,html]
 ----
-<select name=“year” size=“4” multiple>
-    <option value=“2000” selected>2000 год</option>
-    <option value=“2015”>2015 год</option>
+<select name="year" size="4" multiple>
+    <option value="2000" selected>2000 год</option>
+    <option value="2015">2015 год</option>
 </select>
 ----
 
-`multiple` - мультиселект
-`size` - высота мультиселекта
-`selected` - выбор вариантов по умолчанию
-
-=== `file`
-
-[source,html]
-----
-<form action="https://rakovets.com/file" method="get" enctype=“multipart/form-data”>
-    <input type=“file” name=“upload-file”>
-</form>
-----
-
-image::/assets/img/html-and-css/form/file.png[file]
-
-
-=== `hidden`
-
-[source,html]
-----
-<input type=“text” name=“hide” value=“15135” hidden>
-----
+[.step]
+* `multiple` - мультиселект
+* `size` - высота мультиселекта
+* `selected` - выбор вариантов по умолчанию

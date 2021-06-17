@@ -1,0 +1,53 @@
+= Links
+:imagesdir: ../assets/img/html-and-css/link/
+
+== Links
+
+=== Internet
+
+[.fragment]
+image::internet.jpg[Internet]
+
+=== File System Hierarchy
+
+[.fragment]
+image::fs-hierarchy.jpg[File System Hierarchy]
+
+=== Links
+
+[.fragment]
+[source,html]
+----
+<a href="https://rakovets.by">Visit rakovets.by!</a>
+----
+
+[.fragment]
+`https://rakovets.by` - это адрес (*URI*/*URL*)
+
+=== URI
+
+[.fragment]
+Адреса (*URI*) бывают:
+[.step]
+* относительные
+* абсолютные
+
+=== Absolute path
+
+[.fragment]
+`https://rakovets.by/catalog`
+
+[.step]
+* `https://` - *protocol*
+* `rakovets.by` - *domain name* for host
+* `/catalog` - *path*
+
+=== Relative path
+
+[.fragment]
+|===
+|Текущий адрес|Адрес в ссылке|Преобразуется в
+|`https://rakovets.by/course/python-developer`|`java-developer`|`https://rakovets.by/course/java-developer`
+|`https://rakovets.by/course/python-developer`|`..`|`https://rakovets.by/course`
+|`https://rakovets.by/course/python-developer`|`../../review`|`https://rakovets.by/review`
+|===
