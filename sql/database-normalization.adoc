@@ -1,20 +1,25 @@
 = Database normalization
+:imagesdir: ../assets/img/sql/database-normalization/
 
 == Intro
 
-=== Normal Froms
+=== Normal Forms
 
+[.fragment]
 Database normalization is the process of restructuring a relation database
 
-image::/assets/img/sql/database-normalization/normal-forms.png[Normal Forms]
+[.fragment]
+image::normal-forms.png[Normal Forms]
 
 === Normalisation Steps
 
-image::/assets/img/sql/database-normalization/normalisation-steps.gif[Normalisation Steps]
+[.fragment]
+image::normalisation-steps.gif[Normalisation Steps]
 
 === UNF
 
-image::/assets/img/sql/database-normalization/unf.png[UNF]
+[.fragment]
+image::unf.png[UNF]
 
 == 1NF
 
@@ -28,12 +33,14 @@ image::/assets/img/sql/database-normalization/unf.png[UNF]
 
 === Example
 
-image::/assets/img/sql/database-normalization/1nf.png[1NF]
+[.fragment]
+image::1nf.png[1NF]
 
 == Primary Key
 
 === Attributes for Primary Key
 
+[.step]
 * Primary key cannot be NULL
 * Primary key value must be unique
 * Primary key values cannot be changed
@@ -41,24 +48,30 @@ image::/assets/img/sql/database-normalization/1nf.png[1NF]
 
 === Composite Primary Key
 
-image::/assets/img/sql/database-normalization/composite-key.png[Composite Key]
+[.fragment]
+image::composite-key.png[Composite Key]
 
 == 2NF
 
 === Rules for 2NF
 
+[.step]
 * It should be in the First Normal form
 * It should not have Partial Dependency
 
 === Example
 
-image::/assets/img/sql/database-normalization/2nf-01.png[2NF]
-image::/assets/img/sql/database-normalization/2nf-02.png[2NF]
+[.fragment]
+image::2nf-01.png[2NF]
+
+[.fragment]
+image::2nf-02.png[2NF]
 
 == Foreign Key
 
 === Attributes for Foreign Key
 
+[.step]
 * A foreign key may have a different name from its primary key
 * It ensures that rows in one table have corresponding rows in another
 * Unlike the primary key, they do not have to be unique. Most often they are not
@@ -66,27 +79,36 @@ image::/assets/img/sql/database-normalization/2nf-02.png[2NF]
 
 === Example
 
-image::/assets/img/sql/database-normalization/2nf-02.png[2NF]
+[.fragment]
+image::2nf-02.png[2NF]
 
 === Example
 
-image::/assets/img/sql/database-normalization/foreign-key.png[Foreign Key]
+[.fragment]
+image::foreign-key.png[Foreign Key]
 
 == Transitive Functional Dependencies
 
 === Example
 
-image::/assets/img/sql/database-normalization/transitive-functional-dependencies.png[Transitive Functional Dependencies]
+[.fragment]
+image::transitive-functional-dependencies.png[Transitive Functional Dependencies]
 
 == 3NF
 
 === Rules for 3 NF
 
+[.step]
 * It is in the Second Normal form
 * It doesn't have Transitive Dependency
 
 === Example
 
-image::/assets/img/sql/database-normalization/3nf-01.png[3NF]
-image::/assets/img/sql/database-normalization/3nf-02.png[3NF]
-image::/assets/img/sql/database-normalization/3nf-03.png[3NF]
+[.fragment]
+image::3nf-01.png[3NF]
+
+[.fragment]
+image::3nf-02.png[3NF]
+
+[.fragment]
+image::3nf-03.png[3NF]
