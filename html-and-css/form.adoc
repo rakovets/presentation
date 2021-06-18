@@ -18,63 +18,11 @@ image::form.png[Form]
 </form>
 ----
 
-== `<input>`
-
 [.step]
 * `action` - задает адрес (*URL*) отправки формы
 * `method` - задает метод отправки формы
 
-=== `<input>`
-
-[.fragment]
-[source,html]
-----
-<form action="https://rakovets.com/registr" method="get">
-    <input type="type" name="name">
-</form>
-----
-
-[.step]
-* `type` - задает тип поля
-* `name` - задает имя поля
-
-=== `<input type="file">`
-
-[.fragment]
-[source,html]
-----
-<form action="https://rakovets.com/file" method="get" enctype="multipart/form-data">
-    <input type="file" name="upload-file">
-</form>
-----
-
-[.fragment]
-image::file.png[file]
-
-=== `<input type="text" hidden>`
-
-[.fragment]
-[source,html]
-----
-<input type="text" name="hide" value="15135" hidden>
-----
-
-=== Values for attribute `type`
-
-[.fragment]
-image::values-for-attribute-type.png[Values for attribute `type`]
-
-=== Values for attribute `type` (HTML5)
-
-[.fragment]
-image::values-for-attribute-type-html5.png[Values for attribute `type` (HTML5)]
-
-=== Values for attribute `type` (HTML5) support
-
-[.fragment]
-image::values-for-attribute-type-html5-support.png[Values for attribute `type` (HTML5) support]
-
-== Another tags
+== `<label>`
 
 === `<label>`
 
@@ -95,29 +43,46 @@ image::label.png[Label]
 [.fragment]
 image::label2.png[Label]
 
-=== `submit`
+== `<input>`
+
+=== `<input>`
 
 [.fragment]
 [source,html]
 ----
-<input type="submit" value="text">
+<form action="https://rakovets.com/registr" method="get">
+    <input type="${type}" name="${name}">
+</form>
 ----
 
-[.fragment]
-image::submit.png["submit"]
+[.step]
+* `type` - задает тип поля
+* `name` - задает имя поля
 
-=== `<textarea>`
+=== Values for attribute `type`
+
+[.fragment]
+image::values-for-attribute-type.png[Values for attribute `type`]
+
+=== Values for attribute `type` (HTML5)
+
+[.fragment]
+image::values-for-attribute-type-html5.png[Values for attribute `type` (HTML5)]
+
+=== Values for attribute `type` (HTML5) support
+
+[.fragment]
+image::values-for-attribute-type-html5-support.png[Values for attribute `type` (HTML5) support]
+
+=== `<input type="text" hidden>`
 
 [.fragment]
 [source,html]
 ----
-<textarea rows="45" cols="32"> text </textarea>
+<input type="text" name="hide" value="15135" hidden>
 ----
 
-[.fragment]
-image::textarea.png[textarea]
-
-=== `checkbox`
+=== `<input type="checkbox">`
 
 [.fragment]
 [source,html]
@@ -131,13 +96,13 @@ image::textarea.png[textarea]
 [.fragment]
 image::checkbox.png[checkbox]
 
-=== `radio`
+=== `<input type="radio">`
 
 [.fragment]
 [source,html]
 ----
 <input type="radio" name="question-tag" value="p">
-<input type="radio" name="question-tag" value="b">
+<input type="radio" name="question-tag" value="b" checked>
 ----
 
 [.fragment]
@@ -145,6 +110,43 @@ image::checkbox.png[checkbox]
 
 [.fragment]
 image::radio.png[radio]
+
+===  `<input type="submit">`
+
+[.fragment]
+[source,html]
+----
+<input type="submit" value="text">
+----
+
+[.fragment]
+image::submit.png["submit"]
+
+=== `<input type="file">`
+
+[.fragment]
+[source,html]
+----
+<form action="https://rakovets.com/file" method="get" enctype="multipart/form-data">
+    <input type="file" name="upload-file">
+</form>
+----
+
+[.fragment]
+image::file.png[file]
+
+== `<textarea>`
+
+=== `<textarea>`
+
+[.fragment]
+[source,html]
+----
+<textarea rows="45" cols="32"> text </textarea>
+----
+
+[.fragment]
+image::textarea.png[textarea]
 
 == `<select>`
 
@@ -155,6 +157,8 @@ image::radio.png[radio]
 ----
 <select name="year">
     <option value="2000">2000 год</option>
+    <option value="2005">2005 год</option>
+    <option value="2010">2010 год</option>
     <option value="2015">2015 год</option>
 </select>
 ----
@@ -170,8 +174,10 @@ image::select.png[select]
 [.fragment]
 [source,html]
 ----
-<select name="year" size="4" multiple>
+<select name="years" size="2" multiple>
     <option value="2000" selected>2000 год</option>
+    <option value="2005">2005 год</option>
+    <option value="2010">2010 год</option>
     <option value="2015">2015 год</option>
 </select>
 ----
