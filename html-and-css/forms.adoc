@@ -1,7 +1,7 @@
-= Form
+= Forms
 :imagesdir: ../assets/img/html-and-css/form/
 
-== Form
+== Forms
 
 === Example Form
 

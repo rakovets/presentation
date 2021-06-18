@@ -158,12 +158,12 @@
 
 === Course: HTML and CSS
 
-* link:./html-and-css/text-markup.html[Text Markup.]
-* link:./html-and-css/links.html[Link.]
-* link:./html-and-css/form.html[Form.]
-* link:./html-and-css/html-tables.html[Tables.]
-* link:./html-and-css/css-intro.html[CSS. Intro.]
-* link:./html-and-css/css-float.html[CSS. Float.]
+* link:./html-and-css/text-markup.html[HTML: Text Markup.]
+* link:./html-and-css/links.html[HTML: Links.]
+* link:./html-and-css/forms.html[HTML: Forms.]
+* link:./html-and-css/tables.html[HTML: Tables.]
+* link:./html-and-css/css-intro.html[CSS: Intro.]
+* link:./html-and-css/css-float.html[CSS: Float.]
 
 == Course: JavaScript Basic [[course-javascript-basic]]
 
