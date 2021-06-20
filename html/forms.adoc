@@ -1,5 +1,5 @@
 = Forms
-:imagesdir: ../assets/img/html-and-css/form/
+:imagesdir: ../assets/img/html/forms/
 
 == Forms
 

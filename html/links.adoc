@@ -1,5 +1,5 @@
 = Links
-:imagesdir: ../assets/img/html-and-css/link/
+:imagesdir: ../assets/img/html/links/
 
 == Links
 
