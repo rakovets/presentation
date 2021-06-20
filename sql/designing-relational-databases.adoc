@@ -1,5 +1,5 @@
-= Database normalization
-:imagesdir: ../assets/img/sql/database-normalization/
+= Designing relational databases
+:imagesdir: ../assets/img/sql/designing-relational-databases/
 
 == Intro
 

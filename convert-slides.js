@@ -110,7 +110,12 @@ asciidoctor.convertFile('./common/xml.adoc', options)
 asciidoctor.convertFile('./common/yaml.adoc', options)
 
 // Course: "SQL"
-asciidoctor.convertFile('./sql/database-normalization.adoc', options)
+asciidoctor.convertFile('./sql/intro.adoc', options)
+asciidoctor.convertFile('./sql/data-manipulation.adoc', options)
+asciidoctor.convertFile('./sql/aggregation-functions-and-grouping.adoc', options)
+asciidoctor.convertFile('./sql/multi-tabular-databases.adoc', options)
+asciidoctor.convertFile('./sql/designing-relational-databases.adoc', options)
+asciidoctor.convertFile('./sql/advanced-sql.adoc', options)
 
 // Course: "HTML and CSS"
 asciidoctor.convertFile('./html-and-css/css-float.adoc', options)
