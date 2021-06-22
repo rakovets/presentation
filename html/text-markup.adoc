@@ -1,5 +1,5 @@
 = Text Markup
-:imagesdir: ../assets/img/html-and-css/
+:imagesdir: ../assets/img/html/
 
 == Text Markup
 

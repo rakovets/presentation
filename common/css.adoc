@@ -1,0 +1,460 @@
+= CSS
+:imagesdir: ../assets/img/html-and-css/
+
+== Problem
+
+=== Problem
+
+[.step]
+* Как сделать web-страницу красивой и удобной для пользователя
+
+=== Solution
+
+[.step]
+* Использовать стили
+* В частности наиболее используемые: *CSS*
+
+== CSS
+
+=== CSS
+
+[.step]
+* *CSS* - *Cascading Style Sheets* - *каскадные таблицы стилей*
+* Чаще всего *CSS* комбинируется с языками разметки *HTML*
+
+=== CSS  benefits
+
+[.step]
+* CSS экономит время
+* Страницы загружаются быстрее
+* Простота обслуживания
+* Улучшенные стили для HTML
+* Совместимость нескольких устройств
+* Глобальные веб-стандарты
+* Оффлайн-просмотр
+* Независимость от платформы
+
+=== CSS-rules: syntax
+
+[.fragment]
+image::css-syntax.png[CSS syntax]
+
+=== CSS-rules: syntax
+
+[.fragment]
+[source,css]
+----
+селектор {
+    свойство1: значение;
+    свойство2: значение;
+    ...
+}
+----
+
+=== CSS-rules: example
+
+[.fragment]
+[source,css]
+----
+p {
+    color: white;
+    margin: 10px 15px;
+}
+----
+
+== Selectors
+
+===  Стандартные селекторы
+
+[.fragment]
+[source,css]
+----
+h1 {
+    color: #8B4513;
+}
+----
+
+=== Универсальные селекторы
+
+[.fragment]
+[source,css]
+----
+* {
+    color: #808080;
+}
+----
+
+=== Селекторы потомков или вложенные селекторы
+
+[.fragment]
+[source,css]
+----
+ul em {
+    color: #CD5C5C;
+}
+----
+
+=== Селекторы класса
+
+[.fragment]
+[source,css]
+----
+.blue {
+    color: #0000FF;
+}
+----
+
+[.fragment]
+[source,html]
+----
+<p class="blue bold">
+    Этот абзац будет оформлен классами center и bold.
+</p>
+----
+
+=== ID селекторы
+
+[.fragment]
+[source,css]
+----
+#blue {
+    color: #0000FF;
+}
+----
+
+=== Дочерние селекторы
+
+[.fragment]
+[source,css]
+----
+body > p {
+    color: #0000FF;
+}
+----
+
+=== Соседние селекторы
+
+[.fragment]
+[source,css]
+----
+strong + em {
+    color: #0000FF;
+}
+----
+
+=== Селекторы атрибутов
+
+[.fragment]
+[source,css]
+----
+[type = "text"] {
+    color: #0000FF;
+}
+----
+
+== Способы описания/добавления стилей на Web-страницу
+
+=== Встроенный стиль
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Стили</title>
+    </head>
+    <body>
+        <p style="font-size: 1.2em; font-family: monospace; color: #cd66cc">Пример текста</p>
+    </body>
+</html>
+----
+
+=== Внутренняя таблица стилей
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Стили</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;subset=cyrillic">
+        <style>
+            h1 {
+                font-family: 'Lobster', cursive;
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Заголовок</h1>
+        <p>Текст</p>
+    </body>
+</html>
+----
+
+=== Внешняя таблица стилей
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Стили</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;subset=cyrillic">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Заголовок</h1>
+        <p>Текст</p>
+    </body>
+</html>
+----
+
+=== Внешняя таблица стилей
+
+[.fragment]
+[source,css]
+----
+h1 {
+    font-family: 'Lobster', cursive;
+    color: green;
+}
+----
+
+=== Импорт CSS
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Импорт</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Lobster&subset=cyrillic');
+            h1 {
+                font-family: 'Lobster', cursive;
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Заголовок 1</h1>
+        <h2>Заголовок 2</h2>
+    </body>
+</html>
+----
+
+=== Импорт CSS
+
+[.fragment]
+[source,css]
+----
+@import url('https://fonts.googleapis.com/css?family=Lobster&subset=cyrillic');
+h1 {
+    font-family: 'Lobster', cursive;
+    color: green;
+}
+----
+
+== Группирование, наследование, каскадирование
+
+=== Группирование
+
+[.fragment]
+[source,css]
+----
+Селектор_1, Селектор_2, ... Селектор_N {
+    Описание правил стиля
+}
+----
+
+=== Каскадирование
+
+[.step]
+* *Каскадирование* – комбинирование стилей из разных CSS-правил, для элементов страницы.
+* Комбинирование происходит по четким правилам, опирающихся на приоритетность и специфичность
+
+=== Приоритетность
+
+[.step]
+* Стиль браузера.
+* Стиль автора.
+* Стиль пользователя.
+* Стиль автора с добавлением !important.
+* Стиль пользователя с добавлением !important.
+
+=== Специфичность
+
+[.fragment]
+[source,css]
+----
+*              {} /* a=0 b=0 c=0 -> специфичность = 0   */
+li             {} /* a=0 b=0 c=1 -> специфичность = 1   */
+li:first-line  {} /* a=0 b=0 c=2 -> специфичность = 2   */
+ul li          {} /* a=0 b=0 c=2 -> специфичность = 2   */
+ul ol+li       {} /* a=0 b=0 c=3 -> специфичность = 3   */
+ul li.red      {} /* a=0 b=1 c=2 -> специфичность = 12  */
+li.red.level   {} /* a=0 b=2 c=1 -> специфичность = 21  */
+#t34           {} /* a=1 b=0 c=0 -> специфичность = 100 */
+#content #wrap {} /* a=2 b=0 c=0 -> специфичность = 200 */
+----
+
+== CSS box model
+
+=== CSS box model
+
+[.fragment]
+image::box-model-css.png[CSS box model]
+
+=== CSS box model
+
+[.step]
+* `margin` — очищает пространство вокруг границы элемента, не позволяя другим элементам приближаться к границе элемента. Можно сказать, что это "личное пространство" элемента.
+* `margin` не имеет фонового цвета и прозрачен
+
+=== CSS box model
+
+[.step]
+* `border` — граница (рамка), окружающая `padding` и `content` (содержимое).
+* Цвет границы можно изменить
+
+=== CSS box model
+
+[.step]
+* `padding` — очищает пространство вокруг content (содержимого). Можно сказать, что это "личное пространство" контента.
+* `padding` окрашивается в цвет фона элемента.
+
+=== CSS box model
+
+[.step]
+* `content` — пространство для содержимого, куда помещается текст и/или изображения.
+
+== CSS properties
+
+=== CSS properties
+
+[.step]
+* оформление текста
+* работа с размерами и отступами
+* позиционирование элементов
+* создание сеток
+* декоративные: цвета, фон, тени
+* другие
+
+=== Оформление текста
+
+[.step]
+* `text-decoration`
+* `font-weigth`
+* `font-style`
+
+=== Работа с размерами и отступами
+
+[.step]
+* `margin`
+* `padding`
+* `width`
+
+=== Позиционирование элементов
+
+[.step]
+* `position`
+* `top`
+* ...
+* `left`
+
+=== Создание сетки страницы
+
+[.step]
+* `float`
+* `clear`
+
+=== Декоративные
+
+[.step]
+* `background-color`
+* `border-radius`
+* `color`
+
+== CSS property: `float`
+
+=== `float`
+
+[.step]
+* Элемент является плавающим.
+* Элементы идущие в коде после него, обтекают его
+* Может применяться к любому элементу
+
+=== `float`
+
+[.fragment]
+[options="header"]
+|===
+|value|content
+|`left`|плавающий, прижат влево
+|`right`|плавающий, прижат вправо
+|`none`|обычный, не плавающий
+|===
+
+=== `float`
+
+[.step]
+* Если после `float` элемента следует еще один `float` элемент, второй `float` обтекает первый
+* Если несколько `float` и один по размерам больше другого, то образуется область «не обтекания»
+* Если несколько `float` не умещаются в ширину, то элементы переносятся ниже, при этом обтекая предыдущие
+
+=== `clear`
+
+[.step]
+* Запрещает данному элементу обтекать плавающие элементы, с одной или двух сторон
+* Может применяться к любому элементу
+
+=== `clear`
+
+[.fragment]
+[options="header"]
+|===
+|value|content
+|`left`|не может обтекать плавающий элемент, который расположен слева
+|`right`|не может обтекать плавающий элемент, который расположен справа
+|`both`|не может обтекать плавающий элемент вообще
+|`none`|может обтекать плавающие с любой стороны
+|===
+
+=== `clear`
+
+[.step]
+* Если отключено обтекание, то он не обтекает плавающие независимо от уровня вложенности
+* Если отключено обтекание, то он не обтекает другие элементы, но это не мешает другим обтекать его
+* Обтекаемым может быть любой элемент. Для обтекаемых блочных элементов важно указать ширину
+
+== CSS property: `overflow`
+
+=== `overflow`
+
+[.step]
+* Размер обтекающего элемента включает в себя площадь, закрытую плавающим элементами
+* Фон, рамки обтекаемого распространяются на площадь закрытую плавающим
+* Можно скрыть те части фона и рамок, закрытые плавающим
+
+=== `overflow`
+
+[.fragment]
+[options="header"]
+|===
+|value|content
+|`hidden`|скрыть части обтекаемого, которые закрыты плавающим
+|===
+
+=== `overflow`
+
+[.step]
+* Внешние поля и внутренние отступы обтекающих элементов нахлестываются на плавающие элементы, насколько это возможно
