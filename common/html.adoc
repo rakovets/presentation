@@ -1,0 +1,388 @@
+= HTML
+:imagesdir: ../assets/img/common/html/
+
+== Text Markup
+
+=== Tag Structure
+
+[.fragment]
+image::tag-structure.jpg[Tag structure]
+
+=== Tag Types
+
+[.step]
+* Парные:
+[.step]
+** `<div></div>`
+** `<header></header>`
+** `<a></a>`
+** ...
+
+=== Tag Types
+
+[.step]
+* Не парные:
+[.step]
+** `<br/>`
+** `<img/>`
+** `<input/>`
+** `<link/>`
+** `<meta/>`
+
+=== Attributes
+
+[.fragment]
+Для атрибутов тегов используются значения по умолчанию, а так же существую атрибуты без значений.
+
+[.fragment]
+[source,html]
+----
+<form action="self.php">
+    <p><input type="text"></p>
+    <p><input type="submit" disabled></p>
+</form>
+----
+
+[.fragment]
+В данном примере используется атрибут `disabled`, у которого явно не задано значение. Подобная запись называется `сокращенный атрибут тега`.
+
+=== Attributes
+
+[.step]
+* Порядок атрибутов в любом теге не имеет значения и на результат отображения элемента не влияет.
+* Форматы атрибутов:
+[.step]
+** Текст
+** Число
+** Ссылка
+
+=== Example
+
+[.fragment]
+[source,html]
+----
+<img src="images/html.png" width="189" height="255" alt="HTML">
+<link rel="stylesheet" href="style.css">
+----
+
+=== Attributes
+
+[.fragment]
+Атрибуты могут располагаться как в одну строку, так и в несколько. Главное условие - наличие разделительного символа.
+
+[.fragment]
+[source,html]
+----
+<img src="images/girl.png" width="189" height="255" alt="boy">
+
+<img src="images/girl.png"
+    width="189"
+    height="255"
+    alt="boy">
+----
+
+== Document Structure
+
+=== Example
+
+[.fragment]
+[source,html]
+----
+<!DOCTYPE html> <1>
+<html>
+    <head> <2>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <6>
+        <title>Пример веб-страницы</title> <4>
+    </head>
+    <body> <3>
+        <h1>Заголовок</h1>
+        <!-- Комментарий -->
+        <p>Первый абзац.</p>
+        <p>Второй абзац.</p>
+    </body>
+</html>
+----
+
+== Links
+
+=== Internet
+
+[.fragment]
+image::internet.jpg[Internet]
+
+=== File System Hierarchy
+
+[.fragment]
+image::fs-hierarchy.jpg[File System Hierarchy]
+
+=== Links
+
+[.fragment]
+[source,html]
+----
+<a href="https://rakovets.by">Visit rakovets.by!</a>
+----
+
+[.fragment]
+`https://rakovets.by` - это адрес (*URI*/*URL*)
+
+=== URI
+
+[.fragment]
+Адреса (*URI*) бывают:
+[.step]
+* относительные
+* абсолютные
+
+=== Absolute path
+
+[.fragment]
+`https://rakovets.by/catalog`
+
+[.step]
+* `https://` - *protocol*
+* `rakovets.by` - *domain name* for host
+* `/catalog` - *path*
+
+=== Relative path
+
+[.fragment]
+|===
+|Текущий адрес|Адрес в ссылке|Преобразуется в
+|`https://rakovets.by/course/python-developer`|`java-developer`|`https://rakovets.by/course/java-developer`
+|`https://rakovets.by/course/python-developer`|`..`|`https://rakovets.by/course`
+|`https://rakovets.by/course/python-developer`|`../../review`|`https://rakovets.by/review`
+|===
+
+== HTML Tables
+
+=== HTML tags for table
+
+[.fragment]
+[options="header"]
+|===
+|Tag|Description
+|`caption`|название таблицы
+|`table`|таблица
+|`thead`|заголовки таблицы
+|`tbody`|содержимое таблицы
+|`tr`|table row, строка
+|`th`|table header, заголовок столбца
+|`td`|table data, ячейка в строке
+|===
+
+=== HTML tags for table: example
+
+[.fragment]
+[source,html]
+----
+<table>
+    <tr>
+        <td>1 строка 1 ячейка</td>
+        <td>1 строка 2 ячейка</td>
+    </tr>
+    <tr>
+        <td>2 строка 1 ячейка</td>
+        <td>2 строка 2 ячейка</td>
+    </tr>
+</table>
+----
+
+=== Style for table
+
+[.fragment]
+[options="header"]
+|===
+|CSS-property|Description
+|`border-collapse: collapse;`|Схлопывание границ ячеек
+|`border-collapse: separate;`|«Расклеивание» границ ячеек
+|`border-spacing: 10px;`|Отступы между ячейками
+|===
+
+=== Complex table
+
+[.fragment]
+[options="header"]
+|===
+|Attribute|Description
+|`colspan`|объединяет ячейки по горизонтали
+|`rowspan`|объединяет ячейки по вертикали
+|===
+
+== Forms
+
+=== Example Form
+
+[.fragment]
+image::form.png[Form]
+
+=== `<form>`
+
+[.fragment]
+[source,html]
+----
+<form action="https://rakovets.com/login" method="get">
+    поля формы
+</form>
+----
+
+[.step]
+* `action` - задает адрес (*URL*) отправки формы
+* `method` - задает метод отправки формы
+
+=== `<label>`
+
+[.fragment]
+Связывает текст (подпись) и поле ввода.
+
+[.fragment]
+[source,html]
+----
+<label>
+    Подпись<input type="text" name="username">
+</label>
+----
+
+[.fragment]
+image::label.png[Label]
+
+[.fragment]
+image::label2.png[Label]
+
+=== `<input>`
+
+[.fragment]
+[source,html]
+----
+<form action="https://rakovets.com/registr" method="get">
+    <input type="${type}" name="${name}">
+</form>
+----
+
+[.step]
+* `type` - задает тип поля
+* `name` - задает имя поля
+
+=== Values for attribute `type`
+
+[.fragment]
+image::values-for-attribute-type.png[Values for attribute `type`]
+
+=== Values for attribute `type` (HTML5)
+
+[.fragment]
+image::values-for-attribute-type-html5.png[Values for attribute `type` (HTML5)]
+
+=== Values for attribute `type` (HTML5) support
+
+[.fragment]
+image::values-for-attribute-type-html5-support.png[Values for attribute `type` (HTML5) support]
+
+=== `<input type="text" hidden>`
+
+[.fragment]
+[source,html]
+----
+<input type="text" name="hide" value="15135" hidden>
+----
+
+=== `<input type="checkbox">`
+
+[.fragment]
+[source,html]
+----
+<input type="checkbox" checked>
+----
+
+[.fragment]
+Работает как выбор: ДА или НЕТ. `checked` – по умолчанию установить
+
+[.fragment]
+image::checkbox.png[checkbox]
+
+=== `<input type="radio">`
+
+[.fragment]
+[source,html]
+----
+<input type="radio" name="question-tag" value="p">
+<input type="radio" name="question-tag" value="b" checked>
+----
+
+[.fragment]
+Работает как выбор ОДНОГО из вариантов. `checked` - значение по умолчанию
+
+[.fragment]
+image::radio.png[radio]
+
+===  `<input type="submit">`
+
+[.fragment]
+[source,html]
+----
+<input type="submit" value="text">
+----
+
+[.fragment]
+image::submit.png["submit"]
+
+=== `<input type="file">`
+
+[.fragment]
+[source,html]
+----
+<form action="https://rakovets.com/file" method="get" enctype="multipart/form-data">
+    <input type="file" name="upload-file">
+</form>
+----
+
+[.fragment]
+image::file.png[file]
+
+=== `<textarea>`
+
+[.fragment]
+[source,html]
+----
+<textarea rows="45" cols="32"> text </textarea>
+----
+
+[.fragment]
+image::textarea.png[textarea]
+
+=== `<select>`
+
+[.fragment]
+[source,html]
+----
+<select name="year">
+    <option value="2000">2000 год</option>
+    <option value="2005">2005 год</option>
+    <option value="2010">2010 год</option>
+    <option value="2015">2015 год</option>
+</select>
+----
+
+[.fragment]
+Работает как выбор ОДНОГО из вариантов.
+
+[.fragment]
+image::select.png[select]
+
+=== `<select multiple>`
+
+[.fragment]
+[source,html]
+----
+<select name="years" size="2" multiple>
+    <option value="2000" selected>2000 год</option>
+    <option value="2005">2005 год</option>
+    <option value="2010">2010 год</option>
+    <option value="2015">2015 год</option>
+</select>
+----
+
+[.step]
+* `multiple` - мультиселект
+* `size` - высота мультиселекта
+* `selected` - выбор вариантов по умолчанию
