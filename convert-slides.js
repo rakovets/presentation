@@ -14,7 +14,7 @@ var options = {
         'source-highlighter=highlightjs',
         'highlightjs-theme=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/vs.min.css',
         'customcss=/assets/css/custom.css',
-        'highlightjs-languages: xml, java, json, html, css'
+        'highlightjs-languages: xml, java, json, html, css, sql'
     ]
 }
 
@@ -99,6 +99,7 @@ asciidoctor.convertFile('./common/design-patterns.adoc', options)
 asciidoctor.convertFile('./common/design-principles.adoc', options)
 asciidoctor.convertFile('./common/git.adoc', options)
 asciidoctor.convertFile('./common/hardware-resources.adoc', options)
+asciidoctor.convertFile('./common/html.adoc', options)
 asciidoctor.convertFile('./common/http.adoc', options)
 asciidoctor.convertFile('./common/i18n.adoc', options)
 asciidoctor.convertFile('./common/json.adoc', options)
@@ -117,9 +118,3 @@ asciidoctor.convertFile('./sql/aggregation-functions-and-grouping.adoc', options
 asciidoctor.convertFile('./sql/multi-tabular-databases.adoc', options)
 asciidoctor.convertFile('./sql/designing-relational-databases.adoc', options)
 asciidoctor.convertFile('./sql/advanced-sql.adoc', options)
-
-// Course: "HTML"
-asciidoctor.convertFile('./html/forms.adoc', options)
-asciidoctor.convertFile('./html/tables.adoc', options)
-asciidoctor.convertFile('./html/links.adoc', options)
-asciidoctor.convertFile('./html/text-markup.adoc', options)

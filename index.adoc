@@ -13,7 +13,6 @@
 
 * <<course-common, Common.>>
 * <<course-sql, SQL.>>
-* <<course-html, HTML.>>
 * <<course-javascript-basic, JavaScript Basic.>>
 
 == Course: Core Java [[course-java-core]]
@@ -147,6 +146,7 @@
 
 * link:./common/http.html[HTTP]
 * link:./common/css.html[CSS.]
+* link:./common/html.html[HTML.]
 * link:./common/scrum.html[Scrum.]
 
 == Course: SQL [[course-sql]]
@@ -159,15 +159,6 @@
 * link:./sql/multi-tabular-databases.html[Multi-tabular databases.]
 * link:./sql/designing-relational-databases.html[Designing relational databases.]
 * link:./sql/advanced-sql.html[Advanced SQL.]
-
-== Course: HTML [[course-html]]
-
-=== Course: HTML
-
-* link:./html/text-markup.html[Text Markup.]
-* link:./html/links.html[Links.]
-* link:./html/forms.html[Forms.]
-* link:./html/tables.html[Tables.]
 
 == Course: JavaScript Basic [[course-javascript-basic]]
 
