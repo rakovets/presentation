@@ -1,5 +1,5 @@
 = CSS
-:imagesdir: ../assets/img/html-and-css/
+:imagesdir: ../assets/img/common/css/
 
 == Problem
 
