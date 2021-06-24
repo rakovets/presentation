@@ -154,10 +154,10 @@
 
 === Course: SQL
 
-* link:./sql/intro.html[Intro.]
+* link:./sql/basics.html[Basics.]
 * link:./sql/data-manipulation.html[Data manipulation.]
-* link:./sql/aggregation-functions-and-grouping.html[Aggregation functions and grouping.]
 * link:./sql/multi-tabular-databases.html[Multi-tabular databases.]
+* link:./sql/aggregation-functions-and-grouping.html[Aggregation functions and grouping.]
 * link:./sql/designing-relational-databases.html[Designing relational databases.]
 * link:./sql/advanced-sql.html[Advanced SQL.]
 
