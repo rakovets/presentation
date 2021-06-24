@@ -19,6 +19,7 @@ jobs:
     - run: npm i
     - run: node convert-slides.js
     - run: echo 'node_modules/' > ./.gitignore
+    - run: echo 'p.rakovets.by' > CNAME
     - run: rm -rf ./*.adoc
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
