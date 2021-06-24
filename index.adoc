@@ -147,6 +147,7 @@
 * link:./common/http.html[HTTP]
 * link:./common/css.html[CSS.]
 * link:./common/html.html[HTML.]
+* link:./common/databases.html[Databases.]
 * link:./common/scrum.html[Scrum.]
 
 == Course: SQL [[course-sql]]

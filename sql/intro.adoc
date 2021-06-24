@@ -5,38 +5,6 @@
 [.fragment]
 *SQL* - один из самых востребованных языков
 
-== Типы баз данных
-
-[.step]
-* SQL
-* NoSQL
-
-== DB
-
-[.step]
-* *DataBase* (*DB* - *БД* - *База Данных*)
-* *DB* хранит данные
-* Управляется с помощью *DBMS*
-
-== DBMS
-
-=== DBMS
-
-[.step]
-* *DBMS* (*DataBase Management System* - *системой управления базами данных*)
-
-
-Сравнение
-
-=== RDBMS
-
-[.step]
-* PostgreSQL
-* MariaDB (MySQL)
-* SQLite
-* MS-SQL
-* Oracle
-
 == SQL
 
 === SQL

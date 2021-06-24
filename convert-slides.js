@@ -95,6 +95,7 @@ asciidoctor.convertFile('./common/architectural-patterns/architectural-patterns.
 asciidoctor.convertFile('./common/architectural-patterns/client-server.adoc', options)
 asciidoctor.convertFile('./common/css.adoc', options)
 asciidoctor.convertFile('./common/data-structures.adoc', options)
+asciidoctor.convertFile('./common/databases.adoc', options)
 asciidoctor.convertFile('./common/design-patterns.adoc', options)
 asciidoctor.convertFile('./common/design-principles.adoc', options)
 asciidoctor.convertFile('./common/git.adoc', options)
