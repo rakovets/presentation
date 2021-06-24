@@ -7,6 +7,7 @@ Presentations for different courses. Use *AsciiDoc* and *Asciidoctor Reveal.js* 
 Need to install:
 
 * Docker
+* Docker-compose (_Optional_)
 
 === Build image
 
@@ -17,16 +18,36 @@ docker build -t rakovets/presentation .
 
 === Run container
 
+==== Run with docker
+
 [source,sh]
 ----
 docker run -dp 3000:80 rakovets/presentation
 ----
 
-=== Force remove container on 3000 port
+==== Run with docker-compose
+
+[source,sh]
+----
+docker-compose up -d
+----
+
+=== Stop
+
+==== Stop with docker
+
+Force remove container on 3000 port
 
 [source,sh]
 ----
 docker ps -aqf "publish=3000" | xargs docker rm -f
+----
+
+==== Stop with docker-compose
+
+[source,sh]
+----
+docker-compose down
 ----
 
 == Code of Conduct

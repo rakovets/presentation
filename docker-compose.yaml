@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  presentation:
+    container_name: presentation_container
+    image: rakovets/presentation
+    restart: unless-stopped
+    ports:
+      - 3000:80
