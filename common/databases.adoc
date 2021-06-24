@@ -35,6 +35,7 @@
 ** запятая или точка с запятой в csv-файлах датасетов
 ** двоеточие или пробел в *nix-подобных системах
 * Примеры:
+[.step]
 ** `/etc/passwd` и `/etc/fstab` в *nix-системах
 ** csv-файлы
 
@@ -61,7 +62,7 @@
 
 == NoSQL DB
 
-== Типы NoSQL баз данных
+=== Типы NoSQL баз данных
 
 [.step]
 * Ключ-значение базы данных
@@ -75,8 +76,8 @@
 
 [.step]
 * Хранилище типа ключ-значение
-[.step]
 * Применение:
+[.step]
 ** хранение изображений
 ** создание специализированных файловых систем
 ** кэши для объектов
@@ -84,49 +85,49 @@
 [.step]
 ** высокая скорость
 ** высокая масштабируемость
-* DBMS: Redis, Memcached, etcd, Amazon DynamoDB, Riak, LevelDB
+* DBMS: *Redis*, *Memcached*, *etcd*, *Amazon DynamoDB*, *Riak*, *LevelDB*
 
 === Документоориентированные базы данных
 
 [.step]
 * Единица хранения - документ (json, bson, xml)
-[.step]
 * Применение:
+[.step]
 ** Управление контентом
 ** Каталоги
 * Преимущества:
 [.step]
 ** высокая скорость
 ** высокая гибкость данных
-* DBMS: MongoDB, CouchDB, Amazon DocumentDB
+* DBMS: *MongoDB*, *CouchDB*, *Amazon DocumentDB*
 
 === Колоночные/столбцовые базы данных
 
 [.step]
 * Инверсия хранения для быстрого доступа
-[.step]
 * Применение:
+[.step]
 ** Большой объем данных
 ** Аналитика
 * Преимущества:
 [.step]
 ** высокая скорость поиска по большим данным
 ** высокая гибкость данных
-* DBMS: Apache HBase, Apache Cassandra, ScyllaDB, ClickHouse
+* DBMS: *Apache HBase*, *Apache Cassandra*, *ClickHouse*, *ScyllaDB*
 
 === Графовые базы данных
 
 [.step]
 * Наглядность связей
-[.step]
 * Применение:
+[.step]
 ** Большой объем связанных данных
 ** Соцсети
 * Преимущества:
 [.step]
 ** высокая скорость поиска по большим данным
 ** высокая гибкость данных
-* DBMS: Neo4j, OrientDB
+* DBMS: *Neo4j*, *OrientDB*
 
 == Relational DB
 
@@ -142,14 +143,14 @@
 === RDBMS
 
 [.step]
-* PostgreSQL (free and open-source)
-* MariaDB (free and open-source)
-* MySQL (open-source or proprietary, Oracle Corporation)
-* SQLite (public, Dwayne Richard Hipp)
-* SQL Server (proprietary, Microsoft)
-* Oracle® Database (proprietary, Oracle Corporation)
+* *PostgreSQL* (free and open-source)
+* *MariaDB* (free and open-source)
+* *SQLite* (public, Dwayne Richard Hipp)
+* *MySQL* (open-source or proprietary, Oracle Corporation)
+* *SQL Server* (proprietary, Microsoft)
+* *Oracle® Database* (proprietary, Oracle Corporation)
 
 === RDBMS
 
 [.fragment]
-link:../assets/img/common/rdbms-timeline.svg[RDBMS timeline]
+link:../assets/img/common/rdbms-timeline.svg[RDBMS timeline: 1970-2017]
