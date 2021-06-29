@@ -1,0 +1,1223 @@
+= JavaScript
+
+== Intro
+
+=== Введение в JavaScript
+
+[.step]
+* *JavaScript* — мультипарадигменный язык программирования. Поддерживает стили:
+[.step]
+** *объектно-ориентированный*
+** *императивный*
+** *функциональный*
+* *JavaScript* обычно используется как встраиваемый язык для программного доступа к объектам приложений.
+* Наиболее широкое применение находит в браузерах как *язык сценариев* для придания интерактивности веб-страницам.
+* *JavaScript* является интерпретируемым языком
+
+== Синтаксис
+
+=== Инструкции
+
+[.fragment]
+[source, javascript]
+----
+alert("Вычисление выражения")
+var a = 5 + 8
+alert(a)
+----
+
+[.fragment]
+[source, javascript]
+----
+alert("Вычисление выражения"); var a = 5 + 8; alert(a);
+----
+
+[.fragment]
+[source, javascript]
+----
+alert("Вычисление выражения");
+var a = 5 + 8;
+alert(a);
+----
+
+=== Комментарии
+
+[.fragment]
+[source, javascript]
+----
+// вывод сообщения
+alert("Вычисление выражения");
+// арифметическая операция
+var a = 5 + 8;
+alert(a);
+----
+
+[.fragment]
+[source, javascript]
+----
+// вывод сообщения
+/*  вывод сообщения и
+ арифметическая операция */
+alert("Вычисление выражения");
+var a = 5 + 8;
+alert(a);
+----
+
+== Переменные и константы
+
+=== Объявление переменных
+
+[.fragment]
+[source, javascript]
+----
+var myIncome;
+// другой вариант
+let myIncome2;
+----
+
+=== Объявление переменных
+
+[.fragment]
+[source, javascript]
+----
+a1 = 1;
+console.log(a1);
+var a2 = 2;
+console.log(a2);
+let a3 = 3;
+console.log(a3);
+----
+
+[.fragment]
+----
+1
+2
+3
+----
+
+=== Объявление переменных
+
+[.fragment]
+[source, javascript]
+----
+c = 1;
+console.log(c);
+var c = 2;
+console.log(c);
+let c = 2; // Uncaught SyntaxError: redeclaration of var c
+console.log(c);
+----
+
+=== Названия переменных: correct
+
+[.fragment]
+[source, javascript]
+----
+$commision
+someVariable
+product_Store
+income2
+myIncome_from_deposit
+----
+
+=== Названия переменных: wrong
+
+[.fragment]
+[source, javascript]
+----
+222lol
+@someVariable
+my%percent
+----
+
+[.fragment]
+[source, javascript]
+----
+var for;
+----
+
+=== Инициализация
+
+[.fragment]
+[source, javascript]
+----
+var income = 300;
+income = 400;
+console.log(income);
+
+let price = 76;
+price = 54;
+console.log(price);
+----
+
+=== Константы
+
+[.fragment]
+[source, javascript]
+----
+const rate = 10;
+----
+
+[.fragment]
+[source, javascript]
+----
+const rate = 10;
+rate = 23;  // ошибка, rate - константа, поэтому  нельзя изменить ее значение
+----
+
+[.fragment]
+[source, javascript]
+----
+const rate; // ошибка, rate не инициализирована
+----
+
+== Типы данных
+
+=== Типы данных
+
+[.step]
+* Примитивные типы
+[.step]
+** `String`: представляет строку
+** `Number`: представляет числовое значение
+** `Boolean`: представляет логическое значение `true` или `false`
+** `undefined`: указывает, что значение не установлено
+** `null`: указывает на неопределенное значение
+* `object`: объектный тип
+
+=== Числовые данные
+
+[.step]
+* *Целые числа*. Диапазон используемых чисел: *от* `-2^53` *до* `2^53`.
+* *Дробные числа* (*числа с плавающей точкой*). Для чисел с плавающей точкой используется тот же диапазон: *от* `-2^53` *до* `2^53`.
+
+=== Строки
+
+[.fragment]
+[source, javascript]
+----
+var helloWorld = "Привет мир";
+var helloWorld2 = 'Привет мир';
+----
+
+[.fragment]
+[source, javascript]
+----
+var helloWorld = 'Привет мир"; // ошибка
+----
+
+[.fragment]
+[source, javascript]
+----
+var companyName = "Бюро \"Рога и копыта\"";
+----
+
+[.fragment]
+[source, javascript]
+----
+var companyName1 = "Бюро 'Рога и копыта'";
+var companyName2 = 'Бюро "Рога и копыта"';
+----
+
+=== Тип `Boolean`
+
+[.fragment]
+[source, javascript]
+----
+var isAlive = true;
+var isDead = false;
+----
+
+=== `null` и `undefined`
+
+[.fragment]
+[source, javascript]
+----
+var isAlive;
+console.log(isAlive);
+----
+
+----
+undefined
+----
+
+=== `null` и `undefined`
+
+[.step]
+* `null`: означает, что переменная имеет некоторое неопределенное значение
+* `undefined`: означает, что переменная не имеет значения  (фактически: отсутствие чего-либо)
+
+=== `null` и `undefined`
+
+[.fragment]
+[source, javascript]
+----
+var isAlive;
+console.log(isAlive); // undefined
+isAlive = null;
+console.log(isAlive); // null
+isAlive = undefined;  // снова установим тип undefined
+console.log(isAlive); // undefined
+----
+
+=== `object`
+
+[.fragment]
+[source, javascript]
+----
+var user = {};
+----
+
+[.fragment]
+[source, javascript]
+----
+var user = {name: "Tom", age:24};
+console.log(user.name);
+----
+
+[.fragment]
+----
+Tom
+----
+
+=== Слабая типизация
+
+[.fragment]
+[source, javascript]
+----
+var xNumber; // тип `undefined`
+console.log(xNumber);
+xNumber = 45; // тип `number`
+console.log(xNumber);
+xNumber = "45"; // тип `string`
+console.log(xNumber);
+----
+
+[.fragment]
+----
+undefined
+45
+45
+----
+
+=== Слабая типизация
+
+[.fragment]
+[source, javascript]
+----
+var xNumber = 45; // тип `number`
+var yNumber = xNumber + 5;
+console.log(yNumber);
+
+xNumber = "45"; // тип `string`
+var zNumber = xNumber + 5
+console.log(zNumber);
+----
+
+[.fragment]
+----
+50
+455
+----
+
+== Операторы
+
+=== Оператор `typeof`
+
+[.fragment]
+[source, javascript]
+----
+var name = "Tom";
+console.log(typeof name);
+var income = 45.8;
+console.log(typeof income);
+var isEnabled = true;
+console.log(typeof isEnabled);
+var undefVariable;
+console.log(typeof undefVariable);
+----
+
+=== Математические операторы
+
+[.step]
+* `+`
+* `-`
+* `*`
+* `/`
+* `%`
+* `++`
+* `--`
+
+=== Операции присваивания
+
+[.step]
+* `=`
+* `+=`
+* `-=`
+* `*=`
+* `/=`
+* `%=`
+
+=== Операторы сравнения
+
+[.step]
+* `==` - оператор равенства (значения)
+* `===` - оператор тождественности (типы и значения)
+* `!=`
+* `!==`
+* `<`
+* `>`
+* `\<=`
+* `>=`
+
+=== Логические операции
+
+[.step]
+* `&&`
+* `||`
+* `!`
+
+=== Конкатенация
+
+[.fragment]
+[source, javascript]
+----
+var name = "Том";
+var surname = "Сойер"
+var fullname = name + " " + surname;
+console.log(fullname);
+----
+
+[.fragment]
+----
+Том Сойер
+----
+
+=== Конкатенация
+
+[.fragment]
+[source, javascript]
+----
+var name = "Том";
+var fullname = name + 256;
+console.log(fullname);
+----
+
+[.fragment]
+----
+Том256
+----
+
+== Преобразование данных
+
+=== Преобразование данных
+
+[.fragment]
+[source, javascript]
+----
+var number1 = "46";
+var number2 = "4";
+var result = number1 + number2;
+console.log(result);
+----
+
+[.fragment]
+----
+464
+----
+
+=== `parseInt()`
+
+[.fragment]
+[source, javascript]
+----
+var number1 = "46";
+var number2 = "4";
+var result = parseInt(number1) + parseInt(number2);
+console.log(result);
+----
+
+[.fragment]
+----
+50
+----
+
+=== `parseFloat()`
+
+[.fragment]
+[source, javascript]
+----
+var number1 = "46.07";
+var number2 = "4.98";
+var result = parseFloat(number1) + parseFloat(number2);
+console.log(result);
+----
+
+[.fragment]
+----
+51.05
+----
+
+=== Исключительные случаи
+
+[.fragment]
+[source, javascript]
+----
+var num1 = "123hello";
+var num2 = parseInt(num1);
+console.log(num2);
+----
+
+[.fragment]
+----
+123
+----
+
+=== `NaN` и `isNaN()`
+
+[.fragment]
+[source, javascript]
+----
+var num1 = "javascript";
+var num2 = "22";
+var result = isNaN(num1);
+console.log(result);
+
+result = isNaN(num2);
+console.log(result);
+----
+
+[.fragment]
+----
+true
+false
+----
+
+=== Другие системы счисления
+
+[.fragment]
+[source, javascript]
+----
+var num1 = "110";
+var num2 = parseInt(num1, 2);
+console.log(num2);
+----
+
+[.fragment]
+----
+6
+----
+
+== Массивы
+
+=== Массивы
+
+[.fragment]
+[source, javascript]
+----
+var myArray = new Array();
+----
+
+[.fragment]
+[source, javascript]
+----
+var myArray = [];
+----
+
+[.fragment]
+[source, javascript]
+----
+var people = ["Tom", "Alice", "Sam"];
+console.log(people);
+----
+
+=== Массивы
+
+[.fragment]
+[source, javascript]
+----
+var people = ["Tom", "Alice", "Sam"];
+console.log(people[7]);
+----
+
+[.fragment]
+----
+undefined
+----
+
+=== Массивы
+
+[.fragment]
+[source, javascript]
+----
+var people = ["Tom", "Alice", "Sam"];
+console.log(people[7]);
+people[7] = "Bob";
+console.log(people[7]);
+----
+
+[.fragment]
+----
+undefined
+Bob
+----
+
+=== Массивы
+
+[.fragment]
+[source, javascript]
+----
+var objects = ["Tom", 12, true, 3.14, false];
+console.log(objects);
+----
+
+=== spread-оператор
+
+[.fragment]
+[source, javascript]
+----
+let numbers = [1, 2, 3, 4];
+console.log(...numbers);
+console.log(numbers);
+----
+
+[.fragment]
+----
+1 2 3 4
+[1, 2, 3, 4]
+----
+
+=== Многомерные массивы
+
+[.fragment]
+[source, javascript]
+----
+var numbers1 = [0, 1, 2, 3, 4, 5 ]; // одномерный массив
+var numbers2 = [[0, 1, 2], [3, 4, 5]]; // двумерный массив
+----
+
+== Условные конструкции
+
+=== Проверка на наличие значения
+
+[.fragment]
+[source, javascript]
+----
+var myVar = 89;
+if (myVar) {
+    // действия
+}
+----
+
+=== Проверка на `undefined`
+
+[.fragment]
+[source, javascript]
+----
+if (typeof myVar != "undefined") {
+    // действия
+}
+----
+
+== `true` или `false`
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+(undefined) ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+(null) ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+(true) ? true : false
+----
+
+[.fragment]
+----
+true
+----
+
+[.fragment]
+[source, javascript]
+----
+(false) ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+(0) ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+[.fragment]
+[source, javascript]
+----
+(NaN) ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+('') ? true : false
+----
+
+[.fragment]
+----
+false
+----
+
+=== `true` или `false`?
+
+[.fragment]
+[source, javascript]
+----
+(new Boolean(false)) ? true : false
+----
+
+[.fragment]
+----
+true
+----
+
+== Циклы
+
+=== Циклы
+
+[.step]
+* `for`
+* `while`
+* `do..while`
+* `for..in` - предназначен для перебора коллекций, например, массивов
+* `for..of` - предназначен для перебора массивов и объектов
+
+== Функции
+
+=== Функции
+
+[.fragment]
+[source, javascript]
+----
+function имя_функции([параметр [, ...]]) {
+    // Инструкции
+}
+----
+
+[.fragment]
+[source, javascript]
+----
+function display() {
+    document.write("функция в JavaScript");
+}
+----
+
+=== Вызов функции
+
+[.fragment]
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script>
+        function display() {
+            document.write("функция в JavaScript");
+        }
+        display();
+    </script>
+</body>
+</html>
+----
+
+=== Анонимные функции
+
+[.fragment]
+[source, javascript]
+----
+var display = function() { // определение функции
+    document.write("функция в JavaScript");
+}
+display();
+----
+
+[.fragment]
+[source, javascript]
+----
+function goodMorning() {
+    document.write("Доброе утро");
+}
+function goodEvening() {
+    document.write("Добрый вечер");
+}
+var message = goodMorning;
+message();
+message = goodEvening;
+message();
+----
+
+[.fragment]
+----
+Доброе утро
+Добрый вечер
+----
+
+=== Параметры функции
+
+[.fragment]
+[source, javascript]
+----
+function display(x) { // определение функции
+    var z = x * x;
+    document.write(x + " в квадрате равно " + z);
+}
+display(5); // вызов функции
+----
+
+=== Параметры функции
+
+[.fragment]
+[source, javascript]
+----
+function sum(a, b, c) {
+    let d = a + b + c;
+    console.log(d);
+}
+
+sum(1, 2, 3);
+let nums = [4, 5, 6];
+sum(...nums);
+----
+
+=== Необязательные параметры
+
+[.fragment]
+[source, javascript]
+----
+function display(x, y) {
+    if(y === undefined) y = 5;
+    if(x === undefined) x = 8;
+    let z = x * y;
+    console.log(z);
+}
+display();
+display(6);
+display(6, 4);
+----
+
+[.fragment]
+----
+40
+30
+24
+----
+
+=== Необязательные параметры
+
+[.fragment]
+[source, javascript]
+----
+function display(x = 5, y = 10) {
+    let z = x * y;
+    console.log(z);
+}
+display();
+display(6);
+display(6, 4);
+----
+
+[.fragment]
+----
+50
+60
+24
+----
+
+=== Необязательные параметры
+
+[.fragment]
+[source, javascript]
+----
+function display(x = 5, y = 10 + x) {
+    let z = x * y;
+    console.log(z);
+}
+display();
+display(6);
+display(6, 4);
+----
+
+[.fragment]
+----
+75
+96
+24
+----
+
+=== Неопределенное количество параметров
+
+[.fragment]
+[source, javascript]
+----
+function display(season, ...temps) {
+    console.log(season);
+    for (index in temps) {
+        console.log(temps[index]);
+    }
+}
+display("Весна", -2, -3, 4, 2, 5);
+display("Лето", 20, 23, 31);
+----
+
+[.fragment]
+----
+Весна -2 -3 4 2 5;
+Лето 20 23 31;
+----
+
+=== Результат функции
+
+[.fragment]
+[source, javascript]
+----
+var y = 5;
+var z = square(y);
+document.write(y + " в квадрате равно " + z);
+
+function square(x) {
+    return x * x;
+}
+----
+
+=== Функции в качестве параметров
+
+[.fragment]
+[source, javascript]
+----
+function sum(x, y) {
+    return x + y;
+}
+
+function subtract(x, y) {
+    return x - y;
+}
+
+function operation(x, y, func) {
+    var result = func(x, y);
+    console.log(result);
+}
+
+console.log("Sum");
+operation(10, 6, sum);
+console.log("Subtract");
+operation(10, 6, subtract);
+----
+
+[.fragment]
+----
+Sum
+16
+Subtract
+4
+----
+
+=== Возвращение функции из функции
+
+[.fragment]
+[source, javascript]
+----
+function menu(n) {
+    if (n == 1)
+        return function(x, y) { return x + y;}
+    else if(n == 2)
+        return function(x, y) { return x - y;}
+    else if(n == 3)
+        return function(x, y) { return x * y;}
+    return undefined;
+}
+
+for (var i=1; i < 5; i++) {
+    var action = menu(i);
+    if (action !== undefined) {
+        var result = action(5, 4);
+        console.log(result);
+    }
+}
+----
+
+== Область видимости переменных
+
+=== Область видимости переменных
+
+[.step]
+* global
+* local
+
+=== Область видимости переменных
+
+[.fragment]
+[source, javascript]
+----
+var x = 5; <1>
+let d = 8; <2>
+function displaySquare() {
+    var z = x * x; <3>
+    console.log(z);
+}
+----
+
+=== Сокрытие переменных
+
+[.fragment]
+[source, javascript]
+----
+var z = 89;
+function displaySquare() {
+    var z = 10;
+    console.log(z);
+}
+displaySquare();
+----
+
+[.fragment]
+----
+10
+----
+
+=== `let`
+
+[.fragment]
+[source, javascript]
+----
+let z = 10;
+function displayZ() {
+    let z = 20;
+    {
+        let z = 30;
+        console.log("Block: ", z);
+    }
+    console.log("Function: ", z);
+}
+
+displayZ();
+console.log("Global: ", z);
+----
+
+[.fragment]
+----
+Block: 30
+Function: 20
+Global: 10
+----
+
+=== `var`
+
+[.fragment]
+[source, javascript]
+----
+function displaySquare() {
+    var z = 20;
+    {
+        var z = 30; // Ошибка ! Переменная z уже определена
+        console.log("Block:", z);
+    }
+    console.log("Function:", z);
+}
+----
+
+=== `const`
+
+[.fragment]
+[source, javascript]
+----
+const z = 10;
+function displayZ() {
+    const z = 20;
+    {
+        const z = 30;
+        console.log("Block:", z);
+    }
+    console.log("Function:", z);
+}
+
+displayZ();
+console.log("Global:", z);
+----
+
+[.fragment]
+----
+Block: 30
+Function: 20
+Global: 10
+----
+
+=== Необъявленные переменные
+
+[.fragment]
+[source, javascript]
+----
+function bar() {
+    foo = "25";
+}
+bar();
+console.log(foo);
+----
+
+[.fragment]
+----
+25
+----
+
+=== strict mode
+
+[.fragment]
+[source, javascript]
+----
+"use strict";
+function bar() {
+    foo = "25";
+}
+
+bar();
+console.log(foo);
+----
+
+== Замыкания
+
+== Функции IIFE
+
+== Паттерн Модуль
+
+== Рекурсивные функции
+
+== Переопределение функций
+
+== Hoisting
+
+=== Hoisting
+
+[.fragment]
+[source, javascript]
+----
+console.log(foo);
+----
+
+[.fragment]
+----
+Uncaught ReferenceError: foo is not defined
+----
+
+=== Hoisting
+
+[.fragment]
+[source, javascript]
+----
+console.log(foo);
+var foo = "Tom";
+----
+
+[.fragment]
+----
+undefined
+----
+
+=== Hoisting
+
+[.fragment]
+[source, javascript]
+----
+var c = a * b;
+var a = 7;
+var b = 3;
+console.log(c);
+----
+
+[.fragment]
+----
+NaN
+----
+
+=== Hoisting
+
+[.fragment]
+[source, javascript]
+----
+display();
+
+function display() {
+    console.log("Hello Hoisting");
+}
+----
+
+[.fragment]
+----
+Hello Hoisting
+----
+
+===
+
+[.fragment]
+[source, javascript]
+----
+display();
+
+var display = function () {
+    console.log("Hello Hoisting");
+}
+----
+
+[.fragment]
+----
+TypeError: display is not a function
+----
+
+== Передача параметров по значению и по ссылке
+
+== Стрелочные функции
+
+== ООП
+
+== Строки
