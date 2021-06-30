@@ -412,7 +412,9 @@ var a = 5 + 8;
 alert(a);</code></pre></div></div></div></section></section>
 <section><section id="_переменные_и_константы"><h2>Переменные и константы</h2></section><section id="_объявление_переменных"><h2>Объявление переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var myIncome;
 // другой вариант
-let myIncome2;</code></pre></div></div></div></section><section id="_объявление_переменных_2"><h2>Объявление переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">a1 = 1;
+let myIncome2;
+// еще вариант
+myIncome3;</code></pre></div></div></div></section><section id="_объявление_переменных_2"><h2>Объявление переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">a1 = 1;
 console.log(a1);
 var a2 = 2;
 console.log(a2);
@@ -424,8 +426,9 @@ console.log(a3);</code></pre></div></div>
 console.log(c);
 var c = 2;
 console.log(c);
-let c = 2; // Uncaught SyntaxError: redeclaration of var c
-console.log(c);</code></pre></div></div></div></section><section id="_названия_переменных_correct"><h2>Названия переменных: correct</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">$commision
+let c = 2; <b>(0)</b>
+console.log(c);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>Uncaught SyntaxError: redeclaration of var c</pre></div></div></div></section><section id="_названия_переменных_correct"><h2>Названия переменных: correct</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">$commision
 someVariable
 product_Store
 income2
@@ -438,24 +441,32 @@ console.log(income);
 
 let price = 76;
 price = 54;
-console.log(price);</code></pre></div></div></div></section><section id="_константы"><h2>Константы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const rate = 10;</code></pre></div></div>
+console.log(price);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>400
+54</pre></div></div></div></section><section id="_константы"><h2>Константы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const rate = 10;</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const rate = 10;
-rate = 23;  // ошибка, rate - константа, поэтому  нельзя изменить ее значение</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const rate; // ошибка, rate не инициализирована</code></pre></div></div></div></section></section>
+rate = 23; <b>(0)</b></code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>Uncaught TypeError: invalid assignment to const 'rate'</pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const rate; <b>(0)</b></code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>Uncaught SyntaxError: missing = in const declaration</pre></div></div></div></section></section>
 <section><section id="_типы_данных"><h2>Типы данных</h2></section><section id="_типы_данных_2"><h2>Типы данных</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Примитивные типы</p><div class="ulist step"><ul><li class="fragment"><p><code>String</code>: представляет строку</p></li><li class="fragment"><p><code>Number</code>: представляет числовое значение</p></li><li class="fragment"><p><code>Boolean</code>: представляет логическое значение <code>true</code> или <code>false</code></p></li><li class="fragment"><p><code>undefined</code>: указывает, что значение не установлено</p></li><li class="fragment"><p><code>null</code>: указывает на неопределенное значение</p></li></ul></div></li><li class="fragment"><p><code>object</code>: объектный тип</p></li></ul></div></div></section><section id="_числовые_данные"><h2>Числовые данные</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>Целые числа</strong>. Диапазон используемых чисел: <strong>от</strong> <code>-2^53</code> <strong>до</strong> <code>2^53</code>.</p></li><li class="fragment"><p><strong>Дробные числа</strong> (<strong>числа с плавающей точкой</strong>). Для чисел с плавающей точкой используется тот же диапазон: <strong>от</strong> <code>-2^53</code> <strong>до</strong> <code>2^53</code>.</p></li></ul></div></div></section><section id="_строки"><h2>Строки</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var helloWorld = "Привет мир";
 var helloWorld2 = 'Привет мир';</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var helloWorld = 'Привет мир"; // ошибка</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var helloWorld = 'Привет мир"; <b>(0)</b></code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>Uncaught SyntaxError: '' literal not terminated before end of scrip</pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var companyName = "Бюро \"Рога и копыта\"";</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var companyName1 = "Бюро 'Рога и копыта'";
 var companyName2 = 'Бюро "Рога и копыта"';</code></pre></div></div></div></section><section id="_тип_boolean"><h2>Тип <code>Boolean</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var isAlive = true;
-var isDead = false;</code></pre></div></div></div></section><section id="_null_и_undefined"><h2><code>null</code> и <code>undefined</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var isAlive;
+var isDead = false;</code></pre></div></div></div></section><section id="_undefined"><h2><code>undefined</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var isAlive;
 console.log(isAlive);</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre>undefined</pre></div></div></div></section><section id="_null_и_undefined_2"><h2><code>null</code> и <code>undefined</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>null</code>: означает, что переменная имеет некоторое неопределенное значение</p></li><li class="fragment"><p><code>undefined</code>: означает, что переменная не имеет значения  (фактически: отсутствие чего-либо)</p></li></ul></div></div></section><section id="_null_и_undefined_3"><h2><code>null</code> и <code>undefined</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var isAlive;
-console.log(isAlive); // undefined
+<div class="listingblock"><div class="content"><pre>undefined</pre></div></div></div></section><section id="_null_и_undefined"><h2><code>null</code> и <code>undefined</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>null</code>: означает, что переменная имеет некоторое неопределенное значение</p></li><li class="fragment"><p><code>undefined</code>: означает, что переменная не имеет значения  (фактически: отсутствие чего-либо)</p></li></ul></div></div></section><section id="_null_и_undefined_2"><h2><code>null</code> и <code>undefined</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var isAlive;
+console.log(isAlive);
 isAlive = null;
-console.log(isAlive); // null
-isAlive = undefined;  // снова установим тип undefined
-console.log(isAlive); // undefined</code></pre></div></div></div></section><section id="_object"><h2><code>object</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var user = {};</code></pre></div></div>
+console.log(isAlive);
+isAlive = undefined; // снова установим тип undefined
+console.log(isAlive);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>undefined
+null
+undefined</pre></div></div></div></section><section id="_object"><h2><code>object</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var user = {};</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var user = {name: "Tom", age:24};
 console.log(user.name);</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>Tom</pre></div></div></div></section><section id="_слабая_типизация"><h2>Слабая типизация</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var xNumber; // тип `undefined`
@@ -482,7 +493,11 @@ console.log(typeof income);
 var isEnabled = true;
 console.log(typeof isEnabled);
 var undefVariable;
-console.log(typeof undefVariable);</code></pre></div></div></div></section><section id="_математические_операторы"><h2>Математические операторы</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>+</code></p></li><li class="fragment"><p><code>-</code></p></li><li class="fragment"><p><code>*</code></p></li><li class="fragment"><p><code>/</code></p></li><li class="fragment"><p><code>%</code></p></li><li class="fragment"><p><code>++</code></p></li><li class="fragment"><p><code>--</code></p></li></ul></div></div></section><section id="_операции_присваивания"><h2>Операции присваивания</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>=</code></p></li><li class="fragment"><p><code>+=</code></p></li><li class="fragment"><p><code>-=</code></p></li><li class="fragment"><p><code>*=</code></p></li><li class="fragment"><p><code>/=</code></p></li><li class="fragment"><p><code>%=</code></p></li></ul></div></div></section><section id="_операторы_сравнения"><h2>Операторы сравнения</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>==</code> - оператор равенства (значения)</p></li><li class="fragment"><p><code>===</code> - оператор тождественности (типы и значения)</p></li><li class="fragment"><p><code>!=</code></p></li><li class="fragment"><p><code>!==</code></p></li><li class="fragment"><p><code>&lt;</code></p></li><li class="fragment"><p><code>&gt;</code></p></li><li class="fragment"><p><code>&lt;=</code></p></li><li class="fragment"><p><code>&gt;=</code></p></li></ul></div></div></section><section id="_логические_операции"><h2>Логические операции</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>&amp;&amp;</code></p></li><li class="fragment"><p><code>||</code></p></li><li class="fragment"><p><code>!</code></p></li></ul></div></div></section><section id="_конкатенация"><h2>Конкатенация</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var name = "Том";
+console.log(typeof undefVariable);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>string
+number
+boolean
+undefined</pre></div></div></div></section><section id="_математические_операторы"><h2>Математические операторы</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>+</code></p></li><li class="fragment"><p><code>-</code></p></li><li class="fragment"><p><code>*</code></p></li><li class="fragment"><p><code>/</code></p></li><li class="fragment"><p><code>%</code></p></li><li class="fragment"><p><code>++</code></p></li><li class="fragment"><p><code>--</code></p></li></ul></div></div></section><section id="_операции_присваивания"><h2>Операции присваивания</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>=</code></p></li><li class="fragment"><p><code>+=</code></p></li><li class="fragment"><p><code>-=</code></p></li><li class="fragment"><p><code>*=</code></p></li><li class="fragment"><p><code>/=</code></p></li><li class="fragment"><p><code>%=</code></p></li></ul></div></div></section><section id="_операторы_сравнения"><h2>Операторы сравнения</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>==</code> - оператор равенства (значения)</p></li><li class="fragment"><p><code>===</code> - оператор тождественности (типы и значения)</p></li><li class="fragment"><p><code>!=</code></p></li><li class="fragment"><p><code>!==</code></p></li><li class="fragment"><p><code>&lt;</code></p></li><li class="fragment"><p><code>&gt;</code></p></li><li class="fragment"><p><code>&lt;=</code></p></li><li class="fragment"><p><code>&gt;=</code></p></li></ul></div></div></section><section id="_логические_операции"><h2>Логические операции</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>&amp;&amp;</code></p></li><li class="fragment"><p><code>||</code></p></li><li class="fragment"><p><code>!</code></p></li></ul></div></div></section><section id="_конкатенация"><h2>Конкатенация</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var name = "Том";
 var surname = "Сойер"
 var fullname = name + " " + surname;
 console.log(fullname);</code></pre></div></div>
@@ -520,7 +535,8 @@ console.log(num2);</code></pre></div></div>
 <section><section id="_массивы"><h2>Массивы</h2></section><section id="_массивы_2"><h2>Массивы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var myArray = new Array();</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var myArray = [];</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var people = ["Tom", "Alice", "Sam"];
-console.log(people);</code></pre></div></div></div></section><section id="_массивы_3"><h2>Массивы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var people = ["Tom", "Alice", "Sam"];
+console.log(people);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>[ "Tom", "Alice", "Sam" ]</pre></div></div></div></section><section id="_массивы_3"><h2>Массивы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var people = ["Tom", "Alice", "Sam"];
 console.log(people[7]);</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>undefined</pre></div></div></div></section><section id="_массивы_4"><h2>Массивы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var people = ["Tom", "Alice", "Sam"];
 console.log(people[7]);
@@ -528,7 +544,8 @@ people[7] = "Bob";
 console.log(people[7]);</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>undefined
 Bob</pre></div></div></div></section><section id="_массивы_5"><h2>Массивы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var objects = ["Tom", 12, true, 3.14, false];
-console.log(objects);</code></pre></div></div></div></section><section id="_spread_оператор"><h2>spread-оператор</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">let numbers = [1, 2, 3, 4];
+console.log(objects);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>[ "Tom", 12, true, 3.14, false ]</pre></div></div></div></section><section id="_spread_оператор"><h2>spread-оператор</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">let numbers = [1, 2, 3, 4];
 console.log(...numbers);
 console.log(numbers);</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>1 2 3 4
@@ -574,6 +591,7 @@ if (myVar) {
     document.write("функция в JavaScript");
 }
 display();</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>функция в JavaScript</pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function goodMorning() {
     document.write("Доброе утро");
 }
@@ -587,18 +605,21 @@ message();</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>Доброе утро
 Добрый вечер</pre></div></div></div></section><section id="_параметры_функции"><h2>Параметры функции</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function display(x) { // определение функции
     var z = x * x;
-    document.write(x + " в квадрате равно " + z);
+    console.log(x + " в квадрате равно " + z);
 }
-display(5); // вызов функции</code></pre></div></div></div></section><section id="_параметры_функции_2"><h2>Параметры функции</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function sum(a, b, c) {
+display(5); // вызов функции</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>5 в квадрате равно 25</pre></div></div></div></section><section id="_параметры_функции_2"><h2>Параметры функции</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function sum(a, b, c) {
     let d = a + b + c;
     console.log(d);
 }
 
 sum(1, 2, 3);
 let nums = [4, 5, 6];
-sum(...nums);</code></pre></div></div></div></section><section id="_необязательные_параметры"><h2>Необязательные параметры</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function display(x, y) {
-    if(y === undefined) y = 5;
+sum(...nums);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>6
+15</pre></div></div></div></section><section id="_необязательные_параметры"><h2>Необязательные параметры</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function display(x, y) {
     if(x === undefined) x = 8;
+    if(y === undefined) y = 5;
     let z = x * y;
     console.log(z);
 }
@@ -632,15 +653,23 @@ display(6, 4);</code></pre></div></div>
     }
 }
 display("Весна", -2, -3, 4, 2, 5);
-display("Лето", 20, 23, 31);</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre>Весна -2 -3 4 2 5;
-Лето 20 23 31;</pre></div></div></div></section><section id="_результат_функции"><h2>Результат функции</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var y = 5;
+display("Лето", 20, 23, 31);</code></pre></div></div></div></section><section id="_неопределенное_количество_параметров_2"><h2>Неопределенное количество параметров</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre>Весна
+-2
+-3
+4
+2
+5
+Лето
+20
+23
+31;</pre></div></div></div></section><section id="_результат_функции"><h2>Результат функции</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var y = 6;
 var z = square(y);
-document.write(y + " в квадрате равно " + z);
+console.log(y + " в квадрате равно " + z);
 
 function square(x) {
     return x * x;
-}</code></pre></div></div></div></section><section id="_функции_в_качестве_параметров"><h2>Функции в качестве параметров</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function sum(x, y) {
+}</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>6 в квадрате равно 36</pre></div></div></div></section><section id="_функции_в_качестве_параметров"><h2>Функции в качестве параметров</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function sum(x, y) {
     return x + y;
 }
 
@@ -676,40 +705,51 @@ for (var i=1; i &lt; 5; i++) {
         var result = action(5, 4);
         console.log(result);
     }
-}</code></pre></div></div></div></section></section>
-<section><section id="_область_видимости_переменных"><h2>Область видимости переменных</h2></section><section id="_область_видимости_переменных_2"><h2>Область видимости переменных</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>global</p></li><li class="fragment"><p>local</p></li></ul></div></div></section><section id="_область_видимости_переменных_3"><h2>Область видимости переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var x = 5; <b>(1)</b>
-let d = 8; <b>(2)</b>
+}</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>9
+1
+20</pre></div></div></div></section></section>
+<section><section id="_область_видимости_переменных"><h2>Область видимости переменных</h2></section><section id="_область_видимости_переменных_2"><h2>Область видимости переменных</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>global</strong></p></li><li class="fragment"><p><strong>local</strong></p></li></ul></div></div></section><section id="_область_видимости_переменных_3"><h2>Область видимости переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var x = 5; <b>(1)</b>
+let d = 8; <b>(1)</b>
 function displaySquare() {
-    var z = x * x; <b>(3)</b>
-    console.log(z);
-}</code></pre></div></div></div></section><section id="_сокрытие_переменных"><h2>Сокрытие переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var z = 89;
-function displaySquare() {
-    var z = 10;
+    var z = x * d; <b>(2)</b>
     console.log(z);
 }
+displaySquare()</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>40</pre></div></div></div></section><section id="_сокрытие_переменных"><h2>Сокрытие переменных</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var a = 89;
+function displaySquare() {
+    var a = 10;
+    console.log(a);
+}
 displaySquare();</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre>10</pre></div></div></div></section><section id="_let"><h2><code>let</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">let z = 10;
+<div class="listingblock fragment"><div class="content"><pre>10</pre></div></div></div></section><section id="_let"><h2><code>let</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">let b = 10;
 function displayZ() {
-    let z = 20;
+    let b = 20;
     {
-        let z = 30;
-        console.log("Block: ", z);
+        let b = 30;
+        console.log("Block:", b);
     }
-    console.log("Function: ", z);
+    console.log("Function:", b);
 }
 
 displayZ();
-console.log("Global: ", z);</code></pre></div></div>
+console.log("Global:", b);</code></pre></div></div>
 <div class="listingblock fragment"><div class="content"><pre>Block: 30
 Function: 20
-Global: 10</pre></div></div></div></section><section id="_var"><h2><code>var</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function displaySquare() {
-    var z = 20;
+Global: 10</pre></div></div></div></section><section id="_var"><h2><code>var</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var c = 10;
+function displaySquare() {
+    var c = 20;
     {
-        var z = 30; // Ошибка ! Переменная z уже определена
-        console.log("Block:", z);
+        var c = 30;
+        console.log("Block:", c);
     }
-    console.log("Function:", z);
-}</code></pre></div></div></div></section><section id="_const"><h2><code>const</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const z = 10;
+    console.log("Function:", c);
+}
+displaySquare()
+console.log("Global:", c)</code></pre></div></div>
+<div class="listingblock"><div class="content"><pre>Block: 30
+Function: 30
+Global: 10</pre></div></div></div></section><section id="_const"><h2><code>const</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">const z = 10;
 function displayZ() {
     const z = 20;
     {
@@ -728,13 +768,19 @@ Global: 10</pre></div></div></div></section><section id="_необъявленн
 }
 bar();
 console.log(foo);</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre>25</pre></div></div></div></section><section id="_strict_mode"><h2>strict mode</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">"use strict";
+<div class="listingblock fragment"><div class="content"><pre>25</pre></div></div></div></section><section id="_необъявленные_переменные_2"><h2>Необъявленные переменные</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function bar() {
+    var foo = "25";
+}
+bar();
+console.log(foo);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>Uncaught ReferenceError: foo is not defined</pre></div></div></div></section><section id="_strict_mode"><h2>strict mode</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">"use strict";
 function bar() {
     foo = "25";
 }
 
 bar();
-console.log(foo);</code></pre></div></div></div></section></section>
+console.log(foo);</code></pre></div></div>
+<div class="listingblock"><div class="content"><pre>Uncaught ReferenceError: assignment to undeclared variable foo</pre></div></div></div></section></section>
 <section id="_замыкания"><h2>Замыкания</h2></section>
 <section id="_функции_iife"><h2>Функции IIFE</h2></section>
 <section id="_паттерн_модуль"><h2>Паттерн Модуль</h2></section>
@@ -752,9 +798,7 @@ console.log(c);</code></pre></div></div>
 function display() {
     console.log("Hello Hoisting");
 }</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre>Hello Hoisting</pre></div></div>
-<div class="paragraph"><p>===</p></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">display();
+<div class="listingblock fragment"><div class="content"><pre>Hello Hoisting</pre></div></div></div></section><section id="_hoisting_6"><h2>Hoisting</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">display();
 
 var display = function () {
     console.log("Hello Hoisting");

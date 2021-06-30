@@ -73,6 +73,8 @@ alert(a);
 var myIncome;
 // другой вариант
 let myIncome2;
+// еще вариант
+myIncome3;
 ----
 
 === Объявление переменных
@@ -104,8 +106,13 @@ c = 1;
 console.log(c);
 var c = 2;
 console.log(c);
-let c = 2; // Uncaught SyntaxError: redeclaration of var c
+let c = 2; <0>
 console.log(c);
+----
+
+[.fragment]
+----
+Uncaught SyntaxError: redeclaration of var c
 ----
 
 === Названия переменных: correct
@@ -150,6 +157,12 @@ price = 54;
 console.log(price);
 ----
 
+[.fragment]
+----
+400
+54
+----
+
 === Константы
 
 [.fragment]
@@ -162,13 +175,23 @@ const rate = 10;
 [source, javascript]
 ----
 const rate = 10;
-rate = 23;  // ошибка, rate - константа, поэтому  нельзя изменить ее значение
+rate = 23; <0>
+----
+
+[.fragment]
+----
+Uncaught TypeError: invalid assignment to const 'rate'
 ----
 
 [.fragment]
 [source, javascript]
 ----
-const rate; // ошибка, rate не инициализирована
+const rate; <0>
+----
+
+[.fragment]
+----
+Uncaught SyntaxError: missing = in const declaration
 ----
 
 == Типы данных
@@ -203,7 +226,12 @@ var helloWorld2 = 'Привет мир';
 [.fragment]
 [source, javascript]
 ----
-var helloWorld = 'Привет мир"; // ошибка
+var helloWorld = 'Привет мир"; <0>
+----
+
+[.fragment]
+----
+Uncaught SyntaxError: '' literal not terminated before end of scrip
 ----
 
 [.fragment]
@@ -228,7 +256,7 @@ var isAlive = true;
 var isDead = false;
 ----
 
-=== `null` и `undefined`
+=== `undefined`
 
 [.fragment]
 [source, javascript]
@@ -253,11 +281,18 @@ undefined
 [source, javascript]
 ----
 var isAlive;
-console.log(isAlive); // undefined
+console.log(isAlive);
 isAlive = null;
-console.log(isAlive); // null
-isAlive = undefined;  // снова установим тип undefined
-console.log(isAlive); // undefined
+console.log(isAlive);
+isAlive = undefined; // снова установим тип undefined
+console.log(isAlive);
+----
+
+[.fragment]
+----
+undefined
+null
+undefined
 ----
 
 === `object`
@@ -335,6 +370,14 @@ var isEnabled = true;
 console.log(typeof isEnabled);
 var undefVariable;
 console.log(typeof undefVariable);
+----
+
+[.fragment]
+----
+string
+number
+boolean
+undefined
 ----
 
 === Математические операторы
@@ -531,6 +574,11 @@ var people = ["Tom", "Alice", "Sam"];
 console.log(people);
 ----
 
+[.fragment]
+----
+[ "Tom", "Alice", "Sam" ]
+----
+
 === Массивы
 
 [.fragment]
@@ -569,6 +617,11 @@ Bob
 ----
 var objects = ["Tom", 12, true, 3.14, false];
 console.log(objects);
+----
+
+[.fragment]
+----
+[ "Tom", 12, true, 3.14, false ]
 ----
 
 === spread-оператор
@@ -785,6 +838,11 @@ display();
 ----
 
 [.fragment]
+----
+функция в JavaScript
+----
+
+[.fragment]
 [source, javascript]
 ----
 function goodMorning() {
@@ -812,9 +870,14 @@ message();
 ----
 function display(x) { // определение функции
     var z = x * x;
-    document.write(x + " в квадрате равно " + z);
+    console.log(x + " в квадрате равно " + z);
 }
 display(5); // вызов функции
+----
+
+[.fragment]
+----
+5 в квадрате равно 25
 ----
 
 === Параметры функции
@@ -832,14 +895,20 @@ let nums = [4, 5, 6];
 sum(...nums);
 ----
 
+[.fragment]
+----
+6
+15
+----
+
 === Необязательные параметры
 
 [.fragment]
 [source, javascript]
 ----
 function display(x, y) {
-    if(y === undefined) y = 5;
     if(x === undefined) x = 8;
+    if(y === undefined) y = 5;
     let z = x * y;
     console.log(z);
 }
@@ -912,10 +981,20 @@ display("Весна", -2, -3, 4, 2, 5);
 display("Лето", 20, 23, 31);
 ----
 
+=== Неопределенное количество параметров
+
 [.fragment]
 ----
-Весна -2 -3 4 2 5;
-Лето 20 23 31;
+Весна
+-2
+-3
+4
+2
+5
+Лето
+20
+23
+31;
 ----
 
 === Результат функции
@@ -923,13 +1002,18 @@ display("Лето", 20, 23, 31);
 [.fragment]
 [source, javascript]
 ----
-var y = 5;
+var y = 6;
 var z = square(y);
-document.write(y + " в квадрате равно " + z);
+console.log(y + " в квадрате равно " + z);
 
 function square(x) {
     return x * x;
 }
+----
+
+[.fragment]
+----
+6 в квадрате равно 36
 ----
 
 === Функции в качестве параметров
@@ -988,13 +1072,20 @@ for (var i=1; i < 5; i++) {
 }
 ----
 
+[.fragment]
+----
+9
+1
+20
+----
+
 == Область видимости переменных
 
 === Область видимости переменных
 
 [.step]
-* global
-* local
+* *global*
+* *local*
 
 === Область видимости переменных
 
@@ -1002,11 +1093,17 @@ for (var i=1; i < 5; i++) {
 [source, javascript]
 ----
 var x = 5; <1>
-let d = 8; <2>
+let d = 8; <1>
 function displaySquare() {
-    var z = x * x; <3>
+    var z = x * d; <2>
     console.log(z);
 }
+displaySquare()
+----
+
+[.fragment]
+----
+40
 ----
 
 === Сокрытие переменных
@@ -1014,10 +1111,10 @@ function displaySquare() {
 [.fragment]
 [source, javascript]
 ----
-var z = 89;
+var a = 89;
 function displaySquare() {
-    var z = 10;
-    console.log(z);
+    var a = 10;
+    console.log(a);
 }
 displaySquare();
 ----
@@ -1032,18 +1129,18 @@ displaySquare();
 [.fragment]
 [source, javascript]
 ----
-let z = 10;
+let b = 10;
 function displayZ() {
-    let z = 20;
+    let b = 20;
     {
-        let z = 30;
-        console.log("Block: ", z);
+        let b = 30;
+        console.log("Block:", b);
     }
-    console.log("Function: ", z);
+    console.log("Function:", b);
 }
 
 displayZ();
-console.log("Global: ", z);
+console.log("Global:", b);
 ----
 
 [.fragment]
@@ -1058,14 +1155,23 @@ Global: 10
 [.fragment]
 [source, javascript]
 ----
+var c = 10;
 function displaySquare() {
-    var z = 20;
+    var c = 20;
     {
-        var z = 30; // Ошибка ! Переменная z уже определена
-        console.log("Block:", z);
+        var c = 30;
+        console.log("Block:", c);
     }
-    console.log("Function:", z);
+    console.log("Function:", c);
 }
+displaySquare()
+console.log("Global:", c)
+----
+
+----
+Block: 30
+Function: 30
+Global: 10
 ----
 
 === `const`
@@ -1111,6 +1217,23 @@ console.log(foo);
 25
 ----
 
+=== Необъявленные переменные
+
+[.fragment]
+[source, javascript]
+----
+function bar() {
+    var foo = "25";
+}
+bar();
+console.log(foo);
+----
+
+[.fragment]
+----
+Uncaught ReferenceError: foo is not defined
+----
+
 === strict mode
 
 [.fragment]
@@ -1123,6 +1246,10 @@ function bar() {
 
 bar();
 console.log(foo);
+----
+
+----
+Uncaught ReferenceError: assignment to undeclared variable foo
 ----
 
 == Замыкания
@@ -1197,7 +1324,7 @@ function display() {
 Hello Hoisting
 ----
 
-===
+=== Hoisting
 
 [.fragment]
 [source, javascript]
