@@ -807,7 +807,310 @@ var display = function () {
 <section id="_передача_параметров_по_значению_и_по_ссылке"><h2>Передача параметров по значению и по ссылке</h2></section>
 <section id="_стрелочные_функции"><h2>Стрелочные функции</h2></section>
 <section id="_ооп"><h2>ООП</h2></section>
-<section id="_строки_2"><h2>Строки</h2></section></div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+<section id="_строки_2"><h2>Строки</h2></section>
+<section><section id="_браузерный_компонент_window"><h2>Браузерный компонент <code>window</code></h2></section><section id="_window"><h2><code>window</code></h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/window-objects.svg" alt="Window Objects"></span></p></div></div></section><section id="_window_2"><h2><code>window</code></h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/bom-visualization.png" alt="BOM visualization"></span></p></div></div></section></section>
+<section><section id="_bom"><h2>BOM</h2></section><section id="_метод_alert"><h2>Метод <code>alert()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">alert("hello world");</code></pre></div></div></div></section><section id="_метод_confirm"><h2>Метод <code>confirm()</code></h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var result = confirm("Завершить выполнение программы?");
+if (result === true) {
+    document.write("Работа программы завершена");
+} else {
+    document.write("Программа продолжает работать");
+}</code></pre></div></div></div></section><section id="_метод_prompt"><h2>Метод <code>prompt()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var age = prompt("Введите свой возраст:");
+document.write("Вам " + age + " лет");</code></pre></div></div></div></section><section id="_метод_open"><h2>Метод <code>open()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var popup = window.open('https://rakovets.by', 'Rakovets', 'width=400, height=400, resizable=yes');</code></pre></div></div></div></section><section id="_метод_close"><h2>Метод <code>close()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var popup = window.open('https://rakovets.by', 'Rakovets', 'width=400, height=400, resizable=yes');
+
+function closeWindow() {
+    popup.close();
+}
+
+setTimeout(closeWindow, 10000);</code></pre></div></div></div></section><section id="_метод_moveto"><h2>Метод <code>moveTo()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var popup = window.open('https://rakovets.by', 'Rakovets', 'width=400, height=400, resizable=yes');
+popup.moveTo(50, 50);</code></pre></div></div></div></section><section id="_метод_resizeto"><h2>Метод <code>resizeTo()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var popup = window.open('https://rakovets.by', 'Rakovets', 'width=400, height=400, resizable=yes');
+popup.resizeTo(500, 350); // 500 - ширина и 350 - высота</code></pre></div></div></div></section></section>
+<section><section id="_таймеры"><h2>Таймеры</h2></section><section id="_функция_settimeout"><h2>Функция <code>setTimeout()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var timerId = setTimeout(someFunction, period);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function timerFunction() {
+    document.write("выполнение функции setTimeout");
+}
+setTimeout(timerFunction, 3000);</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">function timerFunction() {
+    document.write("выполнение функции setTimeout");
+}
+var timerId = setTimeout(timerFunction, 3000);
+clearTimeout(timerId);</code></pre></div></div></div></section><section id="_функция_setinterval"><h2>Функция <code>setInterval()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="time"&gt;&lt;/div&gt;
+    &lt;script&gt;
+        function updateTime() {
+            document.getElementById("time").innerHTML = new Date().toTimeString();
+        }
+        setInterval(updateTime, 1000);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_функция_requestanimationframe"><h2>Функция <code>requestAnimationFrame()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;style&gt;
+        #rect {
+            margin: 100px;
+            width: 100px;
+            height: 100px;
+            background: #50c878;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="rect"&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var square = document.getElementById("rect");
+        var angle = 0;
+        function rotate() {
+            angle = (angle + 2) % 360;
+            square.style.transform = "rotate(" + angle + "deg)";
+            window.requestAnimationFrame(rotate);
+        }
+        var id = window.requestAnimationFrame(rotate);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_функция_requestanimationframe_2"><h2>Функция <code>requestAnimationFrame()</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">window.cancelAnimationFrame(id);</code></pre></div></div></div></section></section>
+<section><section id="_dom"><h2>DOM</h2></section><section id="_dom_2"><h2>DOM</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Page Header&lt;/h2&gt;
+    &lt;div&gt;
+        &lt;h3&gt;Block Header&lt;/h3&gt;
+        &lt;p&gt;Text&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_dom_3"><h2>DOM</h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/dom.png" alt="DOM"></span></p></div></div></section><section id="_виды_узлов_node"><h2>Виды узлов (Node)</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>Element</strong>: HTML-элемент</p></li><li class="fragment"><p><strong>Attr</strong>: атрибут HTML-элемента</p></li><li class="fragment"><p><strong>Document</strong>: корневой узел HTML-документа</p></li><li class="fragment"><p><strong>DocumentType</strong>: DTD или тип схемы XML-документа</p></li><li class="fragment"><p><strong>DocumentFragment</strong>: место для временного хранения частей документа</p></li><li class="fragment"><p><strong>EntityReference</strong>: ссылка на сущность XML-документа</p></li></ul></div></div></section><section id="_виды_узлов_node_2"><h2>Виды узлов (Node)</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>ProcessingInstruction</strong>: инструкция обработки веб-страницы</p></li><li class="fragment"><p><strong>Comment</strong>: элемент комментария</p></li><li class="fragment"><p><strong>Text</strong>: текст элемента</p></li><li class="fragment"><p><strong>CDATASection</strong>: секция <strong>CDATA</strong> в документе <strong>XML</strong></p></li><li class="fragment"><p><strong>Entity</strong>: необработанная сущность <strong>DTD</strong></p></li><li class="fragment"><p><strong>Notation</strong>: нотация, объявленная в <strong>DTD</strong></p></li></ul></div></div></section><section id="_методы_для_поиска_элементов"><h2>Методы для поиска элементов</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>getElementById(value)</code></p></li><li class="fragment"><p><code>getElementsByTagName(value)</code></p></li><li class="fragment"><p><code>getElementsByClassName(value)</code></p></li><li class="fragment"><p><code>querySelector(value)</code></p></li><li class="fragment"><p><code>querySelectorAll(value)</code></p></li></ul></div></div></section><section id="_поиск_элементов"><h2>Поиск элементов</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;
+        &lt;h3 id="header"&gt;Block Header&lt;/h3&gt;
+        &lt;p&gt;Text&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var headerElement = document.getElementById("header");
+        document.write("Текст заголовка: " + headerElement.innerText);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_поиск_элементов_2"><h2>Поиск элементов</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;
+        &lt;h3&gt;Заголовок&lt;/h3&gt;
+        &lt;p&gt;Первый абзац&lt;/p&gt;
+        &lt;p&gt;Второй абзац&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var pElements = document.getElementsByTagName("p");
+
+        for (var i = 0; i &lt; pElements.length; i++) {
+            document.write("Текст параграфа: " + pElements[i].innerText + "&lt;br/&gt;");
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_свойства_объекта_document"><h2>Свойства объекта <code>document</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>documentElement</code>: предоставляет доступ к корневому элементу <code>&lt;html&gt;</code></p></li><li class="fragment"><p><code>body</code>: предоставляет доступ к элементу <code>&lt;body&gt;</code> на веб-странице</p></li><li class="fragment"><p><code>images</code>: содержит коллекцию всех объектов изображений (элементов <code>img</code>)</p></li><li class="fragment"><p><code>links</code>: содержит коллекцию ссылок - элементов <code>&lt;a&gt;</code> и <code>&lt;area&gt;</code>, у которых определен атрибут <code>href</code></p></li><li class="fragment"><p><code>anchors</code>: предоставляет доступ к коллекции элементов <code>&lt;a&gt;</code>, у которых определен атрибут <code>name</code></p></li><li class="fragment"><p><code>forms</code>: содержит коллекцию всех <strong>форм</strong> на веб-странице</p></li></ul></div></div></section><section id="_объект_node"><h2>Объект <code>Node</code></h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/dom-element-types.png" alt="DOM element types"></span></p></div></div></section><section id="_объект_node_2"><h2>Объект <code>Node</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>childNodes</code>: содержит коллекцию дочерних узлов</p></li><li class="fragment"><p><code>firstChild</code>: возвращает первый дочерний узел текущего узла</p></li><li class="fragment"><p><code>lastChild</code>: возвращает последний дочерний узел текущего узла</p></li><li class="fragment"><p><code>previousSibling</code>: возвращает предыдущий элемент, который находится на одном уровне с текущим</p></li><li class="fragment"><p><code>nextSibling</code>: возвращает следующий элемент, который находится на одном уровне с текущим</p></li></ul></div></div></section><section id="_объект_node_3"><h2>Объект <code>Node</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>ownerDocument</code>: возвращает корневой узел документа</p></li><li class="fragment"><p><code>parentNode</code>: возвращает элемент, который содержит текущий узел</p></li><li class="fragment"><p><code>nodeName</code>: возвращает имя узла</p></li><li class="fragment"><p><code>nodeType</code>: возвращает тип узла в виде числа. 1 - элемент, 2 - атрибут, 3 - текст</p></li><li class="fragment"><p><code>nodeValue</code>: возвращает или устанавливает значение узла в виде простого текста</p></li></ul></div></div></section><section id="_объект_node_4"><h2>Объект <code>Node</code></h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/dom-node-relationships.png" alt="DOM node relationships"></span></p></div></div></section><section id="_создание_добавление_элементов_веб_страницы"><h2>Создание, добавление элементов веб-страницы</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>document.createElement(elementName)</code>: создает <strong>элемент</strong> <code>html</code>, <strong>тег</strong> которого передается в качестве <strong>параметра</strong>. Возвращает созданный элемент</p></li><li class="fragment"><p><code>document.createTextNode(text)</code>: создает и возвращает <strong>текстовый узел</strong>. В качестве параметра передается текст узла.</p></li><li class="fragment"><p><code>node.appendChild(newNode)</code>: добавляет новый узел <code>newNode</code> в <strong>конец коллекции дочерних узлов</strong></p></li><li class="fragment"><p><code>node.insertBefore(newNode, referenceNode)</code>: добавляет новый узел <code>newNode</code> перед узлом <code>referenceNode</code></p></li></ul></div></div></section><section id="_создание_добавление_элементов_веб_страницы_2"><h2>Создание, добавление элементов веб-страницы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="article"&gt;
+        &lt;h3&gt;Заголовок статьи&lt;/h3&gt;
+        &lt;p&gt;Первый абзац&lt;/p&gt;
+        &lt;p&gt;Второй абзац&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var articleDiv = document.querySelector("div.article");
+        // создаем элемент
+        var elem = document.createElement("h2");
+        // создаем для него текст
+        var elemText = document.createTextNode("Привет мир");
+        // добавляем текст в элемент в качестве дочернего элемента
+        elem.appendChild(elemText);
+        // добавляем элемент в блок div
+        articleDiv.appendChild(elem);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_другие_методы"><h2>Другие методы</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>node.cloneNode()</code></p></li><li class="fragment"><p><code>node.removeChild(removalNode)`</code></p></li><li class="fragment"><p><code>node.replaceChild(newNode, oldNode)</code></p></li></ul></div></div></section><section id="_объект_element"><h2>Объект <code>Element</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="article"&gt;
+        &lt;h3&gt;Заголовок статьи&lt;/h3&gt;
+        &lt;p&gt;Первый абзац&lt;/p&gt;
+        &lt;p&gt;Второй абзац&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        function getChildren(elem) {
+            for(var i in elem.childNodes) {
+                if(elem.childNodes[i].nodeType===1) {
+                    console.log(elem.childNodes[i].tagName);
+                    getChildren(elem.childNodes[i]);
+                }
+            }
+        }
+        var root = document.documentElement;
+        console.log(root.tagName);
+        getChildren(root);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_свойства_innertext_и_innerhtml"><h2>Свойства <code>innerText</code> и <code>innerHTML</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-js hljs" data-noescape="true" data-lang="js">var pElement = document.querySelectorAll("div.article p")[0];
+pElement.innerText = "hello";
+pElement.textContent = "hello";</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-js hljs" data-noescape="true" data-lang="js">var articleDiv = document.querySelector("div.article");
+articleDiv.innerHTML ="&lt;h2&gt;Hello World!!!&lt;/h2&gt;&lt;p&gt;bla bla bla&lt;/p&gt;";</code></pre></div></div></div></section><section id="_методы_управления_атрибутами_объекта_element"><h2>Методы управления атрибутами объекта <code>Element</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>getAttribute(attr)</code>: возвращает значение атрибута <code>attr</code></p></li><li class="fragment"><p><code>setAttribute(attr, value)</code>: устанавливает для атрибута <code>attr</code> значение <code>value</code>. Если атрибута нет, то он добавляется</p></li><li class="fragment"><p><code>removeAttribute(attr)</code>: удаляет атрибут <code>attr</code> и его значение</p></li></ul></div></div></section><section id="_методы_управления_атрибутами_объекта_element_2"><h2>Методы управления атрибутами объекта <code>Element</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="article" style="color:red;"&gt;
+        &lt;h3&gt;Заголовок статьи&lt;/h3&gt;
+        &lt;p&gt;Первый абзац&lt;/p&gt;
+        &lt;p&gt;Второй абзац&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var articleDiv = document.querySelector("div.article");
+        // получаем атрибут style
+        var styleValue = articleDiv.getAttribute("style");
+        console.log("До изменения атрибута: " + styleValue);
+        // удаляем атрибут
+        articleDiv.removeAttribute("style");
+        // добавляем заново атрибут style
+        articleDiv.setAttribute("style", "color:blue;");
+        styleValue = articleDiv.getAttribute("style");
+        console.log("После изменения атрибута: " + styleValue);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_размеры_и_позиция_элементов"><h2>Размеры и позиция элементов</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>offsetWidth</code></p></li><li class="fragment"><p><code>offsetHeight</code></p></li><li class="fragment"><p><code>clientWidth</code></p></li><li class="fragment"><p><code>clientHeight</code></p></li></ul></div></div></section></section>
+<section><section id="_events"><h2>Events</h2></section><section id="_events_2"><h2>Events</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>События мыши</strong> (перемещение курсора, нажатие мыши и т.д.)</p></li><li class="fragment"><p><strong>События клавиатуры</strong> (нажатие или отпускание клавиши клавиатуры)</p></li><li class="fragment"><p><strong>События жизненного цикла элементов</strong> (например, событие загрузки web-станицы)</p></li><li class="fragment"><p><strong>События элементов форм</strong> (нажатие кнопки на форме, выбор элемента в выпадающем списке и т.д.)</p></li><li class="fragment"><p><strong>События, возникающие при изменении элементов DOM</strong></p></li><li class="fragment"><p><strong>События, возникающие при касании на сенсорных экранах</strong></p></li><li class="fragment"><p><strong>События, возникающие при возникновении ошибок</strong></p></li></ul></div></div></section><section id="_example"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="rect" onclick="displayMessage()" style="width:50px;height:50px;background-color:blue;"&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        function displayMessage() {
+            alert('Нажато');
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_передача_параметров_обработчику_события"><h2>Передача параметров обработчику события</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">&lt;a href="page1.html" onclick="handler(this)"&gt;Страница 1&lt;/a&gt;
+&lt;script&gt;
+    function handler(obj) {
+        alert(obj.href);
+    }
+&lt;/script&gt;</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;style&gt;
+        #rect {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="rect" onclick="handler(event)"&gt;&lt;/div&gt;
+    &lt;script&gt;
+        function handler(e) {
+            alert(e.type);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section></section>
+<section><section id="_обработчики_событий"><h2>Обработчики событий</h2></section><section id="_встроенные_обработчики"><h2>Встроенные обработчики</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">&lt;div id="rect" onclick="handler(event)"&gt;&lt;/div&gt;</code></pre></div></div></div></section><section id="_минусы"><h2>Минусы</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Код <strong>HTML</strong> смешивается с кодом <strong>JavaScript</strong>, в связи с чем становится труднее разрабатывать, отлаживать и поддерживать приложение.</p></li><li class="fragment"><p><strong>Обработчики событий</strong> можно задать только для уже созданных на web-странице элементов. Динамически создаваемые элементы в этом случае лишаются возможности обработки событий.</p></li><li class="fragment"><p>К элементу для одного события может быть прикреплен только один обработчик.</p></li><li class="fragment"><p>Нельзя удалить обработчик без изменения кода</p></li></ul></div></div></section><section id="_свойства_обработчиков_событий"><h2>Свойства обработчиков событий</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;style&gt;
+        #rect {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="rect"&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        function handler(e) {
+            alert(e.type);
+        }
+        document.getElementById("rect").onclick = handler;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_слушатели_событий"><h2>Слушатели событий</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>EventTarget.addEventListener()</code> для добавления слушателя</p></li><li class="fragment"><p><code>EventTarget.removeEventListener()</code> для удаления слушателя</p></li></ul></div></div></section><section id="_слушатели_событий_2"><h2>Слушатели событий</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-html hljs" data-noescape="true" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"/&gt;
+    &lt;style&gt;
+        #rect {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="rect"&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var rect = document.getElementById("rect");
+        rect.addEventListener("click", function(e) {
+            alert(e.type);
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></div></section><section id="_плюсы"><h2>Плюсы</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var clicks = 0;
+
+function handlerOne(e) {
+    alert(e.type);
+}
+
+function handlerTwo(e) {
+    clicks++;
+    var newNode = document.createElement("p");
+    newNode.textContent = "произошло нажатие " + clicks;
+    document.body.appendChild(newNode);
+}
+
+var rect = document.getElementById("rect");
+// прикрепляем первый обработчик
+rect.addEventListener("click", handlerOne);
+// прикрепляем второй обработчик
+rect.addEventListener("click", handlerTwo);</code></pre></div></div></div></section></section>
+<section><section id="_объект_event"><h2>Объект <code>Event</code></h2></section><section id="_объект_event_2"><h2>Объект <code>Event</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>bubbles</code>: возвращает <code>true</code>, если событие является восходящим. Например, если событие возникло на вложенном элементе, то оно может быть обработано на родительском элементе.</p></li><li class="fragment"><p><code>cancelable</code>: возвращает <code>true</code>, если можно отменить стандартную обработку события.</p></li><li class="fragment"><p><code>currentTarget</code>: определяет элемент, к которому прикреплен обработчик события.</p></li></ul></div></div></section><section id="_объект_event_3"><h2>Объект <code>Event</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><code>defaultPrevented</code>: возвращает <code>true</code>, если был вызван у объекта <code>Event</code> метод <code>preventDefault()</code>.</p></li><li class="fragment"><p><code>eventPhase</code>: определяет стадию обработки события.</p></li><li class="fragment"><p><code>target</code>: указывает на элемент, на котором было вызвано событие.</p></li><li class="fragment"><p><code>timeStamp</code>: хранит время возникновения события.</p></li><li class="fragment"><p><code>type</code>: указывает на имя события.</p></li></ul></div></div></section><section id="_распространение_событий"><h2>Распространение событий</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p><strong>Восходящие</strong>: событие распространяется вверх по дереву <strong>DOM</strong> от дочерних узлов к родительским.</p></li><li class="fragment"><p><strong>Нисходящие</strong>: событие распространяется вниз по дереву <strong>DOM</strong> от родительских узлов к дочерним, пока не достигнет того элемента, на котором это событие и возникло.</p></li></ul></div></div></section><section id="_распространение_событий_2"><h2>Распространение событий</h2><div class="slide-content"><div class="paragraph fragment"><p><span class="image"><img src="../assets/img/common/javascript/eventflow.png" alt="Eventflow"></span></p></div></div></section><section id="_остановка_восходящего"><h2>Остановка восходящего</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var redRect = document.getElementById("redRect");
+redRect.addEventListener("click", function(e){
+    console.log("Событие на redRect");
+    e.stopPropagation();
+});</code></pre></div></div></div></section><section id="_включение_нисходящего"><h2>Включение нисходящего</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-javascript hljs" data-noescape="true" data-lang="javascript">var redRect = document.getElementById("redRect");
+redRect.addEventListener("click", function() {console.log("Событие на redRect");}, true);
+var blueRect = document.getElementById("blueRect");
+blueRect.addEventListener("click", function() {console.log("Событие на blueRect");}, true);
+document.body.addEventListener("click", function() {console.log("Событие на body");}, true);</code></pre></div></div></div></section></section>
+<section id="_события_мыши"><h2>События мыши</h2></section>
+<section id="_события_клавиатуры"><h2>События клавиатуры</h2></section></div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;
