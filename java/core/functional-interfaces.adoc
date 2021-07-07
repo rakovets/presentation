@@ -521,9 +521,9 @@ public interface Callable<V> {
 }
 ----
 
-== Other @FunctionalInterface
+== Other `@FunctionalInterface`
 
-=== Other @FunctionalInterface
+=== Other `@FunctionalInterface`
 
 * `DoubleBinaryOperator`
 * `DoubleConsumer`
@@ -534,7 +534,7 @@ public interface Callable<V> {
 * `DoubleToLongFunction`
 * `DoubleUnaryOperator`
 
-=== Other @FunctionalInterface
+=== Other `@FunctionalInterface`
 
 * `IntBinaryOperator`
 * `IntConsumer`
@@ -545,7 +545,7 @@ public interface Callable<V> {
 * `IntToLongFunction`
 * `IntUnaryOperator`
 
-=== Other @FunctionalInterface
+=== Other `@FunctionalInterface`
 
 * `LongBinaryOperator`
 * `LongConsumer`
@@ -556,14 +556,14 @@ public interface Callable<V> {
 * `LongToIntFunction`
 * `LongUnaryOperator`
 
-=== Other @FunctionalInterface
+=== Other `@FunctionalInterface`
 
 * `BooleanSupplier`
 * `ObjDoubleConsumer`
 * `ObjIntConsumer`
 * `ObjLongConsumer`
 
-=== Other @FunctionalInterface
+=== Other `@FunctionalInterface`
 
 * `ToDoubleBiFunction`
 * `ToDoubleFunction`
