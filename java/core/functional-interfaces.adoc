@@ -497,7 +497,7 @@ public class Program {
 
 == `java.lang.Runnable`
 
-== `Runnable`
+=== `Runnable`
 
 [.fragment]
 [source,java]
