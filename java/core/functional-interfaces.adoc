@@ -1,12 +1,22 @@
 = Functional Interfaces
 
-== Functional Interface
+== Intro
 
 === Functional Interface
 
 [.step]
 * Это интерфейс ровно с одним абстрактным методом.
-* Может быть отмечен аннотаций `@FunctionalInterface`
+* Может иметь другие не абстрактные (`default`, `static`) методы.
+* Может быть отмечен аннотаций `@FunctionalInterface` (@since 1.8):
+[.step]
+** Если отмечен, то compiler делает проверку на наличие ТОЛЬКО одного абстрактного метода.
+
+=== Functional Interface
+
+[.step]
+* Общие функциональные интерфейсы находятся в модуле `java.base` в пакете `java.util.function`.
+* Встречаются и в других модулях и пакетах.
+* Можно создавать собственные функциональные интерфейсы.
 
 === Example
 
@@ -14,14 +24,34 @@
 [source,java]
 ----
 @FunctionalInterface
-public interface Comparator<T> {
-    int compare(T o1, T o2);
-
-    // default behavior
+public interface Operation {
+    int calculate();
 }
 ----
 
-== `Comparator<T>`
+=== Example
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface Operation {
+    int calculate();
+
+    int calculate(int a);
+}
+----
+
+[.fragment]
+----
+error: Unexpected @FunctionalInterface annotation
+@FunctionalInterface
+^
+  Operation is not a functional interface
+    multiple non-overriding abstract methods found in interface Operation
+----
+
+== `java.util.Comparator`
 
 === `Comparator<T>`
 
@@ -31,6 +61,8 @@ public interface Comparator<T> {
 @FunctionalInterface
 public interface Comparator<T> {
     int compare(T o1, T o2);
+
+    ...
 }
 ----
 
@@ -71,11 +103,8 @@ public class Student {
 ----
 import java.util.Comparator;
 
-public class AgeComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        Student s1 = (Student) o1;
-        Student s2 = (Student) o2;
-
+public class AgeComparator implements Comparator<Student> {
+    public int compare(Student s1, Student s2) {
         if (s1.getAge() == s2.getAge()) {
             return 0;
         } else if (s1.getAge() > s2.getAge()) {
@@ -94,11 +123,8 @@ public class AgeComparator implements Comparator {
 ----
 import java.util.Comparator;
 
-public class NameComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        Student s1 = (Student) o1;
-        Student s2 = (Student) o2;
-
+public class NameComparator implements Comparator<Student> {
+    public int compare(Student o1, Student o2) {
         return s1.getName().compareTo(s2.getName());
     }
 }
@@ -141,9 +167,12 @@ public class ComparatorExample {
 }
 ----
 
-=== NOT functional interface `Comparable<T>`
+== `java.lang.Comparable`
 
-=== Method
+=== `Comparable<T>`
+
+[.step]
+* Принимает объект одного типа и выполняет его сравнение с текущим объектом (`this`).
 
 [.fragment]
 [source,java]
@@ -204,9 +233,12 @@ public class CompareExample {
 }
 ----
 
-== `Predicate<T>`
+== `java.util.function.Predicate`
 
 === `Predicate<T>`
+
+[.step]
+* Принимает объект одного типа и выполняет проверку некоторого условия.
 
 [.fragment]
 [source,java]
@@ -214,6 +246,8 @@ public class CompareExample {
 @FunctionalInterface
 public interface Predicate<T> {
     boolean test(T t);
+
+    ...
 }
 ----
 
@@ -234,135 +268,9 @@ public class Program {
 }
 ----
 
-== `BinaryOperator<T>`
-
-=== `BinaryOperator<T>`
-
-[.fragment]
-[source,java]
-----
-@FunctionalInterface
-public interface BinaryOperator<T> {
-    T apply(T t1, T t2);
-}
-----
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-import java.util.function.BinaryOperator;
-
-public class Program {
-    public static void main(String[] args) {
-        BinaryOperator<Integer> multiply = (x, y) -> x * y;
-
-        System.out.println(multiply.apply(3, 5));
-        System.out.println(multiply.apply(10, -2));
-    }
-}
-----
-
-== `UnaryOperator<T>`
-
-=== `UnaryOperator<T>`
-
-[.fragment]
-[source,java]
-----
-@FunctionalInterface
-public interface UnaryOperator<T> {
-    T apply(T t);
-}
-----
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-import java.util.function.UnaryOperator;
-
-public class Program {
-    public static void main(String[] args) {
-        UnaryOperator<Integer> square = x -> x * x;
-        System.out.println(square.apply(5));
-    }
-}
-----
-
-== `Function<T, R>`
-
-=== `Function<T, R>`
-
-[.fragment]
-[source,java]
-----
-@FunctionalInterface
-public interface Function<T, R> {
-    R apply(T t);
-}
-----
-
-[.step]
-* Принимает объект одного типа, а  возвращает того же или другого типа.
-
-=== Other methods
-
-[.fragment]
-[source,java]
-----
-default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
-    Objects.requireNonNull(before);
-    return (V v) -> apply(before.apply(v));
-}
-----
-
-[.fragment]
-[source,java]
-----
-default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
-    Objects.requireNonNull(after);
-    return (T t) -> after.apply(apply(t));
-}
-----
-
-[.fragment]
-[source,java]
-----
-static <T> Function<T, T> identity() {
-    return t -> t;
-}
-----
-
-=== Example
-
-[.fragment]
-[source,java]
-----
-import java.util.function.Function;
-
-public class Program {
-    public static void main(String[] args) {
-        Function<Integer, String> convert = x -> String.valueOf(x) + " долларов";
-        System.out.println(convert.apply(5)); // 5 долларов
-    }
-}
-----
-
-== `Consumer<T>`
+== `java.util.function.Consumer`
 
 === `Consumer<T>`
-
-[.fragment]
-[source,java]
-----
-@FunctionalInterface
-public interface Consumer<T> {
-    void accept(T t);
-}
-----
 
 [.step]
 * Принимает объект одного типа и выполняет с ним бизнес-логику.
@@ -370,9 +278,11 @@ public interface Consumer<T> {
 [.fragment]
 [source,java]
 ----
-default Consumer<T> andThen(Consumer<? super T> after) {
-    Objects.requireNonNull(after);
-    return (T t) -> { accept(t); after.accept(t); };
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+
+    ...
 }
 ----
 
@@ -391,9 +301,12 @@ public class Program {
 }
 ----
 
-== `Supplier<T>`
+== `java.util.function.Supplier`
 
 === `Supplier<T>`
+
+[.step]
+* Порождает объекты данного типа.
 
 [.fragment]
 [source,java]
@@ -404,8 +317,23 @@ public interface Supplier<T> {
 }
 ----
 
-[.step]
-* Возвращает объект типа T.
+=== Example
+
+[.fragment]
+[source,java]
+----
+public class User {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public User(String n) {
+        this.name = n;
+    }
+}
+----
 
 === Example
 
@@ -429,19 +357,145 @@ public class Program {
         System.out.println("Имя user2: " + user2.getName());
     }
 }
+----
 
-public class User {
-    private String name;
+== `java.util.function.Function`
 
-    public String getName() {
-        return name;
-    }
+=== `Function<T, R>`
 
-    public User(String n) {
-        this.name = n;
+[.step]
+* Принимает объект одного типа, преобразует его в объект другого типа (или этого же типа) и возвращает его.
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+
+    ...
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.util.function.Function;
+
+public class Program {
+    public static void main(String[] args) {
+        Function<Integer, String> convert = x -> String.valueOf(x) + " долларов";
+        System.out.println(convert.apply(5)); // 5 долларов
     }
 }
 ----
+
+== `java.util.function.UnaryOperator`
+
+=== `UnaryOperator<T>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface UnaryOperator<T> extends Function<T, T> {
+    ...
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.util.function.UnaryOperator;
+
+public class Program {
+    public static void main(String[] args) {
+        UnaryOperator<Integer> square = x -> x * x;
+        System.out.println(square.apply(5));
+    }
+}
+----
+
+== `java.util.function.BiFunction`
+
+=== `BiFunction<T, U, R>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+    R apply(T t, U u);
+
+    ...
+}
+----
+
+== `java.util.function.BiConsumer`
+
+=== `BiConsumer<T, U>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface BiConsumer<T, U> {
+    void accept(T t, U u);
+
+    ...
+}
+----
+
+== `java.util.function.BiPredicate`
+
+=== `BiPredicate<T, U>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface BiPredicate<T, U> {
+    boolean test(T t, U u);
+
+    ...
+}
+----
+
+== `java.util.function.BinaryOperator`
+
+=== `BinaryOperator<T>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface BinaryOperator<T> extends BiFunction<T,T,T> {
+    ...
+}
+----
+
+=== Example
+
+[.fragment]
+[source,java]
+----
+import java.util.function.BinaryOperator;
+
+public class Program {
+    public static void main(String[] args) {
+        BinaryOperator<Integer> multiply = (x, y) -> x * y;
+
+        System.out.println(multiply.apply(3, 5));
+        System.out.println(multiply.apply(10, -2));
+    }
+}
+----
+
+== `java.lang.Runnable`
 
 == `Runnable`
 
@@ -453,3 +507,67 @@ public interface Runnable {
     public abstract void run();
 }
 ----
+
+== `java.util.concurrent.Callable`
+
+=== `Callable<V>`
+
+[.fragment]
+[source,java]
+----
+@FunctionalInterface
+public interface Callable<V> {
+    V call() throws Exception;
+}
+----
+
+== Other @FunctionalInterface
+
+=== Other @FunctionalInterface
+
+* `DoubleBinaryOperator`
+* `DoubleConsumer`
+* `DoubleFunction`
+* `DoublePredicate`
+* `DoubleSupplier`
+* `DoubleToIntFunction`
+* `DoubleToLongFunction`
+* `DoubleUnaryOperator`
+
+=== Other @FunctionalInterface
+
+* `IntBinaryOperator`
+* `IntConsumer`
+* `IntFunction`
+* `IntPredicate`
+* `IntSupplier`
+* `IntToDoubleFunction`
+* `IntToLongFunction`
+* `IntUnaryOperator`
+
+=== Other @FunctionalInterface
+
+* `LongBinaryOperator`
+* `LongConsumer`
+* `LongFunction`
+* `LongPredicate`
+* `LongSupplier`
+* `LongToDoubleFunction`
+* `LongToIntFunction`
+* `LongUnaryOperator`
+
+=== Other @FunctionalInterface
+
+* `BooleanSupplier`
+* `ObjDoubleConsumer`
+* `ObjIntConsumer`
+* `ObjLongConsumer`
+
+=== Other @FunctionalInterface
+
+* `ToDoubleBiFunction`
+* `ToDoubleFunction`
+* `ToIntBiFunction`
+* `ToIntFunction`
+* `ToLongBiFunction`
+* `ToLongFunction`

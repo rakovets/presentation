@@ -392,16 +392,26 @@ td.hdlist1 {
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? "https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/css/print/pdf.css" : "https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/css/print/paper.css";
-document.getElementsByTagName( 'head' )[0].appendChild( link );</script><link rel="stylesheet" href="/assets/css/custom.css"></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Functional Interfaces</h1></section><section><section id="_functional_interface"><h2>Functional Interface</h2></section><section id="_functional_interface_2"><h2>Functional Interface</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Это интерфейс ровно с одним абстрактным методом.</p></li><li class="fragment"><p>Может быть отмечен аннотаций <code>@FunctionalInterface</code></p></li></ul></div></div></section><section id="_example"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><link rel="stylesheet" href="/assets/css/custom.css"></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Functional Interfaces</h1></section><section><section id="_intro"><h2>Intro</h2></section><section id="_functional_interface"><h2>Functional Interface</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Это интерфейс ровно с одним абстрактным методом.</p></li><li class="fragment"><p>Может иметь другие не абстрактные (<code>default</code>, <code>static</code>) методы.</p></li><li class="fragment"><p>Может быть отмечен аннотаций <code>@FunctionalInterface</code> (@since 1.8):</p><div class="ulist step"><ul><li class="fragment"><p>Если отмечен, то compiler делает проверку на наличие ТОЛЬКО одного абстрактного метода.</p></li></ul></div></li></ul></div></div></section><section id="_functional_interface_2"><h2>Functional Interface</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Общие функциональные интерфейсы находятся в модуле <code>java.base</code> в пакете <code>java.util.function</code>.</p></li><li class="fragment"><p>Встречаются и в других модулях и пакетах.</p></li><li class="fragment"><p>Можно создавать собственные функциональные интерфейсы.</p></li></ul></div></div></section><section id="_example"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface Operation {
+    int calculate();
+}</code></pre></div></div></div></section><section id="_example_2"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface Operation {
+    int calculate();
+
+    int calculate(int a);
+}</code></pre></div></div>
+<div class="listingblock fragment"><div class="content"><pre>error: Unexpected @FunctionalInterface annotation
+@FunctionalInterface
+^
+  Operation is not a functional interface
+    multiple non-overriding abstract methods found in interface Operation</pre></div></div></div></section></section>
+<section><section id="_java_util_comparator"><h2><code>java.util.Comparator</code></h2></section><section id="_comparatort"><h2><code>Comparator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
 public interface Comparator&lt;T&gt; {
     int compare(T o1, T o2);
 
-    // default behavior
-}</code></pre></div></div></div></section></section>
-<section><section id="_comparatort"><h2><code>Comparator&lt;T&gt;</code></h2></section><section id="_comparatort_2"><h2><code>Comparator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
-public interface Comparator&lt;T&gt; {
-    int compare(T o1, T o2);
-}</code></pre></div></div></div></section><section id="_example_2"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public class Student {
+    ...
+}</code></pre></div></div></div></section><section id="_example_3"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public class Student {
     private int id;
     private String name;
     private int age;
@@ -423,13 +433,10 @@ public interface Comparator&lt;T&gt; {
     public int getAge() {
         return this.age;
     }
-}</code></pre></div></div></div></section><section id="_example_3"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Comparator;
+}</code></pre></div></div></div></section><section id="_example_4"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Comparator;
 
-public class AgeComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        Student s1 = (Student) o1;
-        Student s2 = (Student) o2;
-
+public class AgeComparator implements Comparator&lt;Student&gt; {
+    public int compare(Student s1, Student s2) {
         if (s1.getAge() == s2.getAge()) {
             return 0;
         } else if (s1.getAge() &gt; s2.getAge()) {
@@ -438,16 +445,13 @@ public class AgeComparator implements Comparator {
             return -1;
         }
     }
-}</code></pre></div></div></div></section><section id="_example_4"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Comparator;
+}</code></pre></div></div></div></section><section id="_example_5"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Comparator;
 
-public class NameComparator implements Comparator {
-    public int compare(Object o1, Object o2) {
-        Student s1 = (Student) o1;
-        Student s2 = (Student) o2;
-
+public class NameComparator implements Comparator&lt;Student&gt; {
+    public int compare(Student o1, Student o2) {
         return s1.getName().compareTo(s2.getName());
     }
-}</code></pre></div></div></div></section><section id="_example_5"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.ArrayList;
+}</code></pre></div></div></div></section><section id="_example_6"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -476,9 +480,11 @@ public class ComparatorExample {
             System.out.println(student.getId() + " " + student.getName() + " " + student.getAge());
         }
     }
-}</code></pre></div></div></div></section><section id="_not_functional_interface_comparablet"><h2>NOT functional interface <code>Comparable&lt;T&gt;</code></h2></section><section id="_method"><h2>Method</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public interface Comparable&lt;T&gt; {
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_lang_comparable"><h2><code>java.lang.Comparable</code></h2></section><section id="_comparablet"><h2><code>Comparable&lt;T&gt;</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа и выполняет его сравнение с текущим объектом (<code>this</code>).</p></li></ul></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public interface Comparable&lt;T&gt; {
     public int compareTo(T o);
-}</code></pre></div></div></div></section><section id="_example_6"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">class Student implements Comparable&lt;Student&gt; {
+}</code></pre></div></div></div></section><section id="_example_7"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">class Student implements Comparable&lt;Student&gt; {
     private int id;
     private String name;
     private int age;
@@ -498,7 +504,7 @@ public class ComparatorExample {
             return -1;
         }
     }
-}</code></pre></div></div></div></section><section id="_example_7"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.ArrayList;
+}</code></pre></div></div></div></section><section id="_example_8"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.ArrayList;
 import java.util.Collections;
 
 public class CompareExample {
@@ -514,10 +520,13 @@ public class CompareExample {
         }
     }
 }</code></pre></div></div></div></section></section>
-<section><section id="_predicatet"><h2><code>Predicate&lt;T&gt;</code></h2></section><section id="_predicatet_2"><h2><code>Predicate&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+<section><section id="_java_util_function_predicate"><h2><code>java.util.function.Predicate</code></h2></section><section id="_predicatet"><h2><code>Predicate&lt;T&gt;</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа и выполняет проверку некоторого условия.</p></li></ul></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
 public interface Predicate&lt;T&gt; {
     boolean test(T t);
-}</code></pre></div></div></div></section><section id="_example_8"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Predicate;
+
+    ...
+}</code></pre></div></div></div></section><section id="_example_9"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Predicate;
 
 public class Program {
     public static void main(String[] args) {
@@ -527,61 +536,13 @@ public class Program {
         System.out.println(isPositive.test(-7));
     }
 }</code></pre></div></div></div></section></section>
-<section><section id="_binaryoperatort"><h2><code>BinaryOperator&lt;T&gt;</code></h2></section><section id="_binaryoperatort_2"><h2><code>BinaryOperator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
-public interface BinaryOperator&lt;T&gt; {
-    T apply(T t1, T t2);
-}</code></pre></div></div></div></section><section id="_example_9"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.BinaryOperator;
-
-public class Program {
-    public static void main(String[] args) {
-        BinaryOperator&lt;Integer&gt; multiply = (x, y) -&gt; x * y;
-
-        System.out.println(multiply.apply(3, 5));
-        System.out.println(multiply.apply(10, -2));
-    }
-}</code></pre></div></div></div></section></section>
-<section><section id="_unaryoperatort"><h2><code>UnaryOperator&lt;T&gt;</code></h2></section><section id="_unaryoperatort_2"><h2><code>UnaryOperator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
-public interface UnaryOperator&lt;T&gt; {
-    T apply(T t);
-}</code></pre></div></div></div></section><section id="_example_10"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.UnaryOperator;
-
-public class Program {
-    public static void main(String[] args) {
-        UnaryOperator&lt;Integer&gt; square = x -&gt; x * x;
-        System.out.println(square.apply(5));
-    }
-}</code></pre></div></div></div></section></section>
-<section><section id="_functiont_r"><h2><code>Function&lt;T, R&gt;</code></h2></section><section id="_functiont_r_2"><h2><code>Function&lt;T, R&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
-public interface Function&lt;T, R&gt; {
-    R apply(T t);
-}</code></pre></div></div>
-<div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа, а  возвращает того же или другого типа.</p></li></ul></div></div></section><section id="_other_methods"><h2>Other methods</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">default &lt;V&gt; Function&lt;V, R&gt; compose(Function&lt;? super V, ? extends T&gt; before) {
-    Objects.requireNonNull(before);
-    return (V v) -&gt; apply(before.apply(v));
-}</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">default &lt;V&gt; Function&lt;T, V&gt; andThen(Function&lt;? super R, ? extends V&gt; after) {
-    Objects.requireNonNull(after);
-    return (T t) -&gt; after.apply(apply(t));
-}</code></pre></div></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">static &lt;T&gt; Function&lt;T, T&gt; identity() {
-    return t -&gt; t;
-}</code></pre></div></div></div></section><section id="_example_11"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Function;
-
-public class Program {
-    public static void main(String[] args) {
-        Function&lt;Integer, String&gt; convert = x -&gt; String.valueOf(x) + " долларов";
-        System.out.println(convert.apply(5)); // 5 долларов
-    }
-}</code></pre></div></div></div></section></section>
-<section><section id="_consumert"><h2><code>Consumer&lt;T&gt;</code></h2></section><section id="_consumert_2"><h2><code>Consumer&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+<section><section id="_java_util_function_consumer"><h2><code>java.util.function.Consumer</code></h2></section><section id="_consumert"><h2><code>Consumer&lt;T&gt;</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа и выполняет с ним бизнес-логику.</p></li></ul></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
 public interface Consumer&lt;T&gt; {
     void accept(T t);
-}</code></pre></div></div>
-<div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа и выполняет с ним бизнес-логику.</p></li></ul></div>
-<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">default Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after) {
-    Objects.requireNonNull(after);
-    return (T t) -&gt; { accept(t); after.accept(t); };
-}</code></pre></div></div></div></section><section id="_example_12"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Consumer;
+
+    ...
+}</code></pre></div></div></div></section><section id="_example_10"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Consumer;
 
 public class Program {
     public static void main(String[] args) {
@@ -589,11 +550,21 @@ public class Program {
         printer.accept(600);
     }
 }</code></pre></div></div></div></section></section>
-<section><section id="_suppliert"><h2><code>Supplier&lt;T&gt;</code></h2></section><section id="_suppliert_2"><h2><code>Supplier&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+<section><section id="_java_util_function_supplier"><h2><code>java.util.function.Supplier</code></h2></section><section id="_suppliert"><h2><code>Supplier&lt;T&gt;</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Порождает объекты данного типа.</p></li></ul></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
 public interface Supplier&lt;T&gt; {
     T get();
-}</code></pre></div></div>
-<div class="ulist step"><ul><li class="fragment"><p>Возвращает объект типа T.</p></li></ul></div></div></section><section id="_example_13"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Scanner;
+}</code></pre></div></div></div></section><section id="_example_11"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public class User {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public User(String n) {
+        this.name = n;
+    }
+}</code></pre></div></div></div></section><section id="_example_12"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class Program {
@@ -609,23 +580,73 @@ public class Program {
         System.out.println("Имя user1: " + user1.getName());
         System.out.println("Имя user2: " + user2.getName());
     }
-}
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_function"><h2><code>java.util.function.Function</code></h2></section><section id="_functiont_r"><h2><code>Function&lt;T, R&gt;</code></h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>Принимает объект одного типа, преобразует его в объект другого типа (или этого же типа) и возвращает его.</p></li></ul></div>
+<div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface Function&lt;T, R&gt; {
+    R apply(T t);
 
-public class User {
-    private String name;
+    ...
+}</code></pre></div></div></div></section><section id="_example_13"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.Function;
 
-    public String getName() {
-        return name;
-    }
-
-    public User(String n) {
-        this.name = n;
+public class Program {
+    public static void main(String[] args) {
+        Function&lt;Integer, String&gt; convert = x -&gt; String.valueOf(x) + " долларов";
+        System.out.println(convert.apply(5)); // 5 долларов
     }
 }</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_unaryoperator"><h2><code>java.util.function.UnaryOperator</code></h2></section><section id="_unaryoperatort"><h2><code>UnaryOperator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface UnaryOperator&lt;T&gt; extends Function&lt;T, T&gt; {
+    ...
+}</code></pre></div></div></div></section><section id="_example_14"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.UnaryOperator;
+
+public class Program {
+    public static void main(String[] args) {
+        UnaryOperator&lt;Integer&gt; square = x -&gt; x * x;
+        System.out.println(square.apply(5));
+    }
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_bifunction"><h2><code>java.util.function.BiFunction</code></h2></section><section id="_bifunctiont_u_r"><h2><code>BiFunction&lt;T, U, R&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface BiFunction&lt;T, U, R&gt; {
+    R apply(T t, U u);
+
+    ...
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_biconsumer"><h2><code>java.util.function.BiConsumer</code></h2></section><section id="_biconsumert_u"><h2><code>BiConsumer&lt;T, U&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface BiConsumer&lt;T, U&gt; {
+    void accept(T t, U u);
+
+    ...
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_bipredicate"><h2><code>java.util.function.BiPredicate</code></h2></section><section id="_bipredicatet_u"><h2><code>BiPredicate&lt;T, U&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface BiPredicate&lt;T, U&gt; {
+    boolean test(T t, U u);
+
+    ...
+}</code></pre></div></div></div></section></section>
+<section><section id="_java_util_function_binaryoperator"><h2><code>java.util.function.BinaryOperator</code></h2></section><section id="_binaryoperatort"><h2><code>BinaryOperator&lt;T&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface BinaryOperator&lt;T&gt; extends BiFunction&lt;T,T,T&gt; {
+    ...
+}</code></pre></div></div></div></section><section id="_example_15"><h2>Example</h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">import java.util.function.BinaryOperator;
+
+public class Program {
+    public static void main(String[] args) {
+        BinaryOperator&lt;Integer&gt; multiply = (x, y) -&gt; x * y;
+
+        System.out.println(multiply.apply(3, 5));
+        System.out.println(multiply.apply(10, -2));
+    }
+}</code></pre></div></div></div></section></section>
+<section id="_java_lang_runnable"><h2><code>java.lang.Runnable</code></h2></section>
 <section id="_runnable"><h2><code>Runnable</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
 public interface Runnable {
     public abstract void run();
-}</code></pre></div></div></div></section></div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+}</code></pre></div></div></div></section>
+<section><section id="_java_util_concurrent_callable"><h2><code>java.util.concurrent.Callable</code></h2></section><section id="_callablev"><h2><code>Callable&lt;V&gt;</code></h2><div class="slide-content"><div class="listingblock fragment"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@FunctionalInterface
+public interface Callable&lt;V&gt; {
+    V call() throws Exception;
+}</code></pre></div></div></div></section></section>
+<section><section id="_other_functionalinterface"><h2>Other @FunctionalInterface</h2></section><section id="_other_functionalinterface_2"><h2>Other @FunctionalInterface</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>DoubleBinaryOperator</code></p></li><li><p><code>DoubleConsumer</code></p></li><li><p><code>DoubleFunction</code></p></li><li><p><code>DoublePredicate</code></p></li><li><p><code>DoubleSupplier</code></p></li><li><p><code>DoubleToIntFunction</code></p></li><li><p><code>DoubleToLongFunction</code></p></li><li><p><code>DoubleUnaryOperator</code></p></li></ul></div></div></section><section id="_other_functionalinterface_3"><h2>Other @FunctionalInterface</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>IntBinaryOperator</code></p></li><li><p><code>IntConsumer</code></p></li><li><p><code>IntFunction</code></p></li><li><p><code>IntPredicate</code></p></li><li><p><code>IntSupplier</code></p></li><li><p><code>IntToDoubleFunction</code></p></li><li><p><code>IntToLongFunction</code></p></li><li><p><code>IntUnaryOperator</code></p></li></ul></div></div></section><section id="_other_functionalinterface_4"><h2>Other @FunctionalInterface</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>LongBinaryOperator</code></p></li><li><p><code>LongConsumer</code></p></li><li><p><code>LongFunction</code></p></li><li><p><code>LongPredicate</code></p></li><li><p><code>LongSupplier</code></p></li><li><p><code>LongToDoubleFunction</code></p></li><li><p><code>LongToIntFunction</code></p></li><li><p><code>LongUnaryOperator</code></p></li></ul></div></div></section><section id="_other_functionalinterface_5"><h2>Other @FunctionalInterface</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>BooleanSupplier</code></p></li><li><p><code>ObjDoubleConsumer</code></p></li><li><p><code>ObjIntConsumer</code></p></li><li><p><code>ObjLongConsumer</code></p></li></ul></div></div></section><section id="_other_functionalinterface_6"><h2>Other @FunctionalInterface</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>ToDoubleBiFunction</code></p></li><li><p><code>ToDoubleFunction</code></p></li><li><p><code>ToIntBiFunction</code></p></li><li><p><code>ToIntFunction</code></p></li><li><p><code>ToLongBiFunction</code></p></li><li><p><code>ToLongFunction</code></p></li></ul></div></div></section></section></div></div><script src="https://cdn.jsdelivr.net/npm/reveal.js@3.9.2/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;
