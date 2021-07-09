@@ -1,4 +1,4 @@
-= JSR-335: Lambda expressions
+= Lambda expressions (JSR-335)
 
 == Intro
 
@@ -140,6 +140,8 @@ System.out.println(operation3.calculate(20, 10));
 200
 ----
 
+== Syntax Lambda Expressions
+
 === Syntax Lambda Expressions
 
 [.fragment]
@@ -220,6 +222,8 @@ public class LambdaApp {
 Hello Java!
 ----
 
+== Lambda Expressions and global/local variables
+
 === Lambda Expressions and global variables
 
 [.fragment]
@@ -262,10 +266,8 @@ public static void main(String[] args) {
     int n = 70;
     int m = 30;
     Operation op = () -> {
-        // n = 100;
         return m + n;
     };
-    // n = 100;
     System.out.println(op.calculate());
 }
 ----
@@ -275,7 +277,51 @@ public static void main(String[] args) {
 100
 ----
 
-=== Generic Functional Interface
+=== Lambda Expressions and local variables
+
+[.fragment]
+[source, java]
+----
+public static void main(String[] args) {
+    int n = 70;
+    int m = 30;
+    Operation op = () -> {
+        n = 50;
+        return m + n;
+    };
+    System.out.println(op.calculate());
+}
+----
+
+[.fragment]
+----
+error: local variables referenced from a lambda expression must be final or effectively final
+----
+
+=== Lambda Expressions and local variables
+
+[.fragment]
+[source, java]
+----
+public static void main(String[] args) {
+    int n = 70;
+    int m = 30;
+    Operation op = () -> {
+        return m + n;
+    };
+    n = 50;
+    System.out.println(op.calculate());
+}
+----
+
+[.fragment]
+----
+error: local variables referenced from a lambda expression must be final or effectively final
+----
+
+== Generics and Lambda
+
+=== Generics and Lambda
 
 [.fragment]
 [source, java]
@@ -305,7 +351,7 @@ public class LambdaApp {
 2010
 ----
 
-== Lambda as parameters and results of methods
+== Использование Lambda Expressions
 
 === Lambda as parameters method
 
@@ -343,7 +389,7 @@ public class LambdaApp {
 20
 ----
 
-=== Method links as method parameters
+=== Lambda as static method
 
 [.fragment]
 [source, java]
@@ -367,7 +413,7 @@ class ExpressionHelper {
 }
 ----
 
-=== Method links as method parameters
+=== Lambda as static method
 
 [.fragment]
 [source, java]
@@ -398,7 +444,7 @@ public class LambdaApp {
 15
 ----
 
-=== Links to constructors
+=== Lambda as links to constructors
 
 [.fragment]
 [source, java]
@@ -424,7 +470,7 @@ class User {
 }
 ----
 
-=== Links to constructors
+=== Lambda as links to constructors
 
 [.fragment]
 [source, java]
@@ -462,10 +508,10 @@ public class LambdaApp {
     public static void main(String[] args) {
         Operation func = action(1);
         int a = func.execute(6, 5);
-        System.out.println(a); // 11
+        System.out.println(a);
 
         int b = action(2).execute(8, 2);
-        System.out.println(b); // 6
+        System.out.println(b);
     }
 
     private static Operation action(int number) {
@@ -483,12 +529,8 @@ public class LambdaApp {
 }
 ----
 
-== Stream
-
-=== Stream
-
-[.step]
-* Предназначен для *обработки* данных
-* Не хранит данные
-* Нельзя переиспользовать
-* Можно преобразовать в другие типы данных
+[.fragment]
+----
+11
+6
+----
