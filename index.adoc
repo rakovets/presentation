@@ -47,7 +47,7 @@
 * link:./java/core/exception-handling.html[Exception Handling.]
 * link:./java/core/generic-types.html[Generic Types (JSR 14).]
 * link:./java/core/java-collection-framework.html[Java Collection Framework.]
-* link:./java/core/date-and-time.html[Date and Time API (JSR 335).]
+* link:./java/core/date-and-time.html[Date and Time API (JSR 310).]
 * link:./java/core/java-io.html[Java IO.]
 * link:./java/core/properties.html[Properties.]
 * link:./java/core/xml.html[XML (JSR 5, 31, 105, 173, 206, 222, 224).]

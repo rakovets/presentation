@@ -1,4 +1,5 @@
 = Date and Time API (JSR 310)
+:imagesdir: ../../assets/img/java/core/
 
 == Intro
 
@@ -28,18 +29,24 @@
 * JSR 310: Date and Time API
 * Содержит классы:
 [.step]
-** *неизменные* (*immutable*),
+** *не изменяемые* (*immutable*),
 ** *потокобезопасные* (*thread-safe*)
 ** с *продуманным дизайном*
 
-== `java.time`
+== Intro
 
 === Basics
 
 [.step]
 * `java.time` — содержит, часто используемые классы.
-* `java.time.format` — класс для преобразования даты и форматирования.
-* `java.time.temporal` — класс для конвертирования даты и время, и для внесения в них корректировок (например добавить 30 дней к текущей дате).
+* `java.time.format` - содержит классы для разбора и форматирования даты.
+* `java.time.temporal` - содержит классы для конвертирования даты и время, и для внесения в них корректировок (например добавить 30 дней к текущей дате).
+
+=== Basics
+
+[.step]
+* `java.time.chrono` -  пакет с общими интерфейсами для не календарных систем ISO
+* `java.time.zone` - классы для поддержки различных часовых поясов и правила их изменения
 
 === Basics
 
@@ -58,21 +65,25 @@
 === Basics
 
 [.fragment]
-image::/assets/img/java/core/date-time.png[Java Date and Time API]
+image::date-time.png[Java Date and Time API]
 
-== `Temporal`
+== `java.time.temporal.TemporalField`
 
-=== `Temporal`
+=== `TemporalField`
 
 [.step]
-* `isSupported(TemporalUnit): boolean`
-* `with(TemporalAdjuster): Temporal`
-* `with(TemporalField, long): Temporal`
-* `plus(TemporalAmount): Temporal`
-* `plus(long, TemporalUnit): Temporal`
-* `minus(TemporalAmount): Temporal`
-* `minus(long, TemporalUnit): Temporal`
-* `until(Temporal, TemporalUnit): long`
+* A field of date-time, such as month-of-year or hour-of-minute.
+* т.е. относительное значение времени
+
+=== `ChronoField`
+
+[.fragment]
+[source,java]
+----
+public enum ChronoField implements TemporalField {
+    ...
+}
+----
 
 === `ChronoField`
 
@@ -84,7 +95,15 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 * `SECOND_OF_DAY`
 * `SECOND_OF_MINUTE`
 * `NANO_OF_DAY`
-* `NANO_OF_SECOND`
+* ...
+
+== `java.time.temporal.TemporalUnit`
+
+=== `TemporalUnit`
+
+[.step]
+* A unit of date-time, such as Days or Hours.
+* т.е. значение конкретной единицы времени
 
 === `ChronoUnit`
 
@@ -106,9 +125,23 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 * `YEARS`
 * `DECADES`
 * `CENTURIES`
-* `MILLENNIA`
-* `ERAS`
+* `MILLENNIA` (1000 years)
+* `ERAS`  (1,000,000,000 Years)
 * `FOREVER`
+
+== `Temporal`
+
+=== `Temporal`
+
+[.step]
+* `isSupported(TemporalUnit): boolean`
+* `with(TemporalAdjuster): Temporal`
+* `with(TemporalField, long): Temporal`
+* `plus(TemporalAmount): Temporal`
+* `plus(long, TemporalUnit): Temporal`
+* `minus(TemporalAmount): Temporal`
+* `minus(long, TemporalUnit): Temporal`
+* `until(Temporal, TemporalUnit): long`
 
 == `LocalTime`
 
@@ -128,11 +161,8 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 === Methods
 
 [.step]
-* `getHour(): int`
-* `getMinute(): int`
-* `getSecond(): int`
-* `getNano(): int`
-* `get(ChronoField): int`
+* `get(TemporalField): int`
+* `getXxx(): int`
 
 === Compare `LocalTime`
 
@@ -144,7 +174,9 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 === Set units
 
 [.step]
-* `with(ChronoField, int): LocalTime`
+* `with(TemporalField, int): LocalTime`
+* `with(TemporalAdjuster): LocalTime`
+* `withXxx(int): LocalTime`
 * ...
 
 === Change units
@@ -152,6 +184,8 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 [.step]
 * `plus(int, ChronoUnit): LocalTime`
 * `minus(int, ChronoUnit): LocalTime`
+* `plusXxx(int): LocalTime`
+* `minusXxx(int): LocalTime`
 * ...
 
 == `LocalDate`
@@ -160,7 +194,7 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 
 [.step]
 * `LocalDate` — объекты представляют дату, но без какого-либо времени или часового пояса.
-* Same as `LocalDate`
+* Same as `LocalTime`
 
 == `LocalDateTime`
 
@@ -168,7 +202,7 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 
 [.step]
 * `LocalDateTime` — объекты представляют дату и время, но без данных о часовом поясе.
-* Same as `LocalTime` + few methods
+* Same as `LocalDate` and `LocalTime` + few methods
 
 == Time Zone
 
@@ -222,7 +256,7 @@ image::/assets/img/java/core/date-time.png[Java Date and Time API]
 
 [.step]
 * `Duration` — используется чаще всего с классом `Instant`, задает несколько наносекунд.
-* Можно использовать с помощью методов типа _plus()_ и _minus()_.
+* Можно использовать с помощью методов типа `plus()` и `minus()`.
 * Продолжительность не зависит от часовых поясов или других изменений календаря.
 
 == `Period`
